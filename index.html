@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lawrence Totimeh Jr. — Apparel, Events, Systems</title>
-<meta name="description" content="Army veteran and operator in the DMV. Custom apparel and print, event hosting and DJ services, and business systems consulting.">
-<meta property="og:title" content="Lawrence Totimeh Jr.">
-<meta property="og:description" content="Apparel and custom print. Events and entertainment. Business systems that clients run themselves.">
+<title>Lawrence Totimeh Jr. — Coming Soon</title>
+<meta name="description" content="Apparel and custom print. Events and entertainment. Business systems consulting. Site launching soon.">
+<meta property="og:title" content="Lawrence Totimeh Jr. — Coming Soon">
+<meta property="og:description" content="Apparel and custom print. Events and entertainment. Business systems consulting. Site launching soon.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,324 +19,43 @@
     --smoke:#f4f4f3;
     --mute:#6e6e6e;
     --line:#e3e3e1;
-    --wrap:1120px;
     --display:'Archivo',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
   body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--display);font-weight:400;font-size:17px;line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    margin:0;min-height:100vh;background:var(--paper);color:var(--ink);
+    font-family:var(--display);display:flex;align-items:center;justify-content:center;
+    padding:32px;
   }
-  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
-  a{color:inherit}
-  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.02}
-  p{margin:0 0 1em}
+  .card{max-width:560px;text-align:center}
   .eyebrow{
     font-family:var(--mono);font-size:11.5px;font-weight:500;
     letter-spacing:.18em;text-transform:uppercase;color:var(--red);
+    margin:0 0 22px;
   }
-  .eyebrow.grey{color:var(--mute)}
-  /* header */
-  header{
-    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  h1{
+    font-size:clamp(38px,7vw,58px);font-weight:800;letter-spacing:-.01em;
+    line-height:1.05;margin:0 0 22px;
   }
-  .bar{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .mark{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
-  .mark b{color:var(--red)}
-  nav a{
-    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-    text-decoration:none;margin-left:26px;color:var(--mute);
-    border-bottom:1px solid transparent;padding-bottom:2px;
+  h1 .jr{color:var(--red)}
+  p{color:var(--mute);font-size:17px;line-height:1.6;margin:0 0 30px}
+  .line{width:56px;height:2px;background:var(--red);margin:0 auto 30px}
+  .contact{
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+    padding-bottom:4px;
   }
-  nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--red)}
-  @media(max-width:640px){nav{display:none}}
-  /* hero */
-  .hero{padding:76px 0 44px}
-  .hero h1{
-    font-size:clamp(44px,9vw,104px);text-transform:uppercase;margin:16px 0 0;
-  }
-  .hero h1 .jr{color:var(--red)}
-  .thesis{
-    max-width:620px;margin-top:26px;font-size:clamp(17px,2.1vw,21px);
-    line-height:1.5;color:var(--ink);
-  }
-  .thesis span{color:var(--mute)}
-  /* manifest — the signature element */
-  .manifest{margin:54px 0 0;border-top:2px solid var(--ink)}
-  .row{
-    display:grid;grid-template-columns:44px 1.25fr 1fr auto;gap:20px;align-items:center;
-    padding:24px 10px;border-bottom:1px solid var(--line);
-    text-decoration:none;transition:background .18s ease,color .18s ease,padding .18s ease;
-  }
-  .row .idx{font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:.1em}
-  .row .name{font-size:clamp(21px,3vw,30px);font-weight:800;letter-spacing:-.02em}
-  .row .what{color:var(--mute);font-size:15px;line-height:1.45}
-  .row .go{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
-  .row:hover,.row:focus-visible{background:var(--ink);color:var(--paper);padding-left:20px;outline:none}
-  .row:hover .what,.row:focus-visible .what,.row:hover .go,.row:focus-visible .go{color:#cfcfcd}
-  .row:hover .idx,.row:focus-visible .idx{color:#fff}
-  @media(max-width:720px){
-    .row{grid-template-columns:34px 1fr;gap:6px 14px}
-    .row .what{grid-column:2}
-    .row .go{grid-column:2;margin-top:4px}
-  }
-  /* proof strip */
-  .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;padding:22px 0}
-  .proof ul{display:flex;flex-wrap:wrap;gap:14px 38px;list-style:none;margin:0;padding:0}
-  .proof li{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
-  .proof li::before{content:"—";color:var(--red);margin-right:10px}
-  /* sections */
-  section{padding:88px 0}
-  .sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-  .sec-head h2{font-size:clamp(30px,5vw,52px);text-transform:uppercase}
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  @media(max-width:820px){.cols{grid-template-columns:1fr;gap:34px}}
-  .lede{font-size:19px;line-height:1.55;max-width:52ch}
-  .muted{color:var(--mute)}
-  .checks{list-style:none;margin:24px 0 0;padding:0}
-  .checks li{padding:11px 0 11px 26px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px}
-  .checks li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:9px;background:var(--red)}
-  .frame{
-    background:var(--smoke);border:1px solid var(--line);aspect-ratio:4/3;
-    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
-  }
-  .frame span{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-  .btn{
-    display:inline-block;margin-top:26px;background:var(--red);color:#fff;text-decoration:none;
-    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
-    padding:15px 26px;border:2px solid var(--red);transition:background .16s,color .16s;
-  }
-  .btn:hover,.btn:focus-visible{background:transparent;color:var(--red)}
-  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
-  .btn.ghost:hover,.btn.ghost:focus-visible{background:var(--ink);color:#fff}
-  /* about — inverted */
-  #about{background:var(--ink);color:var(--paper)}
-  #about .muted{color:#a9a9a6}
-  #about .checks li{border-color:#2c2c2c}
-  #about .frame{background:#1e1e1e;border-color:#2c2c2c}
-  #about h2{color:#fff}
-  /* contact */
-  form{margin-top:26px;max-width:560px}
-  label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:18px 0 7px}
-  input,select,textarea{
-    width:100%;font-family:var(--display);font-size:16px;color:var(--ink);
-    padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:0;
-  }
-  input:focus,select:focus,textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
-  textarea{min-height:130px;resize:vertical}
-  button{
-    margin-top:24px;background:var(--ink);color:#fff;border:2px solid var(--ink);cursor:pointer;
-    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;
-  }
-  button:hover,button:focus-visible{background:var(--red);border-color:var(--red)}
-  footer{border-top:1px solid var(--line);padding:34px 0 46px}
-  .footrow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-  /* reveal */
-  .rev{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
-  .rev.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .rev{opacity:1;transform:none;transition:none}
-    .row{transition:none}
-  }
+  .contact:hover{border-color:var(--red);color:var(--red)}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="#top">Lawrence Totimeh <b>Jr.</b></a>
-    <nav>
-      <a href="#apparel">Apparel</a>
-      <a href="#events">Events</a>
-      <a href="#consulting">Consulting</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-<main id="top">
-  <!-- HERO -->
-  <div class="wrap hero">
-    <p class="eyebrow">DMV · Army Combat Veteran · Educator · Operator</p>
+  <div class="card">
+    <p class="eyebrow">DMV · Apparel · Events · Business Systems</p>
     <h1>Lawrence<br>Totimeh <span class="jr">Jr.</span></h1>
-    <p class="thesis">
-      Lawrence runs three businesses out of the DMV. <span>He designs and prints apparel under his own label, Black Excellence. He's one of the top event hosts in the DMV, working festivals and conferences for years. And he builds the operating systems small businesses run on.</span>
-    </p>
-    <!-- Signature element: the manifest -->
-    <div class="manifest">
-      <a class="row" href="#apparel">
-        <span class="idx">A</span>
-        <span class="name">Apparel &amp; Custom Print</span>
-        <span class="what">Made in house. Team shirts, event staff gear, volunteer vests, uniforms, and statement tees under his own label, Black Excellence.</span>
-        <span class="go">See the work →</span>
-      </a>
-      <a class="row" href="#events">
-        <span class="idx">B</span>
-        <span class="name">Events &amp; Entertainment</span>
-        <span class="what">iKonic Kreations. Hosting for festivals, conferences, pageants, and community events across the DMV.</span>
-        <span class="go">Book a date →</span>
-      </a>
-      <a class="row" href="#consulting">
-        <span class="idx">C</span>
-        <span class="name">Business Systems</span>
-        <span class="what">Lawrence audits how your business runs, fixes what's broken, and hands you the keys. No agency retainer.</span>
-        <span class="go">Start here →</span>
-      </a>
-    </div>
-    <div class="proof">
-      <ul>
-        <li>U.S. Army Combat Veteran</li>
-        <li>M.S. Project Management, VSU</li>
-        <li>Embassy of Liberia</li>
-        <li>Founder, Liberia Forward</li>
-      </ul>
-    </div>
+    <div class="line"></div>
+    <p>The site is being rebuilt. Apparel and custom print, event hosting, and business systems consulting, all in one place, coming soon.</p>
+    <a class="contact" href="mailto:lawrence.totimeh@gmail.com">lawrence.totimeh@gmail.com</a>
   </div>
-  <!-- APPAREL -->
-  <section id="apparel" class="rev">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">A</span><h2>Apparel &amp; Custom Print</h2></div>
-      <div class="cols">
-        <div>
-          <p class="lede">Everything comes off his own press. Team shirts, event staff
-          gear, volunteer vests, uniforms, and statement tees under his own label,
-          Black Excellence.</p>
-          <p class="muted">Production happens in house, so turnaround is fast. Tell him
-          what you need and he will send back a price.</p>
-          <ul class="checks">
-            <li>Heat press and vinyl, single pieces to bulk orders</li>
-            <li>Design help available if you do not have your own artwork</li>
-            <li>Hand assembly for specialty items like safety vests</li>
-            <li>Statement tees under his own label, Black Excellence</li>
-          </ul>
-          <a class="btn" href="#contact">Request a quote</a>
-        </div>
-        <div class="frame"><span>Replace with product<br>and custom-work photos</span></div>
-      </div>
-    </div>
-  </section>
-  <!-- EVENTS -->
-  <section id="events" class="rev" style="background:var(--smoke)">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">B</span><h2>Events &amp; Entertainment</h2></div>
-      <div class="cols">
-        <div class="frame" style="background:#fff"><span>Replace with photos<br>from past events</span></div>
-        <div>
-          <p class="lede">iKonic Kreations is Lawrence's event side. He hosts pep
-          rallies, pageants, festivals, conferences, and community events, and brings
-          in DJ Elektrk as a partner for select dates.</p>
-          <p class="muted">Birthdays, cookouts, graduations, and private parties too,
-          across Maryland, DC, and Virginia.</p>
-          <ul class="checks">
-            <li>Hosting for festivals, conferences, pageants, and pep rallies</li>
-            <li>Sound and DJ services, brought in through partners like DJ Elektrk</li>
-            <li>Matching event apparel available in house</li>
-            <li>Also known as Agent Kodak on the events side</li>
-          </ul>
-          <a class="btn" href="#contact">Check a date</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- CONSULTING -->
-  <section id="consulting" class="rev">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">C</span><h2>Business Systems</h2></div>
-      <div class="cols">
-        <div>
-          <p class="lede">Most of the small businesses Lawrence works with are not
-          short on customers. They are short on process. Quotes take days to go out,
-          reorders never get followed up on, and nobody can say which jobs actually
-          made money.</p>
-          <p class="muted">He designs the system, installs it inside the tools you
-          already use, and trains your team to run it. From there, it is yours.</p>
-          <ul class="checks">
-            <li>Faster quote turnaround with a repeatable intake process</li>
-            <li>Reorder and follow-up outreach that runs on a schedule</li>
-            <li>Production tracking your whole team can see</li>
-            <li>Margin visibility, job by job</li>
-            <li>Booking and sales-ready websites for creators and small businesses</li>
-            <li>Built once, documented, and handed over</li>
-          </ul>
-          <a class="btn" href="#contact">Talk through your operation</a>
-        </div>
-        <div class="frame"><span>Optional: a simple before /<br>after diagram of one workflow</span></div>
-      </div>
-    </div>
-  </section>
-  <!-- ABOUT -->
-  <section id="about" class="rev">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">D</span><h2>About</h2></div>
-      <div class="cols">
-        <div class="frame"><span>Replace with a photo of you</span></div>
-        <div>
-          <p class="lede">Lawrence Totimeh Jr., also known as Agent Kodak, is an Army
-          combat veteran and an educator of more than ten years. He founded Liberia
-          Forward, works as a project manager, and stays active as a community leader
-          across the DMV.</p>
-          <p class="muted">He holds a master's in Career and Technical Studies, with a
-          concentration in Project Management, from Virginia State University, where
-          he also did his undergrad.</p>
-          <p class="muted">Liberia Forward is his nonprofit. It addresses food
-          insecurity and builds economic empowerment in Liberia by growing and
-          selling cassava.</p>
-          <ul class="checks">
-            <li>U.S. Army Combat Veteran</li>
-            <li>Educator, 10+ years</li>
-            <li>Founder, Liberia Forward — food security and economic empowerment through cassava farming</li>
-            <li>M.S., Career and Technical Studies, Project Management — VSU</li>
-            <li>B.S., Health and Physical Education — VSU</li>
-            <li>Coach, DRockas — Liberia Basketball Association</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- CONTACT -->
-  <section id="contact" class="rev">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">E</span><h2>Get in touch</h2></div>
-      <p class="lede">Tell him which side you are reaching out about and he will get
-      back to you. Quotes usually come back same day.</p>
-      <!-- Replace FORM_ID with your Formspree endpoint. GitHub Pages cannot process forms on its own. -->
-      <form action="https://formspree.io/f/FORM_ID" method="POST">
-        <label for="name">Your name</label>
-        <input id="name" name="name" type="text" autocomplete="name" required>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
-        <label for="topic">What is this about</label>
-        <select id="topic" name="topic">
-          <option>Apparel or custom print</option>
-          <option>Event booking</option>
-          <option>Business systems</option>
-          <option>Something else</option>
-        </select>
-        <label for="message">Details</label>
-        <textarea id="message" name="message" placeholder="Quantity, date, or what you are trying to fix." required></textarea>
-        <button type="submit">Send it</button>
-      </form>
-    </div>
-  </section>
-</main>
-<footer>
-  <div class="wrap footrow">
-    <span>© <span id="yr">2026</span> Lawrence Totimeh Jr.</span>
-    <span>District Heights, MD</span>
-    <span><a href="https://liberiaforward.org" style="text-decoration:none">Liberia Forward ↗</a></span>
-  </div>
-</footer>
-<script>
-  document.getElementById('yr').textContent = new Date().getFullYear();
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:.12});
-  document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
-</script>
 </body>
 </html>
