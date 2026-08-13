@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" font-family="'IBM Plex Mono', ui-monospace, monospace">
+  <rect width="640" height="480" fill="#f4f4f3"/>
+
+  <!-- Column headers -->
+  <text x="150" y="54" text-anchor="middle" font-size="15" letter-spacing="2" fill="#6e6e6e">BEFORE</text>
+  <text x="490" y="54" text-anchor="middle" font-size="15" letter-spacing="2" fill="#c1272d">AFTER</text>
+
+  <line x1="150" y1="66" x2="150" y2="78" stroke="#c8c8c6" stroke-width="2"/>
+  <line x1="490" y1="66" x2="490" y2="78" stroke="#c1272d" stroke-width="2"/>
+
+  <!-- BEFORE card -->
+  <rect x="40" y="90" width="220" height="330" fill="#ffffff" stroke="#e3e3e1" stroke-width="1.5"/>
+
+  <!-- BEFORE item 1 -->
+  <circle cx="72" cy="140" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="68" y1="136" x2="76" y2="144" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="76" y1="136" x2="68" y2="144" stroke="#9a9a97" stroke-width="2"/>
+  <text x="92" y="137" font-size="13" fill="#141414">No website —</text>
+  <text x="92" y="154" font-size="13" fill="#141414">just a phone number</text>
+
+  <!-- BEFORE item 2 -->
+  <circle cx="72" cy="210" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="68" y1="206" x2="76" y2="214" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="76" y1="206" x2="68" y2="214" stroke="#9a9a97" stroke-width="2"/>
+  <text x="92" y="207" font-size="13" fill="#141414">Records scattered</text>
+  <text x="92" y="224" font-size="13" fill="#141414">across texts and paper</text>
+
+  <!-- BEFORE item 3 -->
+  <circle cx="72" cy="280" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="68" y1="276" x2="76" y2="284" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="76" y1="276" x2="68" y2="284" stroke="#9a9a97" stroke-width="2"/>
+  <text x="92" y="277" font-size="13" fill="#141414">Found by word</text>
+  <text x="92" y="294" font-size="13" fill="#141414">of mouth only</text>
+
+  <!-- BEFORE item 4 -->
+  <circle cx="72" cy="350" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="68" y1="346" x2="76" y2="354" stroke="#9a9a97" stroke-width="2"/>
+  <line x1="76" y1="346" x2="68" y2="354" stroke="#9a9a97" stroke-width="2"/>
+  <text x="92" y="347" font-size="13" fill="#141414">No funding or</text>
+  <text x="92" y="364" font-size="13" fill="#141414">registration in place</text>
+
+  <!-- Arrow + label -->
+  <text x="330" y="245" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">LAWRENCE</text>
+  <text x="330" y="259" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">BUILDS IT</text>
+  <line x1="272" y1="270" x2="376" y2="270" stroke="#c1272d" stroke-width="2.5"/>
+  <polygon points="376,262 392,270 376,278" fill="#c1272d"/>
+
+  <!-- AFTER card -->
+  <rect x="380" y="90" width="220" height="330" fill="#141414" stroke="#141414" stroke-width="1.5"/>
+
+  <!-- AFTER item 1 -->
+  <circle cx="412" cy="140" r="9" fill="#c1272d"/>
+  <path d="M 407 140 L 411 144 L 418 136" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="432" y="137" font-size="13" fill="#ffffff">Website live —</text>
+  <text x="432" y="154" font-size="13" fill="#ffffff">built to convert</text>
+
+  <!-- AFTER item 2 -->
+  <circle cx="412" cy="210" r="9" fill="#c1272d"/>
+  <path d="M 407 210 L 411 214 L 418 206" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="432" y="207" font-size="13" fill="#ffffff">One system —</text>
+  <text x="432" y="224" font-size="13" fill="#ffffff">clean and documented</text>
+
+  <!-- AFTER item 3 -->
+  <circle cx="412" cy="280" r="9" fill="#c1272d"/>
+  <path d="M 407 280 L 411 284 L 418 276" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="432" y="277" font-size="13" fill="#ffffff">Visible to the</text>
+  <text x="432" y="294" font-size="13" fill="#ffffff">audience you want</text>
+
+  <!-- AFTER item 4 -->
+  <circle cx="412" cy="350" r="9" fill="#c1272d"/>
+  <path d="M 407 350 L 411 354 L 418 346" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="432" y="347" font-size="13" fill="#ffffff">Registered, funded,</text>
+  <text x="432" y="364" font-size="13" fill="#ffffff">and yours to run</text>
+
+  <!-- footer -->
+  <text x="320" y="452" text-anchor="middle" font-size="11" letter-spacing="1" fill="#6e6e6e">HANDED OVER — NOT RETAINED</text>
+</svg>
