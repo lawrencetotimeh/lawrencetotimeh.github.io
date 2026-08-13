@@ -15,29 +15,29 @@
   <circle cx="72" cy="140" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="136" x2="76" y2="144" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="136" x2="68" y2="144" stroke="#9a9a97" stroke-width="2"/>
-  <text x="92" y="137" font-size="13" fill="#141414">No website —</text>
-  <text x="92" y="154" font-size="13" fill="#141414">just a phone number</text>
+  <text x="86" y="137" font-size="12" fill="#141414">No website —</text>
+  <text x="86" y="154" font-size="12" fill="#141414">just a phone number</text>
 
   <!-- BEFORE item 2 -->
   <circle cx="72" cy="210" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="206" x2="76" y2="214" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="206" x2="68" y2="214" stroke="#9a9a97" stroke-width="2"/>
-  <text x="92" y="207" font-size="13" fill="#141414">Records scattered</text>
-  <text x="92" y="224" font-size="13" fill="#141414">across texts and paper</text>
+  <text x="86" y="207" font-size="12" fill="#141414">Records scattered</text>
+  <text x="86" y="224" font-size="12" fill="#141414">across texts and paper</text>
 
   <!-- BEFORE item 3 -->
   <circle cx="72" cy="280" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="276" x2="76" y2="284" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="276" x2="68" y2="284" stroke="#9a9a97" stroke-width="2"/>
-  <text x="92" y="277" font-size="13" fill="#141414">Found by word</text>
-  <text x="92" y="294" font-size="13" fill="#141414">of mouth only</text>
+  <text x="86" y="277" font-size="12" fill="#141414">Found by word</text>
+  <text x="86" y="294" font-size="12" fill="#141414">of mouth only</text>
 
   <!-- BEFORE item 4 -->
   <circle cx="72" cy="350" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="346" x2="76" y2="354" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="346" x2="68" y2="354" stroke="#9a9a97" stroke-width="2"/>
-  <text x="92" y="347" font-size="13" fill="#141414">No funding or</text>
-  <text x="92" y="364" font-size="13" fill="#141414">registration in place</text>
+  <text x="86" y="347" font-size="12" fill="#141414">No funding or</text>
+  <text x="86" y="364" font-size="12" fill="#141414">registration in place</text>
 
   <!-- Arrow + label -->
   <text x="330" y="245" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">LAWRENCE</text>
@@ -51,26 +51,26 @@
   <!-- AFTER item 1 -->
   <circle cx="412" cy="140" r="9" fill="#c1272d"/>
   <path d="M 407 140 L 411 144 L 418 136" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="432" y="137" font-size="13" fill="#ffffff">Website live —</text>
-  <text x="432" y="154" font-size="13" fill="#ffffff">built to convert</text>
+  <text x="426" y="137" font-size="12" fill="#ffffff">Website live —</text>
+  <text x="426" y="154" font-size="12" fill="#ffffff">built to convert</text>
 
   <!-- AFTER item 2 -->
   <circle cx="412" cy="210" r="9" fill="#c1272d"/>
   <path d="M 407 210 L 411 214 L 418 206" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="432" y="207" font-size="13" fill="#ffffff">One system —</text>
-  <text x="432" y="224" font-size="13" fill="#ffffff">clean and documented</text>
+  <text x="426" y="207" font-size="12" fill="#ffffff">One system —</text>
+  <text x="426" y="224" font-size="12" fill="#ffffff">clean and documented</text>
 
   <!-- AFTER item 3 -->
   <circle cx="412" cy="280" r="9" fill="#c1272d"/>
   <path d="M 407 280 L 411 284 L 418 276" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="432" y="277" font-size="13" fill="#ffffff">Visible to the</text>
-  <text x="432" y="294" font-size="13" fill="#ffffff">audience you want</text>
+  <text x="426" y="277" font-size="12" fill="#ffffff">Visible to the</text>
+  <text x="426" y="294" font-size="12" fill="#ffffff">audience you want</text>
 
   <!-- AFTER item 4 -->
   <circle cx="412" cy="350" r="9" fill="#c1272d"/>
   <path d="M 407 350 L 411 354 L 418 346" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="432" y="347" font-size="13" fill="#ffffff">Registered, funded,</text>
-  <text x="432" y="364" font-size="13" fill="#ffffff">and yours to run</text>
+  <text x="426" y="347" font-size="12" fill="#ffffff">Registered, funded,</text>
+  <text x="426" y="364" font-size="12" fill="#ffffff">and yours to run</text>
 
   <!-- footer -->
   <text x="320" y="452" text-anchor="middle" font-size="11" letter-spacing="1" fill="#6e6e6e">HANDED OVER — NOT RETAINED</text>
