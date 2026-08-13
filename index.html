@@ -155,6 +155,7 @@
       <a href="#consulting">Consulting</a>
       <a href="#events">Events</a>
       <a href="#apparel">Apparel</a>
+      <a href="#planner">Free Planner</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -198,6 +199,23 @@
       </ul>
     </div>
   </div>
+  <!-- FREE PLANNER -->
+  <section id="planner" class="rev" style="background:var(--smoke)">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">+</span><h2>Weekly Planner</h2></div>
+      <p class="eyebrow grey" style="margin:-8px 0 22px">Free Resource</p>
+      <div class="cols">
+        <div>
+          <p class="lede">Lawrence built this one-page planner for the same workshops
+          he runs with students. Fill it in every Sunday night and walk into Monday
+          already knowing what the week holds.</p>
+          <p class="muted">Enter your email and it lands in your inbox in seconds.</p>
+          <div class="ml-embedded" data-form="195728025998853962" style="margin-top:24px;max-width:420px"></div>
+        </div>
+        <div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/planner-preview.jpg" alt="Preview of Lawrence Totimeh Jr.'s free weekly planner" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+      </div>
+    </div>
+  </section>
   <!-- SPEAKING -->
   <section id="speaking" class="rev" style="background:var(--smoke)">
     <div class="wrap">
@@ -382,6 +400,13 @@
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12});
   document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+</script>
+<script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+  .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+  n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+  (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2549929');
 </script>
 </body>
 </html>
