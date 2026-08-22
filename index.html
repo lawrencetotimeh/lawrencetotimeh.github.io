@@ -19,397 +19,423 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
---ink:#141414;
---paper:#ffffff;
---red:#c1272d;
---smoke:#f4f4f3;
---mute:#6e6e6e;
---line:#e3e3e1;
---wrap:1120px;
---display:'Archivo',system-ui,sans-serif;
---mono:'IBM Plex Mono',ui-monospace,monospace;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-margin:0;background:var(--paper);color:var(--ink);
-font-family:var(--display);font-weight:400;font-size:17px;line-height:1.6;
--webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
-a{color:inherit}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.02}
-p{margin:0 0 1em}
-.eyebrow{
-font-family:var(--mono);font-size:11.5px;font-weight:500;
-letter-spacing:.18em;text-transform:uppercase;color:var(--red);
-}
-.eyebrow.grey{color:var(--mute)}
-/* header */
-header{
-position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
-}
-.bar{display:flex;align-items:center;justify-content:space-between;height:62px}
-.mark{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
-.mark b{color:var(--red)}
-nav a{
-font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-text-decoration:none;margin-left:26px;color:var(--mute);
-border-bottom:1px solid transparent;padding-bottom:2px;
-}
-nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--red)}
-@media(max-width:640px){nav{display:none}}
-/* hero */
-.hero{padding:76px 0 44px}
-.hero h1{
-font-size:clamp(44px,9vw,104px);text-transform:uppercase;margin:16px 0 0;
-}
-.hero h1 .jr{color:var(--red)}
-.thesis{
-max-width:620px;margin-top:26px;font-size:clamp(17px,2.1vw,21px);
-line-height:1.5;color:var(--ink);
-}
-.thesis span{color:var(--mute)}
-/* manifest — the signature element */
-.manifest{margin:54px 0 0;border-top:2px solid var(--ink)}
-.row{
-display:grid;grid-template-columns:44px 1.25fr 1fr auto;gap:20px;align-items:center;
-padding:24px 10px;border-bottom:1px solid var(--line);
-text-decoration:none;transition:background .18s ease,color .18s ease,padding .18s ease;
-}
-.row .idx{font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:.1em}
-.row .name{font-size:clamp(21px,3vw,30px);font-weight:800;letter-spacing:-.02em}
-.row .what{color:var(--mute);font-size:15px;line-height:1.45}
-.row .go{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
-.row:hover,.row:focus-visible{background:var(--ink);color:var(--paper);padding-left:20px;outline:none}
-.row:hover .what,.row:focus-visible .what,.row:hover .go,.row:focus-visible .go{color:#cfcfcd}
-.row:hover .idx,.row:focus-visible .idx{color:#fff}
-@media(max-width:720px){
-.row{grid-template-columns:34px 1fr;gap:6px 14px}
-.row .what{grid-column:2}
-.row .go{grid-column:2;margin-top:4px}
-}
-/* proof strip */
-.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;padding:22px 0}
-.proof ul{display:flex;flex-wrap:wrap;gap:14px 38px;list-style:none;margin:0;padding:0}
-.proof li{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
-.proof li::before{content:"—";color:var(--red);margin-right:10px}
-/* sections */
-section{padding:88px 0}
-.sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.sec-head h2{font-size:clamp(30px,5vw,52px);text-transform:uppercase}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-@media(max-width:820px){.cols{grid-template-columns:1fr;gap:34px}}
-.lede{font-size:19px;line-height:1.55;max-width:52ch}
-.muted{color:var(--mute)}
-.checks{list-style:none;margin:24px 0 0;padding:0}
-.checks li{padding:11px 0 11px 26px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px}
-.checks li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:9px;background:var(--red)}
-.frame{
-background:var(--smoke);border:1px solid var(--line);aspect-ratio:4/3;
-display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
-}
-.frame span{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.btn{
-display:inline-block;margin-top:26px;background:var(--red);color:#fff;text-decoration:none;
-font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
-padding:15px 26px;border:2px solid var(--red);transition:background .16s,color .16s;
-}
-.btn:hover,.btn:focus-visible{background:transparent;color:var(--red)}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn.ghost:hover,.btn.ghost:focus-visible{background:var(--ink);color:#fff}
-/* about — inverted */
-#about{background:var(--ink);color:var(--paper)}
-#about .muted{color:#a9a9a6}
-#about .checks li{border-color:#2c2c2c}
-#about .frame{background:#1e1e1e;border-color:#2c2c2c}
-#about h2{color:#fff}
-/* contact */
-form{margin-top:26px;max-width:560px}
-label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:18px 0 7px}
-input,select,textarea{
-width:100%;font-family:var(--display);font-size:16px;color:var(--ink);
-padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:0;
-}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
-textarea{min-height:130px;resize:vertical}
-button{
-margin-top:24px;background:var(--ink);color:#fff;border:2px solid var(--ink);cursor:pointer;
-font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;
-}
-button:hover,button:focus-visible{background:var(--red);border-color:var(--red)}
-footer{border-top:1px solid var(--line);padding:34px 0 46px}
-.footrow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-/* reveal */
-.rev{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
-.rev.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-html{scroll-behavior:auto}
-.rev{opacity:1;transform:none;transition:none}
-.row{transition:none}
-}
+  :root{
+    --ink:#141414;
+    --paper:#ffffff;
+    --red:#c1272d;
+    --smoke:#f4f4f3;
+    --mute:#6e6e6e;
+    --line:#e3e3e1;
+    --wrap:1120px;
+    --display:'Archivo',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--display);font-weight:400;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.02}
+  p{margin:0 0 1em}
+  .eyebrow{
+    font-family:var(--mono);font-size:11.5px;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--red);
+  }
+  .eyebrow.grey{color:var(--mute)}
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .mark{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+  .mark b{color:var(--red)}
+  nav a{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;margin-left:26px;color:var(--mute);
+    border-bottom:1px solid transparent;padding-bottom:2px;
+  }
+  nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--red)}
+  @media(max-width:640px){nav{display:none}}
+  /* hero */
+  .hero{padding:76px 0 44px}
+  .hero h1{
+    font-size:clamp(44px,9vw,104px);text-transform:uppercase;margin:16px 0 0;
+  }
+  .hero h1 .jr{color:var(--red)}
+  .thesis{
+    max-width:620px;margin-top:26px;font-size:clamp(17px,2.1vw,21px);
+    line-height:1.5;color:var(--ink);
+  }
+  .thesis span{color:var(--mute)}
+  /* manifest — the signature element */
+  .manifest{margin:54px 0 0;border-top:2px solid var(--ink)}
+  .row{
+    display:grid;grid-template-columns:44px 1.25fr 1fr auto;gap:20px;align-items:center;
+    padding:24px 10px;border-bottom:1px solid var(--line);
+    text-decoration:none;transition:background .18s ease,color .18s ease,padding .18s ease;
+  }
+  .row .idx{font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:.1em}
+  .row .name{font-size:clamp(21px,3vw,30px);font-weight:800;letter-spacing:-.02em}
+  .row .what{color:var(--mute);font-size:15px;line-height:1.45}
+  .row .go{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+  .row:hover,.row:focus-visible{background:var(--ink);color:var(--paper);padding-left:20px;outline:none}
+  .row:hover .what,.row:focus-visible .what,.row:hover .go,.row:focus-visible .go{color:#cfcfcd}
+  .row:hover .idx,.row:focus-visible .idx{color:#fff}
+  @media(max-width:720px){
+    .row{grid-template-columns:34px 1fr;gap:6px 14px}
+    .row .what{grid-column:2}
+    .row .go{grid-column:2;margin-top:4px}
+  }
+  /* proof strip */
+  .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;padding:22px 0}
+  .proof ul{display:flex;flex-wrap:wrap;gap:14px 38px;list-style:none;margin:0;padding:0}
+  .proof li{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+  .proof li::before{content:"—";color:var(--red);margin-right:10px}
+  /* sections */
+  section{padding:88px 0}
+  .sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(30px,5vw,52px);text-transform:uppercase}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  @media(max-width:820px){.cols{grid-template-columns:1fr;gap:34px}}
+  .lede{font-size:19px;line-height:1.55;max-width:52ch}
+  .muted{color:var(--mute)}
+  .checks{list-style:none;margin:24px 0 0;padding:0}
+  .checks li{padding:11px 0 11px 26px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px}
+  .checks li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:9px;background:var(--red)}
+  .frame{
+    background:var(--smoke);border:1px solid var(--line);aspect-ratio:4/3;
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+  }
+  .frame span{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .btn{
+    display:inline-block;margin-top:26px;background:var(--red);color:#fff;text-decoration:none;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    padding:15px 26px;border:2px solid var(--red);transition:background .16s,color .16s;
+  }
+  .btn:hover,.btn:focus-visible{background:transparent;color:var(--red)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn.ghost:hover,.btn.ghost:focus-visible{background:var(--ink);color:#fff}
+  /* about — inverted */
+  #about{background:var(--ink);color:var(--paper)}
+  #about .muted{color:#a9a9a6}
+  #about .checks li{border-color:#2c2c2c}
+  #about .frame{background:#1e1e1e;border-color:#2c2c2c}
+  #about h2{color:#fff}
+  /* contact */
+  form{margin-top:26px;max-width:560px}
+  label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:18px 0 7px}
+  input,select,textarea{
+    width:100%;font-family:var(--display);font-size:16px;color:var(--ink);
+    padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:0;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
+  textarea{min-height:130px;resize:vertical}
+  button{
+    margin-top:24px;background:var(--ink);color:#fff;border:2px solid var(--ink);cursor:pointer;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;
+  }
+  button:hover,button:focus-visible{background:var(--red);border-color:var(--red)}
+  footer{border-top:1px solid var(--line);padding:34px 0 46px}
+  .footrow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+  /* reveal */
+  .rev{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+  .rev.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rev{opacity:1;transform:none;transition:none}
+    .row{transition:none}
+  }
 </style>
 </head>
 <body>
 <header>
-<div class="wrap bar">
-<a class="mark" href="#top">Lawrence Totimeh <b>Jr.</b></a>
-<nav>
-<a href="#speaking">Speaking</a>
-<a href="#consulting">Consulting</a>
-<a href="#systems">Systems</a>
-<a href="#events">Events</a>
-<a href="#apparel">Apparel</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</nav>
-</div>
+  <div class="wrap bar">
+    <a class="mark" href="#top">Lawrence Totimeh <b>Jr.</b></a>
+    <nav>
+      <a href="#speaking">Speaking</a>
+      <a href="#consulting">Consulting</a>
+      <a href="#systems">Systems</a>
+      <a href="#events">Events</a>
+      <a href="#apparel">Apparel</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 <main id="top">
-<!-- HERO -->
-<div class="wrap hero">
-<p class="eyebrow">DMV · Public Speaker · Consultant · Project Manager</p>
-<h1>Lawrence<br>Totimeh <span class="jr">Jr.</span></h1>
-<p class="thesis">
-Public Speaker, Consultant, and Project Manager who helps schools, communities, and small businesses run better. <span>He also hosts events across the DMV, performs with DMV City Slickerz, and designs and prints apparel under his own label, Black Excellence.</span>
-</p>
-<!-- Signature element: the manifest -->
-<div class="manifest">
-<a class="row" href="#speaking">
-<span class="idx">A</span>
-<span class="name">Public Speaking</span>
-<span class="what">TEDx speaker and workshop facilitator on organization, decision-making, and career building, for schools, community groups, and beyond.</span>
-<span class="go">Hear from him →</span>
-</a>
-<a class="row" href="#consulting">
-<span class="idx">B</span>
-<span class="name">Business Systems</span>
-<span class="what">School and community culture and programming consulting, plus business architecture for small businesses ready to grow. Flat project pricing, no monthly retainer.</span>
-<span class="go">Start here →</span>
-</a>
-<a class="row" href="#events">
-<span class="idx">C</span>
-<span class="name">Events &amp; Entertainment</span>
-<span class="what">Host events across the DMV with DMV City Slickerz, a Southern Soul line dance team available to perform and teach.</span>
-<span class="go">Book a date →</span>
-</a>
-</div>
-<div class="proof">
-<ul>
-<li>TEDx Speaker</li>
-<li>U.S. Army Combat Veteran</li>
-<li>M.S. Project Management, VSU</li>
-<li>Founder, Liberia Forward</li>
-</ul>
-</div>
-</div>
-<!-- SPEAKING -->
-<section id="speaking" class="rev" style="background:var(--smoke)">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">A</span><h2>Public Speaking</h2></div>
-<p class="eyebrow grey" style="margin:-8px 0 22px">TEDx Speaker &amp; Workshop Facilitator</p>
-<div class="cols">
-<div>
-<p class="lede">Lawrence speaks to schools, community groups, and organizations
-across the DMV, from TEDx stages to staff development days. His workshops
-cover planning and organization, decision-making, and career building,
-skills that carry students past graduation.</p>
-<p class="muted">He delivered a TEDx talk and books engagements for
-assemblies, staff development days, parent nights, and community events.
-<a href="https://www.youtube.com/watch?v=qIvFzfNngaw" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Watch the TEDx talk ↗</a>
-&nbsp;·&nbsp;
-<a href="https://youtu.be/p2xshm2iN5Y?si=PRtmkDN5_kFtULZj" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Watch a graduation speech ↗</a></p>
-<ul class="checks">
-<li>Student planning and organization: physical planners and synced phone calendars</li>
-<li>Decision-making workshops for teens</li>
-<li>Career-building workshops for students</li>
-<li>TEDx speaker, available for assemblies and staff development days</li>
-</ul>
-<a class="btn" href="#contact">Book a speaking engagement</a>
-</div>
-<div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/speaking.jpg" alt="Lawrence Totimeh Jr. at a speaking engagement" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block"></div>
-</div>
-</div>
-</section>
-<!-- CONSULTING -->
-<section id="consulting" class="rev">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">B</span><h2>Business Systems</h2></div>
-<p class="eyebrow grey" style="margin:-8px 0 22px">School &amp; Community Programming, Business Architecture</p>
-<div class="cols">
-<div>
-<p class="lede">Lawrence consults with schools, community organizations, and
-small businesses. For schools and community groups, he works on culture and
-programming, the daily systems and expectations that run a building or an
-organization. For small businesses that started at home and are ready to
-become something real, he works as a business architect: registration,
-funding, a website, and the systems to grow into the next stage.</p>
-<p class="muted">He partners with your team to design the system, build the
-website, and train your people to run it. From there, it is yours.</p>
-<ul class="checks">
-<li>Culture and programming consulting for schools, districts, and community organizations</li>
-<li>Business registration and formation support</li>
-<li>Funding and grant identification</li>
-<li>Website design and build</li>
-<li>Document organization and compliance</li>
-<li>Business architecture built around where you are now, not a franchise template</li>
-<li>Built together with your team, documented, and handed over</li>
-</ul>
-<a class="btn" href="#contact">Talk through your operation</a>
-</div>
-<div class="frame" style="padding:0;aspect-ratio:4/5;background:#f4f4f3"><img src="img/workflow-diagram.svg" alt="Before and after working with Lawrence: no website and scattered records becomes a live website, one documented system, and visibility to the right audience" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-</div>
-</div>
-</section>
-<!-- SYSTEMS -->
-<section id="systems" class="rev">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">+</span><h2>Systems in Action</h2></div>
-<p class="eyebrow grey" style="margin:-8px 0 22px">Free Tools, Built for Real Communities</p>
-<div class="cols">
-<div>
-<p class="lede">When Lawrence works with a community, he builds the system it's
-missing. Two free, bilingual study tools are already live: one for NCCER
-Core and one for Print Reading for Residential and Light Commercial
-Construction, both built alongside the actual classes each week.</p>
-<p class="muted">Free for every student, no login, built to work on a phone.</p>
-<a class="btn" href="systems.html">See Systems in Action ↗</a>
-<a class="btn ghost" href="#contact" style="margin-left:10px">Request a build</a>
-</div>
-<div class="frame" style="padding:0;aspect-ratio:4/5;background:#0f1720;border-color:#1e293b"><a href="systems.html" style="display:block;width:100%;height:100%"><img src="img/nccer-tool.jpg" alt="Free study tools built by Lawrence Totimeh Jr.: module list with progress badges, exam countdowns, and calendar reminders" style="width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block"></a></div>
-</div>
-</div>
-</section>
+  <!-- HERO -->
+  <div class="wrap hero">
+    <p class="eyebrow">DMV · Public Speaker · Consultant · Project Manager</p>
+    <h1>Lawrence<br>Totimeh <span class="jr">Jr.</span></h1>
+    <p class="thesis">
+      Public Speaker, Consultant, and Project Manager who helps schools, communities, and small businesses run better. <span>He also hosts events across the DMV, performs with DMV City Slickerz, and designs and prints apparel under his own label, Black Excellence.</span>
+    </p>
+    <!-- Signature element: the manifest -->
+    <div class="manifest">
+      <a class="row" href="#speaking">
+        <span class="idx">A</span>
+        <span class="name">Public Speaking</span>
+        <span class="what">TEDx speaker and workshop facilitator on organization, decision-making, and career building, for schools, community groups, and beyond.</span>
+        <span class="go">Hear from him →</span>
+      </a>
+      <a class="row" href="#consulting">
+        <span class="idx">B</span>
+        <span class="name">Business Systems</span>
+        <span class="what">School and community culture and programming consulting, plus business architecture for small businesses ready to grow. Flat project pricing, no monthly retainer.</span>
+        <span class="go">Start here →</span>
+      </a>
+      <a class="row" href="#events">
+        <span class="idx">C</span>
+        <span class="name">Events &amp; Entertainment</span>
+        <span class="what">Host events across the DMV with DMV City Slickerz, a Southern Soul line dance team available to perform and teach.</span>
+        <span class="go">Book a date →</span>
+      </a>
+    </div>
+    <div class="proof">
+      <ul>
+        <li>TEDx Speaker</li>
+        <li>U.S. Army Combat Veteran</li>
+        <li>M.S. Project Management, VSU</li>
+        <li>Founder, Liberia Forward</li>
+      </ul>
+    </div>
+  </div>
+  <!-- SPEAKING -->
+  <section id="speaking" class="rev" style="background:var(--smoke)">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">A</span><h2>Public Speaking</h2></div>
+      <p class="eyebrow grey" style="margin:-8px 0 22px">TEDx Speaker &amp; Workshop Facilitator</p>
+      <div class="cols">
+        <div>
+          <p class="lede">Lawrence speaks to schools, community groups, and organizations
+          across the DMV, from TEDx stages to staff development days. His workshops
+          cover planning and organization, decision-making, and career building,
+          skills that carry students past graduation.</p>
+          <p class="muted">He delivered a TEDx talk and books engagements for
+          assemblies, staff development days, parent nights, and community events.
+          <a href="https://www.youtube.com/watch?v=qIvFzfNngaw" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Watch the TEDx talk ↗</a>
+          &nbsp;·&nbsp;
+          <a href="https://youtu.be/p2xshm2iN5Y?si=PRtmkDN5_kFtULZj" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Watch a graduation speech ↗</a></p>
+          <ul class="checks">
+            <li>Student planning and organization: physical planners and synced phone calendars</li>
+            <li>Decision-making workshops for teens</li>
+            <li>Career-building workshops for students</li>
+            <li>TEDx speaker, available for assemblies and staff development days</li>
+          </ul>
+          <a class="btn" href="#contact">Book a speaking engagement</a>
+        </div>
+        <div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/speaking.jpg" alt="Lawrence Totimeh Jr. at a speaking engagement" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block"></div>
+      </div>
+    </div>
+  </section>
+  <!-- CONSULTING -->
+  <section id="consulting" class="rev">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">B</span><h2>Business Systems</h2></div>
+      <p class="eyebrow grey" style="margin:-8px 0 22px">School &amp; Community Programming, Business Architecture</p>
+      <div class="cols">
+        <div>
+          <p class="lede">Lawrence consults with schools, community organizations, and
+          small businesses. For schools and community groups, he works on culture and
+          programming, the daily systems and expectations that run a building or an
+          organization. For small businesses that started at home and are ready to
+          become something real, he works as a business architect: registration,
+          funding, a website, and the systems to grow into the next stage.</p>
+          <p class="muted">He partners with your team to design the system, build the
+          website, and train your people to run it. From there, it is yours.</p>
+          <ul class="checks">
+            <li>Culture and programming consulting for schools, districts, and community organizations</li>
+            <li>Business registration and formation support</li>
+            <li>Funding and grant identification</li>
+            <li>Website design and build</li>
+            <li>Document organization and compliance</li>
+            <li>Business architecture built around where you are now, not a franchise template</li>
+            <li>Built together with your team, documented, and handed over</li>
+          </ul>
+          <a class="btn" href="#contact">Talk through your operation</a>
+        </div>
+        <div class="frame" style="padding:0;aspect-ratio:4/5;background:#f4f4f3"><img src="img/workflow-diagram.svg" alt="Before and after working with Lawrence: no website and scattered records becomes a live website, one documented system, and visibility to the right audience" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+      </div>
+    </div>
+  </section>
+  <!-- SYSTEMS -->
+  <section id="systems" class="rev">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">+</span><h2>Systems in Action</h2></div>
+      <p class="eyebrow grey" style="margin:-8px 0 22px">Free Tools, Built for Real Communities</p>
+      <div class="cols">
+        <div>
+          <p class="lede">When Lawrence works with a community, he builds the system it's
+          missing. The first one is public: a free, bilingual study tool for students
+          working through NCCER Core, the intro course used in construction trades
+          programs across the country.</p>
+          <p class="muted">Free for every student, no login, built to work on a phone.
+          Donations from students who found it useful fund the next module.</p>
+          <ul class="checks">
+            <li>Full English and Spanish, switchable anywhere in the app</li>
+            <li>Practice quizzes, flashcards, and module tests matched to the real 70% passing standard</li>
+            <li>Study reminders spaced out the way memory actually works, added straight to your calendar</li>
+            <li>Tap any term for a plain-language definition without losing your place</li>
+          </ul>
+          <a class="btn" href="https://lawrencetotimeh.com/nccer-core-study/" target="_blank" rel="noopener">Open the study tool ↗</a>
+          <a class="btn ghost" href="#contact" style="margin-left:10px">Request a build</a>
+          <p class="muted" style="font-size:13px;margin-top:18px">Independent study tool, not
+          affiliated with or endorsed by NCCER. Want a system like this for your school,
+          program, or business? That is consulting work, and it starts with a conversation.</p>
+        </div>
+        <div class="frame" style="padding:0;aspect-ratio:4/5;background:#0f1720;border-color:#1e293b"><a href="https://lawrencetotimeh.com/nccer-core-study/" target="_blank" rel="noopener" style="display:block;width:100%;height:100%"><img src="img/nccer-tool.jpg" alt="NCCER Core study tool: module list with progress badges, exam countdowns, and calendar reminders" style="width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block"></a></div>
+      </div>
+    </div>
+  </section>
 
-<!-- EVENTS -->
-<section id="events" class="rev" style="background:var(--smoke)">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">C</span><h2>Events &amp; Entertainment</h2></div>
-<p class="eyebrow" style="color:var(--ink);margin:-8px 0 22px">Also Known As <span style="color:var(--red)">Agent Kodak</span></p>
-<div class="cols">
-<div class="frame" style="background:#fff;padding:0;aspect-ratio:4/5"><img src="img/events.jpg" alt="Lawrence Totimeh Jr. at a community event" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block"></div>
-<div>
-<p class="lede">Across the DMV, Lawrence hosts festivals, conferences,
-family reunions, and school and community events. He also performs with
-DMV City Slickerz, a Southern Soul line dance team hired to perform,
-teach, or bring the energy at events.</p>
-<p class="muted">Birthdays, cookouts, graduations, and private parties too,
-across Maryland, DC, and Virginia.</p>
-<ul class="checks">
-<li>Festivals, conferences, school events &amp; more</li>
-<li><a href="https://dmvcityslickerz.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">DMV City Slickerz</a> available to perform, teach, or bring the energy to your event</li>
-<li>In-house apparel made to match your event theme</li>
-</ul>
-<a class="btn" href="#contact">Check a date</a>
-</div>
-</div>
-</div>
-</section>
-<!-- APPAREL -->
-<section id="apparel" class="rev">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">+</span><h2>Apparel &amp; Custom Print</h2></div>
-<p class="eyebrow grey" style="margin:-8px 0 22px">Black Excellence: The Philosophy Behind Everything Above</p>
-<div class="cols">
-<div>
-<p class="lede">Everything comes off his own press. T-shirts, event staff
-gear, volunteer vests, uniforms, and statement tees under his own label,
-Black Excellence.</p>
-<p class="muted">Production happens in house, so turnaround is fast. Tell him
-what you need and he will send back a price.</p>
-<ul class="checks">
-<li>Heat press and vinyl, single pieces to bulk orders</li>
-<li>Design help available if you do not have your own artwork</li>
-<li>Hand assembly for specialty items like safety vests</li>
-<li>Statement tees under his own label, Black Excellence</li>
-<li>Handed out Black Excellence gear at the MLK Day Parade in Los Angeles, asking people what Black Excellence means to them</li>
-</ul>
-<a class="btn" href="#contact">Request a quote</a>
-</div>
-<div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/apparel.jpg" alt="Black Excellence apparel" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-</div>
-</div>
-</section>
-<!-- ABOUT -->
-<section id="about" class="rev">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">D</span><h2>About</h2></div>
-<div class="cols">
-<div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/about.jpg" alt="Lawrence Totimeh Jr." style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block"></div>
-<div>
-<p class="lede">Lawrence Totimeh Jr., also known as Agent Kodak, has lived
-from the DMV to California to Africa and back to the DMV. A former Sergeant
-in the Army National Guard, he deployed to Iraq in support of Operation New
-Dawn, and has spent more than ten years in education, workforce development,
-and community leadership across the DMV.</p>
-<p class="muted">He holds a Master of Science in Career &amp; Technical
-Education, with a concentration in Project Management, from Virginia State
-University, where he also completed his undergrad.</p>
-<p class="muted">Liberia Forward is the nonprofit Lawrence founded and
-leads in Liberia. It addresses food insecurity and builds economic
-empowerment by growing and selling cassava.</p>
-<p class="muted">Lawrence speaks and runs workshops for schools and
-community groups. Topics include teaching students to use a physical
-planner and sync a digital calendar on their phone, showing parents how to
-link calendars so their kids stay organized, and teenage
-decision-making.</p>
-<ul class="checks">
-<li>Former Sergeant, U.S. Army National Guard, deployed to Iraq, Operation New Dawn</li>
-<li>TEDx Speaker</li>
-<li>Educator, 10+ years</li>
-<li>Workshops on student organization: planners, phone calendars, and parent-linked scheduling</li>
-<li>Workshops on teenage decision-making</li>
-<li>Founder &amp; Executive Director, Liberia Forward, a nonprofit in Liberia addressing food security and economic empowerment through cassava farming</li>
-<li>M.S., Career &amp; Technical Education, Project Management concentration, Virginia State University</li>
-<li>Coach &amp; Operations Admin, D-Rockas, Liberia Basketball Association</li>
-<li>Member, Kappa Alpha Psi Fraternity Inc.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<!-- CONTACT -->
-<section id="contact" class="rev">
-<div class="wrap">
-<div class="sec-head"><span class="eyebrow">E</span><h2>Get in touch</h2></div>
-<p class="lede">Tell him which side you are reaching out about and he will get
-back to you. Quotes usually come back same day.</p>
-<!-- Replace FORM_ID with your Formspree endpoint. GitHub Pages cannot process forms on its own. -->
-<form action="https://formspree.io/f/FORM_ID" method="POST">
-<label for="name">Your name</label>
-<input id="name" name="name" type="text" autocomplete="name" required>
-<label for="email">Email</label>
-<input id="email" name="email" type="email" autocomplete="email" required>
-<label for="topic">What is this about</label>
-<select id="topic" name="topic">
-<option>Apparel or custom print</option>
-<option>Event booking</option>
-<option>Business systems</option>
-<option>Something else</option>
-</select>
-<label for="message">Details</label>
-<textarea id="message" name="message" placeholder="Quantity, date, or what you are trying to fix." required></textarea>
-<button type="submit">Send it</button>
-</form>
-</div>
-</section>
+  <!-- EVENTS -->
+  <section id="events" class="rev" style="background:var(--smoke)">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">C</span><h2>Events &amp; Entertainment</h2></div>
+      <p class="eyebrow" style="color:var(--ink);margin:-8px 0 22px">Also Known As <span style="color:var(--red)">Agent Kodak</span></p>
+      <div class="cols">
+        <div class="frame" style="background:#fff;padding:0;aspect-ratio:4/5"><img src="img/events.jpg" alt="Lawrence Totimeh Jr. at a community event" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block"></div>
+        <div>
+          <p class="lede">Across the DMV, Lawrence hosts festivals, conferences,
+          family reunions, and school and community events. He also performs with
+          DMV City Slickerz, a Southern Soul line dance team hired to perform,
+          teach, or bring the energy at events.</p>
+          <p class="muted">Birthdays, cookouts, graduations, and private parties too,
+          across Maryland, DC, and Virginia.</p>
+          <ul class="checks">
+            <li>Festivals, conferences, school events &amp; more</li>
+            <li><a href="https://dmvcityslickerz.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">DMV City Slickerz</a> available to perform, teach, or bring the energy to your event</li>
+            <li>In-house apparel made to match your event theme</li>
+          </ul>
+          <a class="btn" href="#contact">Check a date</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- APPAREL -->
+  <section id="apparel" class="rev">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">+</span><h2>Apparel &amp; Custom Print</h2></div>
+      <p class="eyebrow grey" style="margin:-8px 0 22px">Black Excellence: The Philosophy Behind Everything Above</p>
+      <div class="cols">
+        <div>
+          <p class="lede">Everything comes off his own press. T-shirts, event staff
+          gear, volunteer vests, uniforms, and statement tees under his own label,
+          Black Excellence.</p>
+          <p class="muted">Production happens in house, so turnaround is fast. Tell him
+          what you need and he will send back a price.</p>
+          <ul class="checks">
+            <li>Heat press and vinyl, single pieces to bulk orders</li>
+            <li>Design help available if you do not have your own artwork</li>
+            <li>Hand assembly for specialty items like safety vests</li>
+            <li>Statement tees under his own label, Black Excellence</li>
+            <li>Handed out Black Excellence gear at the MLK Day Parade in Los Angeles, asking people what Black Excellence means to them</li>
+          </ul>
+          <a class="btn" href="#contact">Request a quote</a>
+        </div>
+        <div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/apparel.jpg" alt="Black Excellence apparel" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+      </div>
+    </div>
+  </section>
+  <!-- ABOUT -->
+  <section id="about" class="rev">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">D</span><h2>About</h2></div>
+      <div class="cols">
+        <div class="frame" style="padding:0;aspect-ratio:4/5"><img src="img/about.jpg" alt="Lawrence Totimeh Jr." style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block"></div>
+        <div>
+          <p class="lede">Lawrence Totimeh Jr., also known as Agent Kodak, has lived
+          from the DMV to California to Africa and back to the DMV. A former Sergeant
+          in the Army National Guard, he deployed to Iraq in support of Operation New
+          Dawn, and has spent more than ten years in education, workforce development,
+          and community leadership across the DMV.</p>
+          <p class="muted">He holds a Master of Science in Career &amp; Technical
+          Education, with a concentration in Project Management, from Virginia State
+          University, where he also completed his undergrad.</p>
+          <p class="muted">Liberia Forward is the nonprofit Lawrence founded and
+          leads in Liberia. It addresses food insecurity and builds economic
+          empowerment by growing and selling cassava.</p>
+          <p class="muted">Lawrence speaks and runs workshops for schools and
+          community groups. Topics include teaching students to use a physical
+          planner and sync a digital calendar on their phone, showing parents how to
+          link calendars so their kids stay organized, and teenage
+          decision-making.</p>
+          <ul class="checks">
+            <li>Former Sergeant, U.S. Army National Guard, deployed to Iraq, Operation New Dawn</li>
+            <li>TEDx Speaker</li>
+            <li>Educator, 10+ years</li>
+            <li>Workshops on student organization: planners, phone calendars, and parent-linked scheduling</li>
+            <li>Workshops on teenage decision-making</li>
+            <li>Founder &amp; Executive Director, Liberia Forward, a nonprofit in Liberia addressing food security and economic empowerment through cassava farming</li>
+            <li>M.S., Career &amp; Technical Education, Project Management concentration, Virginia State University</li>
+            <li>Coach &amp; Operations Admin, D-Rockas, Liberia Basketball Association</li>
+            <li>Member, Kappa Alpha Psi Fraternity Inc.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CONTACT -->
+  <section id="contact" class="rev">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">E</span><h2>Get in touch</h2></div>
+      <p class="lede">Tell him which side you are reaching out about and he will get
+      back to you. Quotes usually come back same day.</p>
+      <p class="muted" style="margin-top:-4px">Reach out directly at
+      <a href="mailto:Lawrence.Totimeh@gmail.com" style="color:var(--red);text-decoration:underline;font-weight:600">Lawrence.Totimeh@gmail.com</a>,
+      or use the form below.</p>
+      <form id="contactForm">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+        <label for="topic">What is this about</label>
+        <select id="topic" name="topic">
+          <option>Apparel or custom print</option>
+          <option>Event booking</option>
+          <option>Business systems</option>
+          <option>Something else</option>
+        </select>
+        <label for="message">Details</label>
+        <textarea id="message" name="message" placeholder="Quantity, date, or what you are trying to fix." required></textarea>
+        <button type="submit">Send it</button>
+      </form>
+    </div>
+  </section>
 </main>
 <footer>
-<div class="wrap footrow">
-<span>© <span id="yr">2026</span> Lawrence Totimeh Jr.</span>
-<span>District Heights, MD</span>
-<span><a href="https://liberiaforward.org" style="text-decoration:none">Liberia Forward ↗</a></span>
-</div>
+  <div class="wrap footrow">
+    <span>© <span id="yr">2026</span> Lawrence Totimeh Jr.</span>
+    <span>District Heights, MD</span>
+    <span><a href="https://liberiaforward.org" style="text-decoration:none">Liberia Forward ↗</a></span>
+  </div>
 </footer>
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-var io = new IntersectionObserver(function(es){
-es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-}, {threshold:.12});
-document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var cf = document.getElementById('contactForm');
+  if (cf) {
+    cf.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var topic = document.getElementById('topic').value;
+      var message = document.getElementById('message').value.trim();
+      var subject = 'Website inquiry: ' + topic + (name ? ' — ' + name : '');
+      var body = 'Name: ' + name + '\nEmail: ' + email + '\nAbout: ' + topic + '\n\n' + message;
+      window.location.href = 'mailto:Lawrence.Totimeh@gmail.com?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    });
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
 </script>
 </body>
 </html>
