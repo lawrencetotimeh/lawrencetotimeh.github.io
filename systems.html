@@ -96,6 +96,18 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 .footrow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .divider{margin-top:64px;padding-top:56px;border-top:1px solid var(--line)}
+/* course picker */
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+@media(max-width:720px){.picker{grid-template-columns:1fr}}
+.pick-card{
+display:block;text-decoration:none;color:inherit;background:var(--smoke);
+border:1px solid var(--line);padding:28px;transition:border-color .16s,background .16s,transform .16s;
+}
+.pick-card:hover,.pick-card:focus-visible{border-color:var(--red);background:#fff;transform:translateY(-2px)}
+.pick-card .num{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--red)}
+.pick-card h3{font-size:22px;text-transform:uppercase;margin-top:8px}
+.pick-card p{margin:10px 0 0;color:var(--mute);font-size:14.5px;line-height:1.5}
+.pick-card .go{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
 /* reveal */
 .rev{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
 .rev.in{opacity:1;transform:none}
@@ -128,6 +140,21 @@ html{scroll-behavior:auto}
 missing. These are two of them, both public and free right now: bilingual
 study tools built section by section alongside the actual classes they
 support.</p>
+<p class="eyebrow grey" style="margin-top:36px">Choose Your Course</p>
+<div class="picker">
+<a class="pick-card" href="https://lawrencetotimeh.com/nccer-core-study/" target="_blank" rel="noopener">
+<span class="num">01</span>
+<h3>NCCER Core Study Tool</h3>
+<p>The intro course used in construction trades programs across the country. Quizzes, flashcards, and module tests matched to the real 70% passing standard.</p>
+<span class="go">Open the study tool ↗</span>
+</a>
+<a class="pick-card" href="https://lawrencetotimeh.com/print-reading-study/" target="_blank" rel="noopener">
+<span class="num">02</span>
+<h3>Print Reading Study Tool</h3>
+<p>Print Reading for Residential and Light Commercial Construction. Every question links back to the exact textbook page it came from.</p>
+<span class="go">Open the study tool ↗</span>
+</a>
+</div>
 </div>
 <!-- NCCER -->
 <section id="nccer" class="rev">
