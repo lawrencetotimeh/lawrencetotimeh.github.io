@@ -15,33 +15,33 @@
   <circle cx="72" cy="140" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="136" x2="76" y2="144" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="136" x2="68" y2="144" stroke="#9a9a97" stroke-width="2"/>
-  <text x="86" y="137" font-size="12" fill="#141414">No website —</text>
-  <text x="86" y="154" font-size="12" fill="#141414">just a phone number</text>
+  <text x="86" y="137" font-size="12" fill="#141414">Study guides go home</text>
+  <text x="86" y="154" font-size="12" fill="#141414">and disappear</text>
 
   <!-- BEFORE item 2 -->
   <circle cx="72" cy="210" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="206" x2="76" y2="214" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="206" x2="68" y2="214" stroke="#9a9a97" stroke-width="2"/>
-  <text x="86" y="207" font-size="12" fill="#141414">Records scattered</text>
-  <text x="86" y="224" font-size="12" fill="#141414">across texts and paper</text>
+  <text x="86" y="207" font-size="12" fill="#141414">One review day</text>
+  <text x="86" y="224" font-size="12" fill="#141414">before the test</text>
 
   <!-- BEFORE item 3 -->
   <circle cx="72" cy="280" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="276" x2="76" y2="284" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="276" x2="68" y2="284" stroke="#9a9a97" stroke-width="2"/>
-  <text x="86" y="277" font-size="12" fill="#141414">Found by word</text>
-  <text x="86" y="294" font-size="12" fill="#141414">of mouth only</text>
+  <text x="86" y="277" font-size="12" fill="#141414">Who's struggling shows</text>
+  <text x="86" y="294" font-size="12" fill="#141414">up on the test grade</text>
 
   <!-- BEFORE item 4 -->
   <circle cx="72" cy="350" r="9" fill="none" stroke="#9a9a97" stroke-width="2"/>
   <line x1="68" y1="346" x2="76" y2="354" stroke="#9a9a97" stroke-width="2"/>
   <line x1="76" y1="346" x2="68" y2="354" stroke="#9a9a97" stroke-width="2"/>
-  <text x="86" y="347" font-size="12" fill="#141414">No funding or</text>
-  <text x="86" y="364" font-size="12" fill="#141414">registration in place</text>
+  <text x="86" y="347" font-size="12" fill="#141414">"How do you support</text>
+  <text x="86" y="364" font-size="12" fill="#141414">my student?" — no data</text>
 
   <!-- Arrow + label -->
-  <text x="330" y="245" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">LAWRENCE</text>
-  <text x="330" y="259" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">BUILDS IT</text>
+  <text x="330" y="245" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">BUILT FROM</text>
+  <text x="330" y="259" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#6e6e6e">YOUR CLASS</text>
   <line x1="272" y1="270" x2="376" y2="270" stroke="#c1272d" stroke-width="2.5"/>
   <polygon points="376,262 392,270 376,278" fill="#c1272d"/>
 
@@ -51,27 +51,27 @@
   <!-- AFTER item 1 -->
   <circle cx="412" cy="140" r="9" fill="#c1272d"/>
   <path d="M 407 140 L 411 144 L 418 136" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="426" y="137" font-size="12" fill="#ffffff">Website live —</text>
-  <text x="426" y="154" font-size="12" fill="#ffffff">built to convert</text>
+  <text x="426" y="137" font-size="12" fill="#ffffff">Your study tool on</text>
+  <text x="426" y="154" font-size="12" fill="#ffffff">every student's phone</text>
 
   <!-- AFTER item 2 -->
   <circle cx="412" cy="210" r="9" fill="#c1272d"/>
   <path d="M 407 210 L 411 214 L 418 206" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="426" y="207" font-size="12" fill="#ffffff">One system —</text>
-  <text x="426" y="224" font-size="12" fill="#ffffff">clean and documented</text>
+  <text x="426" y="207" font-size="12" fill="#ffffff">Reps at home — scored</text>
+  <text x="426" y="224" font-size="12" fill="#ffffff">and spaced, every round</text>
 
   <!-- AFTER item 3 -->
   <circle cx="412" cy="280" r="9" fill="#c1272d"/>
   <path d="M 407 280 L 411 284 L 418 276" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="426" y="277" font-size="12" fill="#ffffff">Visible to the</text>
-  <text x="426" y="294" font-size="12" fill="#ffffff">audience you want</text>
+  <text x="426" y="277" font-size="12" fill="#ffffff">Scores land in your</text>
+  <text x="426" y="294" font-size="12" fill="#ffffff">own Google Sheet</text>
 
   <!-- AFTER item 4 -->
   <circle cx="412" cy="350" r="9" fill="#c1272d"/>
   <path d="M 407 350 L 411 354 L 418 346" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="426" y="347" font-size="12" fill="#ffffff">Registered, funded,</text>
-  <text x="426" y="364" font-size="12" fill="#ffffff">and yours to run</text>
+  <text x="426" y="347" font-size="12" fill="#ffffff">Receipts ready for the</text>
+  <text x="426" y="364" font-size="12" fill="#ffffff">parent conversation</text>
 
   <!-- footer -->
-  <text x="320" y="452" text-anchor="middle" font-size="11" letter-spacing="1" fill="#6e6e6e">HANDED OVER — NOT RETAINED</text>
+  <text x="320" y="452" text-anchor="middle" font-size="11" letter-spacing="1" fill="#6e6e6e">NO LOGINS &#183; NO STUDENT DATA &#183; TEACHER-OWNED</text>
 </svg>
