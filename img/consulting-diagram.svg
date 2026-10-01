@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" font-family="Archivo, Helvetica, Arial, sans-serif">
+<rect width="800" height="1000" fill="#f4f4f3"/>
+<g font-family="'IBM Plex Mono', Menlo, monospace" font-size="15" letter-spacing="2" fill="#c1272d">
+<text x="60" y="80">HOW THE WORK GOES</text>
+</g>
+<text x="60" y="130" font-size="40" font-weight="800" fill="#141414">Assess. Find the gap. Close it.</text>
+
+<!-- step 1 -->
+<g>
+<rect x="60" y="190" width="680" height="190" rx="4" fill="#fff" stroke="#e3e3e1" stroke-width="2"/>
+<text x="90" y="235" font-family="'IBM Plex Mono', Menlo, monospace" font-size="14" letter-spacing="2" fill="#6e6e6e">01 / ASSESS</text>
+<text x="90" y="280" font-size="28" font-weight="700" fill="#141414">Sit down with you.</text>
+<text x="90" y="318" font-size="18" fill="#6e6e6e">Walk the process as it actually runs today,</text>
+<text x="90" y="344" font-size="18" fill="#6e6e6e">not as it is supposed to run.</text>
+<text x="690" y="300" font-size="64" font-weight="800" fill="#e3e3e1" text-anchor="end">1</text>
+</g>
+<path d="M400 380 v40" stroke="#c1272d" stroke-width="3"/>
+<path d="M390 410 l10 14 l10 -14" fill="none" stroke="#c1272d" stroke-width="3"/>
+
+<!-- step 2 -->
+<g>
+<rect x="60" y="430" width="680" height="190" rx="4" fill="#fff" stroke="#e3e3e1" stroke-width="2"/>
+<text x="90" y="475" font-family="'IBM Plex Mono', Menlo, monospace" font-size="14" letter-spacing="2" fill="#6e6e6e">02 / IDENTIFY THE GAP</text>
+<text x="90" y="520" font-size="28" font-weight="700" fill="#141414">Name what is breaking.</text>
+<text x="90" y="558" font-size="18" fill="#6e6e6e">Intake, tracking, follow-up, handoffs, or reps.</text>
+<text x="90" y="584" font-size="18" fill="#6e6e6e">One clear gap you can act on.</text>
+<text x="690" y="540" font-size="64" font-weight="800" fill="#e3e3e1" text-anchor="end">2</text>
+</g>
+<path d="M400 620 v40" stroke="#c1272d" stroke-width="3"/>
+<path d="M390 650 l10 14 l10 -14" fill="none" stroke="#c1272d" stroke-width="3"/>
+
+<!-- step 3 -->
+<g>
+<rect x="60" y="670" width="680" height="190" rx="4" fill="#141414"/>
+<text x="90" y="715" font-family="'IBM Plex Mono', Menlo, monospace" font-size="14" letter-spacing="2" fill="#c1272d">03 / CLOSE IT</text>
+<text x="90" y="760" font-size="28" font-weight="700" fill="#fff">Advise, or build the system.</text>
+<text x="90" y="798" font-size="18" fill="#bdbdbd">Classrooms: a study system students use from their phone.</text>
+<text x="90" y="824" font-size="18" fill="#bdbdbd">Businesses: intake, tracking, and follow-up you own.</text>
+<text x="690" y="780" font-size="64" font-weight="800" fill="#2a2a2a" text-anchor="end">3</text>
+</g>
+
+<g font-family="'IBM Plex Mono', Menlo, monospace" font-size="13" letter-spacing="2" fill="#6e6e6e">
+<text x="60" y="930">YOU OWN IT · NO RETAINER · BUILT ON TOOLS YOU ALREADY HAVE</text>
+</g>
+</svg>
