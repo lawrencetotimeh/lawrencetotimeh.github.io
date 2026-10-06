@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Who holds the levers in Jackson County, Mississippi. Every office that touches a death investigation, how each one connects to voters, and the Nolan Xavier Wells School of Law lessons and timeline.">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Who Holds the Levers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a living "jellyfish" map. Power floats at the top, tentacles reach down to the people. Detail panel to the right (below on phones). */
+:root{
+  --ink:#0A0A0B;        /* deep water */
+  --glow:#262321;       /* warm glow behind the map */
+  --panel:#141312;
+  --line:#2E2B29;
+  --paper:#F2EFE9;      /* off-white text */
+  --stone:#B8B2A8;      /* labels */
+  --red:#E0343F;        /* elected by you */
+  --gold:#D9A441;       /* the case path */
+  --display:"Oswald", "Arial Narrow", Impact, sans-serif;
+  --body:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--ink);color:var(--paper)}
+body{font-family:var(--body);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1240px;margin:0 auto}
+a{color:var(--paper);text-decoration-color:var(--red);text-underline-offset:3px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Header */
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;padding-block:28px 18px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}
+.eyebrow b{color:var(--red);font-weight:500}
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(34px,6vw,64px);line-height:.95;letter-spacing:.01em;margin:6px 0 0;text-wrap:balance}
+h1 span{color:var(--red)}
+.lede{max-width:52ch;color:var(--stone);margin:10px 0 0}
+.ballot{border:1px solid var(--red);border-radius:4px;padding:10px 14px;max-width:320px}
+.ballot .eyebrow{color:var(--red)}
+.ballot p{margin:2px 0 0;font-size:14px}
+
+/* Lens controls */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:16px}
+.controls .label{font-family:var(--mono);font-size:12px;color:var(--stone);letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.lens{background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;cursor:pointer;transition:border-color .2s,background .2s}
+.lens:hover{border-color:var(--stone)}
+.lens[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper);font-weight:600}
+
+/* Main grid */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:20px;align-items:start}
+@media (max-width:900px){.stage{grid-template-columns:minmax(0,1fr)}}
+.mapbox{position:relative;border-radius:6px;background:radial-gradient(ellipse 70% 55% at 50% 38%,var(--glow),var(--ink) 75%);border:1px solid var(--line);overflow-x:auto}
+.mapbox svg{display:block;width:100%;min-width:760px;height:auto}
+.levels text{font-family:var(--mono);font-size:11px;letter-spacing:.16em;fill:var(--stone);text-transform:uppercase}
+.edge{fill:none;stroke-width:1.6;opacity:.32;transition:opacity .25s}
+.edge.elect{stroke:var(--red)}
+.edge.appoint{stroke:var(--paper)}
+.edge.case{stroke:var(--gold)}
+.edge.rules{stroke:var(--stone);stroke-dasharray:4 5}
+.edge.hidden{opacity:0}
+.edge.dim{opacity:.06}
+.edge.hot{opacity:1;stroke-width:2.4;stroke-dasharray:6 8;animation:flow 1.1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.elabel{font-family:var(--mono);font-size:10.5px;fill:var(--paper);opacity:0;pointer-events:none;transition:opacity .2s}
+.elabel.show{opacity:1}
+.elabel-bg{fill:var(--ink);opacity:0;transition:opacity .2s}
+.elabel-bg.show{opacity:.85}
+.node{cursor:pointer;transition:opacity .25s}
+.node .halo{opacity:.18;transition:opacity .25s}
+.node:hover .halo,.node.sel .halo{opacity:.45}
+.node .core{fill:var(--ink);stroke-width:2}
+.node.elected .core{stroke:var(--red)}
+.node.appointed .core{stroke:var(--paper);stroke-dasharray:4 3}
+.node.federal .core{stroke:var(--stone)}
+.node.people .core{stroke:var(--gold)}
+.node.elected .halo{fill:var(--red)}
+.node.appointed .halo,.node.federal .halo{fill:var(--paper)}
+.node.people .halo{fill:var(--gold)}
+.node .glyph{font-family:var(--display);font-size:15px;font-weight:600;fill:var(--paper);text-anchor:middle;dominant-baseline:central}
+.node .t1{font-family:var(--display);font-size:14px;letter-spacing:.04em;text-transform:uppercase;fill:var(--paper);text-anchor:middle}
+.node .t2{font-family:var(--body);font-size:11.5px;fill:var(--stone);text-anchor:middle}
+.node.dim{opacity:.22}
+.node.sel .core{stroke-width:3.5}
+.node.step .core{stroke:var(--gold);stroke-dasharray:none;stroke-width:3.5}
+.node.step .halo{fill:var(--gold);opacity:.5}
+.hint{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:11px;color:var(--stone);pointer-events:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 2px 0;font-size:13px;color:var(--stone)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:22px;height:0;border-top:2px solid}
+.ring{width:13px;height:13px;border-radius:50%;border:2px solid}
+
+/* Panel */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px;min-width:0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (max-width:900px){.panel{position:static}}
+.panel h2{font-family:var(--display);text-transform:uppercase;font-size:30px;line-height:1;margin:6px 0 2px;letter-spacing:.01em;text-wrap:balance}
+.holder{font-size:15px;margin:6px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:3px 7px;color:var(--stone)}
+.chip.red{border-color:var(--red);color:var(--paper)}
+.chip.gold{border-color:var(--gold);color:var(--gold)}
+.chip.check{border-style:dashed}
+.panel dl{margin:14px 0 0;display:grid;gap:12px}
+.panel dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+.panel dd{margin:2px 0 0}
+.panel .act{margin-top:16px;border-left:3px solid var(--red);padding:8px 0 8px 12px;background:linear-gradient(90deg,rgba(224,52,63,.10),transparent)}
+.panel .act dt{color:var(--red)}
+.links{margin:6px 0 0;padding-left:18px;font-size:13px}
+.links li{margin:2px 0}
+.links a{color:var(--stone)}
+.conns{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.conn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12.5px;cursor:pointer}
+.conn:hover{border-color:var(--paper)}
+.conn i{font-style:normal;color:var(--stone)}
+
+/* Glossary terms */
+.term{background:none;border:0;padding:0;border-bottom:1px dotted var(--stone);cursor:help;display:inline}
+.term::after{content:"i";display:inline-grid;place-items:center;width:15px;height:15px;margin-left:3px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);font-family:var(--mono);font-size:10px;line-height:1;vertical-align:2px}
+#tip{position:fixed;z-index:20;max-width:290px;background:var(--paper);color:var(--ink);border-radius:5px;padding:10px 12px;font-size:13.5px;line-height:1.45;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#tip b{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;display:block;font-size:15px}
+
+/* Case stepper */
+.stepper{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.stepbtn{background:var(--gold);color:var(--ink);border:0;border-radius:4px;padding:8px 14px;font-weight:600;cursor:pointer}
+.stepbtn.ghost{background:transparent;color:var(--paper);border:1px solid var(--line)}
+.stepbtn:disabled{opacity:.35;cursor:default}
+.dots{display:flex;gap:5px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--gold)}
+
+/* Below the map */
+.lens-class{border-color:var(--gold);color:var(--gold)}
+.lens-class[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.lpills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.lpill{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;font-family:var(--display);font-size:16px;cursor:pointer;display:inline-grid;place-items:center}
+.lpill[aria-selected="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.lpill.soon{opacity:.35;cursor:default}
+.sum{margin:12px 0 0;padding-left:20px;display:grid;gap:8px}
+.sum li::marker{color:var(--gold);font-family:var(--mono)}
+.lnote{font-size:12.5px;color:var(--stone);margin-top:16px}
+.lnote code{font-family:var(--mono);color:var(--paper)}
+.tl{margin-top:28px;border-top:2px solid var(--gold);padding-top:16px}
+.tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px 28px}
+.tl-head h3{font-family:var(--display);text-transform:uppercase;font-size:30px;margin:4px 0 0;letter-spacing:.02em}
+.tl-filters{display:flex;flex-wrap:wrap;gap:6px}
+.tf{background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.tf[aria-pressed="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+.tl-list{list-style:none;margin:18px 0 0;padding:0 0 0 22px;border-left:2px solid var(--line);display:grid;gap:14px}
+.tl-item{position:relative;min-width:0}
+.tl-item::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ink);border:2px solid var(--stone)}
+.tl-item[data-k="v"]::before{border-color:var(--paper);background:var(--paper)}
+.tl-item[data-k="da"]::before{border-color:var(--red)}
+.tl-item[data-k="gap"]::before{border-color:var(--gold);border-style:dashed}
+.tl-when{font-family:var(--mono);font-size:12px;color:var(--stone);letter-spacing:.06em}
+.tl-what{margin:2px 0 0;max-width:75ch}
+.tl-item[data-k="gap"] .tl-what{color:var(--gold)}
+.tl-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.tl-meta a{font-size:12.5px;color:var(--stone)}
+.tl-go{background:transparent;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:12px;cursor:pointer}
+.tl-go:hover{border-color:var(--paper)}
+.tl-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:22px}
+.tl-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
+.tl-card h4{font-family:var(--display);text-transform:uppercase;font-size:19px;margin:0;letter-spacing:.03em}
+.tl-card ul{margin:10px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14px}
+.src-note{font-size:12.5px;color:var(--stone);margin:2px 0 0}
+.tl-next{border-color:var(--gold)}
+
+section.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;margin-top:28px}
+.block{border-top:2px solid var(--paper);padding-top:14px;min-width:0}
+.block h3{font-family:var(--display);text-transform:uppercase;font-size:24px;margin:0 0 8px;letter-spacing:.02em}
+.q{margin:14px 0}
+.q p{margin:0 0 8px;font-weight:500}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{background:transparent;border:1px solid var(--line);border-radius:4px;padding:7px 12px;cursor:pointer;font-size:14px}
+.opt:hover{border-color:var(--stone)}
+.opt.right{border-color:var(--gold);color:var(--gold)}
+.opt.wrong{border-color:var(--red);opacity:.7;text-decoration:line-through}
+.fb{font-size:13.5px;color:var(--stone);margin-top:6px}
+.listview details{border-bottom:1px solid var(--line);padding:8px 0}
+.listview summary{cursor:pointer;font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:17px}
+.listview ul{margin:6px 0 4px;padding-left:18px}
+.listview li button{background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--stone);display:grid;gap:6px}
+footer strong{color:var(--paper)}
+@media (prefers-reduced-motion:reduce){.edge.hot{animation:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <div class="eyebrow"><b>NXW</b> · Nolan Xavier Wells School of Law · Field Guide</div>
+    <h1>Who holds the <span>levers</span><br>in Jackson County, MS</h1>
+    <p class="lede">The county where Nolan Xavier Wells died. Every office that touches a death investigation, from the island to the Governor, and how each one connects back to you.</p>
+  </div>
+  <div class="ballot">
+    <div class="eyebrow">Next on the ballot</div>
+    <p><strong>Nov. 3, 2026.</strong> Four Circuit Court seats for District 19 (George, Greene and Jackson counties), plus Congress.</p>
+  </div>
+</header>
+
+<div class="controls" role="group" aria-label="Choose a view">
+  <span class="label">View</span>
+  <button class="lens" data-lens="all" aria-pressed="true">Everything</button>
+  <button class="lens" data-lens="elect" aria-pressed="false">Who you elect</button>
+  <button class="lens" data-lens="appoint" aria-pressed="false">Who picks whom</button>
+  <button class="lens" data-lens="case" aria-pressed="false">Follow the case</button>
+  <button class="lens lens-class" data-lens="lesson" aria-pressed="false">Classroom: Lessons</button>
+  <a class="lens lens-class" href="#timeline" style="text-decoration:none">Timeline + gaps</a>
+</div>
+
+<div class="stage">
+  <div>
+    <div class="mapbox">
+      <svg id="map" viewBox="0 0 1000 880" role="img" aria-label="Map of offices connected to the death investigation in Jackson County, Mississippi">
+        <g class="levels">
+          <text x="18" y="38">Federal</text>
+          <text x="18" y="222">State of Mississippi</text>
+          <text x="18" y="432">County + District</text>
+          <text x="18" y="640">The people</text>
+        </g>
+        <g id="edges"></g>
+        <g id="elabels"></g>
+        <g id="nodes"></g>
+      </svg>
+      <div class="hint">Hover or tap any circle</div>
+    </div>
+    <div class="legend">
+      <span><i class="ring" style="border-color:var(--red)"></i>Elected by voters</span>
+      <span><i class="ring" style="border-color:var(--paper);border-style:dashed"></i>Appointed</span>
+      <span><i class="ring" style="border-color:var(--stone)"></i>Federal</span>
+      <span><i class="sw" style="border-color:var(--red)"></i>Elects</span>
+      <span><i class="sw" style="border-color:var(--paper)"></i>Appoints or controls</span>
+      <span><i class="sw" style="border-color:var(--gold)"></i>Case moves here</span>
+      <span><i class="sw" style="border-color:var(--stone);border-top-style:dashed"></i>Sets rules or money</span>
+    </div>
+  </div>
+
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
+
+<section class="tl" id="timeline" aria-labelledby="tl-h">
+  <div class="tl-head">
+    <div>
+      <div class="eyebrow" style="color:var(--gold)">Classroom · The record</div>
+      <h3 id="tl-h">The timeline, and the gaps</h3>
+      <p class="lede">What happened, what the DA says was done, what anyone can verify, and where the record goes quiet. Every item is labeled. Tap an office to see it on the map.</p>
+    </div>
+    <div class="tl-filters" role="group" aria-label="Filter the timeline">
+      <button class="tf" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="tf" type="button" data-f="v" aria-pressed="false">Verified</button>
+      <button class="tf" type="button" data-f="r" aria-pressed="false">Reported once</button>
+      <button class="tf" type="button" data-f="da" aria-pressed="false">Officials say</button>
+      <button class="tf" type="button" data-f="gap" aria-pressed="false">Gaps</button>
+    </div>
+  </div>
+  <ol class="tl-list" id="tl-list"></ol>
+  <div class="tl-cards">
+    <div class="tl-card"><h4>What the DA says was done</h4><p class="src-note">From the grand jury report and her public statements.</p><ul id="tl-da"></ul></div>
+    <div class="tl-card"><h4>What anyone can check</h4><p class="src-note">Public documents you can read yourself.</p><ul id="tl-check"></ul></div>
+    <div class="tl-card tl-next"><h4>What's likely next</h4><p class="src-note">Our assessment, not a prediction. Labeled AI.</p><ul id="tl-next"></ul></div>
+  </div>
+</section>
+
+<section class="more">
+  <div class="block">
+    <h3>Test yourself</h3>
+    <div id="quiz"></div>
+  </div>
+  <div class="block listview">
+    <h3>Every office, as a list</h3>
+    <div id="list"></div>
+  </div>
+</section>
+
+<footer>
+  <div><strong>Prototype v0.1 · facts checked Oct. 5, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
+  <div>House rules: we name offices and public officials by their official acts. We do not name private people. Nobody on this map is accused of anything. Anything marked <span class="chip check">to confirm</span> still needs a primary source.</div>
+  <div>Spot an error? Bring the documentation. Documentation beats conversation.</div>
+</footer>
+</div>
+
+<div id="tip" hidden></div>
+
+<script>
+/* ---------- Glossary (plain words, for a 15-year-old) ---------- */
+const GLOSS = {
+  "elected":"Voters pick this person at the ballot box. If they don't do the job, voters can replace them next election.",
+  "appointed":"Someone with power picks this person. Voters don't. To change who holds the job, you go through whoever appointed them.",
+  "coroner":"An elected county official who opens a death investigation and decides if an autopsy is needed. In Mississippi it's not a doctor job.",
+  "medical examiner":"A doctor trained in forensic pathology who does autopsies and decides cause and manner of death.",
+  "autopsy":"A medical exam of a body after death to find out what happened.",
+  "cause of death":"What physically ended the person's life, like drowning or a head injury.",
+  "manner of death":"How it happened, in one of five buckets: natural, accident, suicide, homicide, or undetermined.",
+  "undetermined":"The doctor could not decide, based on the evidence they had. It does not mean nothing happened. It means it wasn't proven either way.",
+  "district attorney":"The elected lawyer who decides whether to bring criminal charges for the state. Also called the DA or prosecutor.",
+  "grand jury":"A group of regular citizens who meet in private and decide if there's enough evidence to charge someone. In Mississippi, 12 have to agree.",
+  "probable cause":"A reasonable belief that a specific person committed a specific crime. Not proof. Just enough to charge.",
+  "no true bill":"The grand jury's way of saying 'not enough to charge right now.' It is not the same as 'not guilty.' The case can come back with new evidence.",
+  "indictment":"A formal criminal charge voted by a grand jury.",
+  "jurisdiction":"Who has the power over a place or a type of case. Like home field.",
+  "circuit court":"Mississippi's main trial court for felonies and big lawsuits. Judges are elected.",
+  "chancery court":"Mississippi court for family matters, estates and wills. A dead person's estate is opened here before a wrongful death suit.",
+  "estate":"Everything a person leaves behind, including the right to sue over their death.",
+  "civil lawsuit":"A case where one side sues another for money or a court order. Lower proof bar than a criminal case.",
+  "discovery":"The part of a lawsuit where both sides must hand over evidence and answer questions under oath.",
+  "term":"How long someone holds office before they face voters again.",
+  "statute":"A written law passed by the Legislature. 'Miss. Code' numbers point to them.",
+  "federal land":"Land owned by the United States, not the state. Federal agencies and laws apply there.",
+  "civil rights review":"The U.S. Justice Department checking whether federal civil rights laws were broken."
+};
+
+/* ---------- Offices ---------- */
+// kind: elected | appointed | federal | people
+const N = [
+ // FEDERAL
+ {id:"nps",lvl:0,x:150,y:95,g:"NPS",kind:"federal",t1:"Horn Island",t2:"National Park Service",
+  title:"Horn Island: National Park Service",
+  holder:"Federal land. Part of Gulf Islands National Seashore, managed by the National Park Service. The U.S. Coast Guard coordinated the search on the water.",
+  how:"Federal agencies, run by the President's administration.",
+  next:"No election.",
+  controls:"Rules and access on the island. Who has [jurisdiction] over a place matters. Federal land can open a federal path.",
+  inCase:"Nolan Xavier Wells went missing near Horn Island on July 4, 2026. A park ranger found him on July 6. Per Wikipedia's summary of news reports.",
+  act:"Learn which agency controls the land and water. That decides which laws and investigators apply.",
+  chips:["federal land"],src:[["Death of Nolan Wells (Wikipedia summary)","https://en.wikipedia.org/wiki/Death_of_Nolan_Wells"]]},
+ {id:"doj",lvl:0,x:390,y:95,g:"DOJ",kind:"federal",t1:"U.S. Justice Dept.",t2:"DOJ + FBI",
+  title:"U.S. Department of Justice + FBI",
+  holder:"Run by the U.S. Attorney General. The FBI is part of DOJ.",
+  how:"Appointed by the President, confirmed by the Senate.",
+  next:"No election. Changes with the President.",
+  controls:"Federal crimes and a [civil rights review]. Can open its own investigation even after a state grand jury says no.",
+  inCase:"The Congressional Black Caucus asked DOJ for an independent federal review in August 2026. DOJ said appropriate staff are reviewing it. No federal investigation announced as of Oct. 5. Separately, people who threatened witnesses were charged in federal court.",
+  act:"Federal pressure moves through Congress. Contact your members of Congress and ask for the status of the review in writing.",
+  chips:["appointed"],src:[["ABC News: CBC urges DOJ review","https://abcnews.com/US/congressional-black-caucus-urges-doj-review-nolan-wells/story?id=135619833"],["NAACP joins family legal team","https://naacp.org/articles/naacp-office-general-counsel-joins-nolan-wells-family-legal-team"]]},
+ {id:"congress",lvl:0,x:640,y:95,g:"US",kind:"elected",t1:"Congress",t2:"Rep. Mike Ezell (MS-4)",
+  title:"Congress",
+  holder:"Jackson County is in Mississippi's 4th Congressional District, represented by Rep. Mike Ezell. Before Congress, he was Jackson County Sheriff. Mississippi also has two U.S. Senators.",
+  how:"[elected] by voters. House: every 2 years. Senate: every 6 years.",
+  next:"Nov. 3, 2026 for the House seat.",
+  controls:"Writes federal law, funds DOJ, and can demand answers from federal agencies.",
+  inCase:"The Congressional Black Caucus asked DOJ for a federal review. Rep. Maxine Waters joined a press event with the family on Oct. 5 (reported).",
+  act:"Call or write your representative. Ask one clear question. Keep the reply. That's documentation.",
+  chips:["elected","on ballot Nov 3"],src:[["Mike Ezell (Wikipedia)","https://en.wikipedia.org/wiki/Mike_Ezell"]]},
+ {id:"fedcourt",lvl:0,x:870,y:95,g:"FED",kind:"federal",t1:"Federal Court",t2:"S.D. Mississippi",
+  title:"U.S. District Court, Southern District of Mississippi",
+  holder:"Federal judges, appointed for life.",
+  how:"[appointed] by the President, confirmed by the Senate.",
+  next:"No election.",
+  controls:"Federal criminal cases and federal civil rights lawsuits.",
+  inCase:"The federal threat cases against people who threatened witnesses are being tried here. First trial set for Oct. 5, 2026.",
+  act:"Federal court records are public through PACER. Agents can track filings without relying on rumors.",
+  chips:["appointed"],src:[["The Dispatch: threat trial dates","https://cdispatch.com/news/trial-dates-set-for-those-accused-of-making-threats-in-investigation-of-nolan-wells-death/"]]},
+
+ // STATE
+ {id:"leg",lvl:1,x:95,y:285,g:"LEG",kind:"elected",t1:"Legislature",t2:"Writes the rules",
+  title:"Mississippi Legislature",
+  holder:"52 senators and 122 representatives. Jackson County elects several of each.",
+  how:"[elected] by district, 4-year terms.",
+  next:"Nov. 2027 (state elections).",
+  controls:"Writes every rule on this map: who can be coroner, where the medical examiner's office sits, grand jury rules, and whether Mississippi has early voting (it doesn't).",
+  inCase:"State law says a coroner needs only a high school diploma or equivalent, plus a short training course. The Legislature can change that.",
+  act:"Find your state senator and representative. Ask where they stand on coroner standards and early voting.",
+  chips:["elected","writes the rules"],src:[["Mississippi Independent: the coroner system","https://msindy.org/p/nolan-wellss-death-exposes-fault"]]},
+ {id:"gov",lvl:1,x:270,y:285,g:"GOV",kind:"elected",t1:"Governor",t2:"Tate Reeves",
+  title:"Governor of Mississippi",
+  holder:"Tate Reeves.",
+  how:"[elected] statewide, 4-year [term].",
+  next:"Nov. 2027. Reeves can't run again (term limits). AG Lynn Fitch has announced a run.",
+  controls:"Appoints the Commissioner of Public Safety, who controls the state crime lab and the medical examiner's office. Signs or vetoes laws.",
+  inCase:"The Governor's appointee runs the Department of Public Safety, which co-investigated with the sheriff.",
+  act:"Ask candidates for Governor in 2027 one question: should the medical examiner stay under the police agency?",
+  chips:["elected","2027"],src:[["Sean Tindell (Wikipedia)","https://en.wikipedia.org/wiki/Sean_Tindell"],["Mississippi Today: Fitch announces","https://mississippitoday.org/2026/08/04/lynn-fitch-announces-run-for-governor/"]]},
+ {id:"dps",lvl:1,x:445,y:285,g:"DPS",kind:"appointed",t1:"Public Safety",t2:"Comm. Sean Tindell",
+  title:"Department of Public Safety",
+  holder:"Commissioner Sean Tindell, in office since June 1, 2020.",
+  how:"[appointed] by the Governor.",
+  next:"No election. Serves at the Governor's choice.",
+  controls:"The state's police agency. The medical examiner's office sits inside it. The Commissioner appoints the State Medical Examiner and can fire them (Miss. Code 41-61-55).",
+  inCase:"Co-investigated Nolan's death with the Jackson County Sheriff's Office, per news summaries.",
+  act:"Ask: should the doctors who rule on deaths answer to the state's top police official? Other states put them under health departments.",
+  chips:["appointed","controls the ME"],src:[["Sean Tindell (Wikipedia)","https://en.wikipedia.org/wiki/Sean_Tindell"],["Death of Nolan Wells (Wikipedia)","https://en.wikipedia.org/wiki/Death_of_Nolan_Wells"]]},
+ {id:"me",lvl:1,x:620,y:285,g:"ME",kind:"appointed",t1:"State ME",t2:"Dr. Staci Turner",
+  title:"State Medical Examiner",
+  holder:"Chief Medical Examiner Dr. Staci Turner. Office in Pearl, MS.",
+  how:"[appointed] by the Commissioner of Public Safety, who can also discharge her (Miss. Code 41-61-55).",
+  next:"No election.",
+  controls:"State [autopsy] results: the official [cause of death] and [manner of death].",
+  inCase:"The state autopsy listed cause and manner as [undetermined], with drowning considered likely. The family's own pathologist also ruled undetermined.",
+  act:"Ask for the office's caseload and staffing numbers. A rushed, understaffed office is a system problem anyone can document.",
+  chips:["appointed","no election"],src:[["Mississippi Free Press: Turner named","https://www.mississippifreepress.org/mississippi-names-next-chief-medical-examiner-dr-staci-turner/"],["MFP: independent autopsy","https://www.mississippifreepress.org/crump-releases-full-independent-autopsy-of-nolan-wells-says-questions-of-wells-death-remain/"]]},
+ {id:"ag",lvl:1,x:795,y:285,g:"AG",kind:"elected",t1:"Atty. General",t2:"Lynn Fitch",
+  title:"Mississippi Attorney General",
+  holder:"Lynn Fitch. Running for Governor in 2027.",
+  how:"[elected] statewide, 4-year [term].",
+  next:"Nov. 2027.",
+  controls:"The state's top lawyer. Can assist local DAs and, in some situations, take over prosecutions.",
+  inCase:"No public role in this case found as of Oct. 5.",
+  act:"Ask: under what conditions would the AG's office review a case a local grand jury declined?",
+  chips:["elected","to confirm powers"],src:[["Lynn Fitch (Wikipedia)","https://en.wikipedia.org/wiki/Lynn_Fitch"]]},
+ {id:"supreme",lvl:1,x:930,y:285,g:"SC",kind:"elected",t1:"Supreme Ct.",t2:"9 justices",
+  title:"Mississippi Supreme Court",
+  holder:"Nine justices elected from three districts.",
+  how:"[elected] to 8-year terms.",
+  next:"Varies by seat.",
+  controls:"Final word on Mississippi law. Reviews appeals from circuit and chancery courts.",
+  inCase:"None yet. Any appeal from a lawsuit would end up here. None of the three districts is majority Black, which is being fought in federal court.",
+  act:"Know which Supreme Court district you vote in. These races are low turnout, so every vote counts more.",
+  chips:["elected","to confirm source link"],src:[["Mississippi Today (Supreme Court districts coverage)","https://mississippitoday.org/"]]},
+
+ // COUNTY / DISTRICT
+ {id:"sup",lvl:2,x:95,y:495,g:"BOS",kind:"elected",t1:"Supervisors",t2:"5 districts",
+  title:"Jackson County Board of Supervisors",
+  holder:"Five supervisors, one per county district.",
+  how:"[elected] by district, 4-year [term].",
+  next:"Nov. 2027 (county elections).",
+  controls:"The county budget. That includes money for the sheriff's office, the coroner and the jail.",
+  inCase:"No direct role. They fund the offices that investigate.",
+  act:"Budget hearings are public. Ask how much the coroner's office gets for training and staff.",
+  chips:["elected","holds the money"],src:[["Jackson County government","https://www.co.jackson.ms.us/"]]},
+ {id:"sheriff",lvl:2,x:260,y:495,g:"SO",kind:"elected",t1:"Sheriff",t2:"John Ledbetter",
+  title:"Jackson County Sheriff",
+  holder:"Sheriff John Ledbetter.",
+  how:"[elected] countywide, 4-year [term].",
+  next:"Nov. 2027 (county elections).",
+  controls:"Investigates deaths and crimes outside city limits. Gathers the evidence the DA and grand jury see.",
+  inCase:"Led the local investigation with the Department of Public Safety. Publicly said early on there were no signs of foul play, per news summaries.",
+  act:"Request records the law allows, like incident reports. Show up when the sheriff is on the ballot.",
+  chips:["elected","investigates"],src:[["Jackson County Sheriff's Office (Wikipedia)","https://en.wikipedia.org/wiki/Jackson_County_Sheriff%27s_Office_(Mississippi)"],["Sheriff's Office site","https://sheriff.co.jackson.ms.us/"]]},
+ {id:"coroner",lvl:2,x:425,y:495,g:"COR",kind:"elected",t1:"Coroner",t2:"Bruce Lynd Jr.",
+  title:"Jackson County Coroner",
+  holder:"Coroner Bruce Lynd Jr.",
+  how:"[elected] countywide. To qualify: high school diploma or equivalent, age 21, county voter (Miss. Code 19-21-103), plus a short training course.",
+  next:"Nov. 2027 (county elections).",
+  controls:"Opens the death investigation. Decides whether to order an [autopsy]. Signs off on the death record.",
+  inCase:"Opened the death investigation and ordered the state autopsy in Pearl.",
+  act:"Mississippi has 82 elected coroners with little professional training required. Ask your legislators to raise the bar.",
+  chips:["elected","no medical degree required"],src:[["Mississippi Independent: the coroner system","https://msindy.org/p/nolan-wellss-death-exposes-fault"]]},
+ {id:"da",lvl:2,x:600,y:495,g:"DA",kind:"elected",t1:"DA",t2:"Angel Myers McIlrath",
+  title:"District Attorney, 19th District",
+  holder:"DA Angel Myers McIlrath. The 19th District covers George, Greene and Jackson counties.",
+  how:"[elected] by district, 4-year [term].",
+  next:"Nov. 2027.",
+  controls:"Decides whether to charge, what evidence the [grand jury] sees, and what law they're told applies. The front line.",
+  inCase:"Presented the case to a grand jury, which returned no charges. Publicly said anyone with new evidence should bring it to her.",
+  act:"New evidence goes to the DA. Ask for grand jury materials to be released. The DA answers to voters in 2027.",
+  chips:["elected","the front line"],src:[["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]},
+ {id:"circuit",lvl:2,x:770,y:495,g:"CC",kind:"elected",t1:"Circuit Judges",t2:"4 judges · District 19",
+  title:"Circuit Court, District 19",
+  holder:"Four judgeships (Places 1 to 4). All four are on the Nov. 3, 2026 ballot.",
+  how:"[elected] by district, 4-year [term]. Nonpartisan races.",
+  next:"Nov. 3, 2026.",
+  controls:"The [circuit court] seats and instructs grand juries, runs criminal trials, and hears big civil cases like wrongful death.",
+  inCase:"The grand jury that heard this case was a circuit court grand jury.",
+  act:"Look up who filed for each seat. Judges are hard to research, so agents who do the homework help everybody.",
+  chips:["elected","on ballot Nov 3"],src:[["WLOX: judicial candidates for Nov. 3","https://www.wlox.com/2026/02/03/here-are-judicial-candidates-who-have-submitted-papers-qualify-nov-3-election/"]]},
+ {id:"chancery",lvl:2,x:925,y:495,g:"CH",kind:"elected",t1:"Chancery",t2:"District 9",
+  title:"Chancery Court, District 9",
+  holder:"Chancellors for Jackson and George counties.",
+  how:"[elected] by district, 4-year [term].",
+  next:"Nov. 3, 2026 (seats listed with the judicial candidates).",
+  controls:"Estates, wills and family law. An [estate] has to be opened here before a family can bring a wrongful death [civil lawsuit].",
+  inCase:"On July 21, 2026, Nolan's mother asked Jackson County Chancery Court to open his estate and name her administrator. That gives her standing to sue.",
+  act:"Court filings are public records. Read the real document instead of the screenshot.",
+  chips:["elected","on ballot Nov 3"],src:[["MPB: lawsuit expected","https://www.mpbonline.org/blogs/news/lawsuit-expected-in-response-to-death-of-nolan-wells/"]]},
+
+ // PEOPLE
+ {id:"clerk",lvl:3,x:300,y:700,g:"CLK",kind:"elected",t1:"Circuit Clerk",t2:"Voter rolls + juries",
+  title:"Jackson County Circuit Clerk",
+  holder:"Elected county official. Name to add after confirming.",
+  how:"[elected] countywide, 4-year [term].",
+  next:"Nov. 2027 (county elections).",
+  controls:"Keeps voter registration records and court files. Jury pools are drawn from voter rolls and driver's license records.",
+  inCase:"The grand jurors who heard this case came from lists like these.",
+  act:"Keep your registration and address current. That's how you stay eligible to serve on a jury.",
+  chips:["elected","to confirm name"],src:[["Mississippi Secretary of State: Y'all Vote","https://www.sos.ms.gov/yall-vote"]]},
+ {id:"gj",lvl:3,x:600,y:700,g:"GJ",kind:"people",t1:"Grand Jury",t2:"12 must agree",
+  title:"Jackson County Grand Jury",
+  holder:"Regular residents of the county, chosen at random.",
+  how:"Drawn from voter rolls and driver's license records. 12 jurors must agree to indict (Miss. Code 99-7-11).",
+  next:"New grand juries are seated regularly by the circuit court.",
+  controls:"Whether there's [probable cause] for an [indictment]. They only see what the DA presents. No judge or defense lawyer in the room.",
+  inCase:"In September 2026 the grand jury found no evidence of criminal conduct and returned no charges. That's a [no true bill], not a 'not guilty.' With new evidence, a case can go to a new grand jury.",
+  act:"Grand jurors are your neighbors. A registered, informed community is a stronger jury pool.",
+  chips:["citizens","12 votes needed"],src:[["NPR: grand jury finds no evidence","https://www.npr.org/2026/09/22/nx-s1-5911804/nolan-wells-investigation-grand-jury"],["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]},
+ {id:"you",lvl:3,x:500,y:820,g:"YOU",kind:"people",r:40,t1:"You",t2:"Voters + Agents of Change",
+  title:"You: the voters",
+  holder:"Every registered voter in Jackson County, and every Agent of Change who teaches them.",
+  how:"You register. You show up.",
+  next:"Nov. 3, 2026. Then Nov. 2027, when the DA, sheriff, coroner, supervisors, Governor and AG are all on the ballot.",
+  controls:"Directly elect 12 of the offices on this map. Grand juries are drawn from you. Every appointed office answers to someone you elect.",
+  inCase:"Every lever in this case before the grand jury was held by someone elected, or appointed by someone elected.",
+  act:"Learn the levers. Document everything. Vote. Follow up. Never harass. Our enemy is injustice, not people.",
+  chips:["the power source"],src:[["Am I registered? (MS SOS)","https://www.sos.ms.gov/yall-vote"]]}
+];
+
+/* ---------- Connections ---------- */
+// type: elect | appoint | case | rules
+const E = [
+ ["you","congress","elect","elects"],["you","leg","elect","elects"],["you","gov","elect","elects"],["you","ag","elect","elects"],["you","supreme","elect","elects"],
+ ["you","sup","elect","elects"],["you","sheriff","elect","elects"],["you","coroner","elect","elects"],["you","da","elect","elects"],["you","circuit","elect","elects"],["you","chancery","elect","elects"],["you","clerk","elect","elects"],
+ ["gov","dps","appoint","appoints"],["dps","me","appoint","appoints + can fire"],["doj","fedcourt","appoint","brings federal cases"],["circuit","gj","appoint","seats + instructs"],["supreme","circuit","appoint","reviews appeals"],["ag","da","appoint","can assist"],
+ ["nps","sheriff","case","search + scene"],["dps","sheriff","case","co-investigated"],["sheriff","da","case","investigation file"],["coroner","me","case","orders autopsy"],["me","da","case","autopsy findings"],["da","gj","case","presents case"],
+ ["congress","doj","case","asked for review"],["chancery","you","case","estate opened"],["clerk","gj","case","jury lists"],
+ ["leg","coroner","rules","sets qualifications"],["leg","me","rules","writes the rules"],["sup","sheriff","rules","funds"],["sup","coroner","rules","funds"],["gov","leg","rules","signs or vetoes laws"],
+ ["congress","sheriff","rules","Ezell: former sheriff"]
+];
+
+/* ---------- Follow the case ---------- */
+const STEPS = [
+ {n:["nps"],h:"July 4, 2026: the island",p:"Nolan Xavier Wells, 18, goes missing near Horn Island, federal land run by the National Park Service. The Coast Guard coordinates the search. He's found July 6."},
+ {n:["sheriff","dps"],h:"The investigation",p:"The Jackson County Sheriff's Office investigates with the state Department of Public Safety. What they collect is what everyone after them gets to see."},
+ {n:["coroner"],h:"The first ruling",p:"The elected [coroner] opens a death investigation and orders a state [autopsy]. No medical degree is required for this job in Mississippi."},
+ {n:["me"],h:"The autopsy",p:"The State Medical Examiner's office in Pearl lists cause and manner as [undetermined]. That office answers to the state police agency. The family's own pathologist also ruled undetermined."},
+ {n:["da"],h:"The decision to present",p:"The elected [district attorney] decides what the grand jury sees and what law they're told applies."},
+ {n:["gj"],h:"The grand jury",p:"Sept. 21, 2026: the [grand jury] returns no charges. That's a [no true bill], not a 'not guilty.' Mississippi has no time limit on murder or manslaughter."},
+ {n:["chancery","doj","congress"],h:"Doors still open",p:"The estate is open in Chancery Court, so a [civil lawsuit] and its [discovery] are possible. Congress members asked DOJ for a federal review. DOJ says it's reviewing."},
+ {n:["you"],h:"Your levers",p:"You elect the DA, sheriff, coroner, judges and the Governor who appoints the medical examiner's boss. Jurors come from your voter rolls. Learn it. Document it. Vote. Follow up."}
+];
+
+/* ---------- Quiz ---------- */
+const QUIZ = [
+ {q:"Who picks Mississippi's State Medical Examiner?",o:["Voters","The Commissioner of Public Safety","The District Attorney"],a:1,
+  w:"Right. The state's top police official appoints the ME and can fire them. Voters have no direct say."},
+ {q:"How many grand jurors must agree to charge someone in Mississippi?",o:["9","12","All of them"],a:1,w:"Right. 12 votes, behind closed doors, with no judge in the room."},
+ {q:"What's the minimum education to run for coroner in Mississippi?",o:["Medical degree","High school diploma or equivalent","Law degree"],a:1,w:"Right. Plus a short training course. That's a lever the Legislature can change."},
+ {q:"A grand jury said 'no true bill.' Is the case over for good?",o:["Yes, it's the same as not guilty","No, new evidence can bring it back"],a:1,w:"Right. Nobody was on trial. In Mississippi there's no time limit on murder or manslaughter."}
+];
+
+/* ---------- Build ---------- */
+const svg=document.getElementById("map"),gE=document.getElementById("edges"),gL=document.getElementById("elabels"),gN=document.getElementById("nodes");
+const NS="http://www.w3.org/2000/svg";
+const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function rich(s){return esc(s).replace(/\[([^\]]+)\]/g,(m,t)=>GLOSS[t.toLowerCase()]?`<button class="term" type="button" data-term="${t.toLowerCase()}">${t}</button>`:t)}
+
+N.forEach((n,i)=>{n.r=n.r||27;n.ph=i*1.7;n.cx=n.x;n.cy=n.y;
+ const g=el("g",{class:`node ${n.kind}`,tabindex:"0",role:"button","aria-label":`${n.title}. ${n.t2}`},gN);
+ el("circle",{class:"halo",r:n.r+14},g);
+ el("circle",{class:"core",r:n.r},g);
+ const gl=el("text",{class:"glyph"},g);gl.textContent=n.g;if(n.id==="you")gl.setAttribute("style","font-size:20px");
+ const a=el("text",{class:"t1",y:n.r+20},g);a.textContent=n.t1;
+ const b=el("text",{class:"t2",y:n.r+36},g);b.textContent=n.t2;
+ n.el=g;
+ g.addEventListener("mouseenter",()=>{if(mode!=="case"&&mode!=="lesson")focusNode(n.id,false)});
+ g.addEventListener("mouseleave",()=>{if(mode!=="case"&&mode!=="lesson")focusNode(selected,false)});
+ g.addEventListener("click",()=>select(n.id));
+ g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(n.id)}});
+});
+const edges=E.map(([f,t,type,label])=>{
+ const p=el("path",{class:`edge ${type}`},gE);
+ const bg=el("rect",{class:"elabel-bg",rx:3,height:16},gL);
+ const tx=el("text",{class:"elabel","text-anchor":"middle"},gL);tx.textContent=label;
+ return {f,t,type,label,p,bg,tx,w:label.length*6.3+10};
+});
+
+function path(a,b){
+ // tentacle curve: leaves vertically, sways in the middle
+ const dy=b.cy-a.cy, my=(a.cy+b.cy)/2;
+ if(Math.abs(dy)<20){const mx=(a.cx+b.cx)/2;return {d:`M${a.cx},${a.cy} Q${mx},${a.cy-60} ${b.cx},${b.cy}`,lx:mx,ly:a.cy-30}}
+ const c1y=a.cy+dy*.45, c2y=b.cy-dy*.45;
+ return {d:`M${a.cx},${a.cy} C${a.cx},${c1y} ${b.cx},${c2y} ${b.cx},${b.cy}`,lx:(a.cx+b.cx)/2,ly:my};
+}
+function frame(t){
+ const s=t/1000;
+ N.forEach(n=>{const amp=reduce?0:(n.id==="you"?3:5);n.cx=n.x+Math.sin(s*.5+n.ph)*amp*.6;n.cy=n.y+Math.sin(s*.8+n.ph)*amp;n.el.setAttribute("transform",`translate(${n.cx.toFixed(1)},${n.cy.toFixed(1)})`)});
+ edges.forEach(e=>{const r=path(byId[e.f],byId[e.t]);e.p.setAttribute("d",r.d);e.tx.setAttribute("x",r.lx);e.tx.setAttribute("y",r.ly+4);e.bg.setAttribute("x",r.lx-e.w/2);e.bg.setAttribute("y",r.ly-8);e.bg.setAttribute("width",e.w)});
+ if(!reduce)requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ---------- State ---------- */
+let mode="all",selected="you",step=0;
+function lensVisible(e){return mode==="all"||mode==="lesson"||mode===e.type}
+function guidedList(){return mode==="case"?STEPS[step].n:mode==="lesson"?LESSONS[les].n:null}
+function focusNode(id,fromSelect){
+ const hotIds=new Set();
+ const gl=guidedList(),guided=!!gl;if(gl)gl.forEach(x=>hotIds.add(x));
+ edges.forEach(e=>{
+  const vis=lensVisible(e);
+  let hot=false;
+  if(mode==="case"){hot=vis&&(hotIds.has(e.f)||hotIds.has(e.t))}
+  else if(mode==="lesson"){hot=hotIds.has(e.f)&&hotIds.has(e.t)}
+  else hot=vis&&id&&(e.f===id||e.t===id);
+  e.p.classList.toggle("hidden",!vis);
+  e.p.classList.toggle("hot",hot);
+  e.p.classList.toggle("dim",vis&&!hot&&(guided||!!id));
+  e.tx.classList.toggle("show",hot);e.bg.classList.toggle("show",hot);
+ });
+ const linked=new Set([id]);
+ if(!guided)edges.forEach(e=>{if(lensVisible(e)&&(e.f===id||e.t===id)){linked.add(e.f);linked.add(e.t)}});
+ N.forEach(n=>{
+  const isStep=guided&&hotIds.has(n.id);
+  n.el.classList.toggle("step",isStep);
+  n.el.classList.toggle("sel",!guided&&n.id===selected);
+  n.el.classList.toggle("dim",guided?!isStep:(id&&!linked.has(n.id)));
+ });
+}
+function select(id){
+ if(mode==="case"||mode==="lesson"){setMode("all")}
+ selected=id;focusNode(id,true);renderPanel(id);
+}
+function renderPanel(id){
+ const n=byId[id];
+ const conns=edges.filter(e=>e.f===id||e.t===id).map(e=>{const other=e.f===id?e.t:e.f;const dir=e.f===id?e.label:`${e.label} (from)`;return `<button class="conn" type="button" data-go="${other}">${esc(byId[other].t1)} <i>· ${esc(dir)}</i></button>`}).join("");
+ const chips=n.chips.map(c=>`<span class="chip ${c==="elected"||c==="the power source"?"red":""} ${c.startsWith("on ballot")||c==="2027"?"gold":""} ${c.startsWith("to confirm")?"check":""}">${esc(c)}</span>`).join("");
+ document.getElementById("panel").innerHTML=`
+  <div class="eyebrow">${["Federal","State","County + District","The people"][n.lvl]}</div>
+  <h2>${esc(n.title)}</h2>
+  <p class="holder">${rich(n.holder)}</p>
+  <div class="chips">${chips}</div>
+  <dl>
+   <div><dt>How they get the job</dt><dd>${rich(n.how)}</dd></div>
+   <div><dt>Next election</dt><dd>${rich(n.next)}</dd></div>
+   <div><dt>What they control</dt><dd>${rich(n.controls)}</dd></div>
+   <div><dt>In Nolan's case</dt><dd>${rich(n.inCase)}</dd></div>
+   <div class="act"><dt>What you can do</dt><dd>${rich(n.act)}</dd></div>
+   <div><dt>Connected to</dt><dd class="conns">${conns}</dd></div>
+   <div><dt>Sources</dt><dd><ul class="links">${n.src.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("")}</ul></dd></div>
+  </dl>`;
+}
+function renderStep(){
+ const s=STEPS[step];
+ document.getElementById("panel").innerHTML=`
+  <div class="eyebrow" style="color:var(--gold)">Follow the case · step ${step+1} of ${STEPS.length}</div>
+  <h2>${esc(s.h)}</h2>
+  <p>${rich(s.p)}</p>
+  <div class="stepper">
+   <button class="stepbtn ghost" type="button" id="prev" ${step===0?"disabled":""}>Back</button>
+   <button class="stepbtn" type="button" id="next">${step===STEPS.length-1?"Start over":"Next"}</button>
+   <div class="dots">${STEPS.map((_,i)=>`<i class="${i<=step?"on":""}"></i>`).join("")}</div>
+  </div>
+  <p style="font-size:13px;color:var(--stone);margin-top:14px">Tap any lit circle for the full breakdown.</p>`;
+ document.getElementById("prev").onclick=()=>{step=Math.max(0,step-1);renderStep();focusNode(null)};
+ document.getElementById("next").onclick=()=>{step=step===STEPS.length-1?0:step+1;renderStep();focusNode(null)};
+}
+function setMode(m){
+ mode=m;
+ document.querySelectorAll(".lens").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lens===m)));
+ if(m==="case"){step=0;renderStep();focusNode(null)}
+ else if(m==="lesson"){renderLesson();focusNode(null)}
+ else{focusNode(selected);renderPanel(selected)}
+}
+document.querySelectorAll(".lens").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.lens)));
+document.getElementById("panel").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)select(g.dataset.go)});
+
+/* ---------- Glossary tooltip ---------- */
+const tip=document.getElementById("tip");let tipFor=null;
+function showTip(btn){const k=btn.dataset.term;tip.innerHTML=`<b>${esc(k)}</b>${esc(GLOSS[k])}`;tip.hidden=false;
+ const r=btn.getBoundingClientRect(),w=Math.min(290,window.innerWidth-24);tip.style.maxWidth=w+"px";
+ let x=Math.min(Math.max(12,r.left),window.innerWidth-w-12);let y=r.bottom+8;
+ tip.style.left=x+"px";tip.style.top=y+"px";
+ const th=tip.offsetHeight;if(y+th>window.innerHeight-8)tip.style.top=(r.top-th-8)+"px";tipFor=btn}
+function hideTip(){tip.hidden=true;tipFor=null}
+document.addEventListener("mouseover",e=>{const b=e.target.closest(".term");if(b)showTip(b)});
+document.addEventListener("mouseout",e=>{if(e.target.closest(".term"))hideTip()});
+document.addEventListener("focusin",e=>{const b=e.target.closest(".term");if(b)showTip(b)});
+document.addEventListener("focusout",e=>{if(e.target.closest(".term"))hideTip()});
+document.addEventListener("click",e=>{const b=e.target.closest(".term");if(b){e.stopPropagation();tipFor===b&&!tip.hidden?hideTip():showTip(b)}else if(!e.target.closest("#tip"))hideTip()},true);
+window.addEventListener("scroll",hideTip,{passive:true});
+
+/* ---------- Quiz ---------- */
+document.getElementById("quiz").innerHTML=QUIZ.map((q,i)=>`<div class="q" data-q="${i}"><p>${i+1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" type="button" data-j="${j}">${esc(o)}</button>`).join("")}</div><div class="fb" aria-live="polite"></div></div>`).join("");
+document.getElementById("quiz").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const box=b.closest(".q"),q=QUIZ[+box.dataset.q],j=+b.dataset.j;
+ if(j===q.a){b.classList.add("right");box.querySelector(".fb").textContent=q.w;box.querySelectorAll(".opt").forEach(o=>o.disabled=true)}
+ else{b.classList.add("wrong");b.disabled=true;box.querySelector(".fb").textContent="Not quite. Try again. Hint: find it on the map."}});
+
+/* ---------- List view ---------- */
+document.getElementById("list").innerHTML=["Federal","State of Mississippi","County + District","The people"].map((h,l)=>`<details ${l===2?"open":""}><summary>${h}</summary><ul>${N.filter(n=>n.lvl===l).map(n=>`<li><button type="button" data-go="${n.id}">${esc(n.title)}</button> <span style="color:var(--stone)">· ${esc(n.t2)}</span></li>`).join("")}</ul></details>`).join("");
+document.getElementById("list").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go);document.getElementById("panel").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}});
+
+/* ---------- Classroom: lesson companion ---------- */
+Object.assign(GLOSS,{
+  "beyond a reasonable doubt":"The proof bar in a criminal case. The jury has to be close to sure. That's high because prison is on the line.",
+  "more likely than not":"The proof bar in most civil cases. Just over 50 percent. Tip the scale, and you win.",
+  "deposition":"Answering a lawyer's questions under oath, outside of court, with every word recorded.",
+  "subpoena":"A court order to hand over evidence or come testify. It can reach people and companies who aren't in the lawsuit.",
+  "spoliation":"Destroying or hiding evidence after you know a lawsuit is coming. A judge can tell the jury to assume it would have hurt you.",
+  "double jeopardy":"You can't be tried twice for the same crime after a trial ends. A grand jury 'no' is not a trial, so it doesn't count."
+});
+const LESSONS=[
+ {t:"Where we are",n:["nps","sheriff","coroner","me","da","gj"],
+  sum:["July 4, 2026: Nolan Xavier Wells died after a trip to Horn Island.",
+   "Sept. 21, 2026: the Jackson County grand jury returned a [no true bill]. No charges.",
+   "Mississippi Today reported 132 subpoenas and 43 witnesses in the process. Still no charges.",
+   "The state autopsy listed cause and manner of death as [undetermined], with drowning considered likely.",
+   "The state report found no fluid in his airway, lungs or stomach. The family's attorney says water is usually there in a drowning.",
+   "No charges is not the end of the road. Next on the map: a civil lawsuit, discovery and new evidence. Mississippi has no time limit on murder (Miss. Code 99-1-5)."],
+  terms:["no true bill","undetermined","grand jury","medical examiner"],
+  act:"Learn the timeline from real sources before you share anything about the case. Rumors hurt the family's fight.",
+  q:[["What does 'no true bill' mean?",["Not guilty","No charges right now","Case closed forever"],1],
+     ["What did the state autopsy list as the manner of death?",["Drowning","Homicide","Undetermined"],2],
+     ["Does Mississippi put a time limit on murder charges?",["Yes, 10 years","No"],1]],
+  src:[["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"],["NPR: no evidence of criminal conduct","https://www.npr.org/2026/09/22/nx-s1-5911804/nolan-wells-investigation-grand-jury"]]},
+ {t:"The civil lawsuit",n:["chancery","circuit","you"],
+  sum:["Criminal court is the state against a person. Prison is on the line, so the bar is [beyond a reasonable doubt].",
+   "Civil court is a family suing for answers and damages. No prison. The bar is lower: [more likely than not].",
+   "Same facts, different bar. O.J. Simpson was found not guilty in criminal court in 1995, then liable in civil court in 1997.",
+   "A grand jury meets in secret. A [civil lawsuit] opens the doors with sworn testimony, GPS, messages, photos and video.",
+   "July 21, 2026: Nolan's mother asked Jackson County [chancery court] to open his [estate]. That's the step that lets a family sue.",
+   "In July, the family's lawyers sent letters telling people to preserve all evidence."],
+  terms:["civil lawsuit","more likely than not","estate","chancery court"],
+  act:"When someone says 'it's over' after a no true bill, explain the two courts. Criminal and civil are separate roads.",
+  q:[["What's the proof bar in most civil cases?",["Beyond a reasonable doubt","More likely than not","100 percent proof"],1],
+     ["Who brings a criminal case?",["The family","The state","The judge"],1],
+     ["Where was Nolan's estate opened?",["Chancery Court","Federal court","The sheriff's office"],0]],
+  src:[["MPB: lawsuit expected","https://www.mpbonline.org/blogs/news/lawsuit-expected-in-response-to-death-of-nolan-wells/"]]},
+ {t:"Discovery",n:["circuit","chancery","fedcourt"],
+  sum:["[discovery] is the part of a lawsuit where both sides have to show their cards.",
+   "Four tools: a [deposition], written questions under oath, demands for documents and media, and a [subpoena], which can even reach companies.",
+   "New phone, same account. Cloud backups, phone company call and text logs, and other people's phones can still hold records.",
+   "Federal privacy law usually blocks apps like Snapchat from handing over message content in a civil case. Records about the messages (when, who, how often) can be a different story.",
+   "[spoliation]: destroying evidence after you know a lawsuit is coming. In Mississippi, a judge can tell the jury to assume it would have hurt you.",
+   "When monkey haul rope, rope haul bush. Pull one thing, and everything tied to it comes out."],
+  terms:["discovery","deposition","subpoena","spoliation"],
+  act:"Save originals. A screenshot or a repost loses detail. The original file beats a copy.",
+  q:[["What's a deposition?",["A court ruling","Answering questions under oath, on the record","A news interview"],1],
+     ["Can a subpoena reach a company that isn't in the lawsuit?",["Yes","No"],0],
+     ["What is spoliation?",["Destroying evidence after you know a lawsuit is coming","Filing a lawsuit late","A type of autopsy"],0]],
+  src:[["Mississippi Free Press: phone and autopsy coverage","https://www.mississippifreepress.org/crump-releases-full-independent-autopsy-of-nolan-wells-says-questions-of-wells-death-remain/"]]},
+ {t:"Indict whom, for what?",n:["da","gj","circuit","you"],
+  sum:["To charge someone, a grand jury needs [probable cause]: a reasonable belief that a specific person committed a specific crime.",
+   "Every grand jury answers three questions. Who? What crime? What evidence ties that person to that crime? Miss one, and there's no [indictment].",
+   "In Mississippi, 12 grand jurors have to agree (Miss. Code 99-7-11).",
+   "A grand jury is the prosecutor's room. No judge. No defense. The prosecutor picks the witnesses and explains the law.",
+   "Federal grand juries turned down 11 cases out of about 162,000 in one year (2010 data). So when a grand jury says no, ask how the case was presented.",
+   "District attorneys are elected in Mississippi. They work for us. The 19th District DA is next on the ballot in Nov. 2027."],
+  terms:["probable cause","indictment","grand jury","district attorney"],
+  act:"Ask for the grand jury materials to be released. Know when your DA is on the ballot. Push for a civil case that puts everyone under oath.",
+  q:[["What is probable cause?",["Proof beyond doubt","A reasonable belief a specific person committed a specific crime","A guilty verdict"],1],
+     ["How many grand jurors must agree in Mississippi?",["9","12","All 18"],1],
+     ["Who runs the grand jury room?",["A judge","The defense lawyer","The prosecutor"],2]],
+  src:[["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]},
+ {t:"New evidence, new grand jury",n:["da","gj","me","chancery"],
+  sum:["A [no true bill] is not 'not guilty.' Nobody was put on trial, so [double jeopardy] doesn't apply.",
+   "Mississippi has no time limit on murder or manslaughter (Miss. Code 99-1-5).",
+   "Mississippi has done this before. Medgar Evers was killed in 1963; his killer was convicted in 1994. Edgar Ray Killen was convicted in 2005 for the 1964 Freedom Summer murders.",
+   "The DA publicly said anyone with new evidence should bring it to her.",
+   "What counts as new: a medical finding, a witness under oath, data (records, video, messages, even satellite images that show boats, not faces), and experts like tide and current specialists.",
+   "Both autopsies, the state's and the family's, list cause and manner as [undetermined]. A civil case's [discovery] is how new evidence gets found."],
+  terms:["no true bill","double jeopardy","undetermined","discovery"],
+  act:"Real, firsthand evidence goes to the DA's office, not the comment section. Documentation beats conversation.",
+  q:[["After a no true bill, can the case come back?",["Yes, with new evidence","No, never"],0],
+     ["When was Medgar Evers' killer convicted?",["1964","1994","2005"],1],
+     ["Where should real new evidence go?",["The comments","The DA's office","A group chat"],1]],
+  src:[["MFP: independent autopsy undetermined","https://www.mississippifreepress.org/crump-releases-full-independent-autopsy-of-nolan-wells-says-questions-of-wells-death-remain/"],["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]}
+
+ ,{t:"The federal path",n:["doj","fedcourt","nps","congress"],
+  sum:["There are two governments: the state and the federal government. The Supreme Court says both can bring charges for the same conduct (Gamble v. United States, 2019).",
+   "A [no true bill] is not an acquittal, so nothing blocks a federal case. But the feds need a federal crime.",
+   "Door one, federal land: federal murder law applies only on federal land under federal jurisdiction. Horn Island's jurisdiction type isn't public, and the Supreme Court says the water around it is Mississippi's.",
+   "Door two, civil rights: the federal hate crime law covers anyone who hurts someone because of race. The motive has to be proven.",
+   "Door three, obstruction: destroying or faking records to block a federal investigation is a federal crime.",
+   "Where it stands: DOJ said in August it's reviewing a request. Congress asked the Park Service's investigators on Oct. 5. The only confirmed federal cases are the threat cases."],
+  terms:["no true bill","jurisdiction","federal land","civil rights review"],
+  act:"Ask your member of Congress in writing: is a federal agency investigating the death? Then request, from the Park Service, what kind of federal land Horn Island is.",
+  q:[["After a state no true bill, can the federal government still charge?",["Yes, if there's a federal crime","No, never"],0],
+     ["Who decides federal charges?",["The FBI","Federal prosecutors and a federal grand jury","Congress"],1],
+     ["Whose water surrounds Horn Island, per the Supreme Court?",["Federal","Mississippi's"],1]],
+  src:[["Gamble v. United States (Cornell LII)","https://www.law.cornell.edu/supremecourt/text/17-646"],["WLOX: renewed push for federal investigation","https://www.wlox.com/2026/10/05/national-leaders-renew-push-federal-investigation-into-nolan-wells-death/"]]}
+];
+let les=0;
+function renderLesson(){
+ const L=LESSONS[les];
+ document.getElementById("panel").innerHTML=`
+  <div class="eyebrow" style="color:var(--gold)">Classroom · Lesson ${les+1} of ${LESSONS.length}</div>
+  <div class="lpills" role="tablist" aria-label="Lessons">${LESSONS.map((x,i)=>`<button class="lpill" type="button" role="tab" aria-selected="${i===les}" data-les="${i}">${i+1}</button>`).join("")}</div>
+  <h2>${esc(L.t)}</h2>
+  <ol class="sum">${L.sum.map(s=>`<li>${rich(s)}</li>`).join("")}</ol>
+  <dl>
+   <div><dt>Key terms</dt><dd class="conns">${L.terms.map(k=>`<button class="term" type="button" data-term="${k}">${k}</button>`).join(" ")}</dd></div>
+   <div class="act"><dt>What you can do</dt><dd>${rich(L.act)}</dd></div>
+   <div><dt>Check yourself</dt><dd>${L.q.map((q,i)=>`<div class="q" data-lq="${i}"><p>${esc(q[0])}</p><div class="opts">${q[1].map((o,j)=>`<button class="opt" type="button" data-j="${j}">${esc(o)}</button>`).join("")}</div><div class="fb" aria-live="polite"></div></div>`).join("")}</dd></div>
+   <div><dt>Sources</dt><dd><ul class="links">${L.src.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("")}</ul></dd></div>
+  </dl>
+  <p class="lnote">The lit circles on the map are the offices in this lesson. Tap one for the full breakdown. Direct link for this lesson: add <code>#lesson${les+1}</code> to the end of this page's address.</p>`;
+}
+function openLesson(i){les=Math.max(0,Math.min(LESSONS.length-1,i));if(mode!=="lesson"){setMode("lesson")}else{renderLesson();focusNode(null)}}
+document.getElementById("panel").addEventListener("click",e=>{
+ const p=e.target.closest("[data-les]");if(p){openLesson(+p.dataset.les);return}
+ const b=e.target.closest(".q[data-lq] .opt");if(!b)return;
+ const box=b.closest(".q"),q=LESSONS[les].q[+box.dataset.lq],j=+b.dataset.j;
+ if(j===q[2]){b.classList.add("right");box.querySelector(".fb").textContent="Right.";box.querySelectorAll(".opt").forEach(o=>o.disabled=true)}
+ else{b.classList.add("wrong");b.disabled=true;box.querySelector(".fb").textContent="Not quite. Try again."}
+});
+function fromHash(){const m=/^#lesson([1-9])$/.exec(location.hash||"");if(m){les=Math.min(LESSONS.length-1,+m[1]-1);setMode("lesson");document.querySelector(".controls").scrollIntoView({block:"start"})}}
+window.addEventListener("hashchange",fromHash);
+
+/* ---------- Timeline ---------- */
+// k: v = verified (2+ sources or primary doc), r = reported once, da = officials say, gap = what the record doesn't show
+const TL=[
+ {w:"July 4 · 9:56 a.m. to 11:14 a.m.",k:"r",t:"The boat leaves the mainland and reaches Horn Island.",n:["nps"],s:"MDMR material, cited secondhand"},
+ {w:"July 4 · about 2:18 p.m.",k:"v",t:"Nolan's phone is last unlocked. It stays locked until his parents open it at 3:14 a.m. on July 5.",n:[],s:"Family's examiner, per Mississippi Free Press",u:"https://www.mississippifreepress.org/crumps-expert-who-examined-nolan-wells-phone-clarifies-misinterpreted-claims-about-deleted-messages/"},
+ {w:"July 4 · 2:23 p.m. to 3:30 p.m.",k:"gap",t:"Three different 'last seen' moments: boat GPS last record (2:23), a friend's account (3:00), and a grand jury witness who saw him slip off a boat (about 3:30). No official timeline puts them together.",n:["gj"]},
+ {w:"July 4 · about 4:00 p.m.",k:"v",t:"Sea Tow call from the sinking boat. Asked if everyone was aboard: \"Yeah, yeah, everyone is on board.\"",n:[],s:"MDMR audio via WLOX",u:"https://www.wlox.com/2026/07/26/mdmr-releases-call-audio-boat-nolan-wells-case/"},
+ {w:"July 4 · 4:31 p.m. to 6:06 p.m.",k:"r",t:"The boat leaves the island and is towed back. His phone rides back without him. The grand jury says his phone \"was not the only phone\" to do that.",n:["gj"],s:"Grand jury report p. 5; times secondhand"},
+ {w:"July 4 · about 11:00 p.m. and 11:49 p.m.",k:"r",t:"A friend calls the Coast Guard (told it \"did not require Coast Guard assistance\"). Then Nolan's mother reports him missing to Marine Resources.",n:[],s:"WLOX timeline",u:"https://www.wlox.com/2026/07/07/timeline-heres-what-we-know-about-disappearance-death-18-year-old-nolan-wells/"},
+ {w:"July 4 to 5 · overnight",k:"gap",t:"No official log has been published showing when each agency was notified and when the search started.",n:["sheriff"]},
+ {w:"July 5",k:"da",t:"Marine Resources launches a search. The grand jury says the island was searched so thoroughly that his body would have been found if it was there.",n:["sheriff","nps"],s:"Grand jury report p. 6"},
+ {w:"July 6 · 8:45 a.m.",k:"v",t:"A park ranger finds Nolan in the water off the island's northwest end.",n:["nps","sheriff"],s:"Mississippi Free Press, WLOX",u:"https://www.mississippifreepress.org/ranger-finds-body-amid-search-for-nolan-wells-who-vanished-on-horn-island-during-trip-with-friends/"},
+ {w:"July 6 and 9",k:"da",t:"The sheriff says there were no signs of foul play and that Nolan \"chose to stay on the island.\" Three days later the state's public safety chief says the case is open to drowning or foul play.",n:["sheriff","dps"],s:"ABC; SuperTalk",u:"https://www.supertalk.fm/dps-commissioner-no-indication-race-played-a-role-in-death-of-nolan-wells/"},
+ {w:"July 7",k:"v",t:"State autopsy in Pearl. The coroner confirms his identity.",n:["coroner","me"]},
+ {w:"July 20",k:"v",t:"His mother opens his estate in Chancery Court so the family can sue. Preservation letters go out.",n:["chancery"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/29/nolan-xavier-wells-lawsuit/"},
+ {w:"July 22",k:"v",t:"The family's pathologist issues his first report: cause undetermined.",n:["me"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/22/nolan-wells-autopsy-ben-crump/"},
+ {w:"July 23",k:"da",t:"The DA says the autopsy stays private until the grand jury. \"Our restraint... is not an effort to keep the truth from the public.\"",n:["da"],s:"WLOX, WLBT",u:"https://www.wlox.com/2026/07/23/nolan-wells-autopsy-report-be-withheld-until-grand-jury-review-district-attorney-says/"},
+ {w:"Late July",k:"r",t:"Marine Resources says it released some records \"inadvertently,\" then stops releasing them after the DA's notice.",n:["da"],s:"TMZ (single outlet)"},
+ {w:"Aug 12",k:"v",t:"The Congressional Black Caucus asks DOJ for an independent federal review. DOJ: staff are \"reviewing it carefully.\"",n:["congress","doj"],s:"ABC, Newsweek",u:"https://abcnews.com/US/congressional-black-caucus-urges-doj-review-nolan-wells/story?id=135619833"},
+ {w:"Aug 17 and Sept 14",k:"v",t:"Both autopsy reports are finished. Both say cause and manner of death are undetermined. The family's doctor notes no close-up photos of the back-of-head injuries in the state autopsy.",n:["me"],s:"Both reports (primary documents)",u:"https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf"},
+ {w:"Sept 14 to 18",k:"da",t:"Grand jury: 23 jurors, 132 subpoenas, 43 witnesses. Unanimous no true bill. Report filed Sept 18.",n:["da","gj","circuit"],s:"Grand jury report (primary document)",u:"https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913"},
+ {w:"Sept 14 to 18",k:"gap",t:"The testimony, exhibits and witness list stay secret. The public can't see how the case was presented.",n:["gj"]},
+ {w:"Sept 21 · 7:56 p.m.",k:"da",t:"The DA announces the decision in a video, two minutes after texting Nolan's mother.",n:["da"],s:"Mother's account via WLOX; AP"},
+ {w:"Sept 24",k:"v",t:"The family's team releases the state autopsy and phone findings. The state report shows two scalp bruises at the back of the head; no neck injury.",n:["me"],s:"Mississippi Today, WLOX",u:"https://mississippitoday.org/2026/09/24/nolan-wells-autopsy-cellphone/"},
+ {w:"Oct 5",k:"v",t:"Members of Congress ask the National Park Service's investigators for a \"prompt and exhaustive investigation.\"",n:["congress","nps"],s:"WLOX, WLBT",u:"https://www.wlox.com/2026/10/05/national-leaders-renew-push-federal-investigation-into-nolan-wells-death/"},
+ {w:"Now",k:"gap",t:"No federal agency has publicly confirmed an investigation into the death itself. Only the threat cases are confirmed federal matters.",n:["doj","fedcourt"]}
+];
+const DA_SAYS=["132 subpoenas and 43 witnesses heard","Full access to the sheriff's file, including every agency that helped","Seven people invited to testify: five did, one couldn't, one declined","The family's pathologist had full access and testified","The family's phone reports (14, 21 and 261 pages) were considered","Asked the family's team in writing for any evidence","Told jurors about all relationships between people involved; jurors found no conflicts","Shared the autopsy and toxicology with the family's Mississippi attorney"];
+const CHECK=["The grand jury report (Jackson County website, 9 pages)","Both autopsy reports (released by the family's team)","The Sea Tow call audio (released by Marine Resources)","The estate filing in Chancery Court","The federal threat cases (federal court records)","The DA's public videos and statements"];
+const NEXT=["DOJ's 'review' could end quietly. DOJ rarely announces when it declines.","The Park Service's investigators may or may not open a case. The congressional letter is the push.","Federal charges would need a federal crime and federal jurisdiction. That's Lesson 6.","A wrongful death lawsuit is the most likely next legal step. The estate is open and preservation letters went out.","A new state grand jury is possible only with new evidence. No time limit applies.","Records requests (Marine Resources, sheriff, Coast Guard, Park Service) can fill the timeline gaps."];
+const KLABEL={v:"Verified",r:"Reported once",da:"Officials say",gap:"Gap"};
+function renderTL(f){
+ document.getElementById("tl-list").innerHTML=TL.filter(x=>f==="all"||x.k===f).map(x=>`<li class="tl-item" data-k="${x.k}"><div class="tl-when">${esc(x.w)}</div><p class="tl-what">${esc(x.t)}</p><div class="tl-meta"><span class="chip ${x.k==="gap"?"gold":x.k==="da"?"red":""} ${x.k==="r"?"check":""}">${KLABEL[x.k]}</span>${x.n.map(id=>`<button class="tl-go" type="button" data-go="${id}">${esc(byId[id].t1)}</button>`).join("")}${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${esc(x.s||"Source")}</a>`:(x.s?`<span style="font-size:12.5px;color:var(--stone)">${esc(x.s)}</span>`:"")}</div></li>`).join("");
+}
+renderTL("all");
+document.getElementById("tl-da").innerHTML=DA_SAYS.map(x=>`<li>${esc(x)}</li>`).join("");
+document.getElementById("tl-check").innerHTML=CHECK.map(x=>`<li>${esc(x)}</li>`).join("");
+document.getElementById("tl-next").innerHTML=NEXT.map(x=>`<li>${esc(x)}</li>`).join("");
+document.querySelectorAll(".tf").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tf").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderTL(b.dataset.f)}));
+document.getElementById("timeline").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go);document.querySelector(".stage").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}});
+
+select("you");
+fromHash();
+</script>
+</body>
+</html>
