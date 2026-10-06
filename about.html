@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,19 +40,19 @@
   "knowsLanguage": "en",
   "sameAs": [
     "https://www.youtube.com/watch?v=qIvFzfNngaw",
-    "https://lawrencetotimeh.com/booking.html"
+    "https://lawrencetotimeh.com/events.html"
   ]
 }
 </script>
 <style>
-:root{--ink:#141414;--paper:#ffffff;--red:#c1272d;--smoke:#f4f4f3;--mute:#6e6e6e;--line:#e3e3e1;--wrap:1120px;
---display:'Archivo',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+:root{--ink:#0A0A0B;--paper:#ffffff;--red:#E0343F;--smoke:#F4F2EE;--mute:#6B665F;--line:#E4E0D8;--wrap:1120px;--stone:#B8B2A8;
+--display:'Poppins',system-ui,sans-serif;--head:'Oswald','Arial Narrow',sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--display);font-weight:400;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.02}
-.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+h1,h2,h3{margin:0;font-family:var(--head);font-weight:700;letter-spacing:.01em;line-height:1;text-transform:uppercase}
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:62px}
 .mark{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
@@ -92,7 +92,7 @@ section,[id]{scroll-margin-top:72px}
 section{padding:70px 0;border-top:1px solid var(--line)}
 .lane{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
 .lane.flip .txt{order:2}
-.num{font-family:var(--mono);color:var(--red);font-size:12px;letter-spacing:.2em;margin-bottom:12px}
+.num{font-family:var(--mono);color:var(--mute);font-size:12px;letter-spacing:.2em;margin-bottom:12px}
 .lane h2{font-size:clamp(26px,3.2vw,38px);text-transform:uppercase;margin-bottom:14px}
 .lane p{color:#333;max-width:54ch;margin:0}
 .lane p+p{margin-top:10px}
@@ -100,7 +100,7 @@ section{padding:70px 0;border-top:1px solid var(--line)}
 .ted{background:var(--ink);color:#fff;padding:26px 28px;display:flex;gap:22px;align-items:center;margin-top:22px;text-decoration:none}
 .ted .play{flex:0 0 58px;height:58px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center}
 .ted .play svg{margin-left:4px}
-.ted .t1{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#e88;text-transform:uppercase}
+.ted .t1{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--stone);text-transform:uppercase}
 .ted .t2{font-weight:800;font-size:18px;margin-top:6px;line-height:1.25;color:#fff}
 .ted .t3{font-family:var(--mono);font-size:11px;color:#aaa;margin-top:8px;letter-spacing:.1em}
 .ted:hover .t3{color:#fff}
@@ -113,7 +113,7 @@ section{padding:70px 0;border-top:1px solid var(--line)}
 .tl{margin-top:34px;border-left:2px solid var(--red);padding-left:28px;display:flex;flex-direction:column;gap:22px;max-width:760px}
 .tl .row{position:relative}
 .tl .row::before{content:"";position:absolute;left:-34px;top:7px;width:10px;height:10px;background:var(--red)}
-.tl .yr{font-family:var(--mono);color:#e88;font-size:12.5px;letter-spacing:.12em}
+.tl .yr{font-family:var(--mono);color:var(--stone);font-size:12.5px;letter-spacing:.12em}
 .tl .what{margin-top:3px;color:#ddd;max-width:60ch}
 .tl b{color:#fff}
 /* cta */
@@ -134,21 +134,17 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 </style>
 </head>
 <body>
-<header>
-<div class="wrap bar">
-<a class="mark" href="index.html">Lawrence Totimeh <b>Jr.</b></a>
+<header style="background:rgba(10,10,11,.92);border-bottom:1px solid #2E2B29"><div class="wrap bar">
+<a class="mark" href="index.html" style="color:#F2EFE9">LAWRENCE TOTIMEH <b>JR.</b></a>
 <nav>
-<a href="index.html#law">Lessons</a>
-<a href="community.html">The Community</a>
-<a href="index.html#speaking">Speaking</a>
-<a href="index.html#events">Events</a>
-<a href="booking.html">Booking</a>
-<a href="about.html" style="color:var(--ink);border-color:var(--red)">About</a>
-<a href="support.html">Support</a>
-<a href="index.html#contact">Contact</a>
+<a href="class/" style="color:#B8B2A8">Classroom</a>
+<a href="speaking.html" style="color:#B8B2A8">Speaking</a>
+<a href="about.html" style="color:#F2EFE9;border-color:var(--red)">About</a>
+<a href="events.html" style="color:#B8B2A8">Events</a>
+<a href="follow-the-money.html" style="color:#B8B2A8">Follow the Money</a>
+<a href="contact.html" style="color:#F2EFE9;background:var(--red);padding:9px 14px;border:0">Book Lawrence</a>
 </nav>
-</div>
-</header>
+</div></header>
 
 <main id="top">
 
@@ -240,7 +236,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 <div class="num">06 / THE MIC</div>
 <h2>The host who runs the room</h2>
 <p>Weddings, banquets, and festivals across the DMV: grand entrances, toasts, transitions, and the energy in between. Stages from the Smithsonian NMAAHC to California to West Africa.</p>
-<a class="btn" href="booking.html">See hosting packages</a>
+<a class="btn" href="contact.html">See hosting packages</a>
 </div>
 <div class="frame rev"><img src="img/about-hosting.jpg" alt="Lawrence on the mic at an outdoor event" loading="lazy" width="1400" height="1749"><div class="cap">On the mic</div></div>
 </div></div></section>
@@ -288,18 +284,16 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 <div class="eyebrow">Work With Him</div>
 <h2 style="margin-top:12px">Bring this energy to your room.</h2>
 <p>Talks, workshops, hosting. Tell him the date, the venue, and the room.</p>
-<a class="btn" href="booking.html">Book Agent Kodak</a><a class="btn ghost" href="index.html#contact">Get in touch</a>
+<a class="btn" href="contact.html">Book Agent Kodak</a><a class="btn ghost" href="index.html#contact">Get in touch</a>
 </div></section>
 
 </main>
 
-<footer>
-<div class="wrap footrow">
-<span>© <span id="yr">2026</span>
-<span>Newark born · DMV built · Liberia rooted</span>
-<span><a href="https://www.youtube.com/@AgentKodak">YouTube ↗</a> · <a href="https://www.instagram.com/AgentKodak">Instagram ↗</a> · <a href="https://www.tiktok.com/@AgentKodak">TikTok ↗</a> · <a href="https://www.facebook.com/AgentKodak">Facebook ↗</a> · <a href="support.html">Support</a></span>
-</div>
-</footer>
+<footer><div class="wrap footrow">
+<span>© <span id="yr">2026</span> Lawrence Totimeh Jr.</span>
+<span>I'm an educator, not an attorney. Nothing here is legal advice.</span>
+<span><a href="https://www.youtube.com/@AgentKodak" style="text-decoration:none">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" style="text-decoration:none">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" style="text-decoration:none">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" style="text-decoration:none">Facebook</a> · <a href="mailto:hello@lawrencetotimeh.com" style="text-decoration:none">hello@lawrencetotimeh.com</a></span>
+</div></footer>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
