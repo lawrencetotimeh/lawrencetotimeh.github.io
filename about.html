@@ -79,6 +79,14 @@ section,[id]{scroll-margin-top:72px}
 .roles span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);padding:6px 11px}
 .frame{background:var(--smoke);border:1px solid var(--line)}
 .frame img{width:100%;height:auto;display:block}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.strip .frame{aspect-ratio:3/4;overflow:hidden}
+.strip .frame img{width:100%;height:100%;object-fit:cover}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.duo .frame img{aspect-ratio:4/3;object-fit:cover}
+.duo .frame img.whole{object-fit:contain;background:#141414}
+@media(max-width:820px){.duo{grid-template-columns:1fr}}
+@media(max-width:820px){.strip{grid-template-columns:repeat(2,1fr)}}
 .cap{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:10px 12px;border-top:1px solid var(--line)}
 /* lanes */
 section{padding:70px 0;border-top:1px solid var(--line)}
@@ -186,7 +194,14 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 <p>U.S. Army. Served in Baghdad, Iraq in 2011 under Operation New Dawn as a door gunner with the 224th Aviation. A decorated soldier and an honorable leader.</p>
 </div>
 <div class="frame rev"><img src="img/about-veteran.jpg" alt="Lawrence in uniform in front of a Black Hawk helicopter" loading="lazy" width="1080" height="1079"><div class="cap">Iraq · Operation New Dawn · 224th Aviation</div></div>
-</div></div></section>
+</div>
+<div class="strip">
+<div class="frame rev"><img src="img/mil-helmet.jpg" alt="Lawrence in a flight helmet aboard a helicopter" loading="lazy"></div>
+<div class="frame rev"><img src="img/mil-doorgun.jpg" alt="Door gunner position over Baghdad, in black and white" loading="lazy"></div>
+<div class="frame rev"><img src="img/mil-huey.jpg" alt="Lawrence beside an Iraqi Air Force helicopter on the flight line" loading="lazy"></div>
+<div class="frame rev"><img src="img/mil-blackhawk.jpg" alt="Lawrence at the open door of a Black Hawk" loading="lazy"></div>
+</div>
+</div></section>
 
 <section><div class="wrap"><div class="lane flip">
 <div class="txt rev">
@@ -200,7 +215,16 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 </a>
 </div>
 <div class="frame rev"><img src="img/about-tedx.jpg" alt="Lawrence seated beside the TEDxSinkor screen in Monrovia" loading="lazy" width="1125" height="1116"><div class="cap">TEDxSinkor · Monrovia, Liberia</div></div>
-</div></div></section>
+</div>
+<div class="duo">
+<div class="frame rev"><img src="img/about-teaching-liberia.jpg" alt="Lawrence teaching a digital skills session to young people in Monrovia" loading="lazy"><div class="cap">Teaching digital skills · Monrovia</div></div>
+<div class="frame rev"><img src="img/about-award-team.jpg" alt="Lawrence and the Liberia Forward team holding the Certificate of Recognition" loading="lazy"><div class="cap">Certificate of Recognition · City Government of Monrovia · Dec. 29, 2021</div></div>
+</div>
+<div class="duo">
+<div class="frame rev"><img style="object-position:50% 35%" src="img/about-award-stage.jpg" alt="Lawrence receiving the certificate on stage at Diaspora Day Dinner Night, Monrovia City Hall" loading="lazy"><div class="cap">Diaspora Day Dinner Night · Monrovia City Hall</div></div>
+<div class="frame rev"><img class="whole" src="img/about-certificate.jpg" alt="Certificate of Recognition awarded to Liberia Forward by the City Government of Monrovia for its services to the Liberian society" loading="lazy"><div class="cap">For its services to the Liberian society</div></div>
+</div>
+</div></section>
 
 <section><div class="wrap"><div class="lane">
 <div class="txt rev">
@@ -253,6 +277,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px}
 <div class="row rev"><div class="yr">2015</div><div class="what">Started his clothing line and T-shirt business, now <b>The Public Stitch</b>.</div></div>
 <div class="row rev"><div class="yr">2019</div><div class="what"><b>CIF Division IV City Champions.</b> Head coach of the Locke Lady Saints, the school's first city title in more than three decades.</div></div>
 <div class="row rev"><div class="yr">2020</div><div class="what">Founded <b>Liberia Forward</b>: agriculture, infrastructure, and digital skills in Liberia. The TEDxSinkor stage in Monrovia. His photo leads a Los Angeles Times investigation during the George Floyd protests.</div></div>
+<div class="row rev"><div class="yr">2021</div><div class="what"><b>Certificate of Recognition</b> from the City Government of Monrovia to Liberia Forward, for its services to the Liberian society. Diaspora Day, Dec. 29.</div></div>
 <div class="row rev"><div class="yr">2026</div><div class="what"><b>Liberian women's champions.</b> D-Rockas, the team he coaches and helps run, win the LBA women's title, 61–58 in Game 5.</div></div>
 <div class="row rev"><div class="yr">2026</div><div class="what"><b>The School of Law.</b> Launches plain-language lessons on the justice system through a real Mississippi case. 1,000+ subscribers and growing. The Community begins.</div></div>
 <div class="row rev"><div class="yr">Now</div><div class="what">Teaching the law to the public on YouTube, building The Community, fighting for human rights in Liberia, running the DMV City Slickerz with his friends, and hosting stages across the DMV, from Art All Night to the H Street Festival.</div></div>
