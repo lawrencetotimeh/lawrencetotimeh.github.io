@@ -24,7 +24,7 @@ def nav(active=""):
         on = ' class="on"' if key == active else ""
         return f'<li><a{on} href="{href}">{label}</a></li>'
     return f'''<nav><div class="wrap"><a class="brand" href="index.html">LAWRENCE TOTIMEH <b>JR.</b></a>
-<ul>{a("class/","Classroom","class")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
+<ul>{a("class/","Classroom","class")}{a("act.html","Act","act")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
 <a class="btn red" href="contact.html">Book Lawrence</a></div></nav>'''
 
 FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
@@ -80,6 +80,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 <div class="lesson"><div class="shell">{yt("DJh7g3wODFE","Lesson 2: No charges doesn't mean no court. The civil lawsuit")}</div><div class="t">Lesson 2<b>No charges doesn't mean no court</b></div></div>
 <div class="lesson"><div class="shell">{yt("YhJ-_J3wDDs","Lesson 3: Discovery")}</div><div class="t">Lesson 3<b>Discovery</b></div></div>
 </div>
+<p class="muted rev" style="margin-top:14px;font-size:14px">Every lesson, in order, in the <a href="class/">Classroom</a>.</p>
 <div class="stats rev"><div class="stat"><div class="v">600K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div><div class="stat"><div class="v">1,040+</div><div class="l">subscribers on @AgentKodak, and growing</div></div><div class="stat"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div></div>
 </div></section>
 
@@ -88,7 +89,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 <div class="rev">
 <div class="eyebrow">The Classroom · <span class="gold">civic education and tools for teachers</span></div>
 <h2 style="margin:10px 0 18px">See who holds the levers</h2>
-<p class="lede muted">Every office, every connection, every source. An interactive map of one Mississippi county, six lessons, the timeline and the gaps. Free, for everyone. Lesson kits for teachers.</p>
+<p class="lede muted">Every office, every connection, every source. An interactive map of one Mississippi county, six lessons, the timeline and the gaps. Free, for everyone. <a href="class/#teachers">Lesson kits for teachers</a>.</p>
 <div class="cta" style="margin-top:30px"><a class="btn red" href="class/">Explore the map</a></div>
 </div>
 </div></section>
@@ -122,7 +123,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 <div class="talks rev">
 <div class="talk"><h3>Transparency Creates Accountability</h3><p>Public records, documentation and holding officials accountable.</p><p class="leave"><b>You leave with:</b> a template to start a paper trail in your community.</p></div>
 <div class="talk"><h3>Learn the Law</h3><p>The basic rights every student is supposed to know, and how to use them: at a traffic stop, at school, online, and in a courtroom.</p><p class="leave"><b>You leave with:</b> a one-page "your rights and how to use them" card.</p></div>
-<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, using the interactive map.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county.</p></div>
+<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, using the interactive map. <a href="class/">See the map</a>.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county.</p></div>
 <div class="talk"><h3>From the Front Line</h3><p>Civic power from Fannie Lou Hamer to today. Nonpartisan voter education option.</p><p class="leave"><b>You leave with:</b> the civic power timeline and a voter-ready checklist.</p></div>
 </div>
 <p class="muted rev" style="margin-top:22px;font-size:14px">For HBCUs, high schools, middle schools, churches, veteran groups and community organizations. Keynote, workshop, or classroom series. <a href="speaking.html">Full details and the speaker sheet</a>.</p>
@@ -176,7 +177,7 @@ speaking = head("Speaking & Workshops · Lawrence Totimeh Jr.", "Civic education
 <div class="talks rev">
 <div class="talk"><h3>Transparency Creates Accountability</h3><p>Public records, documentation and holding officials accountable. How a paper trail wins.</p><p class="leave"><b>You leave with:</b> a template to start building a paper trail in your community.</p></div>
 <div class="talk"><h3>Learn the Law</h3><p>The basic rights every student is supposed to know, and how to use them. What to say at a traffic stop, what a school can and cannot search, what you sign online, and what happens from probable cause to a courtroom. Taught in plain language, with practice.</p><p class="leave"><b>You leave with:</b> a one-page "your rights and how to use them" card, and a script for the moments that matter.</p></div>
-<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, taught with the interactive map from the Classroom.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county, and where pressure actually lands.</p></div>
+<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, taught with the interactive map from the Classroom. <a href="class/">See the map: lawrencetotimeh.com/class</a>.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county, and where pressure actually lands.</p></div>
 <div class="talk"><h3>From the Front Line</h3><p>Civic power from Fannie Lou Hamer to today. Available with a nonpartisan voter education workshop built on official state resources.</p><p class="leave"><b>You leave with:</b> the civic power timeline and a voter-ready checklist.</p></div>
 </div>
 </div></section>
@@ -277,12 +278,129 @@ contact = head("Book Lawrence · Contact", "Book Lawrence Totimeh Jr. for a talk
 </div></section>
 ''' + JOIN + FOOT
 
-def redirect(to):
-    return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{to}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
+# ---------------- ACT ----------------
+STATES = [("AL","Alabama"),("AK","Alaska"),("AZ","Arizona"),("AR","Arkansas"),("CA","California"),("CO","Colorado"),("CT","Connecticut"),("DE","Delaware"),("FL","Florida"),("GA","Georgia"),("HI","Hawaii"),("ID","Idaho"),("IL","Illinois"),("IN","Indiana"),("IA","Iowa"),("KS","Kansas"),("KY","Kentucky"),("LA","Louisiana"),("ME","Maine"),("MD","Maryland"),("MA","Massachusetts"),("MI","Michigan"),("MN","Minnesota"),("MS","Mississippi"),("MO","Missouri"),("MT","Montana"),("NE","Nebraska"),("NV","Nevada"),("NH","New Hampshire"),("NJ","New Jersey"),("NM","New Mexico"),("NY","New York"),("NC","North Carolina"),("ND","North Dakota"),("OH","Ohio"),("OK","Oklahoma"),("OR","Oregon"),("PA","Pennsylvania"),("RI","Rhode Island"),("SC","South Carolina"),("SD","South Dakota"),("TN","Tennessee"),("TX","Texas"),("UT","Utah"),("VT","Vermont"),("VA","Virginia"),("WA","Washington"),("WV","West Virginia"),("WI","Wisconsin"),("WY","Wyoming"),("DC","Washington, DC")]
+STATE_OPTS = '<option value="">Choose your state</option>' + "".join(f'<option value="{c}">{n}</option>' for c, n in STATES)
 
-pages = {"index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact,
+LETTER = """Dear [Representative / Senator NAME],
+
+I am a constituent in [CITY, STATE]. I am writing about the death of Nolan Xavier Wells, 18, found in the water off Horn Island, Mississippi, on July 6, 2026. Horn Island is managed by the National Park Service.
+
+On October 7, 2026, the Justice Department told PEOPLE that federal officials assisted the state investigation, found no evidence of foul play or a crime, and will not pursue a further investigation. Both the state and the independent autopsies list the cause and manner of death as undetermined.
+
+I am asking you to put three questions to the Justice Department and the National Park Service, and to send me the answers in writing:
+
+1. Did the FBI open its own investigation into Mr. Wells' death, or did it only assist the Jackson County investigation? If it assisted, in what capacity, and on what dates?
+
+2. Members of Congress wrote to the National Park Service on October 5, 2026, asking its Investigative Services Branch to open a full investigation. Has the Park Service responded, and what did it say?
+
+3. Both autopsies say cause and manner of death are undetermined. On what evidence did the Justice Department conclude there was nothing to investigate?
+
+I am not asking anyone to be charged. I am asking for the questions to be answered on the record. If no federal agency will answer them, I ask that you request a hearing.
+
+Please reply in writing to the address below.
+
+Respectfully,
+[YOUR NAME]
+[STREET ADDRESS]
+[CITY, STATE ZIP]
+[EMAIL]"""
+
+FOIA = """FOIA Request: jurisdictional status of Horn Island, Gulf Islands National Seashore
+
+To the FOIA Officer, National Park Service:
+
+Under the Freedom of Information Act, 5 U.S.C. 552, I request copies of records that state the legislative jurisdiction status (exclusive, concurrent, partial, or proprietary) of federal lands on Horn Island, Jackson County, Mississippi, within Gulf Islands National Seashore. This includes any jurisdiction maps, cession or acceptance documents, deeds with jurisdiction notes, and the park's entry in the Department of the Interior's inventory of legislative jurisdiction.
+
+I also request any records from July 4, 2026 to the date of this request showing whether the National Park Service Investigative Services Branch opened, declined, or referred an investigation into the death of Nolan Xavier Wells, and any response to the October 5, 2026 congressional letter to the Acting Director on that subject.
+
+I am a private citizen requesting these records for non-commercial, public education use. I ask that fees be waived; if fees would exceed $25, please contact me before processing. I prefer electronic copies.
+
+Name: [YOUR NAME]
+Mailing address: [ADDRESS]
+Email: [EMAIL]
+Date: [DATE]"""
+
+def esc(s):
+    return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
+
+act = head("Act · Contact your representatives · Lawrence Totimeh Jr.", "Find your House member and senators, send the three questions about the federal review of Nolan Xavier Wells' death, and file a records request. By law, on the record.", "act.html") + nav("act") + f'''
+<section class="dark pagehero"><div class="wrap">
+<div class="eyebrow">Act · Lesson 6 · The federal path</div>
+<h1>Ask the questions. On the record.</h1>
+<p class="lede">What the law says. What they did. What's missing. What you do now. This page is the last beat. Four steps, about ten minutes. Everything here goes to the offices that owe the public an answer. Nothing here targets a person.</p>
+<div class="chips"><span class="chip">1 · Find your reps</span><span class="chip">2 · Send the letter</span><span class="chip">3 · Request the record</span><span class="chip">4 · Vote</span></div>
+</div></section>
+
+<section class="light" id="find"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Step 1</div><h2 style="margin-top:8px">Find your three</h2></div></div>
+<p class="muted rev" style="max-width:62ch">One House member and two senators work for you. Both lookups open the official House and Senate directories, which have each office's contact form and phone number.</p>
+<div class="act-grid rev">
+<form class="form" id="houseForm"><div><label for="zip">Your ZIP code</label><input id="zip" inputmode="numeric" pattern="[0-9]{{5}}" maxlength="5" placeholder="20001" required></div><div><button class="btn red" type="submit">Find my House member</button></div></form>
+<form class="form" id="senForm"><div><label for="state">Your state</label><select id="state" required>{STATE_OPTS}</select></div><div><button class="btn red" type="submit">Find my senators</button></div></form>
+</div>
+<p class="muted rev" style="font-size:14px;margin-top:22px">Prefer to call? The Capitol switchboard connects you to any office: <b>202-224-3121</b>. Say your name, your city, and that you are calling about the federal review of Nolan Xavier Wells' death. Then read the three questions below.</p>
+</div></section>
+
+<section class="dark" id="letter"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Step 2</div><h2 style="margin-top:8px">Send the three questions</h2></div></div>
+<p class="muted rev" style="max-width:62ch">Fill in your name and city, copy the letter, and paste it into each office's contact form. Three offices, same letter. Offices count letters. They answer the ones that ask specific questions.</p>
+<form class="form rev act-form" onsubmit="return false">
+<div class="pair"><div><label for="yname">Your name</label><input id="yname" placeholder="First Last"></div><div><label for="ycity">City, State</label><input id="ycity" placeholder="Pascagoula, MS"></div></div>
+<div><label for="ltr">The letter</label><textarea id="ltr" class="tall">{esc(LETTER)}</textarea></div>
+<div class="cta"><button class="btn red" type="button" id="copyLtr">Copy letter</button><button class="btn ghost" type="button" id="dlLtr">Download .txt</button></div>
+<p class="muted" style="font-size:13px">Edit anything. Keep the three questions. Replace the bracketed parts before you send.</p>
+</form>
+</div></section>
+
+<section class="light" id="records"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Step 3</div><h2 style="margin-top:8px">Request the record</h2></div></div>
+<p class="muted rev" style="max-width:62ch">Door one in Lesson 6 depends on one fact nobody has published: what kind of federal land Horn Island is. A records request to the National Park Service is how a citizen gets that answer. Any person can file one. It's free for most requests.</p>
+<form class="form rev act-form" onsubmit="return false">
+<div><label for="foia">The request</label><textarea id="foia" class="tall">{esc(FOIA)}</textarea></div>
+<div class="cta"><button class="btn red" type="button" id="copyFoia">Copy request</button><a class="btn ghost" href="https://securefoia.doi.gov/" target="_blank" rel="noopener">File at Interior's FOIA portal</a><a class="btn ghost" href="https://www.foia.gov/" target="_blank" rel="noopener">Or FOIA.gov</a></div>
+<p class="muted" style="font-size:13px">Pick "National Park Service" as the agency. Save your request number. The law gives them 20 working days to respond. When you get an answer, send it to <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> so it goes into the public record on the <a href="class/#timeline">Classroom timeline</a>.</p>
+</form>
+</div></section>
+
+<section class="dark panelbg" id="doors" style="border-top:1px solid var(--line)"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Step 4</div><h2 style="margin-top:8px">Every lawful door</h2></div></div>
+<div class="cards3 rev">
+<div class="pkg"><div class="eyebrow">Oversight</div><h3 style="margin:10px 0 12px">Committees hold hearings</h3><p class="muted">The House and Senate Judiciary Committees oversee the Justice Department. The Natural Resources (House) and Energy and Natural Resources (Senate) Committees oversee the Park Service. Ask your member to request a hearing.</p><ul class="list" style="margin-top:14px"><li><a href="https://judiciary.house.gov/" target="_blank" rel="noopener">House Judiciary</a></li><li><a href="https://www.judiciary.senate.gov/" target="_blank" rel="noopener">Senate Judiciary</a></li></ul></div>
+<div class="pkg"><div class="eyebrow">Civil rights</div><h3 style="margin:10px 0 12px">Report to the Civil Rights Division</h3><p class="muted">The Justice Department's Civil Rights Division takes reports from the public. A report is not a charge. It is a record that you asked, with a date on it.</p><ul class="list" style="margin-top:14px"><li><a href="https://civilrights.justice.gov/" target="_blank" rel="noopener">civilrights.justice.gov</a></li><li><a href="https://oig.justice.gov/hotline" target="_blank" rel="noopener">DOJ Inspector General hotline</a></li></ul></div>
+<div class="pkg hot"><div class="tagline">November 3, 2026</div><div class="eyebrow" style="margin-top:6px">Vote</div><h3 style="margin:10px 0 12px">Whoever holds the gavels holds subpoena power</h3><p class="muted">The next Congress is seated January 3, 2027. Committee chairs decide who gets called to testify under oath. No party, no names here. Just the fact that your vote picks who holds the gavel.</p><ul class="list" style="margin-top:14px"><li><a href="https://vote.gov/" target="_blank" rel="noopener">Register or check your registration</a></li></ul></div>
+</div>
+<p class="muted rev" style="font-size:13px;margin-top:22px">Agent rules apply to every step: learn the law, document, vote, follow up, never harass. Our enemy is injustice, not people. I'm an educator, not an attorney. Nothing here is legal advice.</p>
+</div></section>
+
+<section class="light"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Then</div><h2 style="margin-top:8px">Name your gap</h2></div></div>
+<p class="muted rev" style="max-width:62ch">When you get an answer, or no answer by the deadline, that's documentation. Post it in the comments on the Lesson 6 video, or send it to <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a>. Every answer goes on the <a href="class/#timeline">timeline</a>. That's how the record gets built: one letter at a time.</p>
+<div class="cta rev" style="margin-top:26px"><a class="btn red" href="class/#lesson6">Back to Lesson 6</a><a class="btn ghost" href="class/">The Classroom</a></div>
+</div></section>
+<script>
+(function(){{
+var hf=document.getElementById('houseForm');hf.addEventListener('submit',function(e){{e.preventDefault();var z=document.getElementById('zip').value.replace(/\\D/g,'');if(z.length!==5)return;window.open('https://ziplook.house.gov/htbin/findrep_house?ZIP='+z,'_blank','noopener')}});
+var sf=document.getElementById('senForm');sf.addEventListener('submit',function(e){{e.preventDefault();var s=document.getElementById('state').value;if(!s)return;window.open('https://www.senate.gov/senators/index.htm?State='+s,'_blank','noopener')}});
+var base=document.getElementById('ltr').value;
+function fill(){{var n=document.getElementById('yname').value.trim(),c=document.getElementById('ycity').value.trim();var t=base;if(n)t=t.split('[YOUR NAME]').join(n);if(c)t=t.split('[CITY, STATE]').join(c);document.getElementById('ltr').value=t}}
+document.getElementById('yname').addEventListener('input',fill);document.getElementById('ycity').addEventListener('input',fill);
+function copy(id,btn,label){{var el=document.getElementById(id);el.select();el.setSelectionRange(0,99999);var done=function(){{btn.textContent='Copied';setTimeout(function(){{btn.textContent=label}},1800)}};if(navigator.clipboard){{navigator.clipboard.writeText(el.value).then(done,function(){{document.execCommand('copy');done()}})}}else{{document.execCommand('copy');done()}}}}
+var cb=document.getElementById('copyLtr');cb.addEventListener('click',function(){{copy('ltr',cb,'Copy letter')}});
+var cf=document.getElementById('copyFoia');cf.addEventListener('click',function(){{copy('foia',cf,'Copy request')}});
+document.getElementById('dlLtr').addEventListener('click',function(){{var b=new Blob([document.getElementById('ltr').value],{{type:'text/plain'}});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='letter-nolan-xavier-wells.txt';a.click()}});
+}})();
+</script>
+''' + JOIN + FOOT
+
+def redirect(to, canon=None):
+    canon = canon or to
+    return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
+
+pages = {"index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"),
          "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
 for name, html in pages.items():
+    os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
         f.write(html)
     print("wrote", name)
