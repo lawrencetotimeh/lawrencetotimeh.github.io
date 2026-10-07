@@ -95,3 +95,11 @@ footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
  .steps,.lessons,.stats,.proof,.talks,.action .grid,.cards3,.form .pair{grid-template-columns:1fr}
  .frame{height:380px}.stat .v{font-size:52px}.photo{height:360px}.qr{grid-template-columns:repeat(3,1fr)}
 }
+/* act page */
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.act-form{margin-top:30px}.form textarea.tall{height:420px;font-family:var(--mono);font-size:13.5px;line-height:1.55;padding:14px}
+.dark .form label{color:var(--stone)}.dark .form input,.dark .form select,.dark .form textarea{background:var(--panel);border-color:var(--line);color:var(--paper)}
+.dark .form input::placeholder{color:#6f6a63}
+.pagehero .chips{margin-top:26px}
+@media(max-width:760px){.act-grid{grid-template-columns:1fr}.form textarea.tall{height:360px}}
+.form button.ghost{border:1.5px solid var(--paper);background:transparent;color:var(--paper)}.light .form button.ghost{border-color:var(--ink);color:var(--ink)}
