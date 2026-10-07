@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Who holds the levers in Jackson County, Mississippi. Every office that touches a death investigation, how each one connects to voters, and the Nolan Xavier Wells School of Law lessons and timeline.">
-<link rel="icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Who Holds the Levers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+body{margin:0}
+
 /* Layout: a living "jellyfish" map. Power floats at the top, tentacles reach down to the people. Detail panel to the right (below on phones). */
 :root{
   --ink:#0A0A0B;        /* deep water */
@@ -190,9 +188,10 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 footer strong{color:var(--paper)}
 @media (prefers-reduced-motion:reduce){.edge.hot{animation:none}}
 </style>
-
 </head>
 <body>
+
+
 <div class="wrap">
 <header>
   <div>
@@ -265,11 +264,21 @@ footer strong{color:var(--paper)}
   <div class="tl-cards">
     <div class="tl-card"><h4>What the DA says was done</h4><p class="src-note">From the grand jury report and her public statements.</p><ul id="tl-da"></ul></div>
     <div class="tl-card"><h4>What anyone can check</h4><p class="src-note">Public documents you can read yourself.</p><ul id="tl-check"></ul></div>
-    <div class="tl-card tl-next"><h4>What's likely next</h4><p class="src-note">Our assessment, not a prediction. Labeled AI.</p><ul id="tl-next"></ul></div>
+    <div class="tl-card tl-next"><h4>Doors that are still open</h4><p class="src-note">What the law allows from here. Not a prediction.</p><ul id="tl-next"></ul></div>
   </div>
 </section>
 
 <section class="more">
+  <div class="block" id="teachers">
+    <h3>For teachers: free class guides</h3>
+    <p>Print-ready guides for each lesson. Every guide has a QR code that opens the matching lesson on this page.</p>
+    <ul>
+      <li>Lesson 1: <a href="guides/Lesson1-Student-Guide-Middle-School.pdf">Student guide, middle school (PDF)</a></li>
+      <li>Lesson 1: <a href="guides/Lesson1-Student-Guide-High-School.pdf">Student guide, high school (PDF)</a></li>
+      <li>Lesson 1: <a href="guides/Lesson1-Teacher-Guide.pdf">Teacher guide with answer key (PDF)</a></li>
+    </ul>
+    <p class="src-note">More lessons coming. No sign-up, no email gate.</p>
+  </div>
   <div class="block">
     <h3>Test yourself</h3>
     <div id="quiz"></div>
@@ -281,9 +290,9 @@ footer strong{color:var(--paper)}
 </section>
 
 <footer>
-  <div><strong>Prototype v0.1 · facts checked Oct. 5, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
+  <div><strong>Version 0.2 · facts checked Oct. 7, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
   <div>House rules: we name offices and public officials by their official acts. We do not name private people. Nobody on this map is accused of anything. Anything marked <span class="chip check">to confirm</span> still needs a primary source.</div>
-  <div>Spot an error? Bring the documentation. Documentation beats conversation.</div>
+  <div>Spot an error? Bring the documentation. Transparency creates accountability.</div>
 </footer>
 </div>
 
@@ -460,15 +469,15 @@ const N = [
   inCase:"The grand jury that heard this case was a circuit court grand jury.",
   act:"Look up who filed for each seat. Judges are hard to research, so agents who do the homework help everybody.",
   chips:["elected","on ballot Nov 3"],src:[["WLOX: judicial candidates for Nov. 3","https://www.wlox.com/2026/02/03/here-are-judicial-candidates-who-have-submitted-papers-qualify-nov-3-election/"]]},
- {id:"chancery",lvl:2,x:925,y:495,g:"CH",kind:"elected",t1:"Chancery",t2:"District 9",
-  title:"Chancery Court, District 9",
-  holder:"Chancellors for Jackson and George counties.",
+ {id:"chancery",lvl:2,x:925,y:495,g:"CH",kind:"elected",t1:"Chancery",t2:"District 16",
+  title:"Chancery Court, 16th District",
+  holder:"Four chancellors elected from the 16th Chancery District, which includes Jackson County. Per a court filing reported by GCWire, Nolan's estate case is assigned to a different chancellor.",
   how:"[elected] by district, 4-year [term].",
   next:"Nov. 3, 2026 (seats listed with the judicial candidates).",
   controls:"Estates, wills and family law. An [estate] has to be opened here before a family can bring a wrongful death [civil lawsuit].",
-  inCase:"On July 21, 2026, Nolan's mother asked Jackson County Chancery Court to open his estate and name her administrator. That gives her standing to sue.",
+  inCase:"In July 2026, Nolan's mother asked Jackson County Chancery Court to open his estate and name her administrator. That gives her standing to sue.",
   act:"Court filings are public records. Read the real document instead of the screenshot.",
-  chips:["elected","on ballot Nov 3"],src:[["MPB: lawsuit expected","https://www.mpbonline.org/blogs/news/lawsuit-expected-in-response-to-death-of-nolan-wells/"]]},
+  chips:["elected","on ballot Nov 3"],src:[["WLOX: judicial candidates for Nov. 3","https://www.wlox.com/2026/02/03/here-are-judicial-candidates-who-have-submitted-papers-qualify-nov-3-election/"],["GCWire: first court documents","https://gcwire.com/exclusive-first-court-documents-filed-in-nolan-wells-case/"],["MPB: lawsuit expected","https://www.mpbonline.org/blogs/news/lawsuit-expected-in-response-to-death-of-nolan-wells/"]]},
 
  // PEOPLE
  {id:"clerk",lvl:3,x:300,y:700,g:"CLK",kind:"elected",t1:"Circuit Clerk",t2:"Voter rolls + juries",
@@ -747,7 +756,7 @@ const LESSONS=[
    "What counts as new: a medical finding, a witness under oath, data (records, video, messages, even satellite images that show boats, not faces), and experts like tide and current specialists.",
    "Both autopsies, the state's and the family's, list cause and manner as [undetermined]. A civil case's [discovery] is how new evidence gets found."],
   terms:["no true bill","double jeopardy","undetermined","discovery"],
-  act:"Real, firsthand evidence goes to the DA's office, not the comment section. Documentation beats conversation.",
+  act:"Real, firsthand evidence goes to the DA's office, not the comment section. Transparency creates accountability.",
   q:[["After a no true bill, can the case come back?",["Yes, with new evidence","No, never"],0],
      ["When was Medgar Evers' killer convicted?",["1964","1994","2005"],1],
      ["Where should real new evidence go?",["The comments","The DA's office","A group chat"],1]],
@@ -808,6 +817,7 @@ const TL=[
  {w:"July 6 · 8:45 a.m.",k:"v",t:"A park ranger finds Nolan in the water off the island's northwest end.",n:["nps","sheriff"],s:"Mississippi Free Press, WLOX",u:"https://www.mississippifreepress.org/ranger-finds-body-amid-search-for-nolan-wells-who-vanished-on-horn-island-during-trip-with-friends/"},
  {w:"July 6 and 9",k:"da",t:"The sheriff says there were no signs of foul play and that Nolan \"chose to stay on the island.\" Three days later the state's public safety chief says the case is open to drowning or foul play.",n:["sheriff","dps"],s:"ABC; SuperTalk",u:"https://www.supertalk.fm/dps-commissioner-no-indication-race-played-a-role-in-death-of-nolan-wells/"},
  {w:"July 7",k:"v",t:"State autopsy in Pearl. The coroner confirms his identity.",n:["coroner","me"]},
+ {w:"July 7",k:"gap",t:"The state pathologist reports two bruises on the back of Nolan's head to the sheriff's office. Per the family's pathologist, they were not photographed up close, dissected or sampled, and he \"could not find any record\" of a specific investigation into that injury. The grand jury says the exact cause \"remains uncertain.\"",n:["me","sheriff"],s:"Dr. Mitchell's final report; grand jury report p. 4",u:"https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf"},
  {w:"July 20",k:"v",t:"His mother opens his estate in Chancery Court so the family can sue. Preservation letters go out.",n:["chancery"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/29/nolan-xavier-wells-lawsuit/"},
  {w:"July 22",k:"v",t:"The family's pathologist issues his first report: cause undetermined.",n:["me"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/22/nolan-wells-autopsy-ben-crump/"},
  {w:"July 23",k:"da",t:"The DA says the autopsy stays private until the grand jury. \"Our restraint... is not an effort to keep the truth from the public.\"",n:["da"],s:"WLOX, WLBT",u:"https://www.wlox.com/2026/07/23/nolan-wells-autopsy-report-be-withheld-until-grand-jury-review-district-attorney-says/"},
@@ -823,7 +833,7 @@ const TL=[
 ];
 const DA_SAYS=["132 subpoenas and 43 witnesses heard","Full access to the sheriff's file, including every agency that helped","Seven people invited to testify: five did, one couldn't, one declined","The family's pathologist had full access and testified","The family's phone reports (14, 21 and 261 pages) were considered","Asked the family's team in writing for any evidence","Told jurors about all relationships between people involved; jurors found no conflicts","Shared the autopsy and toxicology with the family's Mississippi attorney"];
 const CHECK=["The grand jury report (Jackson County website, 9 pages)","Both autopsy reports (released by the family's team)","The Sea Tow call audio (released by Marine Resources)","The estate filing in Chancery Court","The federal threat cases (federal court records)","The DA's public videos and statements"];
-const NEXT=["DOJ's 'review' could end quietly. DOJ rarely announces when it declines.","The Park Service's investigators may or may not open a case. The congressional letter is the push.","Federal charges would need a federal crime and federal jurisdiction. That's Lesson 6.","A wrongful death lawsuit is the most likely next legal step. The estate is open and preservation letters went out.","A new state grand jury is possible only with new evidence. No time limit applies.","Records requests (Marine Resources, sheriff, Coast Guard, Park Service) can fill the timeline gaps."];
+const NEXT=["A federal review or a Park Service investigation is possible but not confirmed. Congress has asked; agencies rarely announce when they decline.","A wrongful death lawsuit can be filed because the estate is open. That is the path where depositions and subpoenas happen.","A new state grand jury needs new evidence. Mississippi has no time limit on murder or manslaughter."];
 const KLABEL={v:"Verified",r:"Reported once",da:"Officials say",gap:"Gap"};
 function renderTL(f){
  document.getElementById("tl-list").innerHTML=TL.filter(x=>f==="all"||x.k===f).map(x=>`<li class="tl-item" data-k="${x.k}"><div class="tl-when">${esc(x.w)}</div><p class="tl-what">${esc(x.t)}</p><div class="tl-meta"><span class="chip ${x.k==="gap"?"gold":x.k==="da"?"red":""} ${x.k==="r"?"check":""}">${KLABEL[x.k]}</span>${x.n.map(id=>`<button class="tl-go" type="button" data-go="${id}">${esc(byId[id].t1)}</button>`).join("")}${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${esc(x.s||"Source")}</a>`:(x.s?`<span style="font-size:12.5px;color:var(--stone)">${esc(x.s)}</span>`:"")}</div></li>`).join("");
@@ -838,5 +848,6 @@ document.getElementById("timeline").addEventListener("click",e=>{const g=e.targe
 select("you");
 fromHash();
 </script>
+
 </body>
 </html>
