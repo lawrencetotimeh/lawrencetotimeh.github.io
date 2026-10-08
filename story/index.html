@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Find Your Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one narrow phone-first column of numbered steps, a sticky save bar at the bottom. */
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#14213a; --muted:#56607a; --line:#d9dce4;
+  --navy:#1b2f5c; --orange:#e2711d; --orange-soft:#fdeee2; --chip:#eef1f7;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1626; --card:#18223a; --ink:#eef1f7; --muted:#a6afc4; --line:#2c3854;
+  --navy:#8fb0f5; --orange:#f39548; --orange-soft:#3a2716; --chip:#222d48; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1626; --card:#18223a; --ink:#eef1f7; --muted:#a6afc4; --line:#2c3854;
+  --navy:#8fb0f5; --orange:#f39548; --orange-soft:#3a2716; --chip:#222d48; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding:0 16px;padding-block:0 120px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{padding-block:28px 4px}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,9vw,52px);line-height:1.02;margin:6px 0 10px;color:var(--navy);text-wrap:balance}
+.lede{color:var(--muted);margin:0}
+.note{font-size:14px;color:var(--muted);background:var(--chip);border-radius:10px;padding:10px 12px;margin-top:14px}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;display:flex;flex-direction:column;gap:14px}
+h2{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1;margin:0;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+h2 .n{color:var(--orange);font-size:15px;letter-spacing:.06em}
+.hint{margin:0;color:var(--muted);font-size:15px}
+label.q{font-weight:700;display:block;margin-bottom:6px}
+label.q span{font-weight:400;color:var(--muted)}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+textarea{min-height:76px}
+textarea:focus,input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0}
+.chip span{display:block;padding:8px 14px;border-radius:999px;background:var(--chip);border:1.5px solid transparent;font-weight:600;font-size:15px;cursor:pointer}
+.chip input:checked + span{background:var(--orange-soft);border-color:var(--orange);color:var(--ink)}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px var(--orange-soft)}
+.lanes{display:grid;gap:10px}
+.lane{position:relative}
+.lane input{position:absolute;opacity:0;inset:0}
+.lane div{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.lane b{display:block}
+.lane small{color:var(--muted);font-size:14px}
+.lane input:checked + div{border-color:var(--orange);background:var(--orange-soft)}
+.lane input:focus-visible + div{box-shadow:0 0 0 3px var(--orange-soft)}
+.formula{display:grid;gap:10px}
+.part{border-left:3px solid var(--orange);padding:2px 0 2px 12px}
+.part b{display:block}
+.part small{color:var(--muted);font-size:14px}
+details{background:var(--chip);border-radius:12px;padding:10px 14px}
+summary{font-weight:700;cursor:pointer}
+details ol{margin:8px 0 4px;padding-left:20px}
+details li{margin:4px 0}
+blockquote{margin:0;padding:12px 14px;border-radius:12px;background:var(--orange-soft);font-style:italic}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:22px;height:22px;accent-color:var(--orange);margin-top:2px;flex:none}
+.tag{font-weight:800;color:var(--orange)}
+footer{text-align:center;color:var(--muted);font-size:14px;padding-block:6px 20px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.bar .in{max-width:640px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button{font:inherit;font-weight:700;border-radius:999px;padding:12px 18px;border:none;cursor:pointer}
+.primary{background:var(--orange);color:#1a1006;flex:1 1 160px}
+.secondary{background:var(--chip);color:var(--ink);flex:1 1 120px}
+button:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.status{width:100%;font-size:13px;color:var(--muted);text-align:center;min-height:1em}
+@media (prefers-reduced-motion:no-preference){.chip span,.lane div{transition:background .15s,border-color .15s}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Trojan Nation 1882 · Mass Comm Session</div>
+    <h1>Find Your Story</h1>
+    <p class="lede">You don't need to know your purpose to start. You just need to be curious. Fill this in and keep it.</p>
+    <p class="note">Your answers save on this phone as you type. Tap <b>Save to my phone</b> or <b>Copy my answers</b> at the bottom to keep a copy.</p>
+  </header>
+
+  <section>
+    <label class="q" for="name">Your name</label>
+    <input type="text" id="name" autocomplete="name" placeholder="First and last name">
+  </section>
+
+  <section>
+    <h2><span class="n">STEP 1</span>Joy or Pain</h2>
+    <p class="hint">Look back at your life. Your best stories usually come from one of these places.</p>
+    <div><label class="q" for="joy">Joy <span>What made you so happy you wanted to learn more about it?</span></label><textarea id="joy"></textarea></div>
+    <div><label class="q" for="pain">Pain <span>What hurt so bad you never want it to happen to anyone else?</span></label><textarea id="pain"></textarea></div>
+    <div><label class="q" for="curious">Curiosity <span>What's one question about this campus you've always wanted answered?</span></label><textarea id="curious"></textarea></div>
+    <div>
+      <p class="q" style="margin:0 0 6px;font-weight:700">Which one pulls at you the most?</p>
+      <div class="chips" role="radiogroup" aria-label="Starting point">
+        <label class="chip"><input type="radio" name="pick" id="pick-joy" value="Joy"><span>Joy</span></label>
+        <label class="chip"><input type="radio" name="pick" id="pick-pain" value="Pain"><span>Pain</span></label>
+        <label class="chip"><input type="radio" name="pick" id="pick-cur" value="Curiosity"><span>Curiosity</span></label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">STEP 2</span>Pick your lane</h2>
+    <p class="hint">Turn your joy or pain into something for other people.</p>
+    <div class="lanes" role="radiogroup" aria-label="Lane">
+      <label class="lane"><input type="radio" name="lane" id="lane-connect" value="Connect"><div><b>Connect</b><small>Bring people together. Example: a series on first-gen students.</small></div></label>
+      <label class="lane"><input type="radio" name="lane" id="lane-educate" value="Educate"><div><b>Educate</b><small>Teach what people need to know. Example: scholarships nobody applies for.</small></div></label>
+      <label class="lane"><input type="radio" name="lane" id="lane-entertain" value="Entertain"><div><b>Entertain</b><small>Make people laugh or come back. Example: rating every dining hall meal.</small></div></label>
+      <label class="lane"><input type="radio" name="lane" id="lane-change" value="Change lives"><div><b>Change lives</b><small>Help someone skip your pain. Example: what I wish I knew freshman year.</small></div></label>
+    </div>
+    <div><label class="q" for="who">Who is this for? <span>There's a community for everybody. Describe yours in one sentence.</span></label><textarea id="who"></textarea></div>
+    <div>
+      <p style="margin:0 0 6px;font-weight:700">Where do they hang out?</p>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" id="pf-yt" value="YouTube"><span>YouTube</span></label>
+        <label class="chip"><input type="checkbox" id="pf-tt" value="TikTok"><span>TikTok</span></label>
+        <label class="chip"><input type="checkbox" id="pf-ig" value="Instagram"><span>Instagram</span></label>
+        <label class="chip"><input type="checkbox" id="pf-pod" value="Podcast"><span>Podcast</span></label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">STEP 3</span>Plan your first post</h2>
+    <p class="hint">Keep it small. One idea, one video, one place on campus.</p>
+    <div><label class="q" for="about">My first post is about</label><textarea id="about"></textarea></div>
+    <div><label class="q" for="where">Where on campus I'll film it</label><input type="text" id="where"></div>
+    <div><label class="q" for="feature">Who I could interview or feature</label><input type="text" id="feature"></div>
+    <div><label class="q" for="when">The day I'll post it</label><input type="text" id="when" placeholder="This weekend?"></div>
+    <div><label class="q" for="partner">Partner check <span>Ask your partner: why would you watch this? Write what they said.</span></label><textarea id="partner"></textarea></div>
+  </section>
+
+  <section>
+    <h2><span class="n">STEP 4</span>The video formula</h2>
+    <p class="hint">Every video has one job: make people keep watching. Lawrence and Deon each have their own take. Take what works from both.</p>
+    <div class="formula">
+      <div class="part"><b>1. The hook</b><small>First 3 seconds. Say what everybody thinks is true, or ask what everybody wonders.</small></div>
+      <div class="part"><b>2. The proof</b><small>The middle. A fact, a number, a clip, or someone you talked to.</small></div>
+      <div class="part"><b>3. The twist</b><small>Right before the end. The part nobody saw coming.</small></div>
+      <div class="part"><b>4. The call to action</b><small>The last line. Comment, share, follow, or show up.</small></div>
+    </div>
+    <details>
+      <summary>See an example</summary>
+      <ol>
+        <li><b>Hook:</b> "Everybody says you need an expensive camera to start a channel."</li>
+        <li><b>Proof:</b> "I filmed this whole video on my phone."</li>
+        <li><b>Twist:</b> "The camera was never the problem. Most people never post because they're scared of what people will think."</li>
+        <li><b>Call to action:</b> "Comment the first video you'd make."</li>
+      </ol>
+    </details>
+    <div>
+      <p style="margin:0 0 6px;font-weight:700">My hook style</p>
+      <div class="chips" role="radiogroup" aria-label="Hook style">
+        <label class="chip"><input type="radio" name="hook" id="hk-obv" value="Obvious answer"><span>Obvious answer</span></label>
+        <label class="chip"><input type="radio" name="hook" id="hk-q" value="Question, then prove it wrong"><span>Question, then prove it wrong</span></label>
+        <label class="chip"><input type="radio" name="hook" id="hk-bold" value="Bold claim"><span>Bold claim</span></label>
+        <label class="chip"><input type="radio" name="hook" id="hk-end" value="Ending first"><span>Ending first</span></label>
+      </div>
+    </div>
+    <div><label class="q" for="f1">My hook</label><textarea id="f1"></textarea></div>
+    <div><label class="q" for="f2">My proof</label><textarea id="f2"></textarea></div>
+    <div><label class="q" for="f3">My twist</label><textarea id="f3"></textarea></div>
+    <div><label class="q" for="f4">My call to action</label><textarea id="f4"></textarea></div>
+  </section>
+
+  <section>
+    <h2><span class="n">STEP 5</span>Brand yourself now</h2>
+    <p class="hint">You're a business. If someone opened your social media right now, what would it say about you? It only takes one skill to take you to the next level.</p>
+    <div><label class="q" for="specialty">My specialty <span>What I want to be known for</span></label><textarea id="specialty"></textarea></div>
+    <div><label class="q" for="skill">My one skill <span>What people come to me for, or what I want to master</span></label><textarea id="skill"></textarea></div>
+    <div><label class="q" for="practice">One way I'll practice it this month</label><textarea id="practice"></textarea></div>
+    <div><label class="q" for="describe">How I want people to describe me in one sentence</label><textarea id="describe"></textarea></div>
+    <div><label class="q" for="asset">What makes me an asset to any team, not a liability</label><textarea id="asset"></textarea></div>
+    <blockquote>The lane you start in won't be the lane you end in. Every step teaches you something new. It's all about reps.</blockquote>
+  </section>
+
+  <section>
+    <h2><span class="n">THIS WEEKEND</span>The homecoming challenge</h2>
+    <p class="hint">Homecoming is this weekend. While you're having fun, catch some b-roll or show homecoming from your view. Post it within 7 days and tag it <span class="tag">#TrojanNation1882</span>. Some will be featured on the channel.</p>
+    <label class="check"><input type="checkbox" id="c1"><span>Thursday: pick my idea</span></label>
+    <label class="check"><input type="checkbox" id="c2"><span>Friday to Sunday: film homecoming from my view</span></label>
+    <label class="check"><input type="checkbox" id="c3"><span>Monday to Tuesday: edit it using the formula</span></label>
+    <label class="check"><input type="checkbox" id="c4"><span>By next Thursday: post it and tag it</span></label>
+  </section>
+
+  <footer>The campus is your canvas, and it's alive. So what's stopping you?<br>Trojan Nation 1882 · Deon Tillman · Lawrence Totimeh Jr.</footer>
+</div>
+
+<div class="bar"><div class="in">
+  <button class="primary" id="save" type="button">Save to my phone</button>
+  <button class="secondary" id="copy" type="button">Copy my answers</button>
+  <div class="status" id="status" aria-live="polite"></div>
+</div></div>
+
+<script>
+(function(){
+  var KEY='tn1882-find-your-story';
+  var status=document.getElementById('status');
+  function fields(){return Array.prototype.slice.call(document.querySelectorAll('input[id],textarea[id]'));}
+  function load(){
+    var d={};try{d=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){d={};}
+    fields().forEach(function(el){
+      if(!(el.id in d))return;
+      if(el.type==='checkbox'||el.type==='radio')el.checked=!!d[el.id];else el.value=d[el.id];
+    });
+  }
+  var t;
+  function store(){
+    clearTimeout(t);t=setTimeout(function(){
+      var d={};fields().forEach(function(el){d[el.id]=(el.type==='checkbox'||el.type==='radio')?el.checked:el.value;});
+      try{localStorage.setItem(KEY,JSON.stringify(d));status.textContent='Saved on this phone';}catch(e){}
+    },400);
+  }
+  document.addEventListener('input',store);document.addEventListener('change',store);
+  load();
+
+  function v(id){var el=document.getElementById(id);return (el&&el.value.trim())||'(blank)';}
+  function picked(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'(not picked)';}
+  function boxes(ids){var out=ids.filter(function(i){return document.getElementById(i).checked;}).map(function(i){return document.getElementById(i).value;});return out.length?out.join(', '):'(none picked)';}
+  function text(){
+    var L=[];
+    L.push('FIND YOUR STORY');L.push('Trojan Nation 1882 · VSU Mass Comm Session');L.push('Name: '+v('name'));L.push('');
+    L.push('STEP 1: JOY OR PAIN');L.push('Joy: '+v('joy'));L.push('Pain: '+v('pain'));L.push('Curiosity: '+v('curious'));L.push('Starting point: '+picked('pick'));L.push('');
+    L.push('STEP 2: MY LANE');L.push('Lane: '+picked('lane'));L.push('Who it is for: '+v('who'));L.push('Platforms: '+boxes(['pf-yt','pf-tt','pf-ig','pf-pod']));L.push('');
+    L.push('STEP 3: MY FIRST POST');L.push('About: '+v('about'));L.push('Where: '+v('where'));L.push('Featuring: '+v('feature'));L.push('Post day: '+v('when'));L.push('Partner said: '+v('partner'));L.push('');
+    L.push('STEP 4: MY VIDEO FORMULA');L.push('Hook style: '+picked('hook'));L.push('Hook: '+v('f1'));L.push('Proof: '+v('f2'));L.push('Twist: '+v('f3'));L.push('Call to action: '+v('f4'));L.push('');
+    L.push('STEP 5: MY BRAND');L.push('Specialty: '+v('specialty'));L.push('One skill: '+v('skill'));L.push('Practice this month: '+v('practice'));L.push('Describe me: '+v('describe'));L.push('Why I am an asset: '+v('asset'));L.push('');
+    L.push('HOMECOMING CHALLENGE: post within 7 days and tag #TrojanNation1882');
+    L.push('The campus is your canvas. So what\'s stopping you?');
+    return L.join('\n');
+  }
+
+  var copyBtn=document.getElementById('copy');
+  copyBtn.addEventListener('click',function(){
+    var s=text();
+    function fallback(){
+      var ta=document.createElement('textarea');ta.value=s;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+      if(ok){document.body.removeChild(ta);status.textContent='Copied. Paste it into your Notes app.';return;}
+      ta.removeAttribute('readonly');ta.style.position='static';ta.style.opacity='1';ta.style.height='220px';ta.style.marginTop='8px';
+      document.body.removeChild(ta);status.textContent='Press and hold the text below, then tap Select All and Copy.';
+      status.parentNode.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,s.length);
+    }
+    try{
+      navigator.clipboard.writeText(s).then(function(){status.textContent='Copied. Paste it into your Notes app.';},fallback);
+    }catch(e){fallback();}
+  });
+
+  var saveBtn=document.getElementById('save');
+  saveBtn.addEventListener('click',function(){
+    var n=(document.getElementById('name').value.trim()||'my').replace(/[^A-Za-z0-9 _-]/g,'').replace(/\s+/g,'-');
+    var fname=n+'-find-your-story.txt';
+    try{
+      var blob=new Blob([text()],{type:'text/plain'});
+      if(navigator.canShare&&navigator.share){
+        var file=new File([blob],fname,{type:'text/plain'});
+        if(navigator.canShare({files:[file]})){
+          navigator.share({files:[file],title:'Find Your Story'}).then(function(){status.textContent='Saved.';}).catch(function(){});
+          return;
+        }
+      }
+      var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fname;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+      status.textContent='Saved to your downloads.';
+    }catch(e){status.textContent='Saving didn\'t work here. Use Copy my answers.';}
+  });
+})();
+</script>
+
+</body>
+</html>
