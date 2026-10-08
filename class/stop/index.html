@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The Stop Kit by Agent Kodak (Lawrence Totimeh Jr.): free civic education for teens on police stops. Documentation beats conversation.">
+<meta name="author" content="Lawrence Totimeh Jr. (Agent Kodak)">
+<title>The Stop Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column like a phone notebook; a tab strip moves between Before, Script, Report, Ask, Follow up. Dark first, matches the Classroom. */
+:root{
+  --bg:#0A0A0B; --panel:#151413; --line:#2B2826; --fg:#F2EFE9; --muted:#B8B2A8;
+  --red:#E0343F; --gold:#D9A441; --ok:#5FB37A; --field:#1C1B19;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F7F5F1; --panel:#FFFFFF; --line:#DDD7CE; --fg:#141312; --muted:#5E5850;
+  --red:#C42530; --gold:#9A6C12; --ok:#2E7D4A; --field:#FFFFFF; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#F7F5F1; --panel:#FFFFFF; --line:#DDD7CE; --fg:#141312; --muted:#5E5850;
+  --red:#C42530; --gold:#9A6C12; --ok:#2E7D4A; --field:#FFFFFF; color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+a{color:var(--fg);text-decoration-color:var(--red);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,10vw,64px);line-height:.95}
+h1 span{color:var(--red)}
+h2{font-size:28px;line-height:1.1;margin-bottom:6px}
+h3{font-size:19px;line-height:1.2}
+p{margin:0}
+.lead{color:var(--muted);max-width:60ch}
+header{display:grid;gap:12px;padding-bottom:18px}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:6px}
+.path{display:grid;gap:2px;text-align:left;padding:14px 16px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:6px;cursor:pointer;font:inherit}
+.path strong{font-family:var(--display);text-transform:uppercase;font-size:18px;letter-spacing:.02em}
+.path small{color:var(--muted);font-size:13px;line-height:1.4}
+.path.hot{border-color:var(--red)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+.tab{flex:0 0 auto;font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:14px 10px 11px;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--red)}
+section.view{padding-top:22px;display:grid;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:10px;min-width:0}
+.rule{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.num{font:700 26px/1 var(--display);color:var(--red);min-width:22px}
+.say{border-left:3px solid var(--gold);padding:8px 12px;background:var(--field);font-weight:500}
+.say::before{content:"Say it: ";font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.ex{font-size:14px;color:var(--muted)}
+.ex b{color:var(--fg);font-weight:600}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+.no,.yes{padding:10px 12px;border-radius:4px;font-size:14px;border:1px solid var(--line)}
+.no{border-left:3px solid var(--red)}
+.yes{border-left:3px solid var(--ok)}
+.no::before,.yes::before{display:block;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.no::before{content:"Don't";color:var(--red)}
+.yes::before{content:"Do";color:var(--ok)}
+.tag{display:inline-block;font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:3px;border:1px solid var(--line);color:var(--muted);vertical-align:middle}
+.tag.v{border-color:var(--ok);color:var(--ok)}
+.tag.u{border-color:var(--gold);color:var(--gold)}
+ol.script{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+ol.script li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:12px}
+ol.script li::before{content:counter(s);font:700 22px/1.1 var(--display);color:var(--gold)}
+ol.script q{font-weight:600;quotes:"\201C" "\201D"}
+ol.script .why{display:block;font-size:14px;color:var(--muted)}
+label{display:grid;gap:4px;font-weight:500;font-size:15px}
+label .hint{font-weight:400;font-size:13px;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--field);border:1px solid var(--line);border-radius:4px;padding:10px 12px;width:100%;min-width:0}
+textarea{min-height:84px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+fieldset{border:1px solid var(--line);border-radius:6px;padding:14px;margin:0;display:grid;gap:12px;min-width:0}
+legend{font:700 16px/1 var(--display);text-transform:uppercase;letter-spacing:.03em;padding:0 6px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:6px;font-weight:400;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--field)}
+.checks input{width:auto;margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+button.btn{font:600 15px/1 var(--body);padding:13px 16px;border-radius:4px;border:1px solid var(--line);background:var(--field);color:var(--fg);cursor:pointer}
+button.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+pre.out{white-space:pre-wrap;word-break:break-word;font:14px/1.55 var(--mono);background:var(--field);border:1px solid var(--line);border-radius:6px;padding:14px;margin:0;max-height:520px;overflow:auto}
+.note{font-size:13px;color:var(--muted)}
+.status{font:500 13px/1.4 var(--mono);color:var(--ok);min-height:1.4em}
+.places{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--red);color:var(--fg)}
+.qbox{display:grid;gap:8px}
+.qgood{border-left:3px solid var(--ok);padding:10px 12px;background:var(--field);font-weight:500}
+.qgood a{font-size:13px;font-weight:400;display:inline-block;margin-top:4px}
+ul.clean{margin:0;padding-left:18px;display:grid;gap:6px}
+.steps{display:grid;gap:10px}
+.step{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:10px}
+.step:first-child{border-top:0;padding-top:0}
+.step b{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;font-weight:500}
+details{border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+details+details{margin-top:8px}
+summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:700 20px/1 var(--display);color:var(--red)}
+details[open] summary::after{content:"\2013"}
+.ans{padding:0 16px 16px;display:grid;gap:10px}
+.tblwrap{overflow-x:auto}
+.tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+.tbl th,.tbl td{border-top:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+.tbl thead th{font:500 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tbl tbody th{font-weight:600;width:22%}
+footer{margin-top:36px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.motto{font:700 22px/1.1 var(--display);text-transform:uppercase;color:var(--fg)}
+.motto span{color:var(--red)}
+@media (prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Nolan Xavier Wells School of Law · Civic education</p>
+  <h1>The Stop <span>Kit</span></h1>
+  <p class="lead">What to do before, during and after a police stop. Learn the rules, get the officer's info the right way, write it all down, and report it if your rights were crossed. Built for Mississippi, DC, Maryland and Virginia.</p>
+  <div class="paths">
+    <button class="path hot" type="button" data-go="report"><strong>I just got stopped</strong><small>Write it down while it's fresh. Email it to yourself.</small></button>
+    <button class="path" type="button" data-go="learn"><strong>Teach me first</strong><small>Five rules and what to say, with real examples.</small></button>
+    <button class="path" type="button" data-go="ask"><strong>I have a question</strong><small>Turn it into a question that gets a real answer.</small></button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Stop Kit sections">
+  <button class="tab" role="tab" id="t-learn" data-tab="learn" aria-selected="true">Before</button>
+  <button class="tab" role="tab" id="t-whatif" data-tab="whatif" aria-selected="false">What if?</button>
+  <button class="tab" role="tab" id="t-script" data-tab="script" aria-selected="false">End script</button>
+  <button class="tab" role="tab" id="t-report" data-tab="report" aria-selected="false">Stop report</button>
+  <button class="tab" role="tab" id="t-ask" data-tab="ask" aria-selected="false">Ask better</button>
+  <button class="tab" role="tab" id="t-followup" data-tab="followup" aria-selected="false">Report it</button>
+  <button class="tab" role="tab" id="t-accountability" data-tab="accountability" aria-selected="false">Accountability</button>
+</nav>
+
+<!-- BEFORE -->
+<section class="view" id="learn" role="tabpanel" aria-labelledby="t-learn">
+  <div><h2>Five rules for any stop</h2><p class="lead">Learn these now, not during the stop. During a stop, your only job is to get home safe. The fight happens after, on paper.</p></div>
+
+  <div class="card rule"><span class="num">1</span><div class="card-in" style="display:grid;gap:8px">
+    <h3>Stay calm. Keep your hands where they can see them.</h3>
+    <p>Officers are trained to watch hands. Slow, visible hands lower the temperature for everybody.</p>
+    <p class="ex"><b>Example:</b> You're driving at night. Pull over, turn on the inside light, turn the car off, hands on top of the wheel. Before you reach for anything, say what you're doing.</p>
+    <p class="say">"My license is in my back pocket. I'm going to reach for it now."</p>
+  </div></div>
+
+  <div class="card rule"><span class="num">2</span><div style="display:grid;gap:8px">
+    <h3>Don't run, fight or argue. Even if you think it's wrong.</h3>
+    <p>You can't win an argument on the side of the road. You can win it later with a complaint, a record and witnesses.</p>
+    <div class="pair">
+      <p class="no">"This is racial profiling and you know it!"</p>
+      <p class="yes">Stay quiet. Remember the words they used. Write them down after.</p>
+    </div>
+  </div></div>
+
+  <div class="card rule"><span class="num">3</span><div style="display:grid;gap:8px">
+    <h3>Find out if you can leave.</h3>
+    <p>If you're free to go, you can calmly walk away. If you're not, you're being detained, and you can ask why.</p>
+    <p class="say">"Officer, am I free to go?"</p>
+    <p class="ex"><b>If they say yes:</b> leave calmly. Don't run. <b>If they say no:</b> ask "What's the reason I'm being stopped?" and remember the answer word for word.</p>
+  </div></div>
+
+  <div class="card rule"><span class="num">4</span><div style="display:grid;gap:8px">
+    <h3>You can stay silent. Say it out loud.</h3>
+    <p>Staying quiet is a right, but you have to use it clearly. Just going quiet can look like you're ignoring them.</p>
+    <p class="say">"I'm choosing to remain silent. I'd like to speak to a lawyer."</p>
+    <p class="ex"><b>Exceptions to know:</b> If you're <b>driving</b>, you must hand over your license, registration and proof of insurance. And <b>never give a fake name</b>. In Virginia that's a crime by itself (Va. Code 19.2-82.1), and anywhere it makes things worse.</p>
+    <div class="pair">
+      <p class="no">"I only had one drink." "I was just about to..." Explaining can be used against you.</p>
+      <p class="yes">Give what the law requires. Then stop talking.</p>
+    </div>
+  </div></div>
+
+  <div class="card rule"><span class="num">5</span><div style="display:grid;gap:8px">
+    <h3>You don't have to agree to a search.</h3>
+    <p>If they ask to search you, your bag, your car or your phone, you can say no. If they search anyway, don't touch them or block them. Say it once and let the record show it.</p>
+    <p class="say">"I don't consent to any searches."</p>
+    <p class="ex"><b>Example:</b> "Mind if I look in your backpack?" You: "I don't consent to searches." They search anyway. You stay still and write down later exactly what they searched and what they said.</p>
+  </div></div>
+
+  <div class="card">
+    <h3>If you're under 18</h3>
+    <p>You have extra protections. Ask for them out loud.</p>
+    <p class="say">"I'm under 18. I want my parent or guardian. I want a lawyer before I answer questions."</p>
+    <ul class="clean">
+      <li><b>Maryland:</b> before police question a child in custody, the child must talk to a lawyer first, and police must try to reach a parent (Child Interrogation Protection Act, 2022). Bills to weaken it failed in 2024, 2025 and 2026. <span class="tag v">Verified</span></li>
+      <li><b>Virginia:</b> before questioning an arrested child, police must notify a parent and let the child contact them (Va. Code 16.1-247.1). No lawyer-first rule. Since 2025, officers questioning a child in custody may not knowingly lie about important facts. <span class="tag v">Verified</span></li>
+      <li><b>DC:</b> whoever takes a child into custody must promptly notify the parent (D.C. Code 16-2311). <span class="tag v">Verified</span></li>
+      <li><b>Mississippi:</b> police must keep trying to reach a parent and invite them to be there for questioning (Miss. Code 43-21-303). "Invite" means questioning can start without them, so ask for your parent out loud. <span class="tag v">Verified</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Can I record?</h3>
+    <p>In general, yes. You can record police doing their job in public, as long as you don't get in the way. Federal courts covering Mississippi have said so (Turner v. Driver, 2017), and so have courts covering Maryland and Virginia (Sharpe v. Winterville, 2023). DC police policy recognizes it too.</p>
+    <p class="say">"I'm recording. I'm not interfering."</p>
+    <p class="ex"><b>Keep it safe:</b> hold the phone where they can see it, step back if told, and don't argue about the camera. If you're the one stopped, it's usually safer to let a passenger or friend record.</p>
+  </div>
+</section>
+
+<!-- WHAT IF -->
+<section class="view" id="whatif" role="tabpanel" aria-labelledby="t-whatif" hidden>
+  <div><h2>What if?</h2><p class="lead">Real moments, what the law says, and what to do. Tap a question to open it.</p></div>
+
+  <div class="card">
+    <h3>Know these by heart</h3>
+    <p class="ex">Not statute numbers. Five calm lines. Said the right way, they tell an officer you know your rights without starting a fight.</p>
+    <ol class="script">
+      <li><span><q>Am I free to go?</q></span></li>
+      <li><span><q>I'm choosing to remain silent.</q></span></li>
+      <li><span><q>I don't consent to any searches.</q></span></li>
+      <li><span><q>I want a lawyer. I want my parent.</q></span></li>
+      <li><span><q>May I have your name and badge number?</q></span></li>
+    </ol>
+  </div>
+
+  <div class="faq">
+  <details><summary>Can I record when they stop me?</summary><div class="ans">
+    <p>Usually yes. You can record police doing their job in public. But during your own stop, safety orders come first. If an officer tells you to keep your hands where they can see them, do it.</p>
+    <p class="ex"><b>Do:</b> before you hit record, say what you're doing. If a passenger is with you, it's safer for them to record.</p>
+    <p class="say">"I'm going to record. My phone is in my right hand."</p>
+  </div></details>
+
+  <details><summary>What if I'm already recording before the officer starts talking?</summary><div class="ans">
+    <p>Keep recording. Just don't let the phone become the problem. If it's on a dash mount, leave it there. If it's in your hand, keep it low and still, not in the officer's face. Tell them right away.</p>
+    <p class="say">"Just so you know, I'm recording. My phone is on the dash. My hands are on the wheel."</p>
+    <p class="ex">If the officer tells you to put it down, follow the order and keep talking calmly. Your words still count, and their camera may still be rolling. <b>Pro tip:</b> put a phone mount on your dash before you ever get pulled over, so you never have to reach for anything.</p>
+  </div></details>
+
+  <details><summary>Remember: you're on camera too</summary><div class="ans">
+    <p>Many officers wear a body camera, usually on the chest. Police cars often have dash cameras. Not every officer has one: Mississippi has no statewide body camera requirement. Where there is a camera, it records the officer, and it records you.</p>
+    <p>That can protect you. If something goes wrong, you or your family can request that video later. Your calm voice and your visible hands are your proof.</p>
+    <ul class="clean">
+      <li>Look for the camera on the officer's chest.</li>
+      <li>Speak slowly and clearly toward the officer so the camera hears you.</li>
+      <li>Say what you're doing before you do it.</li>
+      <li>Say your rights out loud, calmly, once.</li>
+    </ul>
+    <p class="say">"I'm keeping my hands on the wheel. I'm not resisting. I don't consent to any searches. I'm choosing to remain silent."</p>
+    <p class="ex">The camera hears everything, good and bad. Yelling, cursing or pulling away ends up on video too. Stay calm so the video tells your side. <b>Documentation beats conversation.</b> Their camera is documentation. Make sure it documents you doing everything right.</p>
+  </div></details>
+
+  <details><summary>They told me to put my phone away. Do I have to?</summary><div class="ans">
+    <p>Follow the order in the moment. Officers can give safety orders during a stop, and refusing can turn a ticket into an arrest. You won't win that argument on the side of the road. Your report afterward can.</p>
+    <p class="say">"Okay. I'm putting it down. I'd like to call my parent when we're done."</p>
+    <p class="ex"><b>Then:</b> write down that you were told to stop recording, and when.</p>
+  </div></details>
+
+  <details><summary>I want to call my parent during the stop</summary><div class="ans">
+    <p>Ask first. Don't just grab your phone.</p>
+    <p class="say">"Can I call my mom? I'm under 18."</p>
+    <p class="ex">If they say no, don't reach for it. Ask again calmly when the stop is over. If you're taken into custody, each of our four places has rules about reaching a parent. See "If you're under 18" on the Before tab.</p>
+  </div></details>
+
+  <details><summary>Can they look through my phone?</summary><div class="ans">
+    <p>Not without a warrant, in most cases. The Supreme Court said so in Riley v. California (2014).</p>
+    <p class="say">"I don't consent to a search of my phone."</p>
+    <p class="ex">Don't unlock it. Don't give your passcode. If they take it anyway, don't fight. Write down who took it and when.</p>
+  </div></details>
+
+  <details><summary>They told me to get out of the car</summary><div class="ans">
+    <p>Get out. During a lawful traffic stop, officers can order the driver out (Pennsylvania v. Mimms, 1977) and the passengers too. That second case came from Maryland: Maryland v. Wilson (1997).</p>
+    <p class="ex"><b>Do:</b> move slowly, keep your hands visible, close the door behind you. You still don't have to consent to a search.</p>
+  </div></details>
+
+  <details><summary>When do I have to show ID, and when don't I?</summary><div class="ans">
+    <p>It depends on what you're doing when you're stopped.</p>
+    <ul class="clean">
+      <li><b>Driving:</b> yes. Hand over your license, registration and proof of insurance when asked.</li>
+      <li><b>Passenger:</b> usually not required. In these four places we found no law that makes a passenger show ID just for riding in a car that got stopped. If you're told you're being detained or suspected of something, ask. <span class="tag u">Recheck</span></li>
+      <li><b>Walking:</b> none of these four places has a general law that makes a person walking show ID. In DC, if you're stopped for a pedestrian traffic ticket, like crossing against the light, you must give your true name and address, but you don't have to carry or show an ID card (D.C. Code 50-2303.07). <span class="tag v">Verified</span> If an officer is writing you a ticket or arresting you anywhere, refusing your name can lead to being taken in to be identified.</li>
+      <li><b>At school:</b> your school's rules can require your student ID. That's a school rule, not a police stop rule.</li>
+    </ul>
+    <p class="say">"Am I being detained? Am I required to identify myself?"</p>
+    <p class="ex"><b>Three rules that never change:</b> never give a fake name or fake ID (in Virginia that's a crime by itself, Va. Code 19.2-82.1). Not having ID on you is usually not a crime unless you're driving. And showing ID is not agreeing to a search.</p>
+    <p class="ex"><b>Example:</b> You're walking home with two friends. An officer pulls up: "Let me see some ID." You: "Officer, am I being detained?" Officer: "No, just checking." You: "Then I'm choosing not to show ID. Am I free to go?" If yes, walk away calmly.</p>
+  </div></details>
+
+  <details><summary>I'm the passenger. Do I have to give my name?</summary><div class="ans">
+    <p>In these four places we didn't find a general law making passengers give their name. Rules can depend on the situation, so ask.</p>
+    <p class="say">"Am I required to identify myself?"</p>
+    <p class="ex">Never give a fake name. In Virginia, that's a crime by itself.</p>
+  </div></details>
+
+  <details><summary>"I'm not detained," but "I'm not free to go." What does that mean?</summary><div class="ans">
+    <p><b>It means you ARE detained.</b> The words don't decide it. What happens decides it. Under the law, if a reasonable person wouldn't feel free to leave, you've been stopped (United States v. Mendenhall, 1980; Florida v. Bostick, 1991).</p>
+    <p class="say">"Okay. So I am being detained. What's the reason?"</p>
+    <p class="ex">Then stay put. Don't walk away. Remember both answers word for word. "Not detained" plus "not free to go" is exactly what your report and their camera should capture.</p>
+  </div></details>
+
+  <details><summary>Can police lie to me?</summary><div class="ans">
+    <p>Sometimes, yes. During questioning, police are generally allowed to use tricks or say things that aren't true (Frazier v. Cupp, 1969). They might say "Your friend already told us everything" or "This will go easier if you just talk."</p>
+    <p><b>Virginia is different for kids.</b> Since 2025, Virginia officers questioning a child in custody may not knowingly lie about important facts, including with fake documents (Va. Code 16.1-247.1). <span class="tag v">Verified</span> Maryland lawmakers have tried to pass a similar rule every year since 2022, and it hasn't passed. We found no such law in Mississippi or DC.</p>
+    <p class="ex">That's why you don't explain yourself. You can't be tricked into saying something you never say.</p>
+    <p class="say">"I'm choosing to remain silent. I want a lawyer. I want my parent."</p>
+  </div></details>
+
+  <details><summary>What can police do, and what can't they?</summary><div class="ans">
+    <p><b>They can:</b></p>
+    <ul class="clean">
+      <li>Stop you if they have a reason to suspect a crime or a traffic violation.</li>
+      <li>Stop you for a real traffic violation even if they're really curious about something else (Whren v. United States, 1996). That's why a broken tag light can start a stop.</li>
+      <li>Order you out of the car.</li>
+      <li>Pat down the outside of your clothes if they reasonably think you're armed (Terry v. Ohio, 1968).</li>
+      <li>Ask you questions. You don't have to answer.</li>
+      <li>Arrest you if they have probable cause.</li>
+    </ul>
+    <p><b>They can't:</b></p>
+    <ul class="clean">
+      <li>Keep you longer than the stop needs without a new reason. Once the ticket is done, the stop should be done (Rodriguez v. United States, 2015).</li>
+      <li>Search your phone without a warrant (Riley v. California, 2014).</li>
+      <li>Search your car or bag without your consent, a warrant or probable cause.</li>
+      <li>Force you to answer questions.</li>
+      <li>Use more force than the situation calls for.</li>
+      <li>Stop you just because of your race.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>They're trying to get me out of character</summary><div class="ans">
+    <p>Some officers may push your buttons, on purpose or not. A sarcastic question. An insult. Standing too close. Talking back usually isn't a crime by itself. But pulling away, stepping toward an officer, reaching suddenly or refusing a lawful order can give them a legal reason to detain or arrest you.</p>
+    <p><b>If they try to get you out of character, staying in character is how you win.</b> You don't win the argument on the street. You win it on camera, in your report and in your complaint.</p>
+    <p class="ex"><b>Do:</b> breathe. Slow down. Hands visible. Short sentences. Let the camera see a calm young person who knows the law.</p>
+  </div></details>
+
+  <details><summary>They said, "We just want to talk"</summary><div class="ans">
+    <p>That's usually a voluntary conversation. You can decline.</p>
+    <p class="say">"Am I free to go?" If yes: "I'm choosing not to answer questions. Have a good day."</p>
+    <p class="ex">Then leave calmly. Don't run.</p>
+  </div></details>
+
+  <details><summary>The school resource officer wants to ask me questions</summary><div class="ans">
+    <p>A school officer is still police. You can ask for your parent. In Maryland, if you're in custody, you must talk to a lawyer before police can question you, even at school (Cts. & Jud. Proc. 3-8A-14.2). <span class="tag v">Verified</span></p>
+    <p class="say">"I want my parent here before I answer any questions."</p>
+  </div></details>
+
+  <details><summary>The officer won't give me a badge number</summary><div class="ans">
+    <p>Don't push. Read the name tag and badge on the uniform. Remember the car number and plate. Write down the time and place. That's enough to file.</p>
+  </div></details>
+
+  <details><summary>I think they're wrong, and I'm being arrested anyway</summary><div class="ans">
+    <p>Don't resist, pull away or run. Even if the arrest is wrong, resisting can become its own charge.</p>
+    <p class="say">"I'm not resisting. I'm choosing to remain silent. I want a lawyer."</p>
+    <p class="ex">The fight happens in court and in your complaint.</p>
+  </div></details>
+  </div>
+</section>
+
+<!-- END SCRIPT -->
+<section class="view" id="script" role="tabpanel" aria-labelledby="t-script" hidden>
+  <div><h2>Before they leave</h2><p class="lead">This is how you get the officer's information without saying anything that hurts you. Calm voice. One time each. If they won't answer, don't push. Look for it instead.</p></div>
+  <div class="card">
+    <ol class="script">
+      <li><span><q>Officer, am I free to go?</q><span class="why">Makes it clear whether the stop is over.</span></span></li>
+      <li><span><q>May I have your name and badge number, please?</q><span class="why">In Maryland, a complaint has to include the officer's name. Get it now. If they won't say it, read the name tag and badge on the uniform.</span></span></li>
+      <li><span><q>Which department are you with?</q><span class="why">City police, county police, sheriff, state police and school police each have a different place to file a complaint.</span></span></li>
+      <li><span><q>What was the reason for the stop?</q><span class="why">Remember the exact words. Write them down word for word later.</span></span></li>
+      <li><span><q>Is there a report or incident number for this?</q><span class="why">That number is how you request the report and the body camera video later.</span></span></li>
+      <li><span><q>Can I have your card?</q><span class="why">Many officers carry one. It has the info you need, printed.</span></span></li>
+      <li><span><q>Where and when is my court date?</q><span class="why">Only if you got a ticket. Signing a ticket usually just means you received it, not that you agree. Sign it, then fight it in court. Refusing to sign can get you arrested in some places.</span></span></li>
+    </ol>
+  </div>
+  <div class="card">
+    <h3>Don't say this at the end</h3>
+    <div class="pair">
+      <p class="no">"I'm gonna sue you." "I'm getting your badge."</p>
+      <p class="yes">Say nothing about a complaint. Just file it later.</p>
+      <p class="no">"I know my rights!" (yelling)</p>
+      <p class="yes">Use your rights quietly, one sentence at a time.</p>
+      <p class="no">"Look, I wasn't even speeding, I was going like 40."</p>
+      <p class="yes">Don't explain. Your side goes in the report and in court.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>If they won't give it to you</h3>
+    <ul class="clean">
+      <li>Read the <b>name tag and badge number</b> on the uniform.</li>
+      <li>Remember the <b>car number</b> (often on the back or side) and the <b>license plate</b>.</li>
+      <li>Note the <b>time and exact place</b>. Dispatch logs can be matched to it later.</li>
+      <li>As soon as you're safe, open your phone's notes and type everything. Then fill out the Stop Report here.</li>
+    </ul>
+  </div>
+  <div class="btns"><button class="btn primary" type="button" data-go="report">Start my Stop Report</button></div>
+</section>
+
+<!-- REPORT -->
+<section class="view" id="report" role="tabpanel" aria-labelledby="t-report" hidden>
+  <div><h2>Stop Report</h2><p class="lead">Documentation beats conversation. Fill in what you remember. Skip what you don't know. When you press "Email it to me," your own email app opens with the full report addressed to you. This page doesn't save or send anything to us.</p></div>
+
+  <div class="card">
+    <h3>Facts, not feelings</h3>
+    <p>A report that says what happened is stronger than one that says how it felt. Feelings matter, so describe what caused them.</p>
+    <div class="pair">
+      <p class="no">"The cop was rude and disrespectful."</p>
+      <p class="yes">"Officer said 'shut up' two times and pointed his flashlight in my face."</p>
+      <p class="no">"They searched my car for no reason."</p>
+      <p class="yes">"I said 'I don't consent to searches.' Officer searched the glove box and trunk anyway."</p>
+    </div>
+  </div>
+
+  <form id="rf" novalidate>
+    <div style="display:grid;gap:14px">
+    <fieldset>
+      <legend>Where and when</legend>
+      <label>State or district
+        <select id="r-place">
+          <option value="">Choose one</option>
+          <option value="MS">Mississippi</option>
+          <option value="DC">Washington, DC</option>
+          <option value="MD">Maryland</option>
+          <option value="VA">Virginia</option>
+        </select></label>
+      <label>City or county <span class="hint">Example: Prince George's County</span><input id="r-city" autocomplete="off"></label>
+      <div class="grid2">
+        <label>Date<input id="r-date" type="date"></label>
+        <label>Time it started<input id="r-start" type="time"></label>
+      </div>
+      <div class="grid2">
+        <label>Time it ended<input id="r-end" type="time"></label>
+        <label>What you were doing
+          <select id="r-doing"><option value="">Choose one</option><option>Driving</option><option>Passenger in a car</option><option>Walking</option><option>At school</option><option>On a bus or train</option><option>At home</option><option>Other</option></select></label>
+      </div>
+      <label>Exact location <span class="hint">Street, cross street, landmark. Example: Central Ave and Addison Rd, by the gas station</span><input id="r-loc" autocomplete="off"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>The officers</legend>
+      <label>Which department
+        <select id="r-agency"><option value="">Not sure</option><option>City police</option><option>County police</option><option>Sheriff's office</option><option>State police or Highway Patrol</option><option>School police or school resource officer</option><option>Transit police</option><option>Campus police</option><option>Federal officers</option></select></label>
+      <label>Department name if you know it <span class="hint">Example: Prince George's County Police</span><input id="r-agname" autocomplete="off"></label>
+      <label>Officer names and badge numbers <span class="hint">Example: Ofc. Smith #4412. Put "didn't give it" if they refused.</span><textarea id="r-officers"></textarea></label>
+      <div class="grid2">
+        <label>Police car number or plate<input id="r-car" autocomplete="off"></label>
+        <label>How many officers<input id="r-count" inputmode="numeric" autocomplete="off"></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>What happened</legend>
+      <label>The reason they gave, word for word <span class="hint">Example: "Your tag light is out."</span><textarea id="r-reason"></textarea></label>
+      <label>What they asked you and what you said <span class="hint">Write it like a script. Officer: "Where you headed?" Me: "Home."</span><textarea id="r-said"></textarea></label>
+      <div>
+        <p style="font-weight:500;font-size:15px;margin-bottom:6px">What happened to you? <span class="note">(check all that apply)</span></p>
+        <div class="checks" id="r-what">
+          <label><input type="checkbox" value="Asked for ID">Asked for ID</label>
+          <label><input type="checkbox" value="Told to get out of the car">Told to get out</label>
+          <label><input type="checkbox" value="Patted down">Patted down</label>
+          <label><input type="checkbox" value="Me searched">Me searched</label>
+          <label><input type="checkbox" value="Bag searched">Bag searched</label>
+          <label><input type="checkbox" value="Car searched">Car searched</label>
+          <label><input type="checkbox" value="Phone searched or taken">Phone taken</label>
+          <label><input type="checkbox" value="Handcuffed">Handcuffed</label>
+          <label><input type="checkbox" value="Put in police car">Put in police car</label>
+          <label><input type="checkbox" value="Force used">Force used</label>
+          <label><input type="checkbox" value="Ticket or citation">Ticket</label>
+          <label><input type="checkbox" value="Arrested">Arrested</label>
+        </div>
+      </div>
+      <label>Did you agree to a search?
+        <select id="r-consent"><option value="">No search happened</option><option>I said no, they searched anyway</option><option>I said yes</option><option>They didn't ask, they just searched</option><option>Not sure</option></select></label>
+      <label>Force, injuries or medical care <span class="hint">What they did, where you were hurt, if you saw a doctor. Take photos of injuries.</span><textarea id="r-force"></textarea></label>
+      <label>Anything taken from you<input id="r-taken" autocomplete="off"></label>
+      <div class="grid2">
+        <label>Ticket, citation or report number<input id="r-ticket" autocomplete="off"></label>
+        <label>Court date if you got one<input id="r-court" type="date"></label>
+      </div>
+      <label>Why you think your rights were crossed <span class="hint">Stick to what happened. Example: "Kept me 40 minutes after giving me the ticket."</span><textarea id="r-why"></textarea></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Proof</legend>
+      <label>Witnesses <span class="hint">Names and phone numbers if you have them</span><textarea id="r-wit"></textarea></label>
+      <div>
+        <p style="font-weight:500;font-size:15px;margin-bottom:6px">Video that might exist</p>
+        <div class="checks" id="r-video">
+          <label><input type="checkbox" value="I recorded it">I recorded it</label>
+          <label><input type="checkbox" value="Someone else recorded it">Someone else did</label>
+          <label><input type="checkbox" value="Officer body camera seen">Body camera seen</label>
+          <label><input type="checkbox" value="Police car camera">Car camera</label>
+          <label><input type="checkbox" value="Store, home or traffic cameras nearby">Nearby cameras</label>
+        </div>
+      </div>
+      <label>Who you've told so far<input id="r-told" autocomplete="off"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Send it to yourself</legend>
+      <label>Your name <span class="hint">Optional</span><input id="r-name" autocomplete="name"></label>
+      <label>Your email<input id="r-email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+      <p class="note">Tip: send it to an email your parent or a trusted adult can see too.</p>
+      <div class="btns">
+        <button class="btn primary" type="submit">Email it to me</button>
+        <button class="btn" type="button" id="r-copy">Copy report</button>
+        <button class="btn" type="button" id="r-dl">Download</button>
+        <button class="btn" type="button" id="r-sample">Show an example</button>
+      </div>
+      <p class="status" id="r-status" role="status" aria-live="polite"></p>
+    </fieldset>
+    </div>
+  </form>
+
+  <div class="card">
+    <h3>Your report</h3>
+    <p class="note">This updates as you type. If the email button doesn't open your mail app, copy this and paste it into an email to yourself.</p>
+    <pre class="out" id="r-out" tabindex="0"></pre>
+  </div>
+</section>
+
+<!-- ASK BETTER -->
+<section class="view" id="ask" role="tabpanel" aria-labelledby="t-ask" hidden>
+  <div><h2>Ask better questions</h2><p class="lead">"What happens to me if..." gets you guesses. "What does the law say about..." gets you an answer you can check. This tool builds the right question. You do the search.</p></div>
+
+  <div class="card">
+    <label>Type your question the way you'd say it <span class="hint">Example: can the cops search my phone if they pull me over</span><input id="q-raw" autocomplete="off"></label>
+    <p class="note" id="q-tip"></p>
+  </div>
+
+  <div class="card">
+    <h3>1. What's it about?</h3>
+    <div class="places" id="q-topic"></div>
+  </div>
+  <div class="card">
+    <h3>2. Whose law?</h3>
+    <p class="ex">The <b>Constitution</b> sets the floor for everybody in the country. Your <b>state</b> can give you more protection, never less. Your <b>county, city or school district</b> sets police rules and policies inside that.</p>
+    <div class="places" id="q-level"></div>
+  </div>
+  <div class="card">
+    <h3>3. Where?</h3>
+    <div class="places" id="q-place"></div>
+    <label>City, county or school district <span class="hint">Example: Jackson, or Fairfax County Public Schools</span><input id="q-local" autocomplete="off"></label>
+  </div>
+
+  <div class="card">
+    <h3>Your questions</h3>
+    <div class="qbox" id="q-out"></div>
+    <div id="q-where"></div>
+  </div>
+
+  <div class="card">
+    <h3>Is this source legit?</h3>
+    <ul class="clean">
+      <li><b>Who wrote it?</b> A .gov site, a court or a statute beats a random post.</li>
+      <li><b>Does it name the law?</b> Look for a number like "Va. Code 19.2-82.1" or "Fourth Amendment."</li>
+      <li><b>How old is it?</b> Laws change. Check the date.</li>
+      <li><b>Is it about your place?</b> A Texas answer doesn't count in Maryland.</li>
+      <li><b>Can you find it twice?</b> Two solid sources that agree beat one.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOLLOW UP -->
+<section class="view" id="followup" role="tabpanel" aria-labelledby="t-followup" hidden>
+  <div><h2>Report it</h2><p class="lead">If you believe an officer crossed your rights, you don't have to let it go. Reporting is legal and it's how the system gets a record. Pick your place to see the steps.</p></div>
+  <div class="places" id="f-place"></div>
+  <div class="card" id="f-out"></div>
+  <div class="card">
+    <h3>Everywhere</h3>
+    <ul class="clean">
+      <li><b>Emergency?</b> Call 911.</li>
+      <li><b>U.S. Justice Department, Civil Rights Division:</b> report civil rights violations, including excessive force and profiling, at <a href="https://civilrights.justice.gov" target="_blank" rel="noopener">civilrights.justice.gov</a>. <span class="tag v">Verified</span></li>
+      <li><b>FBI:</b> takes reports when an officer willfully violates someone's rights ("color of law"), like excessive force or false arrest, at <a href="https://tips.fbi.gov" target="_blank" rel="noopener">tips.fbi.gov</a>. <span class="tag v">Verified</span></li>
+      <li><b>Tell a parent or trusted adult.</b> Bring your Stop Report.</li>
+      <li><b>Don't post the officer's name or accusations online.</b> Report through official channels. Posting can get you sued even if you're upset for good reason.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>The order to do it in</h3>
+    <div class="steps">
+      <div class="step"><b>Within 1 hour</b><span>Type everything into your phone. Fill out the Stop Report. Photograph any injuries.</span></div>
+      <div class="step"><b>Within 2 days</b><span>Ask the businesses and neighbors nearby to save their camera video. Many systems delete in days.</span></div>
+      <div class="step"><b>Within 1 week</b><span>Request the report and body camera video. File your complaint.</span></div>
+      <div class="step"><b>After you file</b><span>Write down the complaint number, who you talked to and the date. Check back every two weeks. Agents follow up.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNTABILITY -->
+<section class="view" id="accountability" role="tabpanel" aria-labelledby="t-accountability" hidden>
+  <div><h2>Hold them accountable</h2><p class="lead">What actually happens when you report an officer, and when you can sue.</p></div>
+
+  <div class="card">
+    <h3>Who works for who</h3>
+    <p>Police officers are public employees. Your family's taxes pay their salaries. Sheriffs are elected by voters. Police chiefs are hired by mayors and county leaders who are elected by voters. Officers answer to the public, and that includes you.</p>
+    <p>Every department has written rules officers must follow, usually called <b>general orders</b> or a <b>policy manual</b>. Many departments post them online. Those rules sit on top of state law and the Constitution. When you know the rules they operate under, you can tell when one was broken.</p>
+    <p class="ex"><b>Try it:</b> search "[your department] general orders." The Ask Better tab builds that search for you.</p>
+  </div>
+
+  <div class="card">
+    <h3>Complaint vs. lawsuit</h3>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th></th><th>A complaint</th><th>A lawsuit</th></tr></thead>
+      <tbody>
+        <tr><th>What it is</th><td>Telling the department or an oversight board an officer broke the rules</td><td>Asking a court to rule your rights were violated and order payment</td></tr>
+        <tr><th>Who can do it</th><td>Anyone, including teens</td><td>Usually through a lawyer. Under 18, a parent files for you.</td></tr>
+        <tr><th>Cost</th><td>Free</td><td>Many civil rights lawyers only get paid if you win</td></tr>
+        <tr><th>What it can lead to</th><td>Investigation, discipline, retraining, a record</td><td>Money damages, policy changes, a public court record</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>What a complaint does</h3>
+    <div class="steps">
+      <div class="step"><b>1. It starts an investigation</b><span>by Internal Affairs or a civilian board.</span></div>
+      <div class="step"><b>2. It ends with a finding</b><span><b>Sustained</b> (it happened and broke the rules), <b>not sustained</b> (not enough proof either way), <b>unfounded</b> (it didn't happen) or <b>exonerated</b> (it happened but was allowed).</span></div>
+      <div class="step"><b>3. Sustained can mean discipline</b><span>from retraining to suspension to firing.</span></div>
+      <div class="step"><b>4. It stays in the department's records</b><span>even if it isn't sustained. One complaint might go nowhere. Five complaints about the same officer tell a story. Whether the public can see those records depends on the state (see the table below).</span></div>
+      <div class="step"><b>5. Serious misconduct can cost an officer their badge</b><span>State boards certify officers and can take that certification away, which keeps them from working as police.</span></div>
+      <div class="step"><b>6. It can help someone else later</b><span>If a department was warned about an officer and did nothing, that record can matter in a future lawsuit.</span></div>
+    </div>
+    <p class="ex"><b>Be real about it:</b> most complaints don't end in discipline. File anyway. A record that doesn't exist can't protect the next kid.</p>
+  </div>
+
+  <div class="card">
+    <h3>Can I sue a cop?</h3>
+    <p>Sometimes. A federal law, 42 U.S.C. 1983, lets people sue state and local officers who violate their constitutional rights.</p>
+    <ul class="clean">
+      <li><b>The hard part is "qualified immunity."</b> Courts protect officers unless they broke a right that was already "clearly established" (Harlow v. Fitzgerald, 1982). In practice that often means an earlier case with very similar facts. A lot of cases stop here.</li>
+      <li><b>You can sometimes sue the city or county too,</b> if the violation came from its policy or custom, like bad training or a pattern it ignored (Monell v. Department of Social Services, 1978).</li>
+      <li><b>There are deadlines.</b> Some state-law claims need a written notice to the city or county within months. Those notice rules don't apply to the federal civil rights claim (Felder v. Casey, 1988), but miss them and you can lose other claims.</li>
+      <li><b>Talk to a lawyer early.</b> Your Stop Report, your complaint number and your body camera request are what a lawyer will ask for first.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>The rules where you live</h3>
+    <p class="note">Starting points, checked Oct. 8, 2026. Deadlines can be complicated. A lawyer should confirm yours.</p>
+    <div class="tblwrap"><table class="tbl">
+      <thead><tr><th></th><th>Mississippi</th><th>DC</th><th>Maryland</th><th>Virginia</th></tr></thead>
+      <tbody>
+        <tr><th>Deadline to sue in federal court (1983)</th><td>3 years (Miss. Code 15-1-49)</td><td>3 years (D.C. Code 12-301(8))</td><td>3 years (Cts. &amp; Jud. Proc. 5-101)</td><td>2 years (Va. Code 8.01-243)</td></tr>
+        <tr><th>If you were under 18</th><td>Clock pauses until age 21</td><td>Clock starts at 18</td><td>Clock starts at 18</td><td>Clock starts at 18, unless you were emancipated</td></tr>
+        <tr><th>Notice to the city or county (state-law claims)</th><td>90 days before suing, and sue within 1 year (Tort Claims Act, 11-46-11)</td><td>Written notice to the Mayor within 6 months (12-309). A police report can count.</td><td>Written notice within 1 year (5-304)</td><td>Negligence claims only: notice within 6 months (15.2-209)</td></tr>
+        <tr><th>Can the public see misconduct records?</th><td>Mostly no. Internal affairs files are treated as exempt personnel records.</td><td>Partly. MPD discipline data is posted on Open Data DC without names. The Office of Police Complaints publishes reports.</td><td>More open since Anton's Law (2021). You can request misconduct records, with some limits.</td><td>Mostly up to the agency. It may withhold personnel records.</td></tr>
+        <tr><th>Who can take an officer's certification</th><td>Board on Law Enforcement Officer Standards and Training (has a public complaint form)</td><td>No separate board. DC police can't hire officers fired for serious misconduct (5-107.01).</td><td>Police Training and Standards Commission. File complaints through your county's Police Accountability Board.</td><td>Criminal Justice Services Board. Cases usually start with the officer's agency, not the public.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <p class="motto" style="font-size:20px">Stop. Document. Report. <span>Follow up.</span></p>
+    <p>Your report becomes the complaint. The complaint becomes a record. The record can become the evidence. And the evidence is what makes the system answer to you. Documentation beats conversation.</p>
+  </div>
+</section>
+
+<footer>
+  <p class="motto">Documentation <span>beats conversation.</span></p>
+  <p>Write it down. Follow it up. That's Agent Kodak's rule for every stop.</p>
+  <p>Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is civic education, not legal advice. For your own case, talk to a lawyer or public defender.</p>
+  <p>Privacy: nothing you type here is saved or sent to us. Your report only leaves your phone if you email, copy or download it.</p>
+  <p>Facts checked Oct. 8, 2026. <span class="tag v">Verified</span> means we read the official source. <span class="tag u">Recheck</span> means we're still confirming it. Spot an error? Bring the documentation.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var TABS=["learn","whatif","script","report","ask","followup","accountability"];
+function show(name){
+  if(TABS.indexOf(name)<0) name="learn";
+  TABS.forEach(function(t){
+    $(t).hidden = t!==name;
+    $("t-"+t).setAttribute("aria-selected", t===name ? "true":"false");
+  });
+}
+document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.tab);});});
+document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.go);$("t-"+b.dataset.go).scrollIntoView({block:"start",behavior:"smooth"});});});
+var h=(location.hash||"").replace("#",""); if(h) show(h);
+
+/* ---------- Place data (checked Oct 8, 2026) ---------- */
+var PLACES={
+ MS:{name:"Mississippi",steps:[
+  ["File with the department","Mississippi has no statewide civilian police board that we could find. File with the department the officer works for. Call or go in person and ask for Internal Affairs or Professional Standards. Ask for a complaint number before you leave."],
+  ["Jackson Police","Ask for the Professional Standards Section (Internal Affairs). Non-emergency line: 601-960-1800. City Hall: 219 S. President St., Jackson."],
+  ["Highway Patrol or state officers","The Mississippi Department of Public Safety takes complaints online. Questions: 601-987-1212. Start at dps.ms.gov."],
+  ["Get the records","Use the Mississippi Public Records Act (Miss. Code 25-61). Agencies must answer within 7 working days, 14 at most. Incident reports are public. If they refuse, complain to the Mississippi Ethics Commission."],
+  ["Get help","ACLU of Mississippi takes requests through its online intake form at aclu-ms.org (Request Legal Help). If you got a ticket, the court on the ticket handles it."]],
+  links:[["Mississippi Department of Public Safety","https://dps.ms.gov"],["Public Records Act help (Ethics Commission)","https://www.ethics.ms.gov/thepublicrecordact"],["ACLU of Mississippi: request legal help","https://www.aclu-ms.org/request-legal-help/"]],
+  deadline:null, code:"https://law.justia.com/codes/mississippi/", codeName:"Mississippi Code (Justia free copy)"},
+ DC:{name:"Washington, DC",steps:[
+  ["Office of Police Complaints","Independent from the police. Covers DC police (MPD) and Housing Authority police. File online, by mail, or walk in: 1400 I St NW, Suite 700. Phone (202) 727-3838. 24-hour line (866) 588-0569."],
+  ["Deadline: 90 days","File within 90 days of the stop. The office can extend it for good cause, but don't count on it."],
+  ["Watch the body camera video","If you were recorded, you (or your parent if you're under 18) can ask to view MPD body camera video at the district station. Wait 48 hours first. For a copy, file a FOIA request at myfoia.dc.gov."],
+  ["If you're under 18","Whoever takes a child into custody must promptly notify the parent (D.C. Code 16-2311)."]],
+  links:[["Office of Police Complaints: file online","https://policecomplaints.dc.gov/page/office-police-complaints-online-complaint-form"],["MPD body camera viewing request","https://mpdc.dc.gov/page/bwc-footage-viewing-request"],["DC FOIA portal","https://myfoia.dc.gov"]],
+  deadline:90, code:"https://code.dccouncil.gov", codeName:"DC Code (DC Council)"},
+ MD:{name:"Maryland",steps:[
+  ["Police Accountability Board","Every county and Baltimore City has one (Maryland Police Accountability Act of 2021). You can file there or with the department itself. Your complaint must include the officer's name, what happened, and how to reach you. No notary needed."],
+  ["Prince George's County","pab.princegeorgescountymd.gov, pgpab@co.pg.md.us, 301-883-5042. Walk-ins Wednesdays 12 to 5 at 9200 Basil Ct, Suite 406, Largo."],
+  ["Baltimore City","PAB@BaltimoreCity.gov, 410-396-3151. Anonymous complaints accepted."],
+  ["Other counties","Search: \"[your county] Police Accountability Board complaint\"."],
+  ["Get the records","Use the Maryland Public Information Act. Agencies are expected to answer within 30 days. The first 2 hours of search are free."]],
+  links:[["Prince George's PAB: file a complaint","https://princegeorgescountymd.gov/departments-offices/boards-commissions/police-accountability-board/file-complaint-police-misconduct"],["Baltimore City PAB","https://www.baltimorecity.gov/civil-rights/our-work/file-a-complaint/pab"],["Public Information Act FAQ (Attorney General)","https://oag.maryland.gov/resources-info/Pages/public-information-act-faq.aspx"]],
+  deadline:null, code:"https://mgaleg.maryland.gov/mgawebsite/Laws/Statutes", codeName:"Maryland Code (General Assembly)"},
+ VA:{name:"Virginia",steps:[
+  ["File with the department","Start with the department's Internal Affairs or Professional Standards office. Ask for a complaint number."],
+  ["Civilian review, if your area has it","Virginia lets cities and counties create civilian review boards (Va. Code 9.1-601). Example: Fairfax County Police Civilian Review Panel, 703-324-2502, PoliceCivilianReviewPanel@fairfaxcounty.gov. Richmond has an advisory board; appeals are due within 180 days."],
+  ["Get the records","Use Virginia FOIA. Agencies answer in 5 working days, but criminal investigative files can take 60 and can be held back. Basic incident information must be released."],
+  ["Know this one","Giving a false name after a lawful stop is a crime in Virginia (Va. Code 19.2-82.1)."]],
+  links:[["Fairfax County Police Civilian Review Panel","https://www.fairfaxcounty.gov/policecivilianreviewpanel/"],["Va. Code 9.1-601 (civilian oversight)","https://law.lis.virginia.gov/vacode/9.1-601"],["Virginia FOIA Council","https://foiacouncil.dls.virginia.gov"]],
+  deadline:null, code:"https://law.lis.virginia.gov", codeName:"Code of Virginia (Legislative Information System)"}
+};
+
+/* ---------- Stop Report ---------- */
+var F=["place","city","date","start","end","doing","loc","agency","agname","officers","car","count","reason","said","consent","force","taken","ticket","court","why","wit","told","name","email"];
+function v(k){var el=$("r-"+k);return el?el.value.trim():"";}
+function checked(id){return Array.prototype.slice.call(document.querySelectorAll("#"+id+" input:checked")).map(function(i){return i.value;});}
+function fmtDate(s){if(!s)return "";var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]);return d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});}
+function addDays(s,n){var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]);d.setDate(d.getDate()+n);return d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});}
+function line(label,val){return val?label+": "+val+"\n":"";}
+function build(){
+  var P=PLACES[v("place")];
+  var out="STOP REPORT\n";
+  out+="Written: "+new Date().toLocaleString("en-US")+"\n";
+  if(v("name")) out+="By: "+v("name")+"\n";
+  out+="\n== WHERE AND WHEN ==\n";
+  out+=line("Place",[v("city"),P?P.name:""].filter(Boolean).join(", "));
+  out+=line("Date",fmtDate(v("date")));
+  out+=line("Started",v("start"))+line("Ended",v("end"));
+  out+=line("Exact location",v("loc"))+line("I was",v("doing"));
+  out+="\n== OFFICERS ==\n";
+  out+=line("Department type",v("agency"))+line("Department name",v("agname"));
+  out+=line("Names and badges",v("officers"))+line("Car number or plate",v("car"))+line("How many officers",v("count"));
+  out+="\n== WHAT HAPPENED ==\n";
+  out+=line("Reason they gave",v("reason"));
+  if(v("said")) out+="What was said:\n"+v("said")+"\n";
+  var w=checked("r-what"); if(w.length) out+="What happened to me: "+w.join("; ")+"\n";
+  out+=line("Search consent",v("consent"));
+  out+=line("Force, injuries, medical care",v("force"))+line("Taken from me",v("taken"));
+  out+=line("Ticket, citation or report number",v("ticket"))+line("Court date",fmtDate(v("court")));
+  out+=line("Why I believe my rights were crossed",v("why"));
+  out+="\n== PROOF ==\n";
+  out+=line("Witnesses",v("wit"));
+  var vid=checked("r-video"); if(vid.length) out+="Video that may exist: "+vid.join("; ")+"\n";
+  out+=line("People I've told",v("told"));
+  out+="\n== MY NEXT STEPS ==\n";
+  out+="[ ] Photograph any injuries today.\n";
+  out+="[ ] Ask nearby businesses and neighbors to save camera video (it may delete in days).\n";
+  if(v("ticket")) out+="[ ] Request the police report. Use this number: "+v("ticket")+".\n"; else out+="[ ] Call the department and ask for the incident number for this stop.\n";
+  out+="[ ] Request body camera and car camera video.\n";
+  if(P){
+    if(P.deadline && v("date")) out+="[ ] File my complaint by "+addDays(v("date"),P.deadline)+" ("+P.deadline+"-day deadline).\n";
+    else out+="[ ] File my complaint within one week.\n";
+    out+="\nWhere to file in "+P.name+":\n";
+    P.steps.forEach(function(s){out+="- "+s[0]+": "+s[1]+"\n";});
+    P.links.forEach(function(l){out+="  "+l[0]+": "+l[1]+"\n";});
+  } else out+="[ ] Pick your state in the Stop Kit to see where to file.\n";
+  out+="- Federal: civilrights.justice.gov and tips.fbi.gov\n";
+  if(v("court")) out+="[ ] Go to court on "+fmtDate(v("court"))+". Bring this report.\n";
+  out+="[ ] Write down every complaint number, name and date. Check back every two weeks.\n";
+  out+="\nNot legal advice. From the Stop Kit, Nolan Xavier Wells School of Law. For your own case, talk to a lawyer or public defender.\n";
+  return out;
+}
+function render(){$("r-out").textContent=build();}
+$("rf").addEventListener("input",render);
+$("rf").addEventListener("change",render);
+function status(t){$("r-status").textContent=t;}
+$("rf").addEventListener("submit",function(e){
+  e.preventDefault();
+  var em=v("email");
+  if(!em || em.indexOf("@")<1){status("Add your email first so the report goes to you.");$("r-email").focus();return;}
+  var subj="My Stop Report"+(v("date")?" ("+v("date")+")":"");
+  var body=build();
+  var href="mailto:"+encodeURIComponent(em)+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);
+  status("Opening your email app. Press send there. If nothing opens, use Copy report.");
+  window.location.href=href;
+});
+$("r-copy").addEventListener("click",function(){
+  var t=build();
+  function fallback(){var r=document.createRange();r.selectNodeContents($("r-out"));var s=getSelection();s.removeAllRanges();s.addRange(r);status("Selected. Press copy on your keyboard or phone.");}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){status("Copied. Paste it into an email or your notes.");},fallback);}else fallback();
+});
+$("r-dl").addEventListener("click",function(){
+  try{var b=new Blob([build()],{type:"text/plain"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="stop-report-"+(v("date")||"today")+".txt";document.body.appendChild(a);a.click();a.remove();status("Download started. If nothing happened, use Copy report.");}catch(err){status("Download isn't available here. Use Copy report.");}
+});
+var SAMPLE={place:"MD",city:"Prince George's County",date:"2026-10-03",start:"21:40",end:"22:15",doing:"Driving",loc:"Central Ave and Addison Rd, next to the gas station",agency:"County police",agname:"Prince George's County Police",officers:"Ofc. (didn't give name), badge #4412 on uniform",car:"Car 1187, plate on back",count:"2",reason:"\"Your tag light is out.\"",said:"Officer: \"Where you headed?\"\nMe: \"I'm choosing to remain silent.\"\nOfficer: \"Mind if I look in the car?\"\nMe: \"I don't consent to searches.\"",consent:"I said no, they searched anyway",force:"",taken:"",ticket:"Report #26-118204 (warning, no ticket)",court:"",why:"Searched my trunk after I said I don't consent. Kept me about 35 minutes for a tag light.",wit:"My cousin in the passenger seat",told:"My mom",name:"",email:""};
+$("r-sample").addEventListener("click",function(){
+  Object.keys(SAMPLE).forEach(function(k){var el=$("r-"+k);if(el)el.value=SAMPLE[k];});
+  document.querySelectorAll("#r-what input").forEach(function(i){i.checked=["Asked for ID","Told to get out of the car","Car searched"].indexOf(i.value)>=0;});
+  document.querySelectorAll("#r-video input").forEach(function(i){i.checked=["Someone else recorded it","Officer body camera seen"].indexOf(i.value)>=0;});
+  render(); status("This is a made-up example. Clear it and use your own facts.");
+});
+render();
+
+/* ---------- Ask better ---------- */
+var TOPICS={
+ search:{label:"Searches",fed:["Under the Fourth Amendment, when can police search a car without a warrant?","Under the Fourth Amendment, what counts as consent to a search?","Can police search a cell phone without a warrant? (Riley v. California)"],
+   state:["What does {S} law say about police searching a car during a traffic stop?","Does {S} give more privacy protection than the Fourth Amendment for searches?"],
+   local:["What is the {L} police department's policy on consent searches?","Does the {L} police policy manual require officers to tell people they can refuse a search?"]},
+ id:{label:"Showing ID",fed:["When does the Constitution allow police to require your name? (Hiibel v. Nevada)"],
+   state:["Does {S} have a stop-and-identify law?","What does {S} law require a driver to show during a traffic stop?","Does {S} law require a passenger to show ID?"],
+   local:["What does the {L} police policy say about asking passengers for ID?"]},
+ record:{label:"Recording police",fed:["Is there a First Amendment right to record police in public? (federal court of appeals for my state)"],
+   state:["Does {S} have any law limiting how close you can be when recording police?","What does {S} law say about recording police officers?"],
+   local:["What does the {L} police general order say about the public recording officers?"]},
+ walking:{label:"Stopped while walking",fed:["Under the Fourth Amendment, when can police stop and frisk someone? (Terry v. Ohio)","What is reasonable suspicion?"],
+   state:["What does {S} law say about police stopping people on the street?"],
+   local:["What is the {L} police policy on investigative stops and frisks?"]},
+ school:{label:"School police",fed:["Can school officials search a student's bag? (New Jersey v. T.L.O.)"],
+   state:["What does {S} law say about school resource officers questioning students?","Does {S} require a parent to be called before police question a student?"],
+   local:["What is the {L} school district's agreement (MOU) with police about school resource officers?","What does the {L} student code of conduct say about searches?"]},
+ minor:{label:"Questioned as a minor",fed:["What does Miranda require for a minor in custody? (J.D.B. v. North Carolina)"],
+   state:["What does {S} law say about police questioning a child in custody?","Does {S} law require police to notify a parent when a child is taken into custody?"],
+   local:["What is the {L} police policy on interviewing juveniles?"]},
+ complaint:{label:"Filing a complaint",fed:["How do I report a civil rights violation by police to the U.S. Justice Department?"],
+   state:["How do I file a police misconduct complaint in {S}?","Does {S} have civilian oversight boards for police?"],
+   local:["How do I file a complaint against the {L} police department?","Does {L} have a civilian review board or Police Accountability Board?"]},
+ video:{label:"Getting body cam video",fed:["Can I use the federal Freedom of Information Act to get local police video? (Hint: local police follow state law.)"],
+   state:["How do I request police body camera footage under {S} public records law?","How long does an agency in {S} have to answer a public records request?"],
+   local:["How do I request body camera video from the {L} police department?"]},
+ curfew:{label:"Curfew",fed:["Have federal courts allowed youth curfew laws?"],
+   state:["Does {S} have a statewide youth curfew law?"],
+   local:["What are the youth curfew hours in {L}?","What happens if a teen breaks curfew in {L}?"]}
+};
+var LEVELS=[["fed","Federal (Constitution)"],["state","State or DC"],["local","County, city or school"]];
+var qs={topic:"search",level:"state",place:"MD"};
+function chips(box,items,key){
+  var el=$(box); el.innerHTML="";
+  items.forEach(function(it){var b=document.createElement("button");b.type="button";b.className="chip";b.textContent=it[1];b.setAttribute("aria-pressed",qs[key]===it[0]?"true":"false");
+    b.addEventListener("click",function(){qs[key]=it[0];chips(box,items,key);qrender();});el.appendChild(b);});
+}
+function google(q){return "https://www.google.com/search?q="+encodeURIComponent(q);}
+function qrender(){
+  var T=TOPICS[qs.topic], P=PLACES[qs.place];
+  var local=$("q-local").value.trim()||(P.name+" (your city or county)");
+  var list=(T[qs.level]||[]).map(function(q){return q.replace(/\{S\}/g,P.name).replace(/\{L\}/g,local);});
+  var out=$("q-out"); out.innerHTML="";
+  list.forEach(function(q){
+    var d=document.createElement("div");d.className="qgood";
+    var t=document.createElement("div");t.textContent=q;d.appendChild(t);
+    var a=document.createElement("a");a.href=google(q);a.target="_blank";a.rel="noopener";a.textContent="Search this on Google";d.appendChild(a);
+    out.appendChild(d);
+  });
+  var w=$("q-where"); var src;
+  if(qs.level==="fed") src=[["The Constitution, explained (Congress)","https://constitution.congress.gov"],["Supreme Court cases (Justia)","https://supreme.justia.com"]];
+  else if(qs.level==="state") src=[[P.codeName,P.code]];
+  else src=[["Search for the police department's general orders or policy manual",google(local+" police department general orders policy manual")],["Search for the school district's code of conduct",google(local+" student code of conduct")]];
+  w.innerHTML="";
+  var h=document.createElement("p");h.className="note";h.textContent="Where the official answer lives:";w.appendChild(h);
+  var ul=document.createElement("ul");ul.className="clean";
+  src.forEach(function(s){var li=document.createElement("li");var a=document.createElement("a");a.href=s[1];a.target="_blank";a.rel="noopener";a.textContent=s[0];li.appendChild(a);ul.appendChild(li);});
+  w.appendChild(ul);
+}
+chips("q-topic",Object.keys(TOPICS).map(function(k){return [k,TOPICS[k].label];}),"topic");
+chips("q-level",LEVELS,"level");
+chips("q-place",Object.keys(PLACES).map(function(k){return [k,PLACES[k].name];}),"place");
+$("q-local").addEventListener("input",qrender);
+$("q-raw").addEventListener("input",function(){
+  var s=$("q-raw").value.toLowerCase(), tip="";
+  if(/what happens (to me )?if|am i (gonna|going to)|will i (get|go)/.test(s)) tip="That's a \"what happens to me\" question. Flip it: \"What does [place] law say about...\" Then pick whose law below.";
+  else if(/\b(cops?|police|they)\b.*\bcan\b|\bcan (the )?(cops?|police|they)\b|\ballowed\b/.test(s)) tip="Good start. Now say whose rules: the Constitution, your state, or your city or school. Pick below.";
+  else if(s.length>3) tip="Pick a topic, whose law, and where. We'll turn it into questions you can search.";
+  var map=[["search","search"],["phone","search"],["id","id"],["name","id"],["record","record"],["film","record"],["walk","walking"],["frisk","walking"],["school","school"],["sro","school"],["minor","minor"],["under 18","minor"],["parent","minor"],["complain","complaint"],["report","complaint"],["body cam","video"],["bodycam","video"],["video","video"],["curfew","curfew"]];
+  for(var i=0;i<map.length;i++){if(s.indexOf(map[i][0])>=0){qs.topic=map[i][1];chips("q-topic",Object.keys(TOPICS).map(function(k){return [k,TOPICS[k].label];}),"topic");qrender();break;}}
+  $("q-tip").textContent=tip;
+});
+qrender();
+
+/* ---------- Follow up ---------- */
+var fsel="MD";
+function frender(){
+  var P=PLACES[fsel], el=$("f-out"); el.innerHTML="";
+  var h=document.createElement("h3");h.textContent=P.name;el.appendChild(h);
+  var st=document.createElement("div");st.className="steps";
+  P.steps.forEach(function(s){var d=document.createElement("div");d.className="step";var b=document.createElement("b");b.textContent=s[0];var sp=document.createElement("span");sp.textContent=s[1];d.appendChild(b);d.appendChild(sp);st.appendChild(d);});
+  el.appendChild(st);
+  var ul=document.createElement("ul");ul.className="clean";
+  P.links.forEach(function(l){var li=document.createElement("li");var a=document.createElement("a");a.href=l[1];a.target="_blank";a.rel="noopener";a.textContent=l[0];li.appendChild(a);ul.appendChild(li);});
+  el.appendChild(ul);
+}
+(function(){var box=$("f-place");Object.keys(PLACES).forEach(function(k){var b=document.createElement("button");b.type="button";b.className="chip";b.textContent=PLACES[k].name;b.setAttribute("aria-pressed",k===fsel?"true":"false");b.addEventListener("click",function(){fsel=k;box.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false");});b.setAttribute("aria-pressed","true");frender();});box.appendChild(b);});})();
+frender();
+})();
+</script>
+
+</body>
+</html>
