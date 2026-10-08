@@ -81,7 +81,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 <div class="lesson"><div class="shell">{yt("YhJ-_J3wDDs","Lesson 3: Discovery")}</div><div class="t">Lesson 3<b>Discovery</b></div></div>
 </div>
 <p class="muted rev" style="margin-top:14px;font-size:14px">Every lesson, in order, in the <a href="class/">Classroom</a>.</p>
-<div class="stats rev"><div class="stat"><div class="v">600K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div><div class="stat"><div class="v">1,040+</div><div class="l">subscribers on @AgentKodak, and growing</div></div><div class="stat"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div></div>
+<div class="stats rev"><div class="stat"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div><div class="stat"><div class="v">1,080+</div><div class="l">subscribers on @AgentKodak, and growing</div></div><div class="stat"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div></div>
 </div></section>
 
 <section class="dark classroom panelbg" id="class" style="border-top:1px solid var(--line)"><div class="wrap">
@@ -95,13 +95,13 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 </div></section>
 
 <section class="light"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 600,000 views in the past year</h2></div></div>
+<div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 750,000 views in the past year</h2></div></div>
 <div class="proof rev" style="grid-template-columns:1.6fr 1fr 1fr">
-<div class="card"><div class="v">600K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div>
-<div class="card"><div class="v">1,040+</div><div class="l">subscribers on YouTube, and growing</div></div>
+<div class="card"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div>
+<div class="card"><div class="v">1,080+</div><div class="l">subscribers on @AgentKodak, and growing</div></div>
 <div class="card"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div>
 </div>
-<p class="muted" style="font-size:12px;margin-top:14px">Combined platform insights, 12 months to Oct. 6, 2026.</p>
+<p class="muted" style="font-size:12px;margin-top:14px">Combined platform insights, 12 months to Oct. 7, 2026.</p>
 </div></section>
 
 <section class="dark action" id="action"><div class="wrap">
@@ -290,9 +290,9 @@ On October 7, 2026, the Justice Department told PEOPLE that federal officials as
 
 I am asking you to put three questions to the Justice Department and the National Park Service, and to send me the answers in writing:
 
-1. Did the FBI open its own investigation into Mr. Wells' death, or did it only assist the Jackson County investigation? If it assisted, in what capacity, and on what dates?
+1. The FBI reportedly told PEOPLE magazine that it assisted the state investigation and found no evidence of a crime. On October 7, 2026, the President told reporters, "We're looking at that. Yes, we are." Is any federal agency investigating Mr. Wells' death right now? If the FBI only assisted Jackson County, in what capacity, and on what dates?
 
-2. Members of Congress wrote to the National Park Service on October 5, 2026, asking its Investigative Services Branch to open a full investigation. Has the Park Service responded, and what did it say?
+2. Members of Congress wrote to the National Park Service asking its Investigative Services Branch to open a full investigation. Has the Park Service responded, and what did it say?
 
 3. Both autopsies say cause and manner of death are undetermined. On what evidence did the Justice Department conclude there was nothing to investigate?
 
@@ -312,7 +312,7 @@ To the FOIA Officer, National Park Service:
 
 Under the Freedom of Information Act, 5 U.S.C. 552, I request copies of records that state the legislative jurisdiction status (exclusive, concurrent, partial, or proprietary) of federal lands on Horn Island, Jackson County, Mississippi, within Gulf Islands National Seashore. This includes any jurisdiction maps, cession or acceptance documents, deeds with jurisdiction notes, and the park's entry in the Department of the Interior's inventory of legislative jurisdiction.
 
-I also request any records from July 4, 2026 to the date of this request showing whether the National Park Service Investigative Services Branch opened, declined, or referred an investigation into the death of Nolan Xavier Wells, and any response to the October 5, 2026 congressional letter to the Acting Director on that subject.
+I also request any records from July 4, 2026 to the date of this request showing whether the National Park Service Investigative Services Branch opened, declined, or referred an investigation into the death of Nolan Xavier Wells, and any response to the 2026 congressional letter to the Acting Director on that subject.
 
 I am a private citizen requesting these records for non-commercial, public education use. I ask that fees be waived; if fees would exceed $25, please contact me before processing. I prefer electronic copies.
 
