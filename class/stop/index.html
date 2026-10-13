@@ -26,6 +26,7 @@
   --bg:#F7F5F1; --panel:#FFFFFF; --line:#DDD7CE; --fg:#141312; --muted:#5E5850;
   --red:#C42530; --gold:#9A6C12; --ok:#2E7D4A; --field:#FFFFFF; color-scheme:light}
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
 .wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
 a{color:var(--fg);text-decoration-color:var(--red);text-underline-offset:3px}
@@ -121,7 +122,7 @@ footer{margin-top:36px;border-top:1px solid var(--line);padding-top:16px;display
 <body>
 <div class="wrap">
 <header>
-  <p class="eyebrow">Nolan Xavier Wells School of Law · Civic education</p>
+  <p class="eyebrow">Agents of Change Field Guide · Civic education</p>
   <h1>The Stop <span>Kit</span></h1>
   <p class="lead">What to do before, during and after a police stop. Learn the rules, get the officer's info the right way, write it all down, and report it if your rights were crossed. Built for Mississippi, DC, Maryland and Virginia.</p>
   <div class="paths">
@@ -653,7 +654,7 @@ footer{margin-top:36px;border-top:1px solid var(--line);padding-top:16px;display
 <footer>
   <p class="motto">Documentation <span>beats conversation.</span></p>
   <p>Write it down. Follow it up. That's Agent Kodak's rule for every stop.</p>
-  <p>Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is civic education, not legal advice. For your own case, talk to a lawyer or public defender.</p>
+  <p>Built by Agent Kodak for the Agents of Change Field Guide. Lawrence is an educator, not an attorney. This is civic education, not legal advice. For your own case, talk to a lawyer or public defender.</p>
   <p>Privacy: nothing you type here is saved or sent to us. Your report only leaves your phone if you email, copy or download it.</p>
   <p>Facts checked Oct. 8, 2026. <span class="tag v">Verified</span> means we read the official source. <span class="tag u">Recheck</span> means we're still confirming it. Spot an error? Bring the documentation.</p>
 </footer>
@@ -671,9 +672,18 @@ function show(name){
     $("t-"+t).setAttribute("aria-selected", t===name ? "true":"false");
   });
 }
-document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.tab);});});
-document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.go);$("t-"+b.dataset.go).scrollIntoView({block:"start",behavior:"smooth"});});});
-var h=(location.hash||"").replace("#",""); if(h) show(h);
+function go(name){
+  show(name);
+  try{ history.replaceState(null,"","#"+name); }catch(e){}
+  var nav=document.querySelector("nav.tabs"), panel=$(name);
+  var y=panel.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-4;
+  window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+  var t=$("t-"+name); if(t&&t.scrollIntoView) t.scrollIntoView({block:"nearest",inline:"center"});
+}
+document.querySelectorAll("[data-tab]").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.tab);});});
+document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.go);});});
+var h=(location.hash||"").replace("#",""); show(h||"learn");
+window.addEventListener("hashchange",function(){var x=(location.hash||"").replace("#",""); if(x) show(x);});
 
 /* ---------- Place data (checked Oct 8, 2026) ---------- */
 var PLACES={
@@ -756,7 +766,7 @@ function build(){
   out+="- Federal: civilrights.justice.gov and tips.fbi.gov\n";
   if(v("court")) out+="[ ] Go to court on "+fmtDate(v("court"))+". Bring this report.\n";
   out+="[ ] Write down every complaint number, name and date. Check back every two weeks.\n";
-  out+="\nNot legal advice. From the Stop Kit, Nolan Xavier Wells School of Law. For your own case, talk to a lawyer or public defender.\n";
+  out+="\nNot legal advice. From the Stop Kit, Agents of Change Field Guide. For your own case, talk to a lawyer or public defender.\n";
   return out;
 }
 function render(){$("r-out").textContent=build();}
