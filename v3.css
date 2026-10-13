@@ -90,9 +90,13 @@ footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 @media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
 @media(max-width:820px){
  section{padding:64px 0}.hero{padding:72px 0 64px}.pagehero{padding:64px 0 48px}
- nav ul{display:none}
+ nav .wrap{flex-wrap:wrap;height:auto;padding-top:12px;row-gap:0;gap:10px}
+ nav .wrap{padding-left:18px;padding-right:18px}nav .brand{flex:1 1 auto;white-space:nowrap;font-size:12px}nav .btn{flex:0 0 auto;padding:9px 12px;font-size:10px;order:2}
+ nav ul{order:3;width:100%;overflow-x:auto;gap:20px;padding:10px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ nav ul::-webkit-scrollbar{display:none}
+ nav li{flex:0 0 auto}nav li a{white-space:nowrap}
  .hero .wrap,.classroom .wrap,.action .cols,.two,.contact .wrap{grid-template-columns:1fr}
- .steps,.lessons,.stats,.proof,.talks,.action .grid,.cards3,.form .pair{grid-template-columns:1fr}
+ .steps,.lessons,.stats,.proof,.proof[style],.talks,.action .grid,.cards3,.form .pair{grid-template-columns:1fr!important}
  .frame{height:380px}.stat .v{font-size:52px}.photo{height:360px}.qr{grid-template-columns:repeat(3,1fr)}
 }
 /* act page */
