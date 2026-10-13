@@ -278,7 +278,11 @@ footer strong{color:var(--paper)}
       <li>Lesson 1: <a href="guides/Lesson1-Student-Guide-High-School.pdf">Student guide, high school (PDF)</a></li>
       <li>Lesson 1: <a href="guides/Lesson1-Teacher-Guide.pdf">Teacher guide with answer key (PDF)</a></li>
     </ul>
-    <p>New: <a href="stop/">The Stop Kit</a>. What to do before, during and after a police stop, with a stop report students email to themselves.</p>
+    <p>Agents of Change Field Guide: <a href="stop/">The Stop Kit</a>. Civic education on what to do before, during and after a police stop, with a stop report students email to themselves.</p>
+    <ul>
+      <li>Stop Kit: <a href="guides/Stop-Kit-Teacher-Guide.pdf">Teacher guide with lesson plans and answer keys (PDF)</a></li>
+      <li>Stop Kit: <a href="guides/Stop-Kit-Student-Packet.pdf">Printable student packet, no devices needed (PDF)</a></li>
+    </ul>
     <p class="src-note">More lessons coming. No sign-up, no email gate.</p>
   </div>
   <div class="block">
@@ -518,7 +522,7 @@ const E = [
  ["you","sup","elect","elects"],["you","sheriff","elect","elects"],["you","coroner","elect","elects"],["you","da","elect","elects"],["you","circuit","elect","elects"],["you","chancery","elect","elects"],["you","clerk","elect","elects"],
  ["gov","dps","appoint","appoints"],["dps","me","appoint","appoints + can fire"],["doj","fedcourt","appoint","brings federal cases"],["circuit","gj","appoint","seats + instructs"],["supreme","circuit","appoint","reviews appeals"],["ag","da","appoint","can assist"],
  ["nps","sheriff","case","search + scene"],["dps","sheriff","case","co-investigated"],["sheriff","da","case","investigation file"],["coroner","me","case","orders autopsy"],["me","da","case","autopsy findings"],["da","gj","case","presents case"],
- ["congress","doj","case","asked for review"],["chancery","you","case","estate opened"],["clerk","gj","case","jury lists"],
+ ["congress","doj","case","asked for review"],["congress","nps","case","asked to investigate"],["doj","sheriff","case","helped with digital evidence"],["chancery","you","case","estate opened"],["clerk","gj","case","jury lists"],
  ["leg","coroner","rules","sets qualifications"],["leg","me","rules","writes the rules"],["sup","sheriff","rules","funds"],["sup","coroner","rules","funds"],["gov","leg","rules","signs or vetoes laws"],
  ["congress","sheriff","rules","Ezell: former sheriff"]
 ];
@@ -576,7 +580,7 @@ const edges=E.map(([f,t,type,label])=>{
 function path(a,b){
  // tentacle curve: leaves vertically, sways in the middle
  const dy=b.cy-a.cy, my=(a.cy+b.cy)/2;
- if(Math.abs(dy)<20){const mx=(a.cx+b.cx)/2;return {d:`M${a.cx},${a.cy} Q${mx},${a.cy-60} ${b.cx},${b.cy}`,lx:mx,ly:a.cy-30}}
+ if(Math.abs(dy)<20){const mx=(a.cx+b.cx)/2,lift=60+Math.abs(b.cx-a.cx)*.15;return {d:`M${a.cx},${a.cy} Q${mx},${a.cy-lift} ${b.cx},${b.cy}`,lx:mx,ly:a.cy-lift/2}}
  const c1y=a.cy+dy*.45, c2y=b.cy-dy*.45;
  return {d:`M${a.cx},${a.cy} C${a.cx},${c1y} ${b.cx},${c2y} ${b.cx},${b.cy}`,lx:(a.cx+b.cx)/2,ly:my};
 }
@@ -660,7 +664,13 @@ function setMode(m){
  else if(m==="lesson"){renderLesson();focusNode(null)}
  else{focusNode(selected);renderPanel(selected)}
 }
-document.querySelectorAll(".lens").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.lens)));
+function jumpFor(m){
+ const t=(m==="case"||m==="lesson")?document.getElementById("panel"):document.querySelector(".mapbox");
+ if(!t)return;
+ const y=t.getBoundingClientRect().top+window.scrollY-12;
+ window.scrollTo({top:Math.max(0,y),behavior:reduce?"auto":"smooth"});
+}
+document.querySelectorAll(".lens[data-lens]").forEach(b=>b.addEventListener("click",()=>{setMode(b.dataset.lens);jumpFor(b.dataset.lens)}));
 document.getElementById("panel").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)select(g.dataset.go)});
 
 /* ---------- Glossary tooltip ---------- */
