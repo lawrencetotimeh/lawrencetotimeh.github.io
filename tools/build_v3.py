@@ -51,13 +51,13 @@ def yt(id_, title):
     return f'<iframe src="https://www.youtube-nocookie.com/embed/{id_}" title="{title}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
 
 # ---------------- HOME ----------------
-home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as citizens.",
-            "Civic education that turns theory into practice. The School of Law lessons, the Classroom map, talks and workshops, and Follow the Money LIB.", "") + nav("home") + f'''
+home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and civic educator",
+            "Lawrence Totimeh Jr. is a social justice advocate and civic educator, not a lawyer. Plain-language civics lessons taught from the public record, the Classroom map, talks and workshops, and Follow the Money LIB.", "") + nav("home") + f'''
 <section class="hero dark"><div class="wrap">
 <div>
-<div class="eyebrow">Agent Kodak · Civic educator · Combat veteran</div>
+<div class="eyebrow">Agent Kodak · Social justice advocate · Civic educator · Combat veteran</div>
 <h1 style="margin-top:14px">Learn the law.<br>Apply it as <span>citizens.</span></h1>
-<p class="lede">Civic education that turns theory into practice in your own community. We learn the rules. Then we change them.</p>
+<p class="lede">I'm not a lawyer. I'm a social justice advocate and civic educator. I teach everyday people how the justice system works, in plain language, from the public record, so we can hold it accountable. We learn the rules. Then we change them.</p>
 <div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
 <div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S. Project Mgmt, VSU</span><span class="chip">10+ yrs educator</span><span class="chip">TEDx speaker</span></div>
 </div>
@@ -67,13 +67,13 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Learn the law. Apply it as c
 <section class="light"><div class="wrap">
 <div class="sec-head rev"><div><div class="eyebrow">Theory to practice</div><h2 style="margin-top:8px">How this works</h2></div></div>
 <div class="steps rev">
-<div class="step"><div class="n">01</div><h3>Learn the law</h3><p class="muted">Plain-language lessons on the justice system, taught from the public record. Probable cause, grand juries, civil suits, discovery.</p></div>
+<div class="step"><div class="n">01</div><h3>Learn the law</h3><p class="muted">Plain-language civics lessons on how the justice system works, taught from the public record by an educator, not an attorney. Probable cause, grand juries, civil suits, discovery.</p></div>
 <div class="step"><div class="n">02</div><h3>Document</h3><p class="muted">Records, receipts, and a paper trail. Transparency creates accountability.</p></div>
 <div class="step"><div class="n">03</div><h3>Act</h3><p class="muted">Vote. Follow up. Teach somebody else. Our enemy is injustice, not people.</p></div>
 </div></div></section>
 
 <section class="dark" id="lessons"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">The School of Law · on YouTube at @AgentKodak</div><h2 style="margin-top:8px">Real cases. Real law.</h2></div><a class="btn ghost" href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">Watch the series</a></div>
+<div class="sec-head rev"><div><div class="eyebrow">The School of Law · a civic education series on YouTube at @AgentKodak</div><h2 style="margin-top:8px">Real cases. Plain language.</h2></div><a class="btn ghost" href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">Watch the series</a></div>
 <p class="lede muted rev">A real Mississippi case, taught one lesson at a time: civil lawsuits, discovery, probable cause, new evidence, and the federal path. Lawrence is an educator, not an attorney. These lessons are not legal advice.</p>
 <div class="lessons rev" style="margin-top:36px">
 <div class="lesson"><div class="shell">{yt("oriWYFQN414","Lesson 1: Where we are")}</div><div class="t">Lesson 1<b>Where we are</b></div></div>
@@ -168,7 +168,7 @@ speaking = head("Speaking & Workshops · Lawrence Totimeh Jr.", "Civic education
 <section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">Speaking &amp; workshops</div>
 <h1>Civic education for the rooms that need it</h1>
-<p class="lede">Schools, colleges, churches, veterans and community groups. Lawrence teaches how the justice system is built, in plain language, from the public record, so audiences leave knowing the rules and the next move. He is an educator, not an attorney.</p>
+<p class="lede">Schools, colleges, churches, veterans and community groups. Lawrence is a social justice advocate and civic educator, not an attorney. He teaches how the justice system is built, in plain language, from the public record, so audiences leave knowing the rules and the next move.</p>
 <div class="cta" style="margin-top:30px"><a class="btn red" href="contact.html">Book Lawrence</a><a class="btn ghost" href="speaker-sheet.pdf">Speaker sheet (PDF)</a></div>
 </div></section>
 
