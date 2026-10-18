@@ -210,13 +210,13 @@ events = head("Events & Hosting · Agent Kodak", "Agent Kodak hosts festivals, c
 </div></section>
 
 <section class="dark panelbg" style="border-top:1px solid var(--line)"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Hosting packages</div><h2 style="margin-top:8px">Pick the room</h2></div></div>
+<div class="sec-head rev"><div><div class="eyebrow">Hosting options</div><h2 style="margin-top:8px">Pick the room</h2></div></div>
 <div class="cards3 rev">
-<div class="pkg"><div class="eyebrow">The Host</div><div class="price">$350</div><ul class="list" style="margin-top:0"><li>Private parties, banquets and community events</li><li>One prep call before the event</li><li>Up to 3 hours of coverage</li><li>He runs the mic, the timeline, and the energy</li></ul></div>
-<div class="pkg hot"><div class="tagline">Most booked</div><div class="eyebrow" style="margin-top:6px">The Wedding Host</div><div class="price">$500</div><ul class="list" style="margin-top:0"><li>Planning call with the couple</li><li>Full run of show and timeline</li><li>Name pronunciations, grand entrance, toasts and transitions</li><li>Hand-in-hand coordination with your DJ</li><li>Up to 5 hours of reception coverage</li></ul></div>
-<div class="pkg"><div class="eyebrow">The Full Day</div><div class="price">$800</div><ul class="list" style="margin-top:0"><li>Everything in The Wedding Host</li><li>Rehearsal attendance and ceremony support</li><li>Extended coverage into the after-party</li><li>Your day, carried start to finish</li></ul></div>
+<div class="pkg"><div class="eyebrow">The Host</div><ul class="list" style="margin-top:0"><li>Private parties, banquets and community events</li><li>One prep call before the event</li><li>Up to 3 hours of coverage</li><li>He runs the mic, the timeline, and the energy</li></ul></div>
+<div class="pkg hot"><div class="tagline">Most booked</div><div class="eyebrow" style="margin-top:6px">The Wedding Host</div><ul class="list" style="margin-top:0"><li>Planning call with the couple</li><li>Full run of show and timeline</li><li>Name pronunciations, grand entrance, toasts and transitions</li><li>Hand-in-hand coordination with your DJ</li><li>Up to 5 hours of reception coverage</li></ul></div>
+<div class="pkg"><div class="eyebrow">The Full Day</div><ul class="list" style="margin-top:0"><li>Everything in The Wedding Host</li><li>Rehearsal attendance and ceremony support</li><li>Extended coverage into the after-party</li><li>Your day, carried start to finish</li></ul></div>
 </div>
-<p class="muted rev" style="font-size:13px;margin-top:22px">Travel: first 30 miles included · $75 up to 60 miles · $150 beyond. Booking: a deposit locks your date, balance due one week out, simple one-page agreement.</p>
+<p class="muted rev" style="font-size:13px;margin-top:22px">Every event is different, so reach out with your date, venue and what you need and Lawrence will get back to you. Travel across the DMV and beyond.</p>
 </div></section>
 
 <section class="light"><div class="wrap">
