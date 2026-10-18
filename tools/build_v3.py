@@ -27,7 +27,7 @@ def nav(active=""):
 <ul>{a("class/","Classroom","class")}{a("act.html","Act","act")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
 <a class="btn red" href="contact.html">Book Lawrence</a></div></nav>'''
 
-FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
+FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
@@ -45,7 +45,12 @@ JOIN = '''<section class="dark join"><div class="wrap rev">
 <h2 style="margin-top:12px">Agents of Change,<br>fighting for human rights.</h2>
 <p class="lede muted">Learn the law. Document. Vote. Follow up. Never harass. Every like, every repost, every comment helps educate our community.</p>
 <div class="socials"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a><a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a></div>
-</div></section>'''
+<div class="support rev" id="support-links"><div class="eyebrow">Support the work</div>
+<p class="muted">Everything here is free and stays that way. If a lesson helped you, you can back the work directly.</p>
+<div class="cta"><a class="btn ghost" href="https://cash.app/$AgentKodak" target="_blank" rel="noopener">Cash App · $AgentKodak</a><a class="btn ghost" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=ikonicshots@gmail.com" target="_blank" rel="noopener">PayPal</a><button class="btn ghost zelle" type="button" data-email="Lawrence.Totimeh@gmail.com">Zelle · copy email</button></div>
+</div>
+</div></section>
+<script>document.querySelectorAll('.zelle').forEach(function(b){var l=b.textContent;b.addEventListener('click',function(){var e=b.getAttribute('data-email');var done=function(){b.textContent='Copied: '+e;setTimeout(function(){b.textContent=l},2500)};if(navigator.clipboard){navigator.clipboard.writeText(e).then(done,function(){prompt('Zelle email',e)})}else{prompt('Zelle email',e)}})});</script>'''
 
 def yt(id_, title):
     return f'<iframe src="https://www.youtube-nocookie.com/embed/{id_}" title="{title}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
@@ -274,7 +279,10 @@ contact = head("Book Lawrence · Contact", "Book Lawrence Totimeh Jr. for a talk
 <section class="light lt" id="support"><div class="wrap">
 <div class="sec-head rev"><div><div class="eyebrow">Support the work</div><h2 style="margin-top:8px">Everything here is free. This is how it stays that way.</h2></div></div>
 <p class="muted rev" style="max-width:60ch">The lessons, the Classroom, the templates. None of it is behind a paywall and none of it will be. If the work has been useful to you or your community, you can back it directly. Other ways to help: book a talk, or share a lesson with someone who needs it.</p>
-<div class="qr rev"><div><img src="img/qr-cashapp.png" alt="Cash App QR code"><span>Cash App</span></div><div><img src="img/qr-paypal.png" alt="PayPal QR code"><span>PayPal</span></div><div><img src="img/qr-zelle.png" alt="Zelle QR code"><span>Zelle</span></div></div>
+<div class="cta rev" style="margin-top:22px"><a class="btn red" href="https://cash.app/$AgentKodak" target="_blank" rel="noopener">Cash App · $AgentKodak</a><a class="btn ghost" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=ikonicshots@gmail.com" target="_blank" rel="noopener">PayPal</a><button class="btn ghost zelle" type="button" data-email="Lawrence.Totimeh@gmail.com">Zelle · copy email</button></div>
+<p class="muted rev" style="font-size:13px;margin-top:18px">On a computer? Scan with your phone.</p>
+<div class="qr rev"><div><a href="https://cash.app/$AgentKodak" target="_blank" rel="noopener"><img src="img/qr-cashapp.png" alt="Cash App QR code"></a><span>Cash App</span></div><div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=ikonicshots@gmail.com" target="_blank" rel="noopener"><img src="img/qr-paypal.png" alt="PayPal QR code"></a><span>PayPal</span></div><div><img src="img/qr-zelle.png" alt="Zelle QR code"><span>Zelle</span></div></div>
+<p class="muted rev" style="font-size:13px;margin-top:14px;font-family:var(--mono)">Zelle: Lawrence.Totimeh@gmail.com</p>
 </div></section>
 ''' + JOIN + FOOT
 
