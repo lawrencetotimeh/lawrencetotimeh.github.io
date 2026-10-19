@@ -79,6 +79,8 @@ h1 span{color:var(--red)}
 .node.appointed .core{stroke:var(--paper);stroke-dasharray:4 3}
 .node.federal .core{stroke:var(--stone)}
 .node.people .core{stroke:var(--gold)}
+.node.volunteer .core{stroke:var(--stone);stroke-dasharray:1 4;stroke-linecap:round}
+.node.volunteer .halo{fill:var(--stone)}
 .node.elected .halo{fill:var(--red)}
 .node.appointed .halo,.node.federal .halo{fill:var(--paper)}
 .node.people .halo{fill:var(--gold)}
@@ -236,6 +238,7 @@ footer strong{color:var(--paper)}
       <span><i class="ring" style="border-color:var(--red)"></i>Elected by voters</span>
       <span><i class="ring" style="border-color:var(--paper);border-style:dashed"></i>Appointed</span>
       <span><i class="ring" style="border-color:var(--stone)"></i>Federal</span>
+      <span><i class="ring" style="border-color:var(--stone);border-style:dotted"></i>Volunteers (not government)</span>
       <span><i class="sw" style="border-color:var(--red)"></i>Elects</span>
       <span><i class="sw" style="border-color:var(--paper)"></i>Appoints or controls</span>
       <span><i class="sw" style="border-color:var(--gold)"></i>Case moves here</span>
@@ -296,7 +299,7 @@ footer strong{color:var(--paper)}
 </section>
 
 <footer>
-  <div><strong>Version 0.4 · facts checked Oct. 13, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
+  <div><strong>Version 0.5 · facts checked Oct. 19, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
   <div>House rules: we name offices and public officials by their official acts. We do not name private people. Nobody on this map is accused of anything. Anything marked <span class="chip check">to confirm</span> still needs a primary source.</div>
   <div>Spot an error? Bring the documentation. Documentation beats conversation. Transparency creates accountability.</div>
 </footer>
@@ -374,7 +377,7 @@ const N = [
   chips:["appointed"],src:[["The Dispatch: threat trial dates","https://cdispatch.com/news/trial-dates-set-for-those-accused-of-making-threats-in-investigation-of-nolan-wells-death/"]]},
 
  // STATE
- {id:"leg",lvl:1,x:95,y:285,g:"LEG",kind:"elected",t1:"Legislature",t2:"Writes the rules",
+ {id:"leg",lvl:1,x:80,y:285,g:"LEG",kind:"elected",t1:"Legislature",t2:"Writes the rules",
   title:"Mississippi Legislature",
   holder:"52 senators and 122 representatives. Jackson County elects several of each.",
   how:"[elected] by district, 4-year terms.",
@@ -383,7 +386,7 @@ const N = [
   inCase:"State law says a coroner needs only a high school diploma or equivalent, plus a short training course. The Legislature can change that.",
   act:"Find your state senator and representative. Ask where they stand on coroner standards and early voting.",
   chips:["elected","writes the rules"],src:[["Mississippi Independent: the coroner system","https://msindy.org/p/nolan-wellss-death-exposes-fault"]]},
- {id:"gov",lvl:1,x:270,y:285,g:"GOV",kind:"elected",t1:"Governor",t2:"Tate Reeves",
+ {id:"gov",lvl:1,x:215,y:285,g:"GOV",kind:"elected",t1:"Governor",t2:"Tate Reeves",
   title:"Governor of Mississippi",
   holder:"Tate Reeves.",
   how:"[elected] statewide, 4-year [term].",
@@ -392,7 +395,7 @@ const N = [
   inCase:"The Governor's appointee runs the Department of Public Safety, which co-investigated with the sheriff.",
   act:"Ask candidates for Governor in 2027 one question: should the medical examiner stay under the police agency?",
   chips:["elected","2027"],src:[["Sean Tindell (Wikipedia)","https://en.wikipedia.org/wiki/Sean_Tindell"],["Mississippi Today: Fitch announces","https://mississippitoday.org/2026/08/04/lynn-fitch-announces-run-for-governor/"]]},
- {id:"dps",lvl:1,x:445,y:285,g:"DPS",kind:"appointed",t1:"Public Safety",t2:"Comm. Sean Tindell",
+ {id:"dps",lvl:1,x:350,y:285,g:"DPS",kind:"appointed",t1:"Public Safety",t2:"Comm. Sean Tindell",
   title:"Department of Public Safety",
   holder:"Commissioner Sean Tindell, in office since June 1, 2020.",
   how:"[appointed] by the Governor.",
@@ -401,7 +404,7 @@ const N = [
   inCase:"Co-investigated Nolan's death with the Jackson County Sheriff's Office, per news summaries.",
   act:"Ask: should the doctors who rule on deaths answer to the state's top police official? Other states put them under health departments.",
   chips:["appointed","controls the ME"],src:[["Sean Tindell (Wikipedia)","https://en.wikipedia.org/wiki/Sean_Tindell"],["Death of Nolan Wells (Wikipedia)","https://en.wikipedia.org/wiki/Death_of_Nolan_Wells"]]},
- {id:"me",lvl:1,x:620,y:285,g:"ME",kind:"appointed",t1:"State ME",t2:"Dr. Staci Turner",
+ {id:"me",lvl:1,x:485,y:285,g:"ME",kind:"appointed",t1:"State ME",t2:"Dr. Staci Turner",
   title:"State Medical Examiner",
   holder:"Chief Medical Examiner Dr. Staci Turner. Office in Pearl, MS.",
   how:"[appointed] by the Commissioner of Public Safety, who can also discharge her (Miss. Code 41-61-55).",
@@ -410,7 +413,16 @@ const N = [
   inCase:"The state autopsy listed cause and manner as [undetermined], with drowning considered likely. The family's own pathologist also ruled undetermined.",
   act:"Ask for the office's caseload and staffing numbers. A rushed, understaffed office is a system problem anyone can document.",
   chips:["appointed","no election"],src:[["Mississippi Free Press: Turner named","https://www.mississippifreepress.org/mississippi-names-next-chief-medical-examiner-dr-staci-turner/"],["MFP: independent autopsy","https://www.mississippifreepress.org/crump-releases-full-independent-autopsy-of-nolan-wells-says-questions-of-wells-death-remain/"]]},
- {id:"ag",lvl:1,x:795,y:285,g:"AG",kind:"elected",t1:"Atty. General",t2:"Lynn Fitch",
+ {id:"mdmr",lvl:1,x:620,y:285,g:"MP",kind:"appointed",t1:"Marine Patrol",t2:"Dept. of Marine Resources",
+  title:"Marine Patrol: Mississippi Department of Marine Resources",
+  holder:"The state agency for Mississippi's coast and coastal waters. Its Marine Patrol officers enforce boating and fishing laws on the water. Leader's name to add after confirming.",
+  how:"[appointed]. A state agency, not elected. Exactly who picks its leadership is to confirm.",
+  next:"No election.",
+  controls:"Patrols the water, responds to boating emergencies, and keeps boating incident reports. As a state agency, its records fall under Mississippi's Public Records Act.",
+  inCase:"Nolan's mother reported him missing to Marine Patrol at 11:49 p.m. on July 4. On July 5 it searched with a boat, drones and sonar, and used a boat's GPS track lines to narrow the search area. Its report number is MP2607-0016. In late July it released some reports to a TV station, then said that was a mistake and held back records after the DA said the case was under investigation (reported by TMZ).",
+  act:"Marine Patrol records can be requested under the Public Records Act: the full Sea Tow call audio, the boat GPS downloads, and its search tracks. Ask in writing. If they say no, ask which exemption they're using.",
+  chips:["appointed","to confirm leadership","public records"],src:[["TMZ: records released by mistake (July 22)","https://www.tmz.com/2026/07/22/nolan-wells-death-records-released-by-mistake/"],["Mississippi Department of Marine Resources","https://dmr.ms.gov/"]]},
+ {id:"ag",lvl:1,x:755,y:285,g:"AG",kind:"elected",t1:"Atty. General",t2:"Lynn Fitch",
   title:"Mississippi Attorney General",
   holder:"Lynn Fitch. Running for Governor in 2027.",
   how:"[elected] statewide, 4-year [term].",
@@ -419,7 +431,7 @@ const N = [
   inCase:"No public role in this case found as of Oct. 5.",
   act:"Ask: under what conditions would the AG's office review a case a local grand jury declined?",
   chips:["elected","to confirm powers"],src:[["Lynn Fitch (Wikipedia)","https://en.wikipedia.org/wiki/Lynn_Fitch"]]},
- {id:"supreme",lvl:1,x:930,y:285,g:"SC",kind:"elected",t1:"Supreme Ct.",t2:"9 justices",
+ {id:"supreme",lvl:1,x:900,y:285,g:"SC",kind:"elected",t1:"Supreme Ct.",t2:"9 justices",
   title:"Mississippi Supreme Court",
   holder:"Nine justices elected from three districts.",
   how:"[elected] to 8-year terms.",
@@ -504,6 +516,15 @@ const N = [
   inCase:"In September 2026 the grand jury found no evidence of criminal conduct and returned no charges. That's a [no true bill], not a 'not guilty.' With new evidence, a case can go to a new grand jury.",
   act:"Grand jurors are your neighbors. A registered, informed community is a stronger jury pool.",
   chips:["citizens","12 votes needed"],src:[["NPR: grand jury finds no evidence","https://www.npr.org/2026/09/22/nx-s1-5911804/nolan-wells-investigation-grand-jury"],["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]},
+ {id:"ucn",lvl:3,x:870,y:700,g:"UCN",kind:"volunteer",t1:"Cajun Navy",t2:"Volunteers, not gov't",
+  title:"United Cajun Navy (volunteer group)",
+  holder:"A volunteer search-and-rescue and search-and-recovery group. A private group, not a government agency.",
+  how:"Not elected or appointed. Volunteers who show up to help.",
+  next:"No election.",
+  controls:"Nothing official. Volunteers can search, but they can't seize evidence, charge anyone or rule on a death. Public records laws cover government offices, not private groups.",
+  inCase:"After hearing from Nolan's mother and a cousin, the group sent boats, drones and people to search Horn Island (WLOX, July 7). Later, a group leader spoke publicly and pushed back on claims from the family's lawyers (TMZ, Sept 28). A reported 22-page field report given to the sheriff is not confirmed.",
+  act:"You can't file a records request with a volunteer group. But anything they gave the sheriff becomes part of the sheriff's file, and that file can be requested. Treat their public statements as one group's account, not an official finding.",
+  chips:["volunteers","not government"],src:[["WLOX: Cajun Navy details search (July 7)","https://www.wlox.com/2026/07/07/we-jumped-into-action-united-cajun-navy-details-search-efforts-after-body-found-near-horn-island/"],["TMZ: rescuer pushes back (Sept 28)","https://www.tmz.com/2026/09/28/nolan-wells-rescuer-pushes-back-ben-crump-claims/"]]},
  {id:"you",lvl:3,x:500,y:820,g:"YOU",kind:"people",r:40,t1:"You",t2:"Voters + Agents of Change",
   title:"You: the voters",
   holder:"Every registered voter in Jackson County, and every Agent of Change who teaches them.",
@@ -524,12 +545,14 @@ const E = [
  ["nps","sheriff","case","search + scene"],["dps","sheriff","case","co-investigated"],["sheriff","da","case","investigation file"],["coroner","me","case","orders autopsy"],["me","da","case","autopsy findings"],["da","gj","case","presents case"],
  ["congress","doj","case","asked for review"],["congress","nps","case","asked to investigate"],["doj","sheriff","case","helped with digital evidence"],["chancery","you","case","estate opened"],["clerk","gj","case","jury lists"],
  ["leg","coroner","rules","sets qualifications"],["leg","me","rules","writes the rules"],["sup","sheriff","rules","funds"],["sup","coroner","rules","funds"],["gov","leg","rules","signs or vetoes laws"],
- ["congress","sheriff","rules","Ezell: former sheriff"]
+ ["congress","sheriff","rules","Ezell: former sheriff"],
+ ["mdmr","sheriff","case","search + boat GPS leads"],["mdmr","da","case","case records"],["nps","mdmr","case","searched the water"],["leg","mdmr","rules","boating laws"],
+ ["ucn","nps","case","searched the island"],["ucn","sheriff","case","search help (field report unconfirmed)"]
 ];
 
 /* ---------- Follow the case ---------- */
 const STEPS = [
- {n:["nps"],h:"July 4, 2026: the island",p:"Nolan Xavier Wells, 18, goes missing near Horn Island, federal land run by the National Park Service. The Coast Guard coordinates the search. He's found July 6."},
+ {n:["nps","mdmr","ucn"],h:"July 4 to 6, 2026: the search",p:"Nolan Xavier Wells, 18, goes missing near Horn Island, federal land run by the National Park Service. His mother reports him missing to state Marine Patrol that night. Marine Patrol, the Coast Guard and volunteers from the United Cajun Navy search. A park ranger finds him July 6."},
  {n:["sheriff","dps"],h:"The investigation",p:"The Jackson County Sheriff's Office investigates with the state Department of Public Safety. What they collect is what everyone after them gets to see."},
  {n:["coroner"],h:"The first ruling",p:"The elected [coroner] opens a death investigation and orders a state [autopsy]. No medical degree is required for this job in Mississippi."},
  {n:["me"],h:"The autopsy",p:"The State Medical Examiner's office in Pearl lists cause and manner as [undetermined]. That office answers to the state police agency. The family's own pathologist also ruled undetermined."},
@@ -713,7 +736,7 @@ const LESSONS=[
    "Sept. 21, 2026: the Jackson County grand jury returned a [no true bill]. No charges.",
    "Mississippi Today reported 132 subpoenas and 43 witnesses in the process. Still no charges.",
    "The state autopsy listed cause and manner of death as [undetermined], with drowning considered likely.",
-   "The state report found no fluid in his airway, lungs or stomach. The family's attorney says water is usually there in a drowning.",
+   "The state report found no fluid or debris in his airways. The family's attorney says water is usually there in a drowning.",
    "No charges is not the end of the road. Next on the map: a civil lawsuit, discovery and new evidence. Mississippi has no time limit on murder (Miss. Code 99-1-5)."],
   terms:["no true bill","undetermined","grand jury","medical examiner"],
   act:"Learn the timeline from real sources before you share anything about the case. Rumors hurt the family's fight.",
