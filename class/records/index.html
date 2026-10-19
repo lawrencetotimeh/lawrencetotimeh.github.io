@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Records Mission by Agent Kodak (Lawrence Totimeh Jr.): send public records requests about the death of Nolan Xavier Wells from your own email. Documentation beats conversation.">
+<meta name="author" content="Lawrence Totimeh Jr. (Agent Kodak)">
+<title>Records Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column like the Stop Kit. Form on top, then one card per request. Dark first, matches the Classroom. */
+:root{
+  --bg:#0A0A0B; --panel:#151413; --line:#2B2826; --fg:#F2EFE9; --muted:#B8B2A8;
+  --red:#E0343F; --gold:#D9A441; --ok:#5FB37A; --field:#1C1B19;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F7F5F1; --panel:#FFFFFF; --line:#DDD7CE; --fg:#141312; --muted:#5E5850;
+  --red:#C42530; --gold:#9A6C12; --ok:#2E7D4A; --field:#FFFFFF; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#F7F5F1; --panel:#FFFFFF; --line:#DDD7CE; --fg:#141312; --muted:#5E5850;
+  --red:#C42530; --gold:#9A6C12; --ok:#2E7D4A; --field:#FFFFFF; color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+a{color:var(--fg);text-decoration-color:var(--red);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,10vw,64px);line-height:.95}
+h1 span{color:var(--red)}
+h2{font-size:28px;line-height:1.1;margin-bottom:6px}
+h3{font-size:19px;line-height:1.2}
+p{margin:0}
+.lead{color:var(--muted);max-width:60ch}
+header{display:grid;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+section{padding-top:26px;display:grid;gap:14px}
+.card.start{border-color:var(--red)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:10px;min-width:0}
+.card.done{opacity:.6}
+.card.done h3{text-decoration:line-through;text-decoration-color:var(--ok)}
+.card.off{border-style:dashed}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{display:inline-block;font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:3px;border:1px solid var(--line);color:var(--muted)}
+.tag.t1{border-color:var(--ok);color:var(--ok)}
+.tag.t2{border-color:var(--gold);color:var(--gold)}
+.tag.t3{border-color:var(--red);color:var(--red)}
+.ask{font-size:15px}
+.ask ul{margin:6px 0 0;padding-left:20px}
+.why{font-size:14px;color:var(--muted)}
+.why b{color:var(--fg);font-weight:600}
+label{display:grid;gap:4px;font-weight:500;font-size:15px}
+label .hint{font-weight:400;font-size:13px;color:var(--muted)}
+input[type=text],input[type=email]{font:inherit;font-size:16px;color:var(--fg);background:var(--field);border:1px solid var(--line);border-radius:4px;padding:10px 12px;width:100%;min-width:0}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:15px}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:0 0 auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:600 15px/1 var(--body);padding:13px 16px;border-radius:4px;border:1px solid var(--line);background:var(--field);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+details{border:1px solid var(--line);border-radius:6px;background:var(--field)}
+summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:700 20px/1 var(--display);color:var(--red)}
+details[open] summary::after{content:"\2013"}
+.gap{padding:0 14px 14px;display:grid;gap:8px;font-size:14px}
+.gap dt{font:500 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.gap dd{margin:0}
+.to{font-size:14px;color:var(--muted);word-break:break-word}
+.to b{color:var(--fg)}
+.notice{border-left:3px solid var(--gold);padding:10px 12px;background:var(--field);font-size:14px}
+.notice.red{border-left-color:var(--red)}
+.pill{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:4px;font-weight:600;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+#toast.show{opacity:1}
+ol.steps{margin:0;padding-left:20px;display:grid;gap:6px}
+footer{margin-top:36px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Nolan Xavier Wells School of Law · <b style="color:var(--red);font-weight:500">Homework</b></p>
+  <h1>Records <span>Mission</span></h1>
+  <p class="lead" id="lead">A teenager died on federal land, and the public still can't see the file. The law says you can ask for it. Type your info once. You'll get ready-to-send requests, each one in your own words, sent from your own email.</p>
+  <p class="pill" id="modeLabel"></p>
+  <div class="card start">
+    <h3>New to this? Start here.</h3>
+    <p class="why" style="margin-top:4px">A records request means asking the government for copies of what it wrote down. It's your legal right. You don't need a lawyer, and you don't have to explain why you want it.</p>
+    <ol class="steps" style="margin-top:8px">
+      <li><b>Type your name and email</b> below. That's all you need.</li>
+      <li><b>Tap "Build my requests."</b></li>
+      <li><b>Pick one card and send it.</b> One is enough. If you want to do more, go for it.</li>
+      <li><b>Check it off</b>, then comment SENT under the video.</li>
+    </ol>
+    <p class="why" style="margin-top:8px">Takes about 3 minutes. Most adults never use this law. You just did.</p>
+  </div>
+</header>
+
+<section aria-labelledby="you">
+  <h2 id="you">Step 1. You</h2>
+  <div class="card">
+    <div class="grid2">
+      <label>Full name <span class="hint">Agencies need a real name.</span>
+        <input type="text" id="name" autocomplete="name"></label>
+      <label>Email <span class="hint">So they can reply to you.</span>
+        <input type="email" id="email" autocomplete="email"></label>
+    </div>
+    <label id="addrWrap">Mailing address <span class="hint">Optional. Some agencies ask for one.</span>
+      <input type="text" id="addr" autocomplete="street-address"></label>
+    <div class="grid2">
+      <label>City and state
+        <input type="text" id="city" autocomplete="address-level2"></label>
+      <label>Phone <span class="hint">Optional.</span>
+        <input type="text" id="phone" autocomplete="tel"></label>
+    </div>
+    <label class="check"><input type="checkbox" id="minor"> I'm under 18.</label>
+    <p class="notice hidden" id="minorNote">Good on you for showing up. Do this one with a parent or guardian, and leave the address blank. Or send the short letters instead of records requests.</p>
+    <p class="why">Nothing you type leaves your device. This page doesn't store or send anything. Your email app does the sending, and only when you press send.</p>
+    <div class="btns">
+      <button class="btn primary" id="build">Build my requests</button>
+      <button class="btn hidden" id="shuffle">New wording</button>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="send" id="out" class="hidden">
+  <h2 id="send">Step 2. Send them</h2>
+  <p class="lead">Each card goes to one office. Open the draft, read it, change anything you want, and send. Then check it off. Some federal offices only take requests through their website. Those cards copy the text and open the site for you.</p>
+  <div id="cards" style="display:grid;gap:14px"></div>
+</section>
+
+<section aria-labelledby="fam">
+  <h2 id="fam">Family only. Don't request these.</h2>
+  <div class="card off">
+    <div class="meta"><span class="tag t3">Closed by law</span></div>
+    <p class="ask">These records are closed to the public. Only the family or their lawyer can get them, no matter how many people ask:</p>
+    <ul class="ask" style="margin:0;padding-left:20px">
+      <li>Autopsy reports (Miss. Code 41-61-65)</li>
+      <li>Boating accident reports (Miss. Code 59-21-53)</li>
+      <li>Grand jury testimony (Rule 13.5)</li>
+    </ul>
+    <p class="why">Sending requests for these would waste your time and the office's. Put your energy into the cards above.</p>
+  </div>
+</section>
+
+<section aria-labelledby="next">
+  <h2 id="next">Step 3. What happens next</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Mississippi offices</b> usually have up to 7 working days to answer, and 14 at the most with a written reason (Miss. Code 25-61-5).</li>
+      <li><b>Federal offices</b> have 20 working days under FOIA. They often take longer.</li>
+      <li><b>They may ask for a fee.</b> Every draft asks for a cost estimate first. You never have to pay without agreeing.</li>
+      <li><b>If they say no</b>, the law says they have to explain why in writing. Ask them to name the exact exemption.</li>
+      <li><b>Keep every reply</b>, yes or no. That answer is your documentation. Name the gap you found in the comments on the video so other agents can see it.</li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="rules">
+  <h2 id="rules">Rules for agents</h2>
+  <div class="card">
+    <ul class="ask" style="margin:0;padding-left:20px">
+      <li>Be polite. Every word you send could be read in public someday.</li>
+      <li>Use your real name. Never pretend to be someone else.</li>
+      <li>Never name private people, and never contact the friends or their families.</li>
+      <li>One request per office is enough. Don't send repeat follow-ups to annoy them.</li>
+      <li>Got a real tip, firsthand? It goes to the DA's office or tips.fbi.gov. Not the comments.</li>
+    </ul>
+    <p class="why">Educator, not an attorney. This page is civic education, not legal advice.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Agent Kodak · lawrencetotimeh.com · Documentation beats conversation.</p>
+  <p>Nolan Xavier Wells. Say his name.</p>
+</footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   SETTINGS FOR LAWRENCE (the only part you should need to edit)
+   ============================================================ */
+const CONFIG = {
+  // "requests" until about 200 have gone out. Then change to "letters".
+  // You can preview Letter mode any time by adding ?mode=letters to the URL.
+  mode: "requests",
+};
+
+/* Delivery types:
+   email  -> opens the agent's email app with To, Subject, Body filled in
+   portal -> copies the text, then opens the agency's website form
+   mail   -> copies the text and shows the mailing address
+   off    -> address not verified yet; card shows but can't be sent */
+const AGENCIES = {
+  sheriff: {
+    name: "Jackson County Sheriff's Office",
+    delivery: "mail",
+    mail: "Jackson County Sheriff's Office, Attn: Public Records, P.O. Box 998, Pascagoula, MS 39568",
+    form: "https://www.co.jackson.ms.us/FormCenter/Sheriff-4/Contact-Us-46",
+    salutation: "Records Custodian",
+    law: "ms",
+  },
+  mdmr: {
+    name: "Mississippi Department of Marine Resources",
+    delivery: "email",
+    email: "crystal.matta@dmr.ms.gov",
+    salutation: "Public Records Officer",
+    law: "ms",
+  },
+  nps: {
+    name: "National Park Service (FOIA)",
+    delivery: "portal",
+    portal: "https://www.foia.gov/request/",
+    portalNote: "Pick Department of the Interior, then National Park Service. The Park Service does not accept FOIA requests by email.",
+    salutation: "FOIA Officer",
+    law: "foia",
+  },
+  uscg: {
+    name: "U.S. Coast Guard (FOIA)",
+    delivery: "portal",
+    portal: "https://www.foia.gov/request/",
+    portalNote: "Pick Department of Homeland Security, then U.S. Coast Guard.",
+    salutation: "FOIA Officer",
+    law: "foia",
+  },
+  chancery: {
+    name: "Jackson County Chancery Clerk",
+    delivery: "off",
+    salutation: "Chancery Clerk",
+    law: "court",
+  },
+  circuitClerk: {
+    name: "Jackson County Circuit Clerk",
+    delivery: "mail",
+    mail: "Jackson County Circuit Clerk, Attn: Records, P.O. Box 998, Pascagoula, MS 39568",
+    salutation: "Circuit Clerk",
+    law: "court",
+  },
+  da: {
+    name: "District Attorney, 19th Circuit District",
+    delivery: "mail",
+    mail: "Office of the District Attorney, 19th Circuit District, P.O. Box 1756, Pascagoula, MS 39568-1756",
+    salutation: "District Attorney",
+    law: "letter",
+  },
+  mdmrDirector: {
+    name: "MDMR Executive Director",
+    delivery: "mail",
+    mail: "Mississippi Department of Marine Resources, 1141 Bayview Avenue, Biloxi, MS 39530",
+    salutation: "Executive Director",
+    law: "letter",
+  },
+  sheriffLetter: {
+    name: "Jackson County Sheriff",
+    delivery: "mail",
+    mail: "Jackson County Sheriff's Office, P.O. Box 998, Pascagoula, MS 39568",
+    form: "https://www.co.jackson.ms.us/FormCenter/Sheriff-4/Contact-Us-46",
+    salutation: "Sheriff",
+    law: "letter",
+  },
+};
+
+/* The records lists never change. Only the wording around them does. */
+const REQUESTS = [
+  { id:"sheriff-incident", to:"sheriff", tier:1,
+    title:"The incident report",
+    subject:["incident report, missing person, Horn Island, July 4 to 6, 2026","incident and missing-person reports, July 4 to 6, 2026","records request: incident reports for the July 2026 Horn Island missing-person case"],
+    items:[
+      "All law enforcement incident reports for the missing-person report concerning Nolan Wells, July 4 to July 6, 2026, including any supplemental incident reports.",
+      "The initial missing-person report and the incident report for the recovery of his body on or about July 6, 2026."],
+    why:"Mississippi law says an incident report is always a public record.",
+    gap:{ q:"What did deputies write down the night he was reported missing?",
+          know:"MDMR's report shows the sheriff's office decided at 1:38 AM there was no water emergency. The search started the next morning.",
+          settle:"What was reported, when, and why the search waited until morning." } },
+  { id:"sheriff-cad", to:"sheriff", tier:2,
+    title:"Dispatch logs and the search log",
+    subject:["dispatch logs and search records, July 4 to 6, 2026","CAD/911 logs and search log, Horn Island, July 2026","records request: dispatch and search records, July 4 to 6, 2026"],
+    items:[
+      "Computer-aided dispatch (CAD) logs and 911 call records related to the report of Nolan Wells missing, July 4, 2026 at 6:00 PM through July 6, 2026.",
+      "Records showing the search effort on July 5 and 6, 2026: agencies involved, boats and aircraft used, areas searched, and start and stop times."],
+    why:"Two different call times are in the public record. The dispatch system would show the real one.",
+    gap:{ q:"When was each call made, and when did each agency start searching?",
+          know:"A lawsuit complaint alleges a call at 11:07 PM. MDMR logged the mother's call at 11:45 PM. The Coast Guard was asked to help at 12:26 PM the next day.",
+          settle:"The real timeline, straight from the dispatch system." } },
+  { id:"sheriff-steps", to:"sheriff", tier:2,
+    title:"Who stayed on the island, and what was done",
+    subject:["records about investigative steps, Horn Island, July 2026","request for records on witness interviews and evidence preservation","records request: Horn Island investigation, July 2026"],
+    items:[
+      "Records sufficient to show how many people, other than Nolan Wells, were identified as remaining on Horn Island after the three boats departed on July 4, 2026, and how many of them were interviewed and on what dates. Names are not requested.",
+      "Records showing whether any boat operator involved was tested for alcohol, cited, or charged, July 4 to 6, 2026.",
+      "Records showing whether a preservation request or legal process was sent to Snap Inc. in this case, and the dates. The content of any messages is not requested."],
+    why:"The grand jury report says other people stayed on the island with Nolan. The public doesn't know if they were all found.",
+    gap:{ q:"Were the last people near Nolan found and interviewed?",
+          know:"The grand jury report says: “Other individuals, including Mr. Wells, remained at the island to socialize.” Messages were also unsent from group chats. Nobody has said when.",
+          settle:"Whether the last people on the island were accounted for, and whether the message records were saved in time." } },
+  { id:"mdmr-seatow", to:"mdmr", tier:2,
+    title:"The original Sea Tow call",
+    subject:["original Sea Tow call audio, July 4, 2026","Sea Tow audio and redaction records, Horn Island, July 2026","records request: Sea Tow call recording, July 4, 2026"],
+    items:[
+      "The complete, original audio recording of the Sea Tow call(s) from Horn Island on July 4, 2026, with file metadata (creation date and length).",
+      "Any redaction log or record of what was removed from the version released to the public, with the legal reason for each redaction."],
+    why:"The grand jury heard the original call. The public only got a redacted copy.",
+    gap:{ q:"What was said on the call, in full?",
+          know:"The grand jury says it received “the original Sea Tow call” and that versions online “are not true and accurate.”",
+          settle:"What the public version left out, and why." } },
+  { id:"mdmr-gps", to:"mdmr", tier:2,
+    title:"The boats' GPS files",
+    subject:["GPS data for vessels in report MP2607-0016","vessel GPS downloads, Marine Patrol report MP2607-0016","records request: GPS files, report MP2607-0016"],
+    items:[
+      "The complete GPS data downloads (native files) for each vessel examined in Marine Patrol report MP2607-0016, and any GPS data obtained for any other vessel involved on July 4, 2026.",
+      "All Marine Patrol citations, warnings, and boarding records at or near Horn Island on July 4, 2026.",
+      "The complete computer-aided dispatch (CAD) record for MDMR event 2607-0205, related to report MP2607-0016, and any CAD entries for calls about Horn Island from July 4, 2026 at 6:00 PM through July 6, 2026, including call times and dispatch notes."],
+    why:"MDMR's report summarizes the GPS. The full files show every stop.",
+    gap:{ q:"Where did each boat go, minute by minute?",
+          know:"MDMR's report gives summary times, including a 14-minute trip into Fort Bayou at 5:52 PM. One of the three boats isn't in the report at all.",
+          settle:"The full tracks, not a summary." } },
+  { id:"nps-reports", to:"nps", tier:1,
+    title:"Park Service reports from Horn Island",
+    subject:["FOIA: Horn Island incident reports, July 4 to 6, 2026","FOIA request: Gulf Islands National Seashore, Horn Island, July 2026","FOIA: ranger reports, Horn Island, July 2026"],
+    items:[
+      "All incident reports, case reports, and ranger narratives from Gulf Islands National Seashore concerning Horn Island from July 4 to July 6, 2026, including the recovery of a body on or about July 6, 2026.",
+      "Law enforcement patrol logs and citations for Horn Island on July 4, 2026.",
+      "Any boating accident report filed with the park under 36 CFR 3.5 for July 4 to 6, 2026."],
+    why:"A federal ranger was reportedly involved. The Park Service's own record has never been released.",
+    gap:{ q:"Who found Nolan, exactly where, and what did the Park Service write down?",
+          know:"Accounts conflict. A volunteer searcher says a ranger found him on the beach. The sheriff said in the water, just offshore.",
+          settle:"The body's location, and the federal agency's own record." } },
+  { id:"nps-jurisdiction", to:"nps", tier:1,
+    title:"Who has legal power on Horn Island",
+    subject:["FOIA: legislative jurisdiction records, Horn Island","FOIA request: jurisdiction status of Horn Island, Gulf Islands National Seashore","FOIA: Horn Island jurisdiction"],
+    items:[
+      "Records showing the legislative jurisdiction status of Horn Island within Gulf Islands National Seashore (exclusive, concurrent, partial, or proprietary), including any letter accepting jurisdiction under 40 U.S.C. 3112 or its predecessor, and any state cession."],
+    why:"This one record decides whether federal criminal law even applies on the island.",
+    gap:{ q:"Can federal investigators act on their own on Horn Island?",
+          know:"Most of the island is federal land. But owning land and having power to charge a crime there aren't the same thing. Nobody has produced the record.",
+          settle:"Door One from Lesson 6: whether the federal government has criminal jurisdiction there." } },
+  { id:"uscg", to:"uscg", tier:1,
+    title:"The Coast Guard's call and search file",
+    subject:["FOIA: Sector Mobile case file, Horn Island, July 4 to 6, 2026","FOIA request: search and rescue records, Horn Island, July 2026","FOIA: Coast Guard records, Horn Island missing person"],
+    items:[
+      "Sector Mobile's records of any call received on July 4, 2026 concerning a missing person at Horn Island, Mississippi, including the call log and any recording.",
+      "The search and rescue case file for July 5 and 6, 2026, including search patterns, assets used, and any drift modeling.",
+      "Track lines or position logs (with times) for each Coast Guard boat and aircraft that searched near Horn Island on July 5 and 6, 2026."],
+    why:"The Coast Guard's drift data could show where the water would have carried him.",
+    gap:{ q:"What did the Coast Guard hear on July 4, and what did its search show?",
+          know:"Reporting says the Coast Guard got a call around 11 PM July 4 and was formally asked to help at 12:26 PM July 5. No drift data is public.",
+          settle:"The call record and the search and drift data." } },
+  { id:"nps-search", to:"nps", tier:1,
+    title:"The ranger's search path and where Nolan was found",
+    subject:["FOIA: search tracks and recovery location, Horn Island, July 5 to 6, 2026","FOIA request: ranger GPS tracks, Gulf Islands National Seashore, July 2026","FOIA: Horn Island search records and recovery coordinates"],
+    items:[
+      "GPS track logs, vessel or vehicle location data, or any other record showing the routes and times of National Park Service boats, vehicles, or personnel searching on or near Horn Island on July 5 and 6, 2026, including the ranger who located a body on or about July 6, 2026.",
+      "Records showing the time and GPS coordinates where the body was located on or about July 6, 2026, and whether it was on land, at the waterline, or in the water. Photographs of the person are not requested.",
+      "Any search assignments, search area maps, or debrief notes prepared by the Park Service for July 5 and 6, 2026."],
+    why:"The ranger found him. The ranger's own path and the exact spot are the starting point for checking the whole search.",
+    gap:{ q:"Did anyone search the spot where Nolan was found before he was found?",
+          know:"The grand jury report says Horn Island was thoroughly searched on July 5 and that if his body had been on the island, it would have been discovered. A ranger found him the next morning at the west end. The sheriff said in the water, just offshore.",
+          settle:"Exactly where and when he was found, and whether a search path crossed that spot before." } },
+  { id:"mdmr-search", to:"mdmr", tier:2,
+    title:"Marine Patrol's search tracks, drones and sonar",
+    subject:["search track records, Horn Island, July 5 to 6, 2026","Marine Patrol search vessel GPS and drone logs, July 2026","records request: search tracks, report MP2607-0016"],
+    items:[
+      "GPS track logs or position data, with times, for each MDMR vessel that searched on or near Horn Island on July 5 and 6, 2026.",
+      "Flight logs and flight paths for each drone flight MDMR flew in the search on July 5 and 6, 2026, including start and end times.",
+      "Sonar logs or records showing where sonar was used on July 5 and 6, 2026, and any search area maps or assignments."],
+    why:"MDMR's report says it searched with a boat, drones and sonar. The tracks show where they actually went.",
+    gap:{ q:"Which areas around the island did Marine Patrol cover, and when?",
+          know:"MDMR records reported by WLOX describe a boat, three drone attempts and sonar it called inconclusive on July 5. No track data is public.",
+          settle:"A map of where Marine Patrol searched, minute by minute." } },
+  { id:"sheriff-search", to:"sheriff", tier:2,
+    title:"The sheriff's boats and aircraft",
+    subject:["search track records, sheriff's marine unit, July 5 to 6, 2026","GPS tracks of sheriff's boats and aircraft, Horn Island, July 2026","records request: search tracks, Horn Island, July 2026"],
+    items:[
+      "GPS track logs or position data, with times, for each Jackson County Sheriff's Office boat or aircraft used in the search near Horn Island on July 5 and 6, 2026.",
+      "Any search grid, search area map, or assignment records showing which agency or volunteer group searched which area on July 5 and 6, 2026, including volunteer groups such as the United Cajun Navy."],
+    why:"The sheriff led the case. If volunteers handed over search maps or field reports, they're in this file too.",
+    gap:{ q:"Who searched which part of the island and water, and when?",
+          know:"Marine Patrol, the Coast Guard, the sheriff, the Park Service and volunteers all searched. No combined search map has ever been released.",
+          settle:"One picture of the full search, by agency." } },
+  { id:"chancery", to:"chancery", tier:1,
+    title:"How the estate judge was assigned",
+    subject:["copy request: assignment or recusal order, Wells estate","request for court record: judge assignment, Estate of Nolan Wells","copy request: Estate of Nolan Wells, assignment order"],
+    items:[
+      "A copy of any order of recusal, reassignment, or assignment of judge entered in the estate matter of Nolan Wells (2026), and the docket sheet."],
+    why:"A judge in the district has a family tie to someone on the trip. The assignment order shows how the case was handled.",
+    gap:{ q:"How was the judge chosen for Nolan's estate case?",
+          know:"Reporting confirmed a family tie between a local chancellor and one of the friends. The case went to a different chancellor.",
+          settle:"Whether there was a recusal order, and who signed it." } },
+  { id:"circuit-impanel", to:"circuitClerk", tier:1,
+    title:"Which judge impaneled the grand jury",
+    subject:["copy request: order impaneling the April 2026 grand jury","request for court record: grand jury impaneling order, Jackson County, April 2026","copy request: impaneling order and minutes, April 20, 2026 grand jury"],
+    items:[
+      "A copy of the order impaneling the Jackson County grand jury on or about April 20, 2026, and the court minutes for that date showing the presiding circuit judge.",
+      "A copy of any order recalling that grand jury on or about September 14, 2026, and any order of recusal or reassignment entered in connection with it."],
+    why:"The grand jury report credits \"the impaneling Circuit Judge\" but never names the judge. That's a public court record, and it answers whether any judge with ties to a lawyer in this case presided.",
+    gap:{ q:"Which judge impaneled and recalled the grand jury that heard Nolan's case?",
+          know:"The report says the jury was impaneled April 20, 2026 and recalled September 14, 2026, by an unnamed circuit judge. One sitting circuit judge in the district is a former partner of the firm representing three of the friends.",
+          settle:"The impaneling order, the minutes, and any recusal order." } },
+];
+
+const LETTERS = [
+  { id:"letter-sheriff", to:"sheriffLetter", tier:2,
+    title:"Ask the sheriff to release the file",
+    subject:["request to release the Nolan Wells investigative file","please release the Horn Island file","public release of the Nolan Wells file"],
+    body:[
+      "Mississippi law gives your office discretion to release all or part of an investigative report (Miss. Code 25-61-12(2)(a)). The grand jury has finished its work. I'm asking you to use that discretion and release the investigative file in the death of Nolan Wells, with private information redacted.",
+      "Please also confirm whether every person known to have remained on Horn Island with Nolan Wells was identified and interviewed."],
+    why:"After about 200 requests, the ask moves to the person who can say yes.",
+    gap:{ q:"Will the sheriff use the discretion the law gives him?",
+          know:"The investigative file is exempt, but the agency “may choose to make public all or any part” of it.",
+          settle:"Whether the public ever sees the file." } },
+  { id:"letter-mdmr", to:"mdmrDirector", tier:2,
+    title:"Ask MDMR to release the audio and GPS",
+    subject:["request to release the Sea Tow audio and GPS files","please release the original Sea Tow call","Horn Island records: public release request"],
+    body:[
+      "The grand jury heard the original Sea Tow call from July 4, 2026. The public has only heard a redacted version. I'm asking MDMR to release the original audio and the full GPS files from report MP2607-0016, with private information redacted, and to explain each redaction.",
+      "Please also answer the public records requests your office has received on this case promptly."],
+    why:"MDMR holds two of the most-requested records.",
+    gap:{ q:"Will MDMR release what the grand jury already heard?",
+          know:"The grand jury says versions online “are not true and accurate.”",
+          settle:"What was actually said, in full." } },
+  { id:"letter-da", to:"da", tier:2,
+    title:"Ask the DA what would reopen the case",
+    subject:["what new evidence would lead to re-presentment?","request for a public answer on re-presentment","Nolan Wells: re-presentment standard"],
+    body:[
+      "The grand jury report says the matter “should be re-presented” if credible evidence comes to light that the death was non-accidental. I'm asking your office to say publicly what kind of evidence would meet that standard.",
+      "I'm also asking for a public summary of the conflict disclosures given to the grand jury, with private details removed."],
+    why:"The grand jury left the door open. This asks who holds the key, and what opens it.",
+    gap:{ q:"What would reopen the case?",
+          know:"The report says the matter “should be re-presented” if credible new evidence emerges.",
+          settle:"A clear, public standard that people can work toward." } },
+];
+
+/* Hand-written phrase banks. No AI. Mixed fresh every time. */
+const BANK = {
+  hello:["Dear {sal},","Hello,","Good morning,","To the {sal}:","Dear {sal}:","Hi,"],
+  opener:{
+    ms:["My name is {name}, and I'm writing to request public records under the Mississippi Public Records Act, Miss. Code Ann. 25-61-1 and following.",
+        "I'm {name}. Under the Mississippi Public Records Act (Miss. Code Ann. 25-61-1 et seq.), I'm requesting copies of the records listed below.",
+        "This is a public records request under Miss. Code Ann. 25-61-1 and following. My name is {name}.",
+        "My name is {name}. I'm a member of the public, and I'm asking for the records below under the Mississippi Public Records Act (Miss. Code Ann. 25-61-1 et seq.).",
+        "I'm writing as a private citizen to ask for public records under the Mississippi Public Records Act, Miss. Code Ann. 25-61-1 and following. My name is {name}."],
+    foia:["My name is {name}, and this is a request under the Freedom of Information Act, 5 U.S.C. 552.",
+          "I'm {name}. Under the Freedom of Information Act (5 U.S.C. 552), I'm requesting the records listed below.",
+          "This is a FOIA request (5 U.S.C. 552). My name is {name}.",
+          "My name is {name}. I'm a member of the public, and I'm asking for the records below under the Freedom of Information Act, 5 U.S.C. 552."],
+    court:["My name is {name}, and I'd like to request copies of a court record.",
+           "I'm {name}. I'm writing to request copies from a court file.",
+           "My name is {name}. I'm asking for copies of the record described below."],
+    letter:["My name is {name}, and I'm writing about the death of Nolan Wells on Horn Island in July 2026.",
+            "I'm {name}. I'm writing to you about the death of Nolan Wells.",
+            "My name is {name}. Like a lot of people, I've followed the case of Nolan Wells closely, and I'm writing with a respectful request."],
+  },
+  intro:["I'm requesting:","Specifically, I'm asking for:","The records I'm asking for are:","Please provide copies of:","Here's what I'm requesting:"],
+  discretion:[
+    "If any of these records fall under the investigative exemption in 25-61-12(2)(a), I ask that you use the discretion that section gives you to release them, with private information redacted. The grand jury has finished its work.",
+    "I understand investigative reports can be exempt. The same section, 25-61-12(2)(a), lets your office release them anyway. With the grand jury finished, I'm asking you to use that discretion in the public interest.",
+    "Section 25-61-12(2)(a) lets an agency choose to release investigative records. Since the grand jury has concluded, I respectfully ask you to release whatever you can, with private details redacted."],
+  format:["Electronic copies by email are best for me.","I'd prefer electronic copies, sent by email if possible.","Digital copies are fine, and email works great.","Please send electronic copies if you can."],
+  fees:{
+    ms:["If there's a cost, please send me an estimate before any work begins.","Please let me know of any fees before you start.","If fees apply, I'd like an estimate first, please.","Please tell me the cost up front if there is one."],
+    foia:["I'm requesting as a member of the public for noncommercial purposes. Please tell me before fees go over $25.","I'm a private individual, and this isn't for commercial use. Please contact me if fees will exceed $25.","This request is noncommercial. Please let me know first if fees would be more than $25."],
+    court:["Please let me know the copy cost and how to pay.","If there's a copy fee, please tell me the amount.","Please tell me any copy fee before you send."],
+    letter:[""],
+  },
+  denial:{
+    ms:["If any part is denied, please tell me in writing which exemption applies, and release the rest. Please also state whether the investigation is open or closed.","If you withhold anything, please cite the specific exemption, tell me whether the investigation is currently open or closed, and send the parts that can be released.","If something can't be released, please name the exemption in writing and redact rather than withhold whole records. If the reason is an investigation, please say whether it's open or closed."],
+    foia:["If any part is withheld, please cite the specific exemption and release all reasonably segregable portions.","If you deny any part, please name the exemption and send the parts that aren't exempt.","Please release any non-exempt portions and identify the exemption for anything withheld."],
+    court:[""],
+    letter:[""],
+  },
+  thanks:["Thank you for your time.","Thanks for your help with this.","I appreciate your work on this.","Thank you. I look forward to hearing from you.","Thanks in advance."],
+  close:["Sincerely,","Respectfully,","Thank you,","Best,","Regards,"],
+};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} },
+};
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove("show"),2200); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+async function copy(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    let ok=false; try{ ok=document.execCommand("copy"); }catch(_){}
+    ta.remove(); return ok;
+  }
+}
+
+const params = new URLSearchParams(location.search);
+const MODE = params.get("mode")==="letters" ? "letters" : CONFIG.mode;
+
+function me(){
+  return {
+    name: $("#name").value.trim(),
+    email: $("#email").value.trim(),
+    addr: $("#minor").checked ? "" : $("#addr").value.trim(),
+    city: $("#city").value.trim(),
+    phone: $("#phone").value.trim(),
+  };
+}
+
+function signature(u){
+  return [u.name, u.addr, u.city, u.phone, u.email].filter(Boolean).join("\n");
+}
+
+function draft(card, u){
+  const ag = AGENCIES[card.to];
+  const law = ag.law;
+  const fill = s => s.replace(/\{name\}/g,u.name).replace(/\{sal\}/g,ag.salutation);
+  const parts = [fill(pick(BANK.hello)), fill(pick(BANK.opener[law]))];
+  if(card.items){
+    const list = card.items.map((t,i)=> (card.items.length>1?`${i+1}. `:"") + t).join("\n\n");
+    parts.push(pick(BANK.intro) + "\n\n" + list);
+    if(card.tier===2 && law==="ms") parts.push(pick(BANK.discretion));
+    parts.push(pick(BANK.format) + " " + pick(BANK.fees[law]));
+    const d = pick(BANK.denial[law]); if(d) parts.push(d);
+  } else {
+    parts.push(...card.body);
+  }
+  parts.push(pick(BANK.thanks));
+  parts.push(pick(BANK.close) + "\n" + signature(u));
+  return { subject: pick(card.subject).replace(/^./,c=>c.toUpperCase()), body: parts.join("\n\n") };
+}
+
+function deliveryHTML(card, ag){
+  if(ag.delivery==="email") return `<p class="to">To: <b>${esc(ag.name)}</b> · ${esc(ag.email)}</p>`;
+  if(ag.delivery==="portal") return `<p class="to">To: <b>${esc(ag.name)}</b> · online form only. ${esc(ag.portalNote)}</p>`;
+  if(ag.delivery==="mail" && ag.form) return `<p class="to">To: <b>${esc(ag.name)}</b>. No public records email is listed. Copy the text, then use the county's <a href="${ag.form}" target="_blank" rel="noopener">contact form</a> or mail it to: ${esc(ag.mail)}</p>`;
+  if(ag.delivery==="mail") return `<p class="to">To: <b>${esc(ag.name)}</b>. Copy the text, print it, sign it, and mail it to: ${esc(ag.mail)}</p>`;
+  return `<p class="notice">Address being verified. This card turns on once we confirm the right office.</p>`;
+}
+
+function buttonsHTML(card, ag){
+  if(ag.delivery==="email") return `<a class="btn primary" data-act="mail" href="#">Open draft</a><button class="btn" data-act="copy">Copy text</button>`;
+  if(ag.delivery==="portal") return `<button class="btn primary" data-act="portal">Copy + open form</button><button class="btn" data-act="copy">Copy text</button>`;
+  if(ag.delivery==="mail" && ag.form) return `<button class="btn primary" data-act="form">Copy + open form</button><button class="btn" data-act="copy">Copy text</button>`;
+  if(ag.delivery==="mail") return `<button class="btn primary" data-act="copy">Copy text</button>`;
+  return `<button class="btn" disabled>Not ready yet</button>`;
+}
+
+const TIER = {1:["t1","Public by law"],2:["t2","Agency's choice"],3:["t3","Family only"]};
+
+let drafts = {};
+function build(){
+  const u = me();
+  if(!u.name){ toast("Add your name first"); $("#name").focus(); return; }
+  if(!u.email){ toast("Add your email so they can reply"); $("#email").focus(); return; }
+  const list = MODE==="letters" ? LETTERS : REQUESTS;
+  const box = $("#cards"); box.innerHTML = ""; drafts = {};
+  list.forEach(card=>{
+    const ag = AGENCIES[card.to];
+    const d = draft(card,u); drafts[card.id] = d;
+    const done = store.get("rm-done-"+card.id)==="1";
+    const el = document.createElement("article");
+    el.className = "card" + (done?" done":"") + (ag.delivery==="off"?" off":"");
+    el.dataset.id = card.id;
+    const [tc,tl] = TIER[card.tier];
+    const asks = card.items ? card.items : card.body;
+    el.innerHTML = `
+      <div class="meta"><span class="tag ${tc}">${tl}</span><span class="tag">${MODE==="letters"?"Letter":"Records request"}</span></div>
+      <h3>${esc(card.title)}</h3>
+      ${deliveryHTML(card,ag)}
+      <div class="ask">${MODE==="letters"?"What it says:":"What it asks for:"}<ul>${asks.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
+      <p class="why"><b>Why it matters:</b> ${esc(card.why)}</p>
+      <details><summary>What gap does this fill?</summary>
+        <dl class="gap"><dt>The open question</dt><dd>${esc(card.gap.q)}</dd>
+        <dt>What we know now</dt><dd>${esc(card.gap.know)}</dd>
+        <dt>What this would settle</dt><dd>${esc(card.gap.settle)}</dd></dl>
+      </details>
+      <div class="btns">${buttonsHTML(card,ag)}</div>
+      ${ag.delivery!=="off"?`<label class="check"><input type="checkbox" data-act="done" ${done?"checked":""}> I sent it</label>`:""}`;
+    box.appendChild(el);
+  });
+  $("#out").classList.remove("hidden");
+  $("#shuffle").classList.remove("hidden");
+  $("#build").textContent = "Rebuild with my info";
+  $("#out").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+$("#cards").addEventListener("click", async e=>{
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const el = b.closest(".card"); const id = el.dataset.id;
+  const list = MODE==="letters" ? LETTERS : REQUESTS;
+  const card = list.find(c=>c.id===id); const ag = AGENCIES[card.to]; const d = drafts[id];
+  const full = `Subject: ${d.subject}\n\n${d.body}`;
+  const act = b.dataset.act;
+  if(act==="mail"){
+    e.preventDefault();
+    location.href = `mailto:${ag.email}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
+  } else if(act==="copy"){
+    toast(await copy(full) ? "Copied. Paste it anywhere." : "Couldn't copy. Select the text by hand.");
+  } else if(act==="portal"){
+    const ok = await copy(full); toast(ok ? "Copied. Paste it into the form." : "Couldn't copy");
+    window.open(ag.portal, "_blank", "noopener");
+  } else if(act==="form"){
+    const ok = await copy(full); toast(ok ? "Copied. Paste it into the form." : "Couldn't copy");
+    window.open(ag.form, "_blank", "noopener");
+  } else if(act==="done"){
+    el.classList.toggle("done", b.checked);
+    b.checked ? store.set("rm-done-"+id,"1") : store.del("rm-done-"+id);
+    if(b.checked) toast("Logged on your device. Keep whatever they send you.");
+  }
+});
+
+$("#build").addEventListener("click", build);
+$("#shuffle").addEventListener("click", ()=>{ build(); toast("Fresh wording. Same records."); });
+$("#minor").addEventListener("change", e=>{
+  $("#minorNote").classList.toggle("hidden", !e.target.checked);
+  $("#addrWrap").classList.toggle("hidden", e.target.checked);
+});
+$("#modeLabel").textContent = MODE==="letters"
+  ? "Letter mode · The requests are in. Now we ask the people who can say yes."
+  : "Records request mode";
+if(MODE==="letters"){
+  $("#lead").textContent = "A teenager died on federal land, and the public still can't see the file. Agents have already sent the requests. Now we write to the people who can release it. Type your info once, and send three short, respectful letters.";
+  $("#build").textContent = "Build my letters";
+}
+</script>
+</body>
+</html>
