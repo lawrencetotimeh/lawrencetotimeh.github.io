@@ -62,7 +62,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
             "Lawrence Totimeh Jr. is a social justice advocate and civic educator, not a lawyer. Plain-language civics lessons taught from the public record, the Classroom map, talks and workshops, and Follow the Money LIB.", "") + nav("home") + f'''
 <section class="hero dark"><div class="wrap">
 <div>
-<div class="eyebrow">Agent Kodak · Social justice advocate · Civic educator · Combat veteran</div>
+<div class="eyebrow">Agent Kodak · Social justice advocate · Speaker · Civic educator · Combat veteran</div>
 <h1 style="margin-top:14px">Learn the law.<br>Apply it as <span>citizens.</span></h1>
 <p class="lede">I'm not a lawyer. I'm a social justice advocate and civic educator. I teach everyday people how the justice system works, in plain language, from the public record, so we can hold it accountable. We learn the rules. Then we change them.</p>
 <div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
@@ -296,7 +296,7 @@ LETTER = """Dear [Representative / Senator NAME],
 
 I am a constituent in [CITY, STATE]. I am writing about the death of Nolan Xavier Wells, 18, found in the water off Horn Island, Mississippi, on July 6, 2026. Horn Island is managed by the National Park Service.
 
-On October 7, 2026, the Justice Department told PEOPLE that federal officials assisted the state investigation, found no evidence of foul play or a crime, and will not pursue a further investigation. Both the state and the independent autopsies list the cause and manner of death as undetermined.
+Federal officials reportedly told PEOPLE magazine that they assisted the state investigation and found no evidence of a crime. Both the state and the independent autopsies list the cause and manner of death as undetermined.
 
 I am asking you to put three questions to the Justice Department and the National Park Service, and to send me the answers in writing:
 
@@ -386,7 +386,7 @@ act = head("Act · Contact your representatives · Lawrence Totimeh Jr.", "Find 
 <section class="light"><div class="wrap">
 <div class="sec-head rev"><div><div class="eyebrow">Then</div><h2 style="margin-top:8px">Name your gap</h2></div></div>
 <p class="muted rev" style="max-width:62ch">When you get an answer, or no answer by the deadline, that's documentation. Keep it. Name the gap you found in the comments on the Lesson 6 video so other agents can see it. That's how the record gets built: one letter at a time.</p>
-<div class="cta rev" style="margin-top:26px"><a class="btn red" href="class/#lesson6">Back to Lesson 6</a><a class="btn ghost" href="class/">The Classroom</a></div>
+<div class="cta rev" style="margin-top:26px"><a class="btn red" href="class/records/">Records Mission: send a request in 3 minutes</a><a class="btn ghost" href="class/#lesson6">Back to Lesson 6</a><a class="btn ghost" href="class/">The Classroom</a></div>
 </div></section>
 <script>
 (function(){{
@@ -417,7 +417,7 @@ notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land
 </div></section>
 """ + JOIN + FOOT
 
-pages = {"404.html": notfound, "index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"),
+pages = {"404.html": notfound, "index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
          "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
 for name, html in pages.items():
     os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
