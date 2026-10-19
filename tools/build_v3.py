@@ -45,6 +45,8 @@ JOIN = '''<section class="dark join"><div class="wrap rev">
 <h2 style="margin-top:12px">Agents of Change,<br>fighting for human rights.</h2>
 <p class="lede muted">Learn the law. Document. Vote. Follow up. Never harass. Every like, every repost, every comment helps educate our community.</p>
 <div class="socials"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a><a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a></div>
+<p class="share"><span class="muted">Share this page:</span> <button type="button" class="sharelink" id="shareLink" data-base="agentkodak.com">agentkodak.com</button></p>
+<script>(function(){var b=document.getElementById('shareLink');if(!b)return;var p=location.pathname.replace(/[/]index[.]html$/,'/').replace(/[.]html$/,'').replace(/[/]$/,'');if(p==='/index')p='';var t=b.getAttribute('data-base')+p;b.textContent=t;b.addEventListener('click',function(){var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent=t},1800)};if(navigator.clipboard){navigator.clipboard.writeText('https://'+t).then(done,function(){prompt('Share link','https://'+t)})}else{prompt('Share link','https://'+t)}})})();</script>
 <div class="support rev" id="support-links"><div class="eyebrow">Support the work</div>
 <p class="muted">Everything here is free and stays that way. If a lesson helped you, you can back the work directly.</p>
 <div class="cta"><a class="btn ghost" href="https://cash.app/$AgentKodak" target="_blank" rel="noopener">Cash App · $AgentKodak</a><a class="btn ghost" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=ikonicshots@gmail.com" target="_blank" rel="noopener">PayPal</a><button class="btn ghost zelle" type="button" data-email="Lawrence.Totimeh@gmail.com">Zelle · copy email</button></div>
@@ -405,7 +407,17 @@ def redirect(to, canon=None):
     canon = canon or to
     return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
 
-pages = {"index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"),
+# ---------------- 404 ----------------
+notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land. Try the Classroom, the Act page, or the homepage.", "404.html").replace('<link rel="canonical" href="https://lawrencetotimeh.com/404.html">\n', '<base href="https://lawrencetotimeh.com/"><meta name="robots" content="noindex">\n') + nav("") + """
+<section class="pagehero"><div class="wrap">
+<div class="eyebrow">404 · Page not found</div>
+<h1>That link<br>didn't land.</h1>
+<p class="lede">Short links that work: <span style="font-family:var(--mono)">agentkodak.com/class</span> and <span style="font-family:var(--mono)">agentkodak.com/act</span>. Check the spelling, or pick a door below.</p>
+<div class="cta" style="margin-top:34px"><a class="btn red" href="/class/">The Classroom</a><a class="btn ghost" href="/act">Act: contact your reps</a><a class="btn ghost" href="/">Home</a></div>
+</div></section>
+""" + JOIN + FOOT
+
+pages = {"404.html": notfound, "index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"),
          "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
 for name, html in pages.items():
     os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
