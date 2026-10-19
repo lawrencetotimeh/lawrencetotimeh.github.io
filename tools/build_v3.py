@@ -409,7 +409,7 @@ def redirect(to, canon=None):
 
 # ---------------- 404 ----------------
 notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land. Try the Classroom, the Act page, or the homepage.", "404.html").replace('<link rel="canonical" href="https://lawrencetotimeh.com/404.html">\n', '<base href="https://lawrencetotimeh.com/"><meta name="robots" content="noindex">\n') + nav("") + """
-<section class="pagehero"><div class="wrap">
+<section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">404 · Page not found</div>
 <h1>That link<br>didn't land.</h1>
 <p class="lede">Short links that work: <span style="font-family:var(--mono)">agentkodak.com/class</span> and <span style="font-family:var(--mono)">agentkodak.com/act</span>. Check the spelling, or pick a door below.</p>
