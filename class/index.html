@@ -187,6 +187,39 @@ section.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,
 .listview summary{cursor:pointer;font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:17px}
 .listview ul{margin:6px 0 4px;padding-left:18px}
 .listview li button{background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+/* Section nav + sections (Oct 21) */
+.secnav{position:sticky;top:0;z-index:15;background:rgba(10,10,11,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -16px;padding:0 16px}
+.secnav ul{list-style:none;margin:0 auto;padding:10px 0;max-width:1240px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.secnav ul::-webkit-scrollbar{display:none}
+.secnav li{flex:0 0 auto}
+.secnav a,.secnav button{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:transparent;cursor:pointer;white-space:nowrap}
+.secnav a:hover,.secnav button:hover{color:var(--paper);border-color:var(--stone)}
+.secnav .go{color:var(--gold);border-color:var(--gold)}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px;margin:18px 0 6px}
+.howto div{border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:14px;min-width:0}
+.howto b{display:block;font-family:var(--display);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--paper)}
+.howto b i{font-style:normal;color:var(--red);margin-right:6px}
+.howto p{margin:4px 0 0;color:var(--stone)}
+.sec{margin-top:40px;padding-top:18px;border-top:2px solid var(--line);scroll-margin-top:64px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 28px;margin-bottom:14px}
+.sec-head h3{font-family:var(--display);text-transform:uppercase;font-size:30px;margin:4px 0 0;letter-spacing:.02em}
+.sec-head .lede{margin-top:6px}
+.sec.gold{border-top-color:var(--gold)}
+.tl{margin-top:0;border-top:0;padding-top:0}
+section.more{display:block;margin-top:0}
+.block{border-top:0;padding-top:0;margin-top:0}
+.gapfill{margin-top:8px;border:1px dashed var(--gold);border-radius:6px;background:rgba(217,164,65,.06)}
+.gapfill summary{cursor:pointer;padding:9px 12px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);list-style:none;display:flex;justify-content:space-between;gap:10px}
+.gapfill summary::-webkit-details-marker{display:none}
+.gapfill summary::after{content:"+";font-family:var(--display);font-size:18px;line-height:1}
+.gapfill[open] summary::after{content:"\2013"}
+.gapfill .gf{padding:0 12px 12px;display:grid;gap:8px;font-size:14px}
+.gapfill .gf dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.gapfill .gf dd{margin:2px 0 0}
+.gapfill .gf a.btnlink{display:inline-block;margin-top:4px;background:var(--gold);color:var(--ink);text-decoration:none;font-weight:600;border-radius:4px;padding:8px 14px}
+.tl-card a{color:var(--stone)}
+.panel:target{scroll-margin-top:64px}
+@media (max-width:900px){.panel{scroll-margin-top:64px}}
 footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--stone);display:grid;gap:6px}
 footer strong{color:var(--paper)}
 @media (prefers-reduced-motion:reduce){.edge.hot{animation:none}}
@@ -208,6 +241,34 @@ footer strong{color:var(--paper)}
   </div>
 </header>
 
+<nav class="secnav" aria-label="Sections of this page">
+  <ul>
+    <li><a href="#map-sec">1 · The map</a></li>
+    <li><button type="button" data-jump="case">2 · Follow the case</button></li>
+    <li><button type="button" data-jump="lesson">3 · Lessons</button></li>
+    <li><a href="#timeline">4 · Timeline + gaps</a></li>
+    <li><a href="#teachers">5 · Teachers</a></li>
+    <li><a href="#quiz-sec">6 · Quiz</a></li>
+    <li><a href="#list-sec">7 · Every office</a></li>
+    <li><a class="go" href="records/">Records Mission →</a></li>
+  </ul>
+</nav>
+
+<div class="howto" aria-label="How to use this page">
+  <div><b><i>1</i>Tap a circle</b><p>Each circle is an office. Tap one and the breakdown opens: who they are, what they control, what you can do.</p></div>
+  <div><b><i>2</i>Follow the case</b><p>Eight steps, from the island to the grand jury. The lit circles show who had the case at each step.</p></div>
+  <div><b><i>3</i>Find the gaps</b><p>The timeline marks where the record goes quiet. Open any gap to see which request fills it.</p></div>
+  <div><b><i>4</i>Send a request</b><p>The <a href="records/">Records Mission</a> builds the request for you. About 3 minutes.</p></div>
+</div>
+
+<section class="sec" id="map-sec" aria-labelledby="map-h">
+<div class="sec-head">
+  <div>
+    <div class="eyebrow">Section 1 · The map</div>
+    <h3 id="map-h">Who holds the levers</h3>
+    <p class="lede">Tap any circle. The breakdown opens below the map on a phone, beside it on a bigger screen.</p>
+  </div>
+</div>
 <div class="controls" role="group" aria-label="Choose a view">
   <span class="label">View</span>
   <button class="lens" data-lens="all" aria-pressed="true">Everything</button>
@@ -249,13 +310,14 @@ footer strong{color:var(--paper)}
 
   <aside class="panel" id="panel" aria-live="polite"></aside>
 </div>
+</section>
 
-<section class="tl" id="timeline" aria-labelledby="tl-h">
+<section class="sec gold tl" id="timeline" aria-labelledby="tl-h">
   <div class="tl-head">
     <div>
-      <div class="eyebrow" style="color:var(--gold)">Classroom · The record</div>
+      <div class="eyebrow" style="color:var(--gold)">Section 4 · The record</div>
       <h3 id="tl-h">The timeline, and the gaps</h3>
-      <p class="lede">What happened, what the DA says was done, what anyone can verify, and where the record goes quiet. Every item is labeled. Tap an office to see it on the map.</p>
+      <p class="lede">What happened, what the DA says was done, what anyone can verify, and where the record goes quiet. Every item is labeled and linked to its source. Open a gap to see how it gets filled. Tap an office to see it on the map.</p>
     </div>
     <div class="tl-filters" role="group" aria-label="Filter the timeline">
       <button class="tf" type="button" data-f="all" aria-pressed="true">All</button>
@@ -267,14 +329,15 @@ footer strong{color:var(--paper)}
   </div>
   <ol class="tl-list" id="tl-list"></ol>
   <div class="tl-cards">
-    <div class="tl-card"><h4>What the DA says was done</h4><p class="src-note">From the grand jury report and her public statements.</p><ul id="tl-da"></ul></div>
+    <div class="tl-card"><h4>What the DA says was done</h4><p class="src-note">From the <a href="https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913" target="_blank" rel="noopener">grand jury report</a> and her public statements.</p><ul id="tl-da"></ul></div>
     <div class="tl-card"><h4>What anyone can check</h4><p class="src-note">Public documents you can read yourself.</p><ul id="tl-check"></ul></div>
     <div class="tl-card tl-next"><h4>Doors that are still open</h4><p class="src-note">What the law allows from here. Not a prediction.</p><ul id="tl-next"></ul></div>
   </div>
 </section>
 
 <section class="more">
-  <div class="block" id="teachers">
+  <div class="sec block" id="teachers">
+    <div class="eyebrow">Section 5 · Teachers</div>
     <h3>For teachers: free class guides</h3>
     <p>Print-ready guides for each lesson. Every guide has a QR code that opens the matching lesson on this page.</p>
     <ul>
@@ -289,18 +352,20 @@ footer strong{color:var(--paper)}
     </ul>
     <p class="src-note">More lessons coming. No sign-up, no email gate.</p>
   </div>
-  <div class="block">
+  <div class="sec block" id="quiz-sec">
+    <div class="eyebrow">Section 6 · Quiz</div>
     <h3>Test yourself</h3>
     <div id="quiz"></div>
   </div>
-  <div class="block listview">
+  <div class="sec block listview" id="list-sec">
+    <div class="eyebrow">Section 7 · Every office</div>
     <h3>Every office, as a list</h3>
     <div id="list"></div>
   </div>
 </section>
 
 <footer>
-  <div><strong>Version 0.5 · facts checked Oct. 19, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
+  <div><strong>Version 0.6 · facts checked Oct. 19, 2026; layout and links updated Oct. 21, 2026.</strong> Built by Agent Kodak for the Nolan Xavier Wells School of Law. Lawrence is an educator, not an attorney. This is not legal advice.</div>
   <div>House rules: we name offices and public officials by their official acts. We do not name private people. Nobody on this map is accused of anything. Anything marked <span class="chip check">to confirm</span> still needs a primary source.</div>
   <div>Spot an error? Bring the documentation. Documentation beats conversation. Transparency creates accountability.</div>
 </footer>
@@ -477,7 +542,7 @@ const N = [
   next:"Nov. 2027.",
   controls:"Decides whether to charge, what evidence the [grand jury] sees, and what law they're told applies. The front line.",
   inCase:"Presented the case to a grand jury, which returned no charges. Publicly said anyone with new evidence should bring it to her.",
-  act:"New evidence goes to the DA. Ask for grand jury materials to be released. The DA answers to voters in 2027.",
+  act:"Real, firsthand evidence goes to the family's legal team: the {tip}. Ask for grand jury materials to be released. The DA answers to voters in 2027.",
   chips:["elected","the front line"],src:[["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]},
  {id:"circuit",lvl:2,x:770,y:495,g:"CC",kind:"elected",t1:"Circuit Judges",t2:"4 judges · District 19",
   title:"Circuit Court, District 19",
@@ -579,7 +644,8 @@ const byId=Object.fromEntries(N.map(n=>[n.id,n]));
 const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function rich(s){return esc(s).replace(/\[([^\]]+)\]/g,(m,t)=>GLOSS[t.toLowerCase()]?`<button class="term" type="button" data-term="${t.toLowerCase()}">${t}</button>`:t)}
+const TIP='<a href="https://bencrump.com/nolan-wells-tip-line/" target="_blank" rel="noopener">Nolan Wells Tip Line</a> (888-991-1772)';
+function rich(s){return esc(s).replace(/\[([^\]]+)\]/g,(m,t)=>GLOSS[t.toLowerCase()]?`<button class="term" type="button" data-term="${t.toLowerCase()}">${t}</button>`:t).replace(/\{tip\}/g,TIP)}
 
 N.forEach((n,i)=>{n.r=n.r||27;n.ph=i*1.7;n.cx=n.x;n.cy=n.y;
  const g=el("g",{class:`node ${n.kind}`,tabindex:"0",role:"button","aria-label":`${n.title}. ${n.t2}`},gN);
@@ -643,9 +709,14 @@ function focusNode(id,fromSelect){
   n.el.classList.toggle("dim",guided?!isStep:(id&&!linked.has(n.id)));
  });
 }
-function select(id){
+function revealPanel(){
+ const p=document.getElementById("panel");const r=p.getBoundingClientRect();const nav=document.querySelector(".secnav");const top=(nav?nav.offsetHeight:0)+12;
+ if(r.top<top||r.top>window.innerHeight*0.5){window.scrollTo({top:r.top+window.scrollY-top,behavior:reduce?"auto":"smooth"})}
+}
+function select(id,noScroll){
  if(mode==="case"||mode==="lesson"){setMode("all")}
  selected=id;focusNode(id,true);renderPanel(id);
+ if(!noScroll)revealPanel();
 }
 function renderPanel(id){
  const n=byId[id];
@@ -691,10 +762,11 @@ function setMode(m){
 function jumpFor(m){
  const t=(m==="case"||m==="lesson")?document.getElementById("panel"):document.querySelector(".mapbox");
  if(!t)return;
- const y=t.getBoundingClientRect().top+window.scrollY-12;
+ const nav=document.querySelector(".secnav");const y=t.getBoundingClientRect().top+window.scrollY-((nav?nav.offsetHeight:0)+12);
  window.scrollTo({top:Math.max(0,y),behavior:reduce?"auto":"smooth"});
 }
 document.querySelectorAll(".lens[data-lens]").forEach(b=>b.addEventListener("click",()=>{setMode(b.dataset.lens);jumpFor(b.dataset.lens)}));
+document.querySelectorAll(".secnav [data-jump]").forEach(b=>b.addEventListener("click",()=>{setMode(b.dataset.jump);jumpFor(b.dataset.jump)}));
 document.getElementById("panel").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)select(g.dataset.go)});
 
 /* ---------- Glossary tooltip ---------- */
@@ -720,7 +792,7 @@ document.getElementById("quiz").addEventListener("click",e=>{const b=e.target.cl
 
 /* ---------- List view ---------- */
 document.getElementById("list").innerHTML=["Federal","State of Mississippi","County + District","The people"].map((h,l)=>`<details ${l===2?"open":""}><summary>${h}</summary><ul>${N.filter(n=>n.lvl===l).map(n=>`<li><button type="button" data-go="${n.id}">${esc(n.title)}</button> <span style="color:var(--stone)">· ${esc(n.t2)}</span></li>`).join("")}</ul></details>`).join("");
-document.getElementById("list").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go);document.getElementById("panel").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}});
+document.getElementById("list").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go)}});
 
 /* ---------- Classroom: lesson companion ---------- */
 Object.assign(GLOSS,{
@@ -792,10 +864,10 @@ const LESSONS=[
    "What counts as new: a medical finding, a witness under oath, data (records, video, messages, even satellite images that show boats, not faces), and experts like tide and current specialists.",
    "Both autopsies, the state's and the family's, list cause and manner as [undetermined]. A civil case's [discovery] is how new evidence gets found."],
   terms:["no true bill","double jeopardy","undetermined","discovery"],
-  act:"Real, firsthand evidence goes to the DA's office, not the comment section. Documentation beats conversation.",
+  act:"Real, firsthand evidence goes to the family's legal team: the {tip}. Not the comment section. Documentation beats conversation.",
   q:[["After a no true bill, can the case come back?",["Yes, with new evidence","No, never"],0],
      ["When was Medgar Evers' killer convicted?",["1964","1994","2005"],1],
-     ["Where should real new evidence go?",["The comments","The DA's office","A group chat"],1]],
+     ["Where should real new evidence go?",["The comments","The family's legal team (the Nolan Wells Tip Line)","A group chat"],1]],
   src:[["MFP: independent autopsy undetermined","https://www.mississippifreepress.org/crump-releases-full-independent-autopsy-of-nolan-wells-says-questions-of-wells-death-remain/"],["CNN: grand jury report","https://www.cnn.com/2026/09/21/us/nolan-wells-grand-jury-hnk"]]}
 
  ,{t:"The federal path",n:["doj","fedcourt","nps","congress"],
@@ -842,46 +914,55 @@ window.addEventListener("hashchange",fromHash);
 /* ---------- Timeline ---------- */
 // k: v = verified (2+ sources or primary doc), r = reported once, da = officials say, gap = what the record doesn't show
 const TL=[
- {w:"July 4 · 9:56 a.m. to 11:14 a.m.",k:"r",t:"The boat leaves the mainland and reaches Horn Island.",n:["nps"],s:"MDMR material, cited secondhand"},
+ {w:"July 4 · 9:56 a.m. to 11:14 a.m.",k:"r",t:"The boat leaves the mainland and reaches Horn Island.",n:["nps","mdmr"],s:"Marine Patrol report MP2607-0016 (primary document)",u:"https://htv-prod-media.s3.amazonaws.com/files/mdmr-nolan-wells-report-6a67e5fa09702.pdf"},
  {w:"July 4 · about 2:18 p.m.",k:"v",t:"Nolan's phone is last unlocked. It stays locked until his parents open it at 3:14 a.m. on July 5.",n:[],s:"Family's examiner, per Mississippi Free Press",u:"https://www.mississippifreepress.org/crumps-expert-who-examined-nolan-wells-phone-clarifies-misinterpreted-claims-about-deleted-messages/"},
- {w:"July 4 · 2:23 p.m. to 3:30 p.m.",k:"gap",t:"Three different 'last seen' moments: boat GPS last record (2:23), a friend's account (3:00), and a grand jury witness who saw him slip off a boat (about 3:30). No official timeline puts them together.",n:["gj"]},
+ {w:"July 4 · 2:23 p.m. to 3:30 p.m.",k:"gap",t:"Three different 'last seen' moments: boat GPS last record (2:23), a friend's account (3:00), and a grand jury witness who saw him slip off a boat (about 3:30). No official timeline puts them together.",n:["gj"],s:"Grand jury report; Marine Patrol GPS; WLOX",u:"https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913",
+   fill:{q:"When was Nolan last seen, and by whom?",how:"The full GPS files for every boat (not the summary) put the boats on a clock. The sheriff's incident report and dispatch log show what each witness told deputies and when. Side by side, the three 'last seen' times either line up or they don't.",card:"The boats' GPS files (Marine Patrol) and The incident report (Sheriff)"}},
  {w:"July 4 · about 4:00 p.m.",k:"v",t:"Sea Tow call from the sinking boat. Asked if everyone was aboard: \"Yeah, yeah, everyone is on board.\"",n:[],s:"MDMR audio via WLOX",u:"https://www.wlox.com/2026/07/26/mdmr-releases-call-audio-boat-nolan-wells-case/"},
- {w:"July 4 · 4:31 p.m. to 6:06 p.m.",k:"r",t:"The boat leaves the island and is towed back. His phone rides back without him. The grand jury says his phone \"was not the only phone\" to do that.",n:["gj"],s:"Grand jury report p. 5; times secondhand"},
+ {w:"July 4 · 4:31 p.m. to 6:06 p.m.",k:"r",t:"The boat leaves the island and is towed back. His phone rides back without him. The grand jury says his phone \"was not the only phone\" to do that.",n:["gj","mdmr"],s:"Grand jury report p. 5; Marine Patrol report MP2607-0016",u:"https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913"},
  {w:"July 4 · about 11:00 p.m. and 11:49 p.m.",k:"r",t:"A friend calls the Coast Guard (told it \"did not require Coast Guard assistance\"). Then Nolan's mother reports him missing to Marine Resources.",n:[],s:"WLOX timeline",u:"https://www.wlox.com/2026/07/07/timeline-heres-what-we-know-about-disappearance-death-18-year-old-nolan-wells/"},
- {w:"July 4 to 5 · overnight",k:"gap",t:"No official log has been published showing when each agency was notified and when the search started.",n:["sheriff"]},
- {w:"July 5",k:"da",t:"Marine Resources launches a search. The grand jury says the island was searched so thoroughly that his body would have been found if it was there.",n:["sheriff","nps"],s:"Grand jury report p. 6"},
+ {w:"July 4 to 5 · overnight",k:"gap",t:"No official log has been published showing when each agency was notified and when the search started.",n:["sheriff","mdmr","uscg"],
+   fill:{q:"Who was told what, and when did the search actually start?",how:"Three agencies keep their own clocks: the sheriff's dispatch (CAD) log, Marine Patrol's dispatch record for event 2607-0205, and the Coast Guard's call log for the night of July 4. Put the three logs on one line and the overnight gap closes.",card:"Dispatch logs and the search log (Sheriff), The boats' GPS files (Marine Patrol), The Coast Guard's call and search file"}},
+ {w:"July 5",k:"da",t:"Marine Resources launches a search. The grand jury says the island was searched so thoroughly that his body would have been found if it was there.",n:["sheriff","nps","mdmr"],s:"Grand jury report p. 6",u:"https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913"},
  {w:"July 6 · 8:45 a.m.",k:"v",t:"A park ranger finds Nolan in the water off the island's northwest end.",n:["nps","sheriff"],s:"Mississippi Free Press, WLOX",u:"https://www.mississippifreepress.org/ranger-finds-body-amid-search-for-nolan-wells-who-vanished-on-horn-island-during-trip-with-friends/"},
  {w:"July 6 and 9",k:"da",t:"The sheriff says there were no signs of foul play and that Nolan \"chose to stay on the island.\" Three days later the state's public safety chief says the case is open to drowning or foul play.",n:["sheriff","dps"],s:"ABC; SuperTalk",u:"https://www.supertalk.fm/dps-commissioner-no-indication-race-played-a-role-in-death-of-nolan-wells/"},
- {w:"July 7",k:"v",t:"State autopsy in Pearl. The coroner confirms his identity.",n:["coroner","me"]},
- {w:"July 7",k:"gap",t:"The state pathologist reports two bruises on the back of Nolan's head to the sheriff's office. Per the family's pathologist, they were not photographed up close, dissected or sampled, and he \"could not find any record\" of a specific investigation into that injury. The grand jury says the exact cause \"remains uncertain.\"",n:["me","sheriff"],s:"Dr. Mitchell's final report; grand jury report p. 4",u:"https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf"},
+ {w:"July 7",k:"v",t:"State autopsy in Pearl. The coroner confirms his identity.",n:["coroner","me"],s:"State autopsy report, released Sept 24 (Mississippi Today)",u:"https://mississippitoday.org/2026/09/24/nolan-wells-autopsy-cellphone/"},
+ {w:"July 7",k:"gap",t:"The state pathologist reports two bruises on the back of Nolan's head to the sheriff's office. Per the family's pathologist, they were not photographed up close, dissected or sampled, and he \"could not find any record\" of a specific investigation into that injury. The grand jury says the exact cause \"remains uncertain.\"",n:["me","sheriff"],s:"Dr. Mitchell's final report; grand jury report p. 4",u:"https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf",
+   fill:{q:"Were the two bruises on the back of his head ever investigated?",how:"The sheriff's file should show what was done after the pathologist reported the injury: any follow-up interviews, photos, or requests. The sheriff's incident and supplemental reports are public by law in Mississippi. Ask for them, then ask what was done about the injury.",card:"The incident report and Who stayed on the island, and what was done (Sheriff)"}},
  {w:"July 20",k:"v",t:"His mother opens his estate in Chancery Court so the family can sue. Preservation letters go out.",n:["chancery"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/29/nolan-xavier-wells-lawsuit/"},
  {w:"July 22",k:"v",t:"The family's pathologist issues his first report: cause undetermined.",n:["me"],s:"Mississippi Today",u:"https://mississippitoday.org/2026/07/22/nolan-wells-autopsy-ben-crump/"},
  {w:"July 23",k:"da",t:"The DA says the autopsy stays private until the grand jury. \"Our restraint... is not an effort to keep the truth from the public.\"",n:["da"],s:"WLOX, WLBT",u:"https://www.wlox.com/2026/07/23/nolan-wells-autopsy-report-be-withheld-until-grand-jury-review-district-attorney-says/"},
- {w:"Late July",k:"r",t:"Marine Resources says it released some records \"inadvertently,\" then stops releasing them after the DA's notice.",n:["da"],s:"TMZ (single outlet)"},
+ {w:"Late July",k:"r",t:"Marine Resources says it released some records \"inadvertently,\" then stops releasing them after the DA's notice.",n:["da","mdmr"],s:"TMZ (single outlet)",u:"https://www.tmz.com/2026/07/22/nolan-wells-death-records-released-by-mistake/"},
  {w:"Aug 12",k:"v",t:"The Congressional Black Caucus asks DOJ for an independent federal review. DOJ: staff are \"reviewing it carefully.\"",n:["congress","doj"],s:"ABC, Newsweek",u:"https://abcnews.com/US/congressional-black-caucus-urges-doj-review-nolan-wells/story?id=135619833"},
  {w:"Aug 17 and Sept 14",k:"v",t:"Both autopsy reports are finished. Both say cause and manner of death are undetermined. The family's doctor notes no close-up photos of the back-of-head injuries in the state autopsy.",n:["me"],s:"Both reports (primary documents)",u:"https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf"},
  {w:"Sept 14 to 18",k:"da",t:"Grand jury: 23 jurors, 132 subpoenas, 43 witnesses. Unanimous no true bill. Report filed Sept 18.",n:["da","gj","circuit"],s:"Grand jury report (primary document)",u:"https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913"},
- {w:"Sept 14 to 18",k:"gap",t:"The testimony, exhibits and witness list stay secret. The public can't see how the case was presented.",n:["gj"]},
- {w:"Sept 21 · 7:56 p.m.",k:"da",t:"The DA announces the decision in a video, two minutes after texting Nolan's mother.",n:["da"],s:"Mother's account via WLOX; AP"},
+ {w:"Sept 14 to 18",k:"gap",t:"The testimony, exhibits and witness list stay secret. The public can't see how the case was presented.",n:["gj","circuit"],
+   fill:{q:"How was the case presented to the grand jury?",how:"Grand jury testimony is secret, and no public records request opens it. Two things do: a judge can order parts released, and a civil lawsuit's discovery puts the same witnesses under oath in public. What agents can get now: the order that impaneled the grand jury and the minutes naming the judge (Circuit Clerk), which answers who oversaw the room.",card:"Which judge impaneled the grand jury (Circuit Clerk)"}},
+ {w:"Sept 21 · 7:56 p.m.",k:"da",t:"The DA announces the decision in a video, two minutes after texting Nolan's mother.",n:["da"],s:"Mississippi Today (DA announcement); mother's account via WLOX",u:"https://mississippitoday.org/2026/09/21/nolan-wells-death-no-indictments/"},
  {w:"Sept 24",k:"v",t:"The family's team releases the state autopsy and phone findings. The state report shows two scalp bruises at the back of the head; no neck injury.",n:["me"],s:"Mississippi Today, WLOX",u:"https://mississippitoday.org/2026/09/24/nolan-wells-autopsy-cellphone/"},
  {w:"Oct 5",k:"v",t:"Members of Congress ask the National Park Service's investigators for a \"prompt and exhaustive investigation.\"",n:["congress","nps"],s:"WLOX, WLBT",u:"https://www.wlox.com/2026/10/05/national-leaders-renew-push-federal-investigation-into-nolan-wells-death/"},
- {w:"Now",k:"gap",t:"No federal agency has publicly confirmed an investigation into the death itself. Only the threat cases are confirmed federal matters.",n:["doj","fedcourt"]}
+ {w:"Now",k:"gap",t:"No federal agency has publicly confirmed an investigation into the death itself. Only the threat cases are confirmed federal matters.",n:["doj","fedcourt","congress"],
+   fill:{q:"Is any federal agency investigating the death itself?",how:"Agencies rarely announce when they decline. Two ways to force an answer on paper: your member of Congress can ask the Justice Department and the Park Service in writing (the Act page gives you the letter), and a FOIA request to the Park Service for its Horn Island reports shows what the federal agency's own file says.",card:"Park Service reports from Horn Island and The ranger's search path (Park Service), plus the Act page letter"}}
 ];
 const DA_SAYS=["132 subpoenas and 43 witnesses heard","Full access to the sheriff's file, including every agency that helped","Seven people invited to testify: five did, one couldn't, one declined","The family's pathologist had full access and testified","The family's phone reports (14, 21 and 261 pages) were considered","Asked the family's team in writing for any evidence","Told jurors about all relationships between people involved; jurors found no conflicts","Shared the autopsy and toxicology with the family's Mississippi attorney"];
-const CHECK=["The grand jury report (Jackson County website, 9 pages)","Both autopsy reports (released by the family's team)","The Sea Tow call audio (released by Marine Resources)","The estate filing in Chancery Court","The federal threat cases (federal court records)","The DA's public videos and statements"];
+const CHECK=[["The grand jury report (Jackson County website, 9 pages)","https://www.co.jackson.ms.us/m/newsflash/Home/Detail/1913"],["The family's pathologist's final report (PDF)","https://atlantablackstar.com/wp-content/uploads/2026/09/FinalReport_Nolan_Wells.RAM_v1-1.pdf"],["The state autopsy findings, as released by the family's team","https://mississippitoday.org/2026/09/24/nolan-wells-autopsy-cellphone/"],["Marine Patrol report MP2607-0016 (PDF)","https://htv-prod-media.s3.amazonaws.com/files/mdmr-nolan-wells-report-6a67e5fa09702.pdf"],["The Sea Tow call audio (released by Marine Resources)","https://www.wlox.com/2026/07/26/mdmr-releases-call-audio-boat-nolan-wells-case/"],["The estate filing in Chancery Court (reported)","https://mississippitoday.org/2026/07/29/nolan-xavier-wells-lawsuit/"],["The DA's public statements","https://www.wlox.com/2026/07/23/nolan-wells-autopsy-report-be-withheld-until-grand-jury-review-district-attorney-says/"]];
 const NEXT=["A federal review or a Park Service investigation is possible but not confirmed. Congress has asked; agencies rarely announce when they decline.","A wrongful death lawsuit can be filed because the estate is open. That is the path where depositions and subpoenas happen.","A new state grand jury needs new evidence. Mississippi has no time limit on murder or manslaughter."];
 const KLABEL={v:"Verified",r:"Reported once",da:"Officials say",gap:"Gap"};
+function gapHTML(x){
+ if(!x.fill)return "";
+ return `<details class="gapfill"><summary>How this gap gets filled</summary><dl class="gf"><div><dt>The open question</dt><dd>${esc(x.fill.q)}</dd></div><div><dt>What fills it</dt><dd>${esc(x.fill.how)}</dd></div><div><dt>Records Mission card</dt><dd>${esc(x.fill.card)}<br><a class="btnlink" href="records/">Send the request →</a></dd></div></dl></details>`;
+}
 function renderTL(f){
- document.getElementById("tl-list").innerHTML=TL.filter(x=>f==="all"||x.k===f).map(x=>`<li class="tl-item" data-k="${x.k}"><div class="tl-when">${esc(x.w)}</div><p class="tl-what">${esc(x.t)}</p><div class="tl-meta"><span class="chip ${x.k==="gap"?"gold":x.k==="da"?"red":""} ${x.k==="r"?"check":""}">${KLABEL[x.k]}</span>${x.n.map(id=>`<button class="tl-go" type="button" data-go="${id}">${esc(byId[id].t1)}</button>`).join("")}${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${esc(x.s||"Source")}</a>`:(x.s?`<span style="font-size:12.5px;color:var(--stone)">${esc(x.s)}</span>`:"")}</div></li>`).join("");
+ document.getElementById("tl-list").innerHTML=TL.filter(x=>f==="all"||x.k===f).map(x=>`<li class="tl-item" data-k="${x.k}"><div class="tl-when">${esc(x.w)}</div><p class="tl-what">${esc(x.t)}</p><div class="tl-meta"><span class="chip ${x.k==="gap"?"gold":x.k==="da"?"red":""} ${x.k==="r"?"check":""}">${KLABEL[x.k]}</span>${x.n.map(id=>byId[id]?`<button class="tl-go" type="button" data-go="${id}">${esc(byId[id].t1)}</button>`:"").join("")}${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${esc(x.s||"Source")}</a>`:(x.s?`<span style="font-size:12.5px;color:var(--stone)">${esc(x.s)}</span>`:"")}</div>${gapHTML(x)}</li>`).join("");
 }
 renderTL("all");
 document.getElementById("tl-da").innerHTML=DA_SAYS.map(x=>`<li>${esc(x)}</li>`).join("");
-document.getElementById("tl-check").innerHTML=CHECK.map(x=>`<li>${esc(x)}</li>`).join("");
+document.getElementById("tl-check").innerHTML=CHECK.map(x=>`<li><a href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a></li>`).join("");
 document.getElementById("tl-next").innerHTML=NEXT.map(x=>`<li>${esc(x)}</li>`).join("");
 document.querySelectorAll(".tf").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tf").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderTL(b.dataset.f)}));
-document.getElementById("timeline").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go);document.querySelector(".stage").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}});
+document.getElementById("timeline").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){select(g.dataset.go)}});
 
-select("you");
+select("you",true);
 fromHash();
 </script>
 
