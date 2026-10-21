@@ -25,9 +25,10 @@ nav li a.on,nav li a:hover{color:var(--paper)}
 nav .btn{padding:11px 18px;font-size:11px}
 .hero{padding:120px 0 100px;background:radial-gradient(ellipse 60% 70% at 70% 40%,var(--glow),var(--ink) 70%)}
 .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center}
-.hero h1 span{color:var(--red)}
-.hero .lede{margin:26px 0 36px;color:var(--stone)}
-.hero .photo{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line);position:relative}
+.hero h1{font-size:clamp(36px,4.4vw,56px)}.hero h1 .l{display:block}.hero h1 .l:last-child{white-space:nowrap}.hero h1 .red{color:var(--red)}
+.hero .sub{font-size:20px;line-height:1.4;font-weight:500;color:var(--paper);max-width:48ch;margin:22px 0 0}
+.hero .lede{margin:16px 0 36px;color:var(--stone)}
+.hero .photo{aspect-ratio:4/5;height:auto;overflow:hidden;border:1px solid var(--line);position:relative}
 .hero .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;filter:saturate(.9)}
 .hero .photo .tag{position:absolute;left:0;bottom:0;background:var(--ink);padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}.chip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);padding:6px 10px;color:var(--stone)}
@@ -101,6 +102,7 @@ footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
  .steps,.lessons,.stats,.proof,.proof[style],.talks,.action .grid,.cards3,.form .pair{grid-template-columns:1fr!important}
  .frame{height:380px}.stat .v{font-size:52px}.photo{height:360px}.qr{grid-template-columns:repeat(3,1fr)}
 }
+@media(min-width:821px){.hero h1 .l:first-child{white-space:nowrap}}
 /* act page */
 .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
 .act-form{margin-top:30px}.form textarea.tall{height:420px;font-family:var(--mono);font-size:13.5px;line-height:1.55;padding:14px}
