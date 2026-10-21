@@ -80,14 +80,15 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 </div></div></section>
 
 <section class="dark" id="lessons"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">The School of Law · a civic education series on YouTube at @AgentKodak</div><h2 style="margin-top:8px">Real cases. Plain language.</h2></div><a class="btn ghost" href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">Watch the series</a></div>
+<div class="sec-head rev"><div><div class="eyebrow">The School of Law · a civic education series on YouTube at @AgentKodak</div><h2 style="margin-top:8px">Real cases. Plain language.</h2></div><a class="btn ghost" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">The playlist</a></div>
 <p class="lede muted rev">A real Mississippi case, taught one lesson at a time: civil lawsuits, discovery, probable cause, new evidence, and the federal path. Lawrence is an educator, not an attorney. These lessons are not legal advice.</p>
 <div class="lessons rev" style="margin-top:36px">
-<div class="lesson"><div class="shell">{yt("oriWYFQN414","Lesson 1: Where we are")}</div><div class="t">Lesson 1<b>Where we are</b></div></div>
-<div class="lesson"><div class="shell">{yt("DJh7g3wODFE","Lesson 2: No charges doesn't mean no court. The civil lawsuit")}</div><div class="t">Lesson 2<b>No charges doesn't mean no court</b></div></div>
-<div class="lesson"><div class="shell">{yt("YhJ-_J3wDDs","Lesson 3: Discovery")}</div><div class="t">Lesson 3<b>Discovery</b></div></div>
+<div class="lesson"><div class="shell">{yt("r8bkd_yQsOQ","Lesson 7, Part 1: Who's connected to who in Mississippi?")}</div><div class="t">Lesson 7 · Part 1<b>Who's connected to who in Mississippi?</b></div></div>
+<div class="lesson"><div class="shell">{yt("PRJ1wK_wpeA","Lesson 6, Part 3: A no with no reason isn't allowed")}</div><div class="t">Lesson 6 · Part 3<b>A "no" with no reason isn't allowed</b></div></div>
+<div class="lesson"><div class="shell">{yt("KnF-P05Y96k","Lesson 6, Part 2: Where the feds at? Who knocked")}</div><div class="t">Lesson 6 · Part 2<b>Where the feds at? Who knocked</b></div></div>
 </div>
-<p class="muted rev" style="margin-top:14px;font-size:14px">Every lesson, in order, in the <a href="class/">Classroom</a>.</p>
+<div class="cta rev" style="margin-top:22px"><a class="btn red" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">Watch every lesson: the full playlist</a><a class="btn ghost" href="class/">The Classroom map</a></div>
+<p class="muted rev" style="margin-top:14px;font-size:14px">The three newest lessons are above. All 16 videos, in order, are in the playlist on YouTube.</p>
 <div class="stats rev"><div class="stat"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div><div class="stat"><div class="v">1,080+</div><div class="l">subscribers on @AgentKodak, and growing</div></div><div class="stat"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div></div>
 </div></section>
 
