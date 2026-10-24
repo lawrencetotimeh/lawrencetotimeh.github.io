@@ -138,6 +138,14 @@ h1 span{color:var(--red)}
 /* Below the map */
 .lens-class{border-color:var(--gold);color:var(--gold)}
 .lens-class[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+/* Oct 24 (Lawrence): bigger view buttons so people see they can tap them */
+.controls{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding-block:18px}
+.controls .label{grid-column:1/-1;font-size:14px;color:var(--paper);margin:0}
+.lens{display:flex;align-items:center;justify-content:center;text-align:center;min-height:58px;padding:12px 16px;border-width:2px;border-radius:10px;font-size:17px;font-weight:600;line-height:1.25}
+.lens:not(.lens-class){color:var(--paper);border-color:var(--stone)}
+.lens:not(.lens-class)[aria-pressed="true"]{color:var(--ink);border-color:var(--paper)}
+.lens:hover{transform:translateY(-1px);box-shadow:0 0 0 2px rgba(242,239,233,.25)}
+@media(max-width:520px){.controls{grid-template-columns:1fr 1fr}.lens{font-size:16px;min-height:56px}}
 .lpills{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
 .lpill{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;font-family:var(--display);font-size:16px;cursor:pointer;display:inline-grid;place-items:center}
 .lpill[aria-selected="true"]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
@@ -226,6 +234,7 @@ footer strong{color:var(--paper)}
 </style>
 </head>
 <body>
+<a class="givebar" href="/contact.html#support-links" style="display:block;margin:0 -16px;background:#E0343F;color:#fff;text-decoration:none;font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.3;letter-spacing:.1em;text-transform:uppercase"><span style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 16px;max-width:1180px;margin:0 auto;padding:10px 16px;text-align:center"><span>Keep the lessons free</span><span style="background:#F2EFE9;color:#0A0A0B;font-weight:600;padding:8px 14px">Support the work &rarr;</span><span style="opacity:.85">Cash App · PayPal · Zelle</span></span></a>
 
 
 <div class="wrap">
@@ -270,7 +279,7 @@ footer strong{color:var(--paper)}
   </div>
 </div>
 <div class="controls" role="group" aria-label="Choose a view">
-  <span class="label">View</span>
+  <span class="label">Tap a view to change the map</span>
   <button class="lens" data-lens="all" aria-pressed="true">Everything</button>
   <button class="lens" data-lens="elect" aria-pressed="false">Who you elect</button>
   <button class="lens" data-lens="appoint" aria-pressed="false">Who picks whom</button>
