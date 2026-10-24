@@ -138,6 +138,13 @@ h1 span{color:var(--red)}
 /* Below the map */
 .lens-class{border-color:var(--gold);color:var(--gold)}
 .lens-class[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+/* Oct 24 (Lawrence): On the Record callout above Section 1 */
+.otr-cta{display:grid;gap:6px;margin:18px 0;padding:18px 20px;border:2px solid var(--red);border-radius:10px;background:rgba(224,52,63,.10);color:var(--paper);text-decoration:none}
+.otr-cta:hover{background:rgba(224,52,63,.18)}
+.otr-k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.otr-h{font-family:var(--display);font-size:clamp(22px,4.6vw,32px);line-height:1.1;text-transform:uppercase;font-weight:700}
+.otr-p{font-size:16px;color:var(--stone);max-width:70ch}
+.otr-b{justify-self:start;margin-top:6px;background:var(--red);color:#fff;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 18px;border-radius:6px}
 /* Oct 24 (Lawrence): bigger view buttons so people see they can tap them */
 .controls{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding-block:18px}
 .controls .label{grid-column:1/-1;font-size:14px;color:var(--paper);margin:0}
@@ -249,6 +256,13 @@ footer strong{color:var(--paper)}
     <p><strong>Nov. 3, 2026.</strong> Four Circuit Court seats for District 19 (George, Greene and Jackson counties), plus Congress.</p>
   </div>
 </header>
+
+<a class="otr-cta" href="ontherecord/">
+  <span class="otr-k">#OnTheRecordForNolan · 2 minutes</span>
+  <span class="otr-h">Click here to hold your public servants accountable</span>
+  <span class="otr-p">Make your congressman and both senators say, in writing, where they stand on a federal investigation into Nolan's death. We write the letter. You hit send.</span>
+  <span class="otr-b">Send my letter &rarr;</span>
+</a>
 
 <nav class="secnav" aria-label="Sections of this page">
   <ul>
