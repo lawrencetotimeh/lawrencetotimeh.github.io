@@ -103,6 +103,16 @@ footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
  .frame{height:380px}.stat .v{font-size:52px}.photo{height:360px}.qr{grid-template-columns:repeat(3,1fr)}
 }
 @media(min-width:821px){.hero h1 .l:first-child{white-space:nowrap}}
+/* support bar under the nav (Oct 24) */
+.givebar{display:block;background:var(--red);color:#fff;text-decoration:none}
+.givebar .wrap{display:flex;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.givebar .gb-b{background:var(--paper);color:var(--ink);font-weight:600;padding:8px 14px}
+.givebar .gb-s{opacity:.85}
+.givebar:hover .gb-b,.givebar:focus-visible .gb-b{background:#fff}
+#support-links{scroll-margin-top:140px}
+#support-links:target{animation:gbflash 1.6s ease-out 1}
+@keyframes gbflash{0%{box-shadow:0 0 0 4px var(--red)}100%{box-shadow:0 0 0 0 rgba(224,52,63,0)}}
+@media(max-width:520px){.givebar .gb-s{flex-basis:100%;font-size:11px}}
 /* act page */
 .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
 .act-form{margin-top:30px}.form textarea.tall{height:420px;font-family:var(--mono);font-size:13.5px;line-height:1.55;padding:14px}
