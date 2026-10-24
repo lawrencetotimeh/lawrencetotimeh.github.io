@@ -25,7 +25,8 @@ def nav(active=""):
         return f'<li><a{on} href="{href}">{label}</a></li>'
     return f'''<nav><div class="wrap"><a class="brand" href="index.html">LAWRENCE TOTIMEH <b>JR.</b></a>
 <ul>{a("class/","Classroom","class")}{a("act.html","Act","act")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
-<a class="btn red" href="contact.html">Book Lawrence</a></div></nav>'''
+<a class="btn red" href="contact.html">Book Lawrence</a></div></nav>
+<a class="givebar" href="#support-links"><span class="wrap"><span class="gb-t">Keep the lessons free</span><span class="gb-b">Support the work &rarr;</span><span class="gb-s">Cash App · PayPal · Zelle</span></span></a>'''
 
 FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
 <script>
