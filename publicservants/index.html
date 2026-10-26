@@ -59,6 +59,11 @@ input,select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px
 .mini button.done .ma{background:#FFF;color:var(--ink)}
 .mini .mr{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
 .mini .mn{display:block;font-family:var(--display);font-size:16px;line-height:1.15;overflow-wrap:anywhere}
+.devtip{background:#0A0A0B;color:#FFF;border-radius:8px;padding:12px 14px;margin-top:10px;font-size:16px;line-height:1.5}
+.devtip b{color:#FFF}
+.devtip .dl{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+.devtip p{margin:0}
+.devtip p+span{margin-top:12px}
 .tips{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}
 .ok{font-family:var(--mono);font-size:14px;color:var(--ok)}
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
@@ -113,6 +118,7 @@ details summary{cursor:pointer;font-weight:700}
   <h2 data-t="saveh">Save them to your phone</h2>
   <p class="small" style="margin:0 0 8px" data-t="tapeach" data-html><b>Tap each box</b> to save that person to your phone.</p>
   <div class="mini" id="ps-mini"></div>
+  <div class="devtip" id="ps-devtip"></div>
   <p class="ok" id="ps-saved" hidden style="margin:10px 0 0"></p>
   <div class="save" id="ps-allwrap" style="margin-top:12px">
     <button class="btn big" type="button" id="ps-save">Or save all 3 at once</button>
@@ -121,7 +127,7 @@ details summary{cursor:pointer;font-weight:700}
   <div class="cards" id="ps-cards"></div>
   <div class="tips">
     <p class="small" style="margin:0" data-t="updating" data-html><b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.</p>
-    <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap a box, then tap <b>Create New Contact</b>. Come back and tap the next box until all three are saved. <b>Android:</b> tap a box (or Save all) and choose your Contacts app.</p>
+    <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap a box, scroll to the bottom, tap <b>Create New Contact</b>, then tap the <b>✓</b>. Repeat for each box. <b>Android:</b> tap a box (or Save all), choose <b>Contacts</b>, then tap <b>Save</b>.</p>
     <details style="margin-top:10px"><summary class="small" data-t="whatsaved">What gets saved</summary>
       <div class="preview" id="ps-preview" style="margin-top:8px"></div>
     </details>
@@ -190,8 +196,8 @@ details summary{cursor:pointer;font-weight:700}
       priv:"<b>Your address stays yours.</b> We don't save anything you type. Your address goes only to the U.S. Census Bureau's public lookup to find your district. The list of members of Congress comes from a free public record of Congress.",
       step2:"Step 2", saveh:"Save them to your phone", onetap:"One tap",
       updating:"<b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.",
-      howto:"<b>iPhone:</b> tap a box, then tap <b>Create New Contact</b>. Come back and tap the next box until all three are saved. <b>Android:</b> tap a box (or Save all) and choose your Contacts app.",
-      whatsaved:"What gets saved", yourthree:"<b>Your three public servants:</b>", minirep:"Rep.", minisen:"Senator", tapeach:"<b>Tap each box</b> to save that person to your phone.", tapsave:"+ Save", savedok:"Saved", oneios:"Tap Create New Contact, then come back for the next one.", saveAllN:"Or save all {n} at once", step3:"Step 3",
+      howto:"<b>iPhone:</b> tap a box, scroll to the bottom, tap <b>Create New Contact</b>, then tap the <b>✓</b>. Repeat for each box. <b>Android:</b> tap a box (or Save all), choose <b>Contacts</b>, then tap <b>Save</b>.",
+      whatsaved:"What gets saved", yourthree:"<b>Your three public servants:</b>", minirep:"Rep.", minisen:"Senator", tapeach:"<b>Tap each box</b> to save that person to your phone.", tapsave:"+ Save", savedok:"Saved", oneios:"Scroll to the bottom, tap Create New Contact, then tap the check mark.", tipios:"<span class=\"dl\">iPhone</span><p>After you tap a box, scroll to the bottom and tap <b>Create New Contact</b>. Then tap the <b>✓</b> at the top to save. Come back and tap the next box.</p>", tipandroid:"<span class=\"dl\">Android</span><p>After you tap a box, choose <b>Contacts</b>. Then tap <b>Save</b>. Come back and tap the next box.</p>", saveAllN:"Or save all {n} at once", step3:"Step 3",
       findany:'Now find them any time. Open your contacts and search <b style="color:#FFF">public servant</b>. All three show up.',
       whye:"Why this matters", whyh:"They work for you",
       why1:"Members of Congress are paid $174,000 a year. Answering you is part of the job.",
@@ -224,8 +230,8 @@ details summary{cursor:pointer;font-weight:700}
       priv:"<b>Tu dirección es tuya.</b> No guardamos nada de lo que escribes. Tu dirección solo va a la búsqueda pública de la Oficina del Censo de EE. UU. para encontrar tu distrito. La lista de miembros del Congreso viene de un registro público y gratuito.",
       step2:"Paso 2", saveh:"Guárdalos en tu teléfono", onetap:"Un toque",
       updating:"<b>¿Actualizando después de una elección?</b> Tu teléfono no puede borrar contactos viejos por ti. Primero abre Contactos, busca <b>servidor público</b> y borra a quien no aparezca arriba. Luego toca Guardar.",
-      howto:"<b>iPhone:</b> toca un recuadro y luego <b>Crear nuevo contacto</b>. Regresa y toca el siguiente hasta guardar los tres. <b>Android:</b> toca un recuadro (o Guardar todos) y elige tu app de Contactos.",
-      whatsaved:"Qué se guarda", yourthree:"<b>Tus tres servidores públicos:</b>", minirep:"Rep.", minisen:"Senador(a)", tapeach:"<b>Toca cada recuadro</b> para guardar a esa persona en tu teléfono.", tapsave:"+ Guardar", savedok:"Guardado", oneios:"Toca Crear nuevo contacto y regresa para el siguiente.", saveAllN:"O guárdalos los {n} a la vez", step3:"Paso 3",
+      howto:"<b>iPhone:</b> toca un recuadro, baja hasta el final, toca <b>Crear nuevo contacto</b> y luego la <b>✓</b>. Repite con cada recuadro. <b>Android:</b> toca un recuadro (o Guardar todos), elige <b>Contactos</b> y toca <b>Guardar</b>.",
+      whatsaved:"Qué se guarda", yourthree:"<b>Tus tres servidores públicos:</b>", minirep:"Rep.", minisen:"Senador(a)", tapeach:"<b>Toca cada recuadro</b> para guardar a esa persona en tu teléfono.", tapsave:"+ Guardar", savedok:"Guardado", oneios:"Baja hasta el final, toca Crear nuevo contacto y luego la marca de verificación.", tipios:"<span class=\"dl\">iPhone</span><p>Después de tocar un recuadro, baja hasta el final y toca <b>Crear nuevo contacto</b>. Luego toca la <b>✓</b> arriba para guardar. Regresa y toca el siguiente recuadro.</p>", tipandroid:"<span class=\"dl\">Android</span><p>Después de tocar un recuadro, elige <b>Contactos</b>. Luego toca <b>Guardar</b>. Regresa y toca el siguiente recuadro.</p>", saveAllN:"O guárdalos los {n} a la vez", step3:"Paso 3",
       findany:'Encuéntralos cuando quieras. Abre tus contactos y busca <b style="color:#FFF">servidor público</b> o <b style="color:#FFF">public servant</b>. Aparecen los tres.',
       whye:"Por qué importa", whyh:"Trabajan para ti",
       why1:"A los miembros del Congreso se les paga $174,000 al año. Contestarte es parte de su trabajo.",
@@ -320,7 +326,8 @@ details summary{cursor:pointer;font-weight:700}
     if(isIOS()){ var u=URL.createObjectURL(blob); var w=window.open(u,"_blank"); if(!w) window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},120000); flash(msg,t("oneios")); return; }
     download(blob,name);
   }
-  function renderMini(){
+  function renderTip(){ var a=/Android/.test(navigator.userAgent); $("ps-devtip").innerHTML = isIOS()? t("tipios") : a? t("tipandroid") : t("tipios")+t("tipandroid"); }
+  function renderMini(){ renderTip();
     $("ps-mini").innerHTML=current.map(function(o,i){ var lab=o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
     $("ps-mini").querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ saveOne(+b.dataset.i); }); });
   }
