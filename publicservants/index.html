@@ -48,11 +48,15 @@ input,select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px
 .card{border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:6px}
 .card .r{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .card .nm{font-family:var(--display);font-size:22px;line-height:1.15}
-.card .job{font-size:16px;color:var(--muted);line-height:1.45}
+.card .job{font-size:16px;color:var(--muted);line-height:1.5;white-space:pre-line}
 .save{background:var(--tint);border:2px solid var(--red);border-radius:10px;padding:18px;margin-top:18px}
 .save b.k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:6px}
 .mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:6px}
-.mini div{border:2px solid var(--ink);border-radius:8px;padding:10px 8px;text-align:center;min-width:0}
+.mini button{font:inherit;color:var(--ink);background:#FFF;border:2px solid var(--ink);border-radius:8px;padding:10px 8px 12px;text-align:center;min-width:0;cursor:pointer;display:block;width:100%}
+.mini button .ma{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--red);color:#FFF;border-radius:999px;padding:5px 4px}
+.mini button.done{background:var(--ink);color:#FFF}
+.mini button.done .mr{color:#FFF}
+.mini button.done .ma{background:#FFF;color:var(--ink)}
 .mini .mr{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
 .mini .mn{display:block;font-family:var(--display);font-size:16px;line-height:1.15;overflow-wrap:anywhere}
 .tips{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}
@@ -60,7 +64,7 @@ input,select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:18px}
 .steps li::before{content:counter(s);font-family:var(--display);font-size:22px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#FFF;display:grid;place-items:center;box-shadow:0 0 0 3px var(--red)}
-.preview{font-family:var(--mono);font-size:14px;line-height:1.6;background:#FFF;border:1px solid var(--line);border-radius:8px;padding:14px;overflow-wrap:anywhere}
+.preview{font-family:var(--mono);font-size:14px;line-height:1.6;white-space:pre-line;background:#FFF;border:1px solid var(--line);border-radius:8px;padding:14px;overflow-wrap:anywhere}
 .preview span{color:var(--muted)}
 .priv{border-left:4px solid var(--red);padding:8px 0 8px 14px;margin-top:16px;font-size:16px;color:var(--muted)}
 .priv b{color:var(--ink)}
@@ -107,16 +111,17 @@ details summary{cursor:pointer;font-weight:700}
 <section id="results" hidden>
   <span class="eyebrow" data-t="step2">Step 2</span>
   <h2 data-t="saveh">Save them to your phone</h2>
+  <p class="small" style="margin:0 0 8px" data-t="tapeach" data-html><b>Tap each box</b> to save that person to your phone.</p>
   <div class="mini" id="ps-mini"></div>
-  <div class="save" style="margin-top:12px">
-    <button class="btn big" type="button" id="ps-save">Save all 3 to my phone</button>
-    <p class="ok" id="ps-saved" hidden style="margin:10px 0 0"></p>
+  <p class="ok" id="ps-saved" hidden style="margin:10px 0 0"></p>
+  <div class="save" id="ps-allwrap" style="margin-top:12px">
+    <button class="btn big" type="button" id="ps-save">Or save all 3 at once</button>
   </div>
   <p class="small" style="margin:24px 0 0" data-t="yourthree" data-html><b>Your three public servants:</b></p>
   <div class="cards" id="ps-cards"></div>
   <div class="tips">
     <p class="small" style="margin:0" data-t="updating" data-html><b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.</p>
-    <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap <b>Add All 3 Contacts</b> (or open the file, then tap it). <b>Android:</b> open the file and choose your Contacts app.</p>
+    <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap a box, then tap <b>Create New Contact</b>. Come back and tap the next box until all three are saved. <b>Android:</b> tap a box (or Save all) and choose your Contacts app.</p>
     <details style="margin-top:10px"><summary class="small" data-t="whatsaved">What gets saved</summary>
       <div class="preview" id="ps-preview" style="margin-top:8px"></div>
     </details>
@@ -182,8 +187,8 @@ details summary{cursor:pointer;font-weight:700}
       priv:"<b>Your address stays yours.</b> We don't save anything you type. Your address goes only to the U.S. Census Bureau's public lookup to find your district. The list of members of Congress comes from a free public record of Congress.",
       step2:"Step 2", saveh:"Save them to your phone", onetap:"One tap",
       updating:"<b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.",
-      howto:"<b>iPhone:</b> tap <b>Add All 3 Contacts</b> (or open the file, then tap it). <b>Android:</b> open the file and choose your Contacts app.",
-      whatsaved:"What gets saved", yourthree:"<b>Your three public servants:</b>", minirep:"Rep.", minisen:"Senator", step3:"Step 3",
+      howto:"<b>iPhone:</b> tap a box, then tap <b>Create New Contact</b>. Come back and tap the next box until all three are saved. <b>Android:</b> tap a box (or Save all) and choose your Contacts app.",
+      whatsaved:"What gets saved", yourthree:"<b>Your three public servants:</b>", minirep:"Rep.", minisen:"Senator", tapeach:"<b>Tap each box</b> to save that person to your phone.", tapsave:"+ Save", savedok:"Saved", oneios:"Tap Create New Contact, then come back for the next one.", saveAllN:"Or save all {n} at once", step3:"Step 3",
       findany:'Now find them any time. Open your contacts and search <b style="color:#FFF">public servant</b>. All three show up.',
       whye:"Why this matters", whyh:"They work for you",
       why1:"Members of Congress are paid $174,000 a year. Answering you is part of the job.",
@@ -200,9 +205,9 @@ details summary{cursor:pointer;font-weight:700}
       share:"Choose Contacts to save them.", ios:"Tap Add All Contacts.", dl:"Downloaded. Open public-servants.vcf to add them.",
       rep:"U.S. Representative", sen:"U.S. Senator", atlarge:"At-large",
       org:"Public Servant",
-      jobrep:"Your voice in the U.S. House. Call when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you. Their caseworkers can push the agency for you. Also call about bills in Congress.",
-      jobsen:"One of your two voices in the U.S. Senate. Call about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports. Their caseworkers can help you too.",
-      writeThem:"Write them:", saved:"Saved {d} from {s}. Officials change after elections. Go to {s} to update.",
+      jobrep:"Your voice in the U.S. House.\n\nCall when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you.\n\nTheir caseworkers can push the agency for you.\n\nAlso call about bills in Congress.",
+      jobsen:"One of your two voices in the U.S. Senate.\n\nCall about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports.\n\nTheir caseworkers can help you too.",
+      writeThem:"Write them:", saved:"Saved {d} from {s}.\nOfficials change after elections. Go to {s} to update.",
       pv:{name:"Name",org:"Company",title:"Job title",phone:"Phone",web:"Website",note:"Note"}
     },
     es:{
@@ -216,8 +221,8 @@ details summary{cursor:pointer;font-weight:700}
       priv:"<b>Tu dirección es tuya.</b> No guardamos nada de lo que escribes. Tu dirección solo va a la búsqueda pública de la Oficina del Censo de EE. UU. para encontrar tu distrito. La lista de miembros del Congreso viene de un registro público y gratuito.",
       step2:"Paso 2", saveh:"Guárdalos en tu teléfono", onetap:"Un toque",
       updating:"<b>¿Actualizando después de una elección?</b> Tu teléfono no puede borrar contactos viejos por ti. Primero abre Contactos, busca <b>servidor público</b> y borra a quien no aparezca arriba. Luego toca Guardar.",
-      howto:"<b>iPhone:</b> toca <b>Agregar los contactos</b> (o abre el archivo y tócalo). <b>Android:</b> abre el archivo y elige tu app de Contactos.",
-      whatsaved:"Qué se guarda", yourthree:"<b>Tus tres servidores públicos:</b>", minirep:"Rep.", minisen:"Senador(a)", step3:"Paso 3",
+      howto:"<b>iPhone:</b> toca un recuadro y luego <b>Crear nuevo contacto</b>. Regresa y toca el siguiente hasta guardar los tres. <b>Android:</b> toca un recuadro (o Guardar todos) y elige tu app de Contactos.",
+      whatsaved:"Qué se guarda", yourthree:"<b>Tus tres servidores públicos:</b>", minirep:"Rep.", minisen:"Senador(a)", tapeach:"<b>Toca cada recuadro</b> para guardar a esa persona en tu teléfono.", tapsave:"+ Guardar", savedok:"Guardado", oneios:"Toca Crear nuevo contacto y regresa para el siguiente.", saveAllN:"O guárdalos los {n} a la vez", step3:"Paso 3",
       findany:'Encuéntralos cuando quieras. Abre tus contactos y busca <b style="color:#FFF">servidor público</b> o <b style="color:#FFF">public servant</b>. Aparecen los tres.',
       whye:"Por qué importa", whyh:"Trabajan para ti",
       why1:"A los miembros del Congreso se les paga $174,000 al año. Contestarte es parte de su trabajo.",
@@ -234,9 +239,9 @@ details summary{cursor:pointer;font-weight:700}
       share:"Elige Contactos para guardarlos.", ios:"Toca Agregar los contactos.", dl:"Descargado. Abre public-servants.vcf para agregarlos.",
       rep:"Representante de EE. UU.", sen:"Senador(a) de EE. UU.", atlarge:"distrito único",
       org:"Servidor Público (Public Servant)",
-      jobrep:"Tu voz en la Cámara de Representantes. Llama cuando sea un asunto federal: Seguro Social, VA, Medicare, IRS, pasaportes, inmigración, o una agencia federal que no te responde. Su personal puede presionar a la agencia por ti. También llama sobre proyectos de ley en el Congreso.",
-      jobsen:"Una de tus dos voces en el Senado. Llama sobre proyectos de ley federales, los jueces federales y miembros del gabinete que el Senado confirma, o un problema con una agencia federal como el VA, Seguro Social, IRS o pasaportes. Su personal también puede ayudarte.",
-      writeThem:"Escríbeles:", saved:"Guardado el {d} desde {s}. Los funcionarios cambian después de las elecciones. Ve a {s} para actualizar.",
+      jobrep:"Tu voz en la Cámara de Representantes.\n\nLlama cuando sea un asunto federal: Seguro Social, VA, Medicare, IRS, pasaportes, inmigración, o una agencia federal que no te responde.\n\nSu personal puede presionar a la agencia por ti.\n\nTambién llama sobre proyectos de ley en el Congreso.",
+      jobsen:"Una de tus dos voces en el Senado.\n\nLlama sobre proyectos de ley federales, los jueces federales y miembros del gabinete que el Senado confirma, o un problema con una agencia federal como el VA, Seguro Social, IRS o pasaportes.\n\nSu personal también puede ayudarte.",
+      writeThem:"Escríbeles:", saved:"Guardado el {d} desde {s}.\nLos funcionarios cambian después de las elecciones. Ve a {s} para actualizar.",
       pv:{name:"Nombre",org:"Empresa",title:"Cargo",phone:"Teléfono",web:"Sitio web",note:"Nota"}
     }
   };
@@ -284,7 +289,7 @@ details summary{cursor:pointer;font-weight:700}
   function today(){ return new Date().toLocaleDateString(lang==="es"?"es-US":"en-US",{year:"numeric",month:"long",day:"numeric"}); }
   function vcard(o){
     var prefix=o.type==="sen"?"Sen.":"Rep.";
-    var note=job(o)+(o.url?" "+t("writeThem")+" "+o.url+" .":"")+" "+fmt(t("saved"),{d:today(),s:SHORT});
+    var note=job(o)+(o.url?"\n\n"+t("writeThem")+" "+o.url:"")+"\n\n"+fmt(t("saved"),{d:today(),s:SHORT});
     var L=["BEGIN:VCARD","VERSION:3.0",
       "N:"+vEsc(o.last)+";"+vEsc(o.first)+";;"+prefix+";"+vEsc(o.suffix),
       "FN:"+vEsc(o.name),
@@ -301,6 +306,21 @@ details summary{cursor:pointer;font-weight:700}
   }
   function isIOS(){ return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1); }
   function download(blob,name){ var u=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
+  var savedIdx={};
+  function fileName(o){ return (o.last||"contact").replace(/[^A-Za-z0-9]+/g,"-")+"-public-servant.vcf"; }
+  function saveOne(i){
+    var o=current[i]; if(!o) return; var name=fileName(o), blob=new Blob([vcard(o)+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
+    savedIdx[i]=true; renderMini();
+    try{ var file=new File([blob],name,{type:"text/vcard"});
+      if(!isIOS() && /Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:t("org")}).catch(function(){download(blob,name)}); return; }
+    }catch(e){}
+    if(isIOS()){ var u=URL.createObjectURL(blob); var w=window.open(u,"_blank"); if(!w) window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},120000); flash(msg,t("oneios")); return; }
+    download(blob,name);
+  }
+  function renderMini(){
+    $("ps-mini").innerHTML=current.map(function(o,i){ var lab=o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
+    $("ps-mini").querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ saveOne(+b.dataset.i); }); });
+  }
   function saveAll(list){
     var name="public-servants.vcf", blob=new Blob([list.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
     try{ var file=new File([blob],name,{type:"text/vcard"});
@@ -324,10 +344,11 @@ details summary{cursor:pointer;font-weight:700}
         '<div class="row" style="margin-top:4px">'+(callNum?'<a class="btn ghost" href="tel:'+esc(String(callNum).replace(/[^0-9+]/g,""))+'">'+esc(t("call"))+'</a>':'')+(o.url?'<a class="btn ghost" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("write"))+'</a>':'')+'</div>';
       box.appendChild(d);
     });
-    $("ps-mini").innerHTML=list.map(function(o){ var lab=o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state); return '<div><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span></div>'; }).join("");
+    renderMini();
     var o=list[0], pv=t("pv");
     $("ps-preview").innerHTML='<span>'+pv.name+':</span> '+esc(o.name)+'<br><span>'+pv.org+':</span> '+esc(t("org"))+'<br><span>'+pv.title+':</span> '+esc(roleOf(o))+'<br><span>'+pv.phone+':</span> '+(o.local?esc(t("local"))+' '+esc(o.local.phone)+' · ':'')+esc(t("dc"))+' '+esc(o.phone)+'<br><span>'+pv.web+':</span> '+esc(o.url)+'<br><span>'+pv.note+':</span> '+esc(job(o))+' '+esc(fmt(t("saved"),{d:today(),s:SHORT}));
-    $("ps-save").textContent = fmt(t("saveN"),{n:list.length});
+    $("ps-save").textContent = fmt(t("saveAllN"),{n:list.length});
+    $("ps-allwrap").hidden = isIOS();
     $("results").hidden=false;
   }
   $("ps-save").addEventListener("click",function(){ if(current.length) saveAll(current); });
@@ -345,7 +366,7 @@ details summary{cursor:pointer;font-weight:700}
       if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
       var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      function done(list){ show(list); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }
+      function done(list){ savedIdx={}; show(list); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }
       if(rep){ done([withLocal(rep)].concat(sens)); return; }
       var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
       $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
