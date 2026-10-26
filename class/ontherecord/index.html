@@ -138,6 +138,7 @@ html{scroll-behavior:smooth}
     <div id="wt-results" hidden>
       <p class="small" style="margin-top:18px">Tap <b>Send</b> on each one. The letter copies itself and their official contact form opens. Paste. Submit. Done.</p>
       <div class="cards" id="wt-cards"></div>
+      <div class="q" style="margin-top:16px"><b>Save them to your phone</b><p class="small" style="margin:0 0 10px">One tap adds all three to your contacts under <b>Public Servant</b>. Search "public servant" any time to find them.</p><button class="btn" type="button" id="wt-vcf">Save all 3 to my phone</button><p class="copied" id="wt-vcf-msg" hidden style="margin:8px 0 0"></p><p class="small" style="margin:10px 0 0"><b>Updating after an election?</b> Delete your old Public Servant contacts first, then save again.</p></div>
       <div class="row"><a class="btn ghost" id="wt-self" href="#">Email myself a copy</a></div>
       <details style="margin-top:12px"><summary class="small">See my letter</summary><div class="letter" id="wt-letter" style="margin-top:8px"></div></details>
     </div>
@@ -271,8 +272,12 @@ html{scroll-behavior:smooth}
 
   /* automated tool */
   var legCache=null;
-  function loadLeg(){ if(legCache) return Promise.resolve(legCache); return fetch(LEG_URL).then(function(r){if(!r.ok) throw 0; return r.json()}).then(function(d){legCache=d.map(function(p){var t=p.terms[p.terms.length-1];return {name:p.name.official_full||(p.name.first+" "+p.name.last),last:p.name.last,type:t.type,state:t.state,district:(t.district==null?null:t.district),party:t.party,phone:t.phone||"",url:t.contact_form||t.url||""}});return legCache}) }
+  function loadLeg(){ if(legCache) return Promise.resolve(legCache); return fetch(LEG_URL).then(function(r){if(!r.ok) throw 0; return r.json()}).then(function(d){legCache=d.map(function(p){var t=p.terms[p.terms.length-1];return {id:(p.id&&p.id.bioguide)||"",name:p.name.official_full||(p.name.first+" "+p.name.last),first:p.name.nickname||p.name.first,last:p.name.last,suffix:p.name.suffix||"",type:t.type,state:t.state,district:(t.district==null?null:t.district),party:t.party,phone:t.phone||"",address:t.address||"",url:t.contact_form||t.url||""}});return legCache}) }
   loadLeg().catch(useManual);
+  var offCache=null;
+  function loadOff(){ if(offCache) return Promise.resolve(offCache); return fetch("https://unitedstates.github.io/congress-legislators/legislators-district-offices.json").then(function(r){if(!r.ok) throw 0; return r.json()}).then(function(d){offCache={}; (d||[]).forEach(function(x){ if(x&&x.id&&x.id.bioguide) offCache[x.id.bioguide]=x.offices||[]; }); return offCache}).catch(function(){offCache={};return offCache}) }
+  function miles(a,b,c,d){ var R=3959,k=Math.PI/180,x=Math.sin((c-a)*k/2)*Math.sin((c-a)*k/2)+Math.cos(a*k)*Math.cos(c*k)*Math.sin((d-b)*k/2)*Math.sin((d-b)*k/2); return 2*R*Math.asin(Math.sqrt(x)); }
+  function addLocal(o,offs,pt){ var c={}; for(var k in o) c[k]=o[k]; var l=(offs[o.id]||[]).filter(function(f){return f&&f.phone}); if(l.length){ if(pt) l.sort(function(a,b){return (a.latitude!=null?miles(pt.lat,pt.lon,a.latitude,a.longitude):1e9)-(b.latitude!=null?miles(pt.lat,pt.lon,b.latitude,b.longitude):1e9)}); var f=l[0]; c.local={phone:f.phone,city:f.city||"",st:f.state||"",zip:f.zip||"",address:[f.address,f.suite,f.building].filter(Boolean).join(", ")}; } return c; }
   function geocode(v){ return new Promise(function(ok,fail){ var n="__geo"+Date.now(), done=false; window[n]=function(d){done=true;ok(d)}; var s=document.createElement("script"); s.src=GEO_URL+"?street="+encodeURIComponent(v.street)+"&city="+encodeURIComponent(v.city)+"&state="+v.state+"&zip="+v.zip+"&benchmark=Public_AR_Current&vintage=ACS2025_Current&layers=all&format=jsonp&callback="+n; s.onerror=function(){if(!done)fail()}; document.head.appendChild(s); setTimeout(function(){if(!done)fail()},20000) }) }
   function vals(){return {name:$("wt-name").value.trim(),email:$("wt-email").value.trim(),street:$("wt-street").value.trim(),city:$("wt-city").value.trim(),state:$("wt-state").value.trim().toUpperCase(),zip:$("wt-zip").value.trim()}}
   function letterFor(o,v){ var title=o.type==="sen"?"Senator":"Representative";
@@ -284,7 +289,7 @@ html{scroll-behavior:smooth}
     list.forEach(function(o,i){
       var role=o.type==="sen"?"U.S. Senator · "+o.state:"U.S. Representative · "+o.state+(o.district?" District "+o.district:" At-large");
       var d=document.createElement("div"); d.className="card";
-      d.innerHTML='<span class="r">'+esc(role)+'</span><span class="nm">'+esc(o.name)+'</span><span class="small">Office: <span class="mono">'+esc(o.phone)+'</span></span><div class="row" style="margin-top:4px"><button class="btn" type="button" data-i="'+i+'">Send</button>'+(o.phone?'<a class="btn ghost" href="tel:'+esc(o.phone.replace(/[^0-9+]/g,""))+'">Call</a>':'')+'</div><span class="done" hidden>Copied. Paste it into the form that just opened.</span>';
+      d.innerHTML='<span class="r">'+esc(role)+'</span><span class="nm">'+esc(o.name)+'</span>'+(o.local?'<span class="small">Local office'+(o.local.city?' ('+esc(o.local.city)+')':'')+': <span class="mono">'+esc(o.local.phone)+'</span></span>':'')+'<span class="small">DC office: <span class="mono">'+esc(o.phone)+'</span></span><div class="row" style="margin-top:4px"><button class="btn" type="button" data-i="'+i+'">Send</button>'+((o.local||o).phone?'<a class="btn ghost" href="tel:'+esc((o.local||o).phone.replace(/[^0-9+]/g,""))+'">Call</a>':'')+'</div><span class="done" hidden>Copied. Paste it into the form that just opened.</span>';
       box.appendChild(d);
     });
     box.querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ var o=current[+b.dataset.i]; var t=letterFor(o,v); var p; try{p=navigator.clipboard.writeText(t)}catch(e){p=Promise.reject()} window.open(o.url,"_blank","noopener"); var s=b.closest(".card").querySelector(".done"); p.then(function(){s.hidden=false},function(){s.textContent="Open \"See my letter\" below and copy it.";s.hidden=false}); }) });
@@ -293,20 +298,38 @@ html{scroll-behavior:smooth}
     $("wt-self").href="mailto:"+encodeURIComponent(v.email||"")+"?subject="+encodeURIComponent("My letter about Nolan Wells")+"&body="+encodeURIComponent("Sent "+new Date().toLocaleDateString()+" to: "+list.map(function(o){return o.name}).join(", ")+"\n\n"+letterFor(rep,v));
     $("wt-results").hidden=false; $("wt-results").scrollIntoView({behavior:"smooth",block:"start"});
   }
+  /* save contacts (vCard), same format as agentkodak.com/publicservants */
+  var SHORT_PS="agentkodak.com/publicservants";
+  var ST={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+  function vRole(o){ var s=ST[o.state]||o.state; return o.type==="sen"?"U.S. Senator, "+s:"U.S. Representative, "+s+(o.district?" District "+o.district:" At-large"); }
+  function vEsc(s){ return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;"); }
+  function vFold(l){ var out="",s=l; while(s.length>73){var k=73; while(k>60&&s.charAt(k-1)==="\\") k--; out+=s.slice(0,k)+"\r\n ";s=s.slice(k);} return out+s; }
+  var JOB={rep:"Your voice in the U.S. House. Call when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you. Their caseworkers can push the agency for you. Also call about bills in Congress.",sen:"One of your two voices in the U.S. Senate. Call about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports. Their caseworkers can help you too."};
+  function vcard(o){ var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var tel=(o.phone||"").replace(/[^0-9]/g,""); if(tel.length===10) tel="+1-"+tel.slice(0,3)+"-"+tel.slice(3,6)+"-"+tel.slice(6);
+    var note=(JOB[o.type]||"Your public servant.")+(o.url?" Write them: "+o.url+" .":"")+" Saved "+today+" from "+SHORT_PS+". Officials change after elections. Go to "+SHORT_PS+" to update.";
+    return ["BEGIN:VCARD","VERSION:3.0","N:"+vEsc(o.last)+";"+vEsc(o.first)+";;"+(o.type==="sen"?"Sen.":"Rep.")+";"+vEsc(o.suffix),"FN:"+vEsc(o.name),"ORG:Public Servant","TITLE:"+vEsc(vRole(o)),"CATEGORIES:Public Servant",(o.local?"item1.TEL;TYPE=WORK,VOICE:"+o.local.phone.replace(/[^0-9]/g,"").replace(/^(\d{3})(\d{3})(\d{4})$/,"+1-$1-$2-$3"):null),(o.local?"item1.X-ABLabel:Local office"+(o.local.city?" ("+vEsc(o.local.city)+")":""):null),tel?"item2.TEL;TYPE=WORK,VOICE:"+tel:null,tel?"item2.X-ABLabel:DC office":null,o.url?"URL;TYPE=WORK:"+o.url:null,(o.local&&o.local.address)?"ADR;TYPE=WORK:;;"+vEsc(o.local.address)+";"+vEsc(o.local.city)+";"+vEsc(o.local.st)+";"+vEsc(o.local.zip)+";USA":(o.address?"ADR;TYPE=WORK:;;"+vEsc(o.address)+";;;;":null),"NOTE:"+vEsc(note),"END:VCARD"].filter(Boolean).map(vFold).join("\r\n"); }
+  function vIOS(){ return /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1); }
+  function vMsg(m){ var e=$("wt-vcf-msg"); e.textContent=m; e.hidden=false; }
+  function vDownload(blob,name){ var u=URL.createObjectURL(blob),a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
+  $("wt-vcf").addEventListener("click",function(){ if(!current.length) return; var name="public-servants.vcf", blob=new Blob([current.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"});
+    try{ var f=new File([blob],name,{type:"text/vcard"}); if(!vIOS()&&/Android/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){ navigator.share({files:[f],title:"My public servants"}).then(function(){vMsg("Choose Contacts to save all 3.")}).catch(function(){vDownload(blob,name)}); return; } }catch(e){}
+    if(vIOS()){ var u=URL.createObjectURL(blob); window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},60000); vMsg("Tap Add All 3 Contacts."); return; }
+    vDownload(blob,name); vMsg("Downloaded. Open public-servants.vcf to add all 3."); });
+
   $("wt-form").addEventListener("submit",function(e){
     e.preventDefault(); var v=vals(); var st=$("wt-status");
     if(!v.name||!v.street||!v.city||!/^[A-Z]{2}$/.test(v.state)||!/^\d{5}$/.test(v.zip)){ st.textContent="Fill in name, street, city, 2-letter state and 5-digit ZIP."; return; }
     st.textContent="Finding your officials..."; $("wt-pick").hidden=true; $("wt-results").hidden=true;
-    Promise.all([loadLeg(),geocode(v).catch(function(){return null})]).then(function(r){
-      var leg=r[0], g=r[1], dist=null;
-      try{ var G=g.result.addressMatches[0].geographies; Object.keys(G).forEach(function(k){ if(/Congressional Districts/.test(k)){ var n=parseInt(G[k][0].BASENAME,10); dist=isNaN(n)?0:n; } }) }catch(err){}
+    Promise.all([loadLeg(),geocode(v).catch(function(){return null}),loadOff()]).then(function(r){
+      var leg=r[0], g=r[1], offs=r[2], dist=null, pt=null;
+      try{ var M=g.result.addressMatches[0]; if(M.coordinates) pt={lat:+M.coordinates.y,lon:+M.coordinates.x}; var G=M.geographies; Object.keys(G).forEach(function(k){ if(/Congressional Districts/.test(k)){ var n=parseInt(G[k][0].BASENAME,10); dist=isNaN(n)?0:n; } }) }catch(err){}
       var sens=leg.filter(function(o){return o.type==="sen"&&o.state===v.state}), reps=leg.filter(function(o){return o.type==="rep"&&o.state===v.state});
       if(!sens.length&&!reps.length){ st.textContent="Use the 2-letter state code, like MS."; return; }
       var rep=dist!==null?(reps.filter(function(o){return o.district===dist})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      if(rep){ show([rep].concat(sens),v); return; }
+      var L=function(o){return addLocal(o,offs,pt)}; if(rep){ show([L(rep)].concat(sens.map(L)),v); return; }
       var sel=$("wt-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent="District "+o.district+": "+o.name;sel.appendChild(op)});
-      $("wt-pick").hidden=false; $("wt-pick-go").onclick=function(){ show([reps[+sel.value]].concat(sens),v); $("wt-pick").hidden=true; };
+      $("wt-pick").hidden=false; $("wt-pick-go").onclick=function(){ show([L(reps[+sel.value])].concat(sens.map(L)),v); $("wt-pick").hidden=true; };
     }).catch(function(){ st.textContent=""; useManual(); });
   });
 })();
