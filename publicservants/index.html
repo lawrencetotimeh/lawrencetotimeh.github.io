@@ -34,7 +34,7 @@ a{color:var(--ink);text-decoration-color:var(--red);text-decoration-thickness:2p
 .lang button{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;padding:6px 14px;border:0;background:#FFF;color:var(--ink);cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--ink);color:#FFF}
 .lead{font-family:var(--display);font-size:clamp(20px,4.8vw,27px);line-height:1.25;margin:18px 0 0}
-.mono{font-family:var(--mono);font-weight:600;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em;overflow-wrap:anywhere}
+.mono{font-family:var(--mono);font-weight:600;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em;white-space:nowrap}
 .btn{display:inline-block;font-family:var(--body);font-weight:700;font-size:17px;padding:12px 18px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:#FFF;text-decoration:none;cursor:pointer;text-align:center}
 .btn.ghost{background:#FFF;color:var(--ink);border-color:var(--red)}
 .btn.big{font-size:19px;padding:16px 22px;width:100%}
@@ -150,13 +150,16 @@ details summary{cursor:pointer;font-weight:700}
     <div id="qr" role="img" aria-label="QR code for this page"></div>
     <div>
       <p class="small" data-t="shot">Screenshot the code or share the link:</p>
-      <p><span class="mono" id="share-text">agentkodak.com/publicservants</span></p>
+      <p><span class="mono" id="share-text" style="white-space:normal;overflow-wrap:anywhere">agentkodak.com/publicservants</span></p>
       <div class="row"><button class="btn ghost" type="button" id="link-copy" data-t="copy">Copy link</button><span class="ok" id="link-copied" hidden></span></div>
     </div>
   </div>
   <p class="small" style="margin-top:18px" data-t="otr" data-html>Working on a specific issue? <a href="https://agentkodak.com/class/ontherecord/">Send the On the Record for Nolan letter</a> to the same three people.</p>
 </section>
 
+</div>
+<a class="givebar" href="/contact.html#support-links" style="display:block;background:#E0343F;color:#fff;text-decoration:none;font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.3;letter-spacing:.1em;text-transform:uppercase"><span style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 16px;max-width:1180px;margin:0 auto;padding:10px 16px;text-align:center"><span>Keep the lessons free</span><span style="background:#F2EFE9;color:#0A0A0B;font-weight:600;padding:8px 14px">Support the work &rarr;</span><span style="opacity:.85">Cash App · PayPal · Zelle</span></span></a>
+<div class="wrap">
 <footer>
   <b>Know Your Public Servants</b> · Agent Kodak · Agents of Change Field Guide.
   <p style="margin:8px 0 0" data-t="foot">District lookup: U.S. Census Bureau Geocoder. Members of Congress, offices and phone numbers: the public-domain congress-legislators dataset. Senators and representatives listed for the 50 states. DC and the territories have one delegate in the House and no senators.</p>
