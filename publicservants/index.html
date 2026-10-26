@@ -1,0 +1,349 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Know Your Public Servants</title>
+<meta name="description" content="Type your address. Find your U.S. representative and both senators. Save all three to your phone in one tap.">
+<meta property="og:title" content="Know Your Public Servants">
+<meta property="og:description" content="Find your representative and both senators. Save all three to your phone. Search 'public servant' any time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#111111; --muted:#3D3D3D; --line:#E2D6B5;
+  --gold:#8C6A00; --gold-soft:#FCF1D4; --tint:#FFF8E6; --ok:#1B5E32;
+  --display:"Archivo Black","Arial Black",Impact,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:20px;line-height:1.55}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:36px;border-top:1px solid var(--line)}
+h1,h2{font-family:var(--display);font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,11.5vw,84px);text-transform:uppercase}
+h1 .g{color:var(--gold)}
+h2{font-size:clamp(26px,6.2vw,38px);text-transform:uppercase;margin-bottom:12px}
+p{margin:0 0 12px}
+a{color:var(--ink);text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.small{font-size:17px} .muted{color:var(--muted)}
+.hero{padding-block:20px 30px;border-bottom:6px solid var(--gold)}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:22px}
+.lang{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;padding:6px 14px;border:0;background:#FFF;color:var(--ink);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#FFF}
+.lead{font-family:var(--display);font-size:clamp(20px,4.8vw,27px);line-height:1.25;margin:18px 0 0}
+.mono{font-family:var(--mono);font-weight:600;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em;overflow-wrap:anywhere}
+.btn{display:inline-block;font-family:var(--body);font-weight:700;font-size:17px;padding:12px 18px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:#FFF;text-decoration:none;cursor:pointer;text-align:center}
+.btn.ghost{background:#FFF;color:var(--ink);border-color:var(--gold)}
+.btn.big{font-size:19px;padding:16px 22px;width:100%}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+input,select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #CFC3A0;border-radius:6px;background:#FFF;color:var(--ink)}
+.cards{display:grid;gap:12px;margin-top:14px}
+.card{border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:6px}
+.card .r{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card .nm{font-family:var(--display);font-size:22px;line-height:1.15}
+.card .job{font-size:16px;color:var(--muted);line-height:1.45}
+.save{background:var(--tint);border:2px solid var(--gold);border-radius:10px;padding:18px;margin-top:18px}
+.save b.k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+.ok{font-family:var(--mono);font-size:14px;color:var(--ok)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:18px}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:22px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#FFF;display:grid;place-items:center;box-shadow:0 0 0 3px var(--gold)}
+.preview{font-family:var(--mono);font-size:14px;line-height:1.6;background:#FFF;border:1px solid var(--line);border-radius:8px;padding:14px;overflow-wrap:anywhere}
+.preview span{color:var(--muted)}
+.priv{border-left:4px solid var(--gold);padding:8px 0 8px 14px;margin-top:16px;font-size:16px;color:var(--muted)}
+.priv b{color:var(--ink)}
+.kit{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+@media (max-width:560px){.kit{grid-template-columns:1fr}}
+#qr{background:#fff;padding:10px;border:1px solid var(--line);border-radius:8px;width:162px;height:162px}
+#qr img,#qr canvas{width:140px!important;height:140px!important}
+.cta{background:var(--ink);color:#FFF;border-radius:10px;padding:20px}
+.cta p{color:#E8E1CF;font-size:17px}
+.stamp{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-top:14px}
+footer{border-top:1px solid var(--line);padding-block:24px 44px;font-size:14px;color:var(--muted)}
+details summary{cursor:pointer;font-weight:700}
+</style></head><body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="topbar"><div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div></div>
+  <span class="eyebrow" data-t="eyebrow">Agents of Change Field Guide · Civic education</span>
+  <h1 data-t="h1" data-html>Know Your <span class="g">Public Servants</span></h1>
+  <p class="lead" data-t="lead">Three people in Congress work for you. Save them in your phone like you mean it.</p>
+  <p class="small" style="margin-top:14px" data-t="intro">If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. One tap saves them to your contacts.</p>
+  <p class="stamp" id="stamp"></p>
+</header>
+
+<section id="find">
+  <span class="eyebrow" data-t="step1">Step 1</span>
+  <h2 data-t="find">Find your three</h2>
+  <form id="ps-form" novalidate>
+    <div class="grid2">
+      <div class="full"><label for="ps-street" data-t="street">Street address</label><input id="ps-street" autocomplete="address-line1" placeholder="123 Main St"></div>
+      <div><label for="ps-city" data-t="city">City</label><input id="ps-city" autocomplete="address-level2" placeholder="Jackson"></div>
+      <div class="grid2" style="gap:10px"><div><label for="ps-state" data-t="state">State</label><input id="ps-state" autocomplete="address-level1" maxlength="2" placeholder="MS" style="text-transform:uppercase"></div><div><label for="ps-zip" data-t="zip">ZIP</label><input id="ps-zip" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="39201"></div></div>
+    </div>
+    <div class="row"><button class="btn" type="submit" data-t="go">Find my public servants</button><span class="small muted" id="ps-status" aria-live="polite"></span></div>
+  </form>
+  <div id="ps-pick" hidden style="margin-top:14px">
+    <p class="small" data-t="nomatch" data-html><b>We couldn't match that exact address.</b> Pick your House district:</p>
+    <select id="ps-pick-sel"></select>
+    <div class="row"><button class="btn" type="button" id="ps-pick-go" data-t="useone">Use this one</button></div>
+  </div>
+  <p class="priv" data-t="priv" data-html><b>Your address stays yours.</b> We don't save anything you type. Your address goes only to the U.S. Census Bureau's public lookup to find your district. The list of members of Congress comes from a free public record of Congress.</p>
+</section>
+
+<section id="results" hidden>
+  <span class="eyebrow" data-t="step2">Step 2</span>
+  <h2 data-t="saveh">Save them to your phone</h2>
+  <div class="cards" id="ps-cards"></div>
+  <div class="save">
+    <b class="k" data-t="onetap">One tap</b>
+    <button class="btn big" type="button" id="ps-save">Save all 3 to my phone</button>
+    <p class="ok" id="ps-saved" hidden style="margin:10px 0 0"></p>
+    <p class="small" style="margin:10px 0 0;border-top:1px solid var(--line);padding-top:10px" data-t="updating" data-html><b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.</p>
+    <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap <b>Add All 3 Contacts</b> (or open the file, then tap it). <b>Android:</b> open the file and choose your Contacts app.</p>
+  </div>
+  <details style="margin-top:14px"><summary class="small" data-t="whatsaved">What gets saved</summary>
+    <div class="preview" id="ps-preview" style="margin-top:8px"></div>
+  </details>
+  <div class="cta" style="margin-top:22px">
+    <span class="eyebrow" style="color:#E2C15A" data-t="step3">Step 3</span>
+    <p style="margin:0" data-t="findany" data-html>Now find them any time. Open your contacts and search <b style="color:#FFF">public servant</b>. All three show up.</p>
+  </div>
+</section>
+
+<section id="why">
+  <span class="eyebrow" data-t="whye">Why this matters</span>
+  <h2 data-t="whyh">They work for you</h2>
+  <ol class="steps">
+    <li data-t="why1">Members of Congress are paid $174,000 a year. Answering you is part of the job.</li>
+    <li data-t="why2">Call the local office for help with a federal agency. Their caseworkers handle problems with the VA, Social Security, the IRS, passports and more, close to home.</li>
+    <li data-t="why3">Each office has a website contact form. That's how they take written messages. The saved contact links straight to it.</li>
+  </ol>
+  <p class="small muted" style="margin-top:12px" data-t="whynote">Officials change after elections. Come back here after each election, delete your old Public Servant contacts, and save the new ones. We update this page when new officials take office.</p>
+</section>
+
+<section id="share">
+  <span class="eyebrow" data-t="spread">Spread it</span>
+  <h2 data-t="spreadh">Get your people on it</h2>
+  <div class="kit">
+    <div id="qr" role="img" aria-label="QR code for this page"></div>
+    <div>
+      <p class="small" data-t="shot">Screenshot the code or share the link:</p>
+      <p><span class="mono" id="share-text">agentkodak.com/publicservants</span></p>
+      <div class="row"><button class="btn ghost" type="button" id="link-copy" data-t="copy">Copy link</button><span class="ok" id="link-copied" hidden></span></div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:18px" data-t="otr" data-html>Working on a specific issue? <a href="https://agentkodak.com/class/ontherecord/">Send the On the Record for Nolan letter</a> to the same three people.</p>
+</section>
+
+<footer>
+  <b>Know Your Public Servants</b> · Agent Kodak · Agents of Change Field Guide.
+  <p style="margin:8px 0 0" data-t="foot">District lookup: U.S. Census Bureau Geocoder. Members of Congress, offices and phone numbers: the public-domain congress-legislators dataset. Senators and representatives listed for the 50 states. DC and the territories have one delegate in the House and no senators.</p>
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  var PAGE_CHECKED = {en:"October 26, 2026", es:"26 de octubre de 2026"};
+  var SHORT = "agentkodak.com/publicservants";
+  var LEG_URL = "https://unitedstates.github.io/congress-legislators/legislators-current.json";
+  var OFF_URL = "https://unitedstates.github.io/congress-legislators/legislators-district-offices.json";
+  var GEO_URL = "https://geocoding.geo.census.gov/geocoder/geographies/address";
+  var $ = function(id){return document.getElementById(id)};
+  var STATES = {AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming",DC:"District of Columbia",PR:"Puerto Rico",GU:"Guam",VI:"U.S. Virgin Islands",AS:"American Samoa",MP:"Northern Mariana Islands"};
+
+  /* ---------- language ---------- */
+  var T = {
+    en:{
+      eyebrow:"Agents of Change Field Guide · Civic education",
+      h1:'Know Your <span class="g">Public Servants</span>',
+      lead:"Three people in Congress work for you. Save them in your phone like you mean it.",
+      intro:"If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. One tap saves them to your contacts.",
+      stamp:"Page last checked {d}. Members of Congress update automatically from public records.",
+      step1:"Step 1", find:"Find your three", street:"Street address", city:"City", state:"State", zip:"ZIP", go:"Find my public servants",
+      nomatch:"<b>We couldn't match that exact address.</b> Pick your House district:", useone:"Use this one",
+      priv:"<b>Your address stays yours.</b> We don't save anything you type. Your address goes only to the U.S. Census Bureau's public lookup to find your district. The list of members of Congress comes from a free public record of Congress.",
+      step2:"Step 2", saveh:"Save them to your phone", onetap:"One tap",
+      updating:"<b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.",
+      howto:"<b>iPhone:</b> tap <b>Add All 3 Contacts</b> (or open the file, then tap it). <b>Android:</b> open the file and choose your Contacts app.",
+      whatsaved:"What gets saved", step3:"Step 3",
+      findany:'Now find them any time. Open your contacts and search <b style="color:#FFF">public servant</b>. All three show up.',
+      whye:"Why this matters", whyh:"They work for you",
+      why1:"Members of Congress are paid $174,000 a year. Answering you is part of the job.",
+      why2:"Call the local office for help with a federal agency. Their caseworkers handle problems with the VA, Social Security, the IRS, passports and more, close to home.",
+      why3:"Each office has a website contact form. That's how they take written messages. The saved contact links straight to it.",
+      whynote:"Officials change after elections. Come back here after each election, delete your old Public Servant contacts, and save the new ones. We update this page when new officials take office.",
+      spread:"Spread it", spreadh:"Get your people on it", shot:"Screenshot the code or share the link:", copy:"Copy link",
+      otr:'Working on a specific issue? <a href="https://agentkodak.com/class/ontherecord/">Send the On the Record for Nolan letter</a> to the same three people.',
+      foot:"District lookup: U.S. Census Bureau Geocoder. Members of Congress, offices and phone numbers: the public-domain congress-legislators dataset. Senators and representatives listed for the 50 states. DC and the territories have one delegate in the House and no senators.",
+      saveN:"Save all {n} to my phone", copied:"Copied", copyfail:"Copy failed",
+      fill:"Fill in street, city, 2-letter state and 5-digit ZIP.", finding:"Finding your public servants...", badstate:"Use the 2-letter state code, like MS.",
+      loadfail:"The list of members didn't load. Refresh and try again.", netfail:"Something didn't load. Check your connection and try again.",
+      district:"District", call:"Call", write:"Write", dc:"DC office", local:"Local office",
+      share:"Choose Contacts to save them.", ios:"Tap Add All Contacts.", dl:"Downloaded. Open public-servants.vcf to add them.",
+      rep:"U.S. Representative", sen:"U.S. Senator", atlarge:"At-large",
+      org:"Public Servant",
+      jobrep:"Your voice in the U.S. House. Call when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you. Their caseworkers can push the agency for you. Also call about bills in Congress.",
+      jobsen:"One of your two voices in the U.S. Senate. Call about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports. Their caseworkers can help you too.",
+      writeThem:"Write them:", saved:"Saved {d} from {s}. Officials change after elections. Go to {s} to update.",
+      pv:{name:"Name",org:"Company",title:"Job title",phone:"Phone",web:"Website",note:"Note"}
+    },
+    es:{
+      eyebrow:"Guía de Agentes del Cambio · Educación cívica",
+      h1:'Conoce a tus <span class="g">Servidores Públicos</span>',
+      lead:"Tres personas en el Congreso trabajan para ti. Guárdalas en tu teléfono en serio.",
+      intro:"Si vives en uno de los 50 estados, tienes un representante y dos senadores en el Congreso de EE. UU. Escribe tu dirección una vez. Encontramos a los tres. Con un toque los guardas en tus contactos.",
+      stamp:"Página revisada el {d}. Los miembros del Congreso se actualizan automáticamente con registros públicos.",
+      step1:"Paso 1", find:"Encuentra a tus tres", street:"Dirección", city:"Ciudad", state:"Estado", zip:"Código postal", go:"Buscar mis servidores públicos",
+      nomatch:"<b>No pudimos ubicar esa dirección exacta.</b> Elige tu distrito de la Cámara:", useone:"Usar este",
+      priv:"<b>Tu dirección es tuya.</b> No guardamos nada de lo que escribes. Tu dirección solo va a la búsqueda pública de la Oficina del Censo de EE. UU. para encontrar tu distrito. La lista de miembros del Congreso viene de un registro público y gratuito.",
+      step2:"Paso 2", saveh:"Guárdalos en tu teléfono", onetap:"Un toque",
+      updating:"<b>¿Actualizando después de una elección?</b> Tu teléfono no puede borrar contactos viejos por ti. Primero abre Contactos, busca <b>servidor público</b> y borra a quien no aparezca arriba. Luego toca Guardar.",
+      howto:"<b>iPhone:</b> toca <b>Agregar los contactos</b> (o abre el archivo y tócalo). <b>Android:</b> abre el archivo y elige tu app de Contactos.",
+      whatsaved:"Qué se guarda", step3:"Paso 3",
+      findany:'Encuéntralos cuando quieras. Abre tus contactos y busca <b style="color:#FFF">servidor público</b> o <b style="color:#FFF">public servant</b>. Aparecen los tres.',
+      whye:"Por qué importa", whyh:"Trabajan para ti",
+      why1:"A los miembros del Congreso se les paga $174,000 al año. Contestarte es parte de su trabajo.",
+      why2:"Llama a la oficina local para pedir ayuda con una agencia federal. Su personal resuelve problemas con el VA, el Seguro Social, el IRS, pasaportes y más, cerca de casa.",
+      why3:"Cada oficina tiene un formulario de contacto en su sitio web. Así reciben mensajes por escrito. El contacto guardado te lleva directo a ese formulario.",
+      whynote:"Los funcionarios cambian después de las elecciones. Regresa aquí después de cada elección, borra tus contactos viejos de Servidor Público y guarda los nuevos. Actualizamos esta página cuando nuevos funcionarios toman posesión.",
+      spread:"Compártelo", spreadh:"Que tu gente lo haga también", shot:"Toma captura del código o comparte el enlace:", copy:"Copiar enlace",
+      otr:'¿Trabajas en un tema específico? <a href="https://agentkodak.com/class/ontherecord/">Envía la carta On the Record for Nolan</a> (en inglés) a las mismas tres personas.',
+      foot:"Búsqueda de distrito: Geocodificador de la Oficina del Censo de EE. UU. Miembros del Congreso, oficinas y teléfonos: el conjunto de datos público congress-legislators. Se muestran senadores y representantes de los 50 estados. DC y los territorios tienen un delegado en la Cámara y no tienen senadores.",
+      saveN:"Guardar los {n} en mi teléfono", copied:"Copiado", copyfail:"No se pudo copiar",
+      fill:"Escribe dirección, ciudad, estado de 2 letras y código postal de 5 dígitos.", finding:"Buscando tus servidores públicos...", badstate:"Usa el código de estado de 2 letras, como MS.",
+      loadfail:"La lista de miembros no cargó. Recarga la página e intenta otra vez.", netfail:"Algo no cargó. Revisa tu conexión e intenta otra vez.",
+      district:"Distrito", call:"Llamar", write:"Escribir", dc:"Oficina en DC", local:"Oficina local",
+      share:"Elige Contactos para guardarlos.", ios:"Toca Agregar los contactos.", dl:"Descargado. Abre public-servants.vcf para agregarlos.",
+      rep:"Representante de EE. UU.", sen:"Senador(a) de EE. UU.", atlarge:"distrito único",
+      org:"Servidor Público (Public Servant)",
+      jobrep:"Tu voz en la Cámara de Representantes. Llama cuando sea un asunto federal: Seguro Social, VA, Medicare, IRS, pasaportes, inmigración, o una agencia federal que no te responde. Su personal puede presionar a la agencia por ti. También llama sobre proyectos de ley en el Congreso.",
+      jobsen:"Una de tus dos voces en el Senado. Llama sobre proyectos de ley federales, los jueces federales y miembros del gabinete que el Senado confirma, o un problema con una agencia federal como el VA, Seguro Social, IRS o pasaportes. Su personal también puede ayudarte.",
+      writeThem:"Escríbeles:", saved:"Guardado el {d} desde {s}. Los funcionarios cambian después de las elecciones. Ve a {s} para actualizar.",
+      pv:{name:"Nombre",org:"Empresa",title:"Cargo",phone:"Teléfono",web:"Sitio web",note:"Nota"}
+    }
+  };
+  var lang="en";
+  try{ var q=new URLSearchParams(location.search).get("lang"); if(q==="es"||q==="en") lang=q; else { var s=localStorage.getItem("ps-lang"); if(s==="es"||s==="en") lang=s; } }catch(e){}
+  function t(k){ return T[lang][k]; }
+  function fmt(s,o){ return s.replace(/\{(\w)\}/g,function(_,k){return o[k]}); }
+  function shareURL(){ return "https://"+SHORT+(lang==="es"?"/?lang=es":""); }
+  var qrObj=null;
+  function applyLang(){
+    document.documentElement.lang=lang;
+    document.querySelectorAll("[data-t]").forEach(function(el){ var v=t(el.getAttribute("data-t")); if(v==null) return; if(el.hasAttribute("data-html")) el.innerHTML=v; else el.textContent=v; });
+    document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.lang===lang?"true":"false"); });
+    $("stamp").textContent=fmt(t("stamp"),{d:PAGE_CHECKED[lang]});
+    $("share-text").textContent=SHORT+(lang==="es"?"/?lang=es":"");
+    try{ if(window.QRCode){ $("qr").innerHTML=""; qrObj=new QRCode($("qr"),{text:shareURL(),width:140,height:140,colorDark:"#111111",colorLight:"#ffffff"}); } }catch(e){}
+    if(current.length) show(current);
+  }
+  document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click",function(){ lang=b.dataset.lang; try{localStorage.setItem("ps-lang",lang)}catch(e){} applyLang(); }); });
+
+  function flash(el,msg){el.textContent=msg;el.hidden=false;setTimeout(function(){el.hidden=true},2600)}
+  $("link-copy").addEventListener("click",function(){ try{navigator.clipboard.writeText(shareURL()).then(function(){flash($("link-copied"),t("copied"))},function(){flash($("link-copied"),t("copyfail"))})}catch(e){flash($("link-copied"),t("copyfail"))} });
+
+  /* ---------- data ---------- */
+  var legCache=null, offCache=null;
+  function loadLeg(){ if(legCache) return Promise.resolve(legCache); return fetch(LEG_URL).then(function(r){if(!r.ok) throw 0; return r.json()}).then(function(d){legCache=d.map(function(p){var tm=p.terms[p.terms.length-1];return {id:(p.id&&p.id.bioguide)||"",first:p.name.nickname||p.name.first,last:p.name.last,suffix:p.name.suffix||"",name:p.name.official_full||(p.name.first+" "+p.name.last),type:tm.type,state:tm.state,district:(tm.district==null?null:tm.district),phone:tm.phone||"",address:tm.address||"",url:tm.contact_form||tm.url||""}});return legCache}) }
+  function loadOff(){ if(offCache) return Promise.resolve(offCache); return fetch(OFF_URL).then(function(r){if(!r.ok) throw 0; return r.json()}).then(function(d){offCache={}; (d||[]).forEach(function(x){ if(x&&x.id&&x.id.bioguide) offCache[x.id.bioguide]=x.offices||[]; }); return offCache}).catch(function(){ offCache={}; return offCache; }) }
+  loadLeg().catch(function(){ $("ps-status").textContent=t("loadfail"); });
+  function geocode(v){ return new Promise(function(ok,fail){ var n="__geo"+Date.now(), done=false; window[n]=function(d){done=true;ok(d)}; var s=document.createElement("script"); s.src=GEO_URL+"?street="+encodeURIComponent(v.street)+"&city="+encodeURIComponent(v.city)+"&state="+v.state+"&zip="+v.zip+"&benchmark=Public_AR_Current&vintage=ACS2025_Current&layers=all&format=jsonp&callback="+n; s.onerror=function(){if(!done)fail()}; document.head.appendChild(s); setTimeout(function(){if(!done)fail()},20000) }) }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function dist(a,b,c,d){ var R=3959,toR=Math.PI/180,dLa=(c-a)*toR,dLo=(d-b)*toR; var x=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(a*toR)*Math.cos(c*toR)*Math.sin(dLo/2)*Math.sin(dLo/2); return 2*R*Math.asin(Math.sqrt(x)); }
+  function nearestOffice(o,offs,pt){
+    var list=(offs[o.id]||[]).filter(function(f){return f&&f.phone});
+    if(!list.length) return null;
+    if(pt){ list.sort(function(a,b){ var da=(a.latitude!=null)?dist(pt.lat,pt.lon,a.latitude,a.longitude):1e9, db=(b.latitude!=null)?dist(pt.lat,pt.lon,b.latitude,b.longitude):1e9; return da-db; }); }
+    var f=list[0]; return {phone:f.phone,city:f.city||"",st:f.state||"",zip:f.zip||"",address:[f.address,f.suite,f.building].filter(Boolean).join(", ")};
+  }
+
+  /* ---------- vCard ---------- */
+  function roleOf(o){ var st=STATES[o.state]||o.state; return o.type==="sen" ? t("sen")+", "+st : t("rep")+", "+st+(o.district?" "+t("district")+" "+o.district:" "+t("atlarge")); }
+  function vEsc(s){ return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;"); }
+  function fold(line){ var out="", s=line; while(s.length>73){ var k=73; while(k>60&&s.charAt(k-1)==="\\") k--; out+=s.slice(0,k)+"\r\n "; s=s.slice(k); } return out+s; }
+  function tel(p){ var n=String(p||"").replace(/[^0-9]/g,""); return n.length===10?"+1-"+n.slice(0,3)+"-"+n.slice(3,6)+"-"+n.slice(6):n; }
+  function job(o){ return o.type==="sen"?t("jobsen"):t("jobrep"); }
+  function today(){ return new Date().toLocaleDateString(lang==="es"?"es-US":"en-US",{year:"numeric",month:"long",day:"numeric"}); }
+  function vcard(o){
+    var prefix=o.type==="sen"?"Sen.":"Rep.";
+    var note=job(o)+(o.url?" "+t("writeThem")+" "+o.url+" .":"")+" "+fmt(t("saved"),{d:today(),s:SHORT});
+    var L=["BEGIN:VCARD","VERSION:3.0",
+      "N:"+vEsc(o.last)+";"+vEsc(o.first)+";;"+prefix+";"+vEsc(o.suffix),
+      "FN:"+vEsc(o.name),
+      "ORG:"+vEsc(t("org")),
+      "TITLE:"+vEsc(roleOf(o)),
+      "CATEGORIES:Public Servant"];
+    if(o.local){ L.push("item1.TEL;TYPE=WORK,VOICE:"+tel(o.local.phone)); L.push("item1.X-ABLabel:"+vEsc(t("local")+(o.local.city?" ("+o.local.city+")":""))); }
+    if(o.phone){ L.push("item2.TEL;TYPE=WORK,VOICE:"+tel(o.phone)); L.push("item2.X-ABLabel:"+vEsc(t("dc"))); }
+    if(o.url) L.push("URL;TYPE=WORK:"+o.url);
+    if(o.local&&o.local.address) L.push("ADR;TYPE=WORK:;;"+vEsc(o.local.address)+";"+vEsc(o.local.city)+";"+vEsc(o.local.st)+";"+vEsc(o.local.zip)+";USA");
+    else if(o.address) L.push("ADR;TYPE=WORK:;;"+vEsc(o.address)+";;;;");
+    L.push("NOTE:"+vEsc(note)); L.push("END:VCARD");
+    return L.map(fold).join("\r\n");
+  }
+  function isIOS(){ return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1); }
+  function download(blob,name){ var u=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
+  function saveAll(list){
+    var name="public-servants.vcf", blob=new Blob([list.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
+    try{ var file=new File([blob],name,{type:"text/vcard"});
+      if(!isIOS() && /Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:t("org")}).then(function(){flash(msg,t("share"))}).catch(function(){download(blob,name)}); return; }
+    }catch(e){}
+    if(isIOS()){ var u=URL.createObjectURL(blob); window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},60000); flash(msg,t("ios")); return; }
+    download(blob,name); flash(msg,t("dl"));
+  }
+
+  /* ---------- results ---------- */
+  var current=[];
+  function show(list){
+    current=list; var box=$("ps-cards"); box.innerHTML="";
+    list.forEach(function(o){
+      var d=document.createElement("div"); d.className="card";
+      var callNum=(o.local&&o.local.phone)||o.phone;
+      d.innerHTML='<span class="r">'+esc(roleOf(o))+'</span><span class="nm">'+esc(o.name)+'</span>'+
+        (o.local?'<span class="small">'+esc(t("local"))+(o.local.city?' ('+esc(o.local.city)+')':'')+': <span class="mono">'+esc(o.local.phone)+'</span></span>':'')+
+        (o.phone?'<span class="small">'+esc(t("dc"))+': <span class="mono">'+esc(o.phone)+'</span></span>':'')+
+        '<span class="job">'+esc(job(o))+'</span>'+
+        '<div class="row" style="margin-top:4px">'+(callNum?'<a class="btn ghost" href="tel:'+esc(String(callNum).replace(/[^0-9+]/g,""))+'">'+esc(t("call"))+'</a>':'')+(o.url?'<a class="btn ghost" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("write"))+'</a>':'')+'</div>';
+      box.appendChild(d);
+    });
+    var o=list[0], pv=t("pv");
+    $("ps-preview").innerHTML='<span>'+pv.name+':</span> '+esc(o.name)+'<br><span>'+pv.org+':</span> '+esc(t("org"))+'<br><span>'+pv.title+':</span> '+esc(roleOf(o))+'<br><span>'+pv.phone+':</span> '+(o.local?esc(t("local"))+' '+esc(o.local.phone)+' · ':'')+esc(t("dc"))+' '+esc(o.phone)+'<br><span>'+pv.web+':</span> '+esc(o.url)+'<br><span>'+pv.note+':</span> '+esc(job(o))+' '+esc(fmt(t("saved"),{d:today(),s:SHORT}));
+    $("ps-save").textContent = fmt(t("saveN"),{n:list.length});
+    $("results").hidden=false;
+  }
+  $("ps-save").addEventListener("click",function(){ if(current.length) saveAll(current); });
+
+  $("ps-form").addEventListener("submit",function(e){
+    e.preventDefault(); var st=$("ps-status");
+    var v={street:$("ps-street").value.trim(),city:$("ps-city").value.trim(),state:$("ps-state").value.trim().toUpperCase(),zip:$("ps-zip").value.trim()};
+    if(!v.street||!v.city||!/^[A-Z]{2}$/.test(v.state)||!/^\d{5}$/.test(v.zip)){ st.textContent=t("fill"); return; }
+    st.textContent=t("finding"); $("ps-pick").hidden=true; $("results").hidden=true;
+    Promise.all([loadLeg(),geocode(v).catch(function(){return null}),loadOff()]).then(function(r){
+      var leg=r[0], g=r[1], offs=r[2], dnum=null, pt=null;
+      try{ var m=g.result.addressMatches[0]; if(m.coordinates) pt={lat:+m.coordinates.y,lon:+m.coordinates.x}; var G=m.geographies; Object.keys(G).forEach(function(k){ if(/Congressional Districts/.test(k)){ var n=parseInt(G[k][0].BASENAME,10); dnum=isNaN(n)?0:n; } }) }catch(err){}
+      function withLocal(o){ var c={}; for(var k in o) c[k]=o[k]; c.local=nearestOffice(o,offs,pt); return c; }
+      var sens=leg.filter(function(o){return o.type==="sen"&&o.state===v.state}).map(withLocal), reps=leg.filter(function(o){return o.type==="rep"&&o.state===v.state});
+      if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
+      var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
+      st.textContent="";
+      function done(list){ show(list); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }
+      if(rep){ done([withLocal(rep)].concat(sens)); return; }
+      var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
+      $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
+    }).catch(function(){ st.textContent=t("netfail"); });
+  });
+
+  applyLang();
+})();
+</script>
+</body></html>
