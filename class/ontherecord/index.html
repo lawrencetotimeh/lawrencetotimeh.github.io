@@ -2,15 +2,15 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
-/* Mission sheet: white paper, black type, gold for marks. One column, big numbers, almost no reading. */
+/* Mission sheet: white paper, black type, red for marks. One column, big numbers, almost no reading. */
 :root{
-  --bg:#FFFFFF; --ink:#111111; --muted:#3D3D3D; --line:#E2D6B5;
-  --gold:#8C6A00; --gold-soft:#FCF1D4; --tint:#FFF8E6;
+  --bg:#FFFFFF; --ink:#0A0A0B; --muted:#3D3D3D; --line:#E4E0D8;
+  --red:#E0343F; --red-soft:#FDE8E9; --tint:#F4F2EE;
   --ok:#1B5E32; --ok-soft:#E9F4EC; --no:#8F1D21; --no-soft:#F9E8E8;
-  --display:"Archivo Black","Arial Black",Impact,sans-serif;
-  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Poppins",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:light;
 }
@@ -23,41 +23,41 @@ h1{font-size:clamp(46px,12vw,88px);text-transform:uppercase}
 h2{font-size:clamp(28px,6.5vw,40px);text-transform:uppercase;margin-bottom:12px}
 h3{font-size:21px;margin-bottom:6px}
 p{margin:0 0 12px}
-a{color:var(--ink);text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+a{color:var(--ink);text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:10px}
 .small{font-size:17px}
 .muted{color:var(--muted)}
 .mono{font-family:var(--mono);font-weight:600;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:1px 6px;white-space:nowrap;font-size:.85em}
-.hero{padding-block:52px 34px;border-bottom:6px solid var(--gold)}
-.hero h1 .g{color:var(--gold)}
+.hero{padding-block:52px 34px;border-bottom:6px solid var(--red)}
+.hero h1 .g{color:var(--red)}
 .quote{font-family:var(--display);font-size:clamp(20px,4.8vw,27px);line-height:1.25;margin:20px 0 0}
-.q{background:var(--tint);border:2px solid var(--gold);border-radius:10px;padding:18px 20px;margin-top:22px}
-.q b{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+.q{background:var(--tint);border:2px solid var(--red);border-radius:10px;padding:18px 20px;margin-top:22px}
+.q b{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:6px}
 .q p{font-size:20px;margin:0}
 .ynp{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .ynp span{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
 .y{background:var(--ok-soft);color:var(--ok)} .n{background:var(--no-soft);color:var(--no)} .s{background:#EEE;color:var(--muted)}
 .btn{display:inline-block;font-family:var(--body);font-weight:700;font-size:17px;padding:12px 18px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:#FFF;text-decoration:none;cursor:pointer}
-.btn.ghost{background:#FFF;color:var(--ink);border-color:var(--gold)}
+.btn.ghost{background:#FFF;color:var(--ink);border-color:var(--red)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
 .mission{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:m}
 .mission li{counter-increment:m;display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
-.mission li::before{content:counter(m);font-family:var(--display);font-size:26px;width:52px;height:52px;border-radius:50%;background:var(--ink);color:#FFF;display:grid;place-items:center;box-shadow:0 0 0 3px var(--gold)}
+.mission li::before{content:counter(m);font-family:var(--display);font-size:26px;width:52px;height:52px;border-radius:50%;background:var(--ink);color:#FFF;display:grid;place-items:center;box-shadow:0 0 0 3px var(--red)}
 .mission li div{min-width:0}
 .mission b{display:block;font-size:21px;line-height:1.2}
-.mission .t{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.mission .t{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:560px){.grid2{grid-template-columns:1fr}}
 label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
-input{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #CFC3A0;border-radius:6px;background:#FFF;color:var(--ink)}
-select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #CFC3A0;border-radius:6px;background:#FFF;color:var(--ink)}
+input{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #D6D1C8;border-radius:6px;background:#FFF;color:var(--ink)}
+select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #D6D1C8;border-radius:6px;background:#FFF;color:var(--ink)}
 .full{grid-column:1/-1}
 .box{background:#FFF;border:1px solid var(--line);border-radius:8px;padding:16px}
 .letter{background:#FFF;border:1px solid var(--line);border-radius:6px;padding:16px;white-space:pre-wrap;font-size:17px;line-height:1.55;overflow-wrap:anywhere}
-.fill{background:var(--gold-soft);border-radius:3px;padding:0 2px}
+.fill{background:var(--red-soft);border-radius:3px;padding:0 2px}
 .copied{font-family:var(--mono);font-size:13px;color:var(--ok)}
-.priv{border-left:4px solid var(--gold);padding:8px 0 8px 14px;margin-top:16px;font-size:16px;color:var(--muted)}
+.priv{border-left:4px solid var(--red);padding:8px 0 8px 14px;margin-top:16px;font-size:16px;color:var(--muted)}
 .priv b{color:var(--ink)}
 .cards{display:grid;gap:12px;margin-top:14px}
 .card{border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:6px}
@@ -66,7 +66,7 @@ select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px solid
 .card .done{font-family:var(--mono);font-size:13px;color:var(--ok)}
 .rule{background:var(--ink);color:#FFF;border-radius:10px;padding:22px;text-align:center}
 .rule h2{color:#FFF;margin:0;font-size:clamp(34px,9vw,58px)}
-.rule p{margin:8px 0 0;font-size:17px;color:#E8E1CF}
+.rule p{margin:8px 0 0;font-size:17px;color:#E4E0D8}
 .ladder{display:grid;gap:10px;margin-top:16px}
 .rung{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
 @media (max-width:520px){.rung{grid-template-columns:1fr}}
@@ -138,7 +138,7 @@ html{scroll-behavior:smooth}
     <div id="wt-results" hidden>
       <p class="small" style="margin-top:18px">Tap <b>Send</b> on each one. The letter copies itself and their official contact form opens. Paste. Submit. Done.</p>
       <div class="cards" id="wt-cards"></div>
-      <div class="q" style="margin-top:16px"><b>Save them to your phone</b><p class="small" style="margin:0 0 10px">One tap adds all three to your contacts under <b>Public Servant</b>. Search "public servant" any time to find them.</p><button class="btn" type="button" id="wt-vcf">Save all 3 to my phone</button><p class="copied" id="wt-vcf-msg" hidden style="margin:8px 0 0"></p><p class="small" style="margin:10px 0 0"><b>Updating after an election?</b> Delete your old Public Servant contacts first, then save again.</p></div>
+      <div class="q" style="margin-top:16px"><b>Save them to your phone</b><p class="small" style="margin:0 0 10px">Tap each one to add them to your contacts under <b>Public Servant</b>. Search "public servant" any time to find them. <b>iPhone:</b> tap Create New Contact, then come back for the next one.</p><div class="row" id="wt-vcf-list" style="margin-top:0"></div><p class="copied" id="wt-vcf-msg" hidden style="margin:8px 0 0"></p><p class="small" style="margin:10px 0 0"><b>Updating after an election?</b> Delete your old Public Servant contacts first, then save again.</p></div>
       <div class="row"><a class="btn ghost" id="wt-self" href="#">Email myself a copy</a></div>
       <details style="margin-top:12px"><summary class="small">See my letter</summary><div class="letter" id="wt-letter" style="margin-top:8px"></div></details>
     </div>
@@ -180,7 +180,7 @@ html{scroll-behavior:smooth}
   <h3 style="margin-top:22px">When they answer, here's your next move</h3>
   <div class="ladder">
     <div class="rung"><span class="k y">Yes</span><div>Hold them to it. Ask them to write the Justice Department and the Park Service, and to send you a copy.</div></div>
-    <div class="rung"><span class="k" style="background:var(--gold-soft);color:var(--gold)">Form letter</span><div>Write back: "That's not an answer. Yes or no?" Call the office.</div></div>
+    <div class="rung"><span class="k" style="background:var(--red-soft);color:var(--red)">Form letter</span><div>Write back: "That's not an answer. Yes or no?" Call the office.</div></div>
     <div class="rung"><span class="k n">No</span><div>Post it. Then ask them in person at their next town hall, on camera.</div></div>
     <div class="rung"><span class="k s">Silent</span><div>No answer in 21 days? Now you march, with a destination: their district office.</div></div>
   </div>
@@ -257,7 +257,7 @@ html{scroll-behavior:smooth}
   $("caption").textContent = CAPTION;
   $("cap-copy").addEventListener("click",function(){copyText(CAPTION,$("caption"),$("cap-copied"))});
   $("link-copy").addEventListener("click",function(){copyText(PAGE_URL,$("page-link"),$("link-copied"))});
-  try{ if(window.QRCode){ new QRCode($("qr"),{text:PAGE_URL,width:140,height:140,colorDark:"#111111",colorLight:"#ffffff"}) } else { $("qr").textContent="QR loading" } }catch(e){ $("qr").textContent="QR unavailable" }
+  try{ if(window.QRCode){ new QRCode($("qr"),{text:PAGE_URL,width:140,height:140,colorDark:"#0A0A0B",colorLight:"#ffffff"}) } else { $("qr").textContent="QR loading" } }catch(e){ $("qr").textContent="QR unavailable" }
 
   /* manual fallback */
   function manualLetter(){
@@ -285,7 +285,7 @@ html{scroll-behavior:smooth}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   var current=[];
   function show(list,v){
-    current=list; var box=$("wt-cards"); box.innerHTML="";
+    current=list; setTimeout(renderSave,0); var box=$("wt-cards"); box.innerHTML="";
     list.forEach(function(o,i){
       var role=o.type==="sen"?"U.S. Senator · "+o.state:"U.S. Representative · "+o.state+(o.district?" District "+o.district:" At-large");
       var d=document.createElement("div"); d.className="card";
@@ -304,17 +304,18 @@ html{scroll-behavior:smooth}
   function vRole(o){ var s=ST[o.state]||o.state; return o.type==="sen"?"U.S. Senator, "+s:"U.S. Representative, "+s+(o.district?" District "+o.district:" At-large"); }
   function vEsc(s){ return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;"); }
   function vFold(l){ var out="",s=l; while(s.length>73){var k=73; while(k>60&&s.charAt(k-1)==="\\") k--; out+=s.slice(0,k)+"\r\n ";s=s.slice(k);} return out+s; }
-  var JOB={rep:"Your voice in the U.S. House. Call when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you. Their caseworkers can push the agency for you. Also call about bills in Congress.",sen:"One of your two voices in the U.S. Senate. Call about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports. Their caseworkers can help you too."};
+  var JOB={rep:"Your voice in the U.S. House.\n\nCall when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you.\n\nTheir caseworkers can push the agency for you.\n\nAlso call about bills in Congress.",sen:"One of your two voices in the U.S. Senate.\n\nCall about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports.\n\nTheir caseworkers can help you too."};
   function vcard(o){ var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var tel=(o.phone||"").replace(/[^0-9]/g,""); if(tel.length===10) tel="+1-"+tel.slice(0,3)+"-"+tel.slice(3,6)+"-"+tel.slice(6);
-    var note=(JOB[o.type]||"Your public servant.")+(o.url?" Write them: "+o.url+" .":"")+" Saved "+today+" from "+SHORT_PS+". Officials change after elections. Go to "+SHORT_PS+" to update.";
+    var note=(JOB[o.type]||"Your public servant.")+(o.url?"\n\nWrite them: "+o.url:"")+"\n\nSaved "+today+" from "+SHORT_PS+".\nOfficials change after elections. Go to "+SHORT_PS+" to update.";
     return ["BEGIN:VCARD","VERSION:3.0","N:"+vEsc(o.last)+";"+vEsc(o.first)+";;"+(o.type==="sen"?"Sen.":"Rep.")+";"+vEsc(o.suffix),"FN:"+vEsc(o.name),"ORG:Public Servant","TITLE:"+vEsc(vRole(o)),"CATEGORIES:Public Servant",(o.local?"item1.TEL;TYPE=WORK,VOICE:"+o.local.phone.replace(/[^0-9]/g,"").replace(/^(\d{3})(\d{3})(\d{4})$/,"+1-$1-$2-$3"):null),(o.local?"item1.X-ABLabel:Local office"+(o.local.city?" ("+vEsc(o.local.city)+")":""):null),tel?"item2.TEL;TYPE=WORK,VOICE:"+tel:null,tel?"item2.X-ABLabel:DC office":null,o.url?"URL;TYPE=WORK:"+o.url:null,(o.local&&o.local.address)?"ADR;TYPE=WORK:;;"+vEsc(o.local.address)+";"+vEsc(o.local.city)+";"+vEsc(o.local.st)+";"+vEsc(o.local.zip)+";USA":(o.address?"ADR;TYPE=WORK:;;"+vEsc(o.address)+";;;;":null),"NOTE:"+vEsc(note),"END:VCARD"].filter(Boolean).map(vFold).join("\r\n"); }
   function vIOS(){ return /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1); }
   function vMsg(m){ var e=$("wt-vcf-msg"); e.textContent=m; e.hidden=false; }
   function vDownload(blob,name){ var u=URL.createObjectURL(blob),a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
-  $("wt-vcf").addEventListener("click",function(){ if(!current.length) return; var name="public-servants.vcf", blob=new Blob([current.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"});
-    try{ var f=new File([blob],name,{type:"text/vcard"}); if(!vIOS()&&/Android/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){ navigator.share({files:[f],title:"My public servants"}).then(function(){vMsg("Choose Contacts to save all 3.")}).catch(function(){vDownload(blob,name)}); return; } }catch(e){}
-    if(vIOS()){ var u=URL.createObjectURL(blob); window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},60000); vMsg("Tap Add All 3 Contacts."); return; }
-    vDownload(blob,name); vMsg("Downloaded. Open public-servants.vcf to add all 3."); });
+  function vSaveOne(o){ var name=(o.last||"contact").replace(/[^A-Za-z0-9]+/g,"-")+"-public-servant.vcf", blob=new Blob([vcard(o)+"\r\n"],{type:"text/vcard;charset=utf-8"});
+    try{ var f=new File([blob],name,{type:"text/vcard"}); if(!vIOS()&&/Android/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){ navigator.share({files:[f],title:o.name}).catch(function(){vDownload(blob,name)}); return; } }catch(e){}
+    if(vIOS()){ var u=URL.createObjectURL(blob); var w=window.open(u,"_blank"); if(!w) window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},120000); vMsg("Tap Create New Contact, then come back for the next one."); return; }
+    vDownload(blob,name); }
+  function renderSave(){ var box=$("wt-vcf-list"); if(!box) return; box.innerHTML=""; current.forEach(function(o){ var b=document.createElement("button"); b.type="button"; b.className="btn"; b.textContent="+ Save "+(o.type==="sen"?"Sen. ":"Rep. ")+o.last; b.addEventListener("click",function(){ vSaveOne(o); b.textContent="\u2713 Saved "+o.last; b.className="btn ghost"; }); box.appendChild(b); }); }
 
   $("wt-form").addEventListener("submit",function(e){
     e.preventDefault(); var v=vals(); var st=$("wt-status");
