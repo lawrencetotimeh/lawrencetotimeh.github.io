@@ -28,7 +28,7 @@ def nav(active=""):
 <a class="btn red" href="contact.html">Book Lawrence</a></div></nav>
 <a class="givebar" href="#support-links"><span class="wrap"><span class="gb-t">Keep the lessons free</span><span class="gb-b">Support the work &rarr;</span><span class="gb-s">Cash App · PayPal · Zelle</span></span></a>'''
 
-FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
+FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a> · <a href="press.html">Press</a> · <a href="playbook/">Teen Playbook</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
@@ -68,7 +68,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <p class="sub">Community-centered civic education that helps people understand power, examine evidence, and act together.</p>
 <p class="lede">I turn the law into visual lessons so everyday people know their rights and can hold public officials accountable. I'm not a lawyer. I'm a social justice advocate and civic educator.</p>
 <div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
-<div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S. Project Mgmt, VSU</span><span class="chip">10+ yrs educator</span><span class="chip">TEDx speaker</span></div>
+<div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S., Virginia State</span><span class="chip">10+ yrs educator</span><span class="chip">TEDx speaker</span></div>
 </div>
 <div class="photo"><img src="img/hero/image.jpg" alt="Lawrence Totimeh Jr. in a gray suit with a Liberian flag lapel pin" width="1200" height="1465"><div class="tag">Lawrence Totimeh Jr.</div></div>
 </div></section>
@@ -91,7 +91,6 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 </div>
 <div class="cta rev" style="margin-top:22px"><a class="btn red" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">Watch every lesson: the full playlist</a><a class="btn ghost" href="class/">The Classroom map</a></div>
 <p class="muted rev" style="margin-top:14px;font-size:14px">The three newest lessons are above. All 16 videos, in order, are in the playlist on YouTube.</p>
-<div class="stats rev"><div class="stat"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div><div class="stat"><div class="v">1,080+</div><div class="l">subscribers on @AgentKodak, and growing</div></div><div class="stat"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div></div>
 </div></section>
 
 <section class="dark classroom panelbg" id="class" style="border-top:1px solid var(--line)"><div class="wrap">
@@ -108,10 +107,17 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 750,000 views in the past year</h2></div></div>
 <div class="proof rev" style="grid-template-columns:1.6fr 1fr 1fr">
 <div class="card"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div>
-<div class="card"><div class="v">1,080+</div><div class="l">subscribers on @AgentKodak, and growing</div></div>
-<div class="card"><div class="v">Free</div><div class="l">every lesson, every document, no email gate</div></div>
+<div class="card"><div class="v">11K+</div><div class="l">followers on Instagram at @AgentKodak</div></div>
+<div class="card"><div class="v">1,200+</div><div class="l">subscribers on YouTube, and growing</div></div>
 </div>
-<p class="muted" style="font-size:12px;margin-top:14px">Combined platform insights, 12 months to Oct. 7, 2026.</p>
+<p class="muted" style="font-size:14px;margin-top:14px">Every lesson and every document is free, with no email gate.</p>
+<p class="muted" style="font-size:12px;margin-top:6px">Views: combined platform insights, 12 months to Oct. 7, 2026. Followers and subscribers as of Oct. 31, 2026.</p>
+</div></section>
+
+<section class="light lt" id="playbook"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">New · free for teens and parents · all 50 states + D.C.</div><h2 style="margin-top:8px">The Teen Playbook</h2></div></div>
+<p class="lede muted rev">Step-by-step sheets for the things teens want to do and need to do: a driver's license, a first job, a state ID, taxes, a bank account, turning 18 and more. Pick your state, download the PDF, and hand it to your parent. Print it at your public library.</p>
+<div class="cta rev" style="margin-top:26px"><a class="btn red" href="playbook/">Open the Teen Playbook</a></div>
 </div></section>
 
 <section class="dark action" id="action"><div class="wrap">
@@ -271,6 +277,8 @@ contact = head("Book Lawrence · Contact", "Book Lawrence Totimeh Jr. for a talk
 <section class="light contact"><div class="wrap">
 <div class="rev"><div class="eyebrow">What to include</div><h2 style="margin:10px 0 18px">The basics</h2>
 <p class="muted">Your organization, the date, the audience and what you want them to leave with. Lawrence replies from hello@lawrencetotimeh.com. Press and media requests use the same form.</p>
+<p class="muted" style="margin-top:14px"><b>Press?</b> Bios, a photo and quick facts are on the <a href="press.html">press page</a>.</p>
+<div class="cta" style="margin-top:16px"><a class="btn ghost" href="press.html" style="color:var(--ink);border-color:var(--ink)">Press kit</a></div>
 <p class="muted" style="margin-top:20px;font-size:14px">I'm an educator, not an attorney. Nothing here is legal advice.</p></div>
 <form class="form rev" id="bookForm">
 <div class="pair"><div><label for="name">Name</label><input id="name" required></div><div><label for="org">Organization</label><input id="org"></div></div>
@@ -406,6 +414,65 @@ document.getElementById('dlLtr').addEventListener('click',function(){{var b=new 
 </script>
 ''' + JOIN + FOOT
 
+press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr. (Agent Kodak): short and long bios, a downloadable photo, quick facts and media contact.", "press.html") + nav("") + '''
+<section class="dark pagehero"><div class="wrap">
+<div class="eyebrow">Press · Media kit</div>
+<h1>Press kit</h1>
+<p class="lede">Bios, a photo and quick facts for stories, introductions and event programs. For interviews and requests, email <a href="mailto:hello@lawrencetotimeh.com?subject=Press%20request" style="color:var(--paper)">hello@lawrencetotimeh.com</a> with your outlet and deadline.</p>
+</div></section>
+
+<section class="light"><div class="wrap two">
+<div class="rev">
+<div class="eyebrow">Short bio · about 60 words</div>
+<p class="lede" id="bio-short" style="margin-top:12px">Lawrence Totimeh Jr. is a social justice advocate, civic educator and U.S. Army combat veteran who served in Iraq. Through his School of Law series at @AgentKodak, he teaches how the justice system works in plain language, from the public record, so everyday people know their rights and can hold public officials accountable. He is a TEDx speaker.</p>
+<div class="cta" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-short" style="color:var(--ink);border-color:var(--ink)">Copy short bio</button></div>
+<div class="eyebrow" style="margin-top:40px">Courte biographie · en français (traduction)</div>
+<p id="bio-fr" lang="fr" style="margin-top:12px">Lawrence Totimeh Jr. est militant pour la justice sociale, éducateur civique et ancien combattant de l'armée américaine, qui a servi en Irak. Avec sa série School of Law (@AgentKodak), il explique en langage simple, à partir de documents publics, comment fonctionne le système judiciaire, afin que chacun connaisse ses droits et puisse demander des comptes aux responsables publics. Il est intervenant TEDx.</p>
+<div class="cta" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-fr" style="color:var(--ink);border-color:var(--ink)">Copier la biographie</button></div>
+</div>
+<div class="photo rev"><img src="img/hero/image.jpg" alt="Lawrence Totimeh Jr. in a gray suit with a Liberian flag lapel pin" width="1206" height="1809" loading="lazy"><div class="tag">Official photo</div></div>
+</div></section>
+
+<section class="light lt"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Photo</div><h2 style="margin-top:8px">Download</h2></div></div>
+<p class="muted rev">Free to use with stories about Lawrence and his work. Please credit: Courtesy of Lawrence Totimeh Jr.</p>
+<div class="cta rev" style="margin-top:18px"><a class="btn red" href="img/hero/image.jpg" download="Lawrence-Totimeh-Jr.jpg">Download photo (JPG, 1206 x 1809)</a></div>
+</div></section>
+
+<section class="light"><div class="wrap">
+<div class="eyebrow rev">Long bio · about 170 words</div>
+<div id="bio-long" class="rev" style="max-width:70ch;margin-top:12px">
+<p>Lawrence Totimeh Jr. is a social justice advocate and civic educator based in the Washington, D.C. area. He turns the law into plain-language visual lessons so everyday people know their rights and can hold public officials accountable. His School of Law series, on YouTube, Instagram, TikTok and Facebook at @AgentKodak, teaches the justice system one real case at a time. He is an educator, not an attorney.</p>
+<p style="margin-top:14px">Born in Newark, New Jersey, to Liberian parents, Lawrence served in Baghdad, Iraq, in 2011 as a U.S. Army door gunner. He has spent more than ten years in classrooms from D.C. to Los Angeles, where he coached the Locke High School Lady Saints to a 2019 CIF Los Angeles City Section title. In 2020, his photo led a Los Angeles Times investigation into police tactics during the George Floyd protests. He founded Liberia Forward, spoke at TEDxSinkor in Monrovia, and launched Follow the Money LIB. He studied at Virginia State University, earning a bachelor's degree, a graduate certificate and a master's degree.</p>
+</div>
+<div class="cta rev" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-long" style="color:var(--ink);border-color:var(--ink)">Copy long bio</button></div>
+</div></section>
+
+<section class="dark"><div class="wrap two">
+<div class="rev"><div class="eyebrow">Quick facts</div>
+<ul class="list" style="margin-top:16px">
+<li><b>Name:</b> Lawrence Totimeh Jr. (Agent Kodak on social media)</li>
+<li><b>Based:</b> Washington, D.C. area</li>
+<li><b>Work:</b> Social justice advocate, civic educator, speaker</li>
+<li><b>Service:</b> U.S. Army, Baghdad, Iraq, 2011 (Operation New Dawn)</li>
+<li><b>Education:</b> Virginia State University: B.S., graduate certificate, M.S.</li>
+<li><b>Reach:</b> 750K+ views across platforms in the 12 months to Oct. 7, 2026. 11K+ Instagram followers and 1,200+ YouTube subscribers as of Oct. 31, 2026.</li>
+<li><b>Social:</b> @AgentKodak on YouTube, Instagram, TikTok and Facebook</li>
+<li><b>Note:</b> He is an educator, not an attorney.</li>
+</ul></div>
+<div class="rev"><div class="eyebrow">As seen in</div>
+<ul class="list" style="margin-top:16px">
+<li><a href="https://enewspaper.latimes.com/infinity/article_share.aspx?guid=488bfc92-522a-47c3-af19-0da51f0909b4" target="_blank" rel="noopener">Los Angeles Times</a>, 2020: his photo led an investigation into police tactics at the George Floyd protests</li>
+<li>The New York Times, 2020: images of him marching</li>
+<li>ESPN First Take, 2020: protest footage</li>
+<li><a href="https://www.youtube.com/watch?v=qIvFzfNngaw" target="_blank" rel="noopener">TEDxSinkor</a>, Monrovia, Liberia</li>
+</ul>
+<div class="cta" style="margin-top:26px"><a class="btn red" href="speaker-sheet.pdf">Speaker sheet (PDF)</a><a class="btn ghost" href="about.html">Full story</a></div>
+</div>
+</div></section>
+<script>document.querySelectorAll('.copybio').forEach(function(b){var l=b.textContent;b.addEventListener('click',function(){var t=document.getElementById(b.getAttribute('data-t')).innerText.trim();var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent=l},1800)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){prompt('Copy',t)})}else{prompt('Copy',t)}})});</script>
+''' + JOIN + FOOT
+
 def redirect(to, canon=None):
     canon = canon or to
     return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
@@ -420,7 +487,7 @@ notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land
 </div></section>
 """ + JOIN + FOOT
 
-pages = {"404.html": notfound, "index.html": home, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
+pages = {"404.html": notfound, "index.html": home, "press.html": press, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
          "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
 for name, html in pages.items():
     os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
