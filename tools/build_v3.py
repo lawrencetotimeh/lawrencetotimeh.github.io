@@ -133,6 +133,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="frame"><img src="img/action2/image.jpg" alt="Lawrence marching with a raised fist, as posted by The New York Times" style="object-position:50% 38%" loading="lazy"><div class="cap">The New York Times · 2020</div></div>
 <div class="frame"><img src="img/action3/image.jpg" alt="Lawrence at a police line, as aired on ESPN's First Take" style="object-position:50% 40%" loading="lazy"><div class="cap">ESPN First Take · 2020</div></div>
 </div>
+<div class="frame rev" style="margin-top:18px"><img src="img/march/nolan-dc-2026.jpg" alt="Marchers at Freedom Plaza in Washington, D.C. carrying Justice for Nolan Wells signs, led by a man with a megaphone" style="object-position:50% 45%" loading="lazy" width="1078" height="802"><div class="cap">March for Nolan · D.C. · Nov. 1, 2026 · Organizer: Tyler · Photo: @therealchancemeeting</div></div>
 </div></section>
 
 <section class="light lt" id="speaking"><div class="wrap">
@@ -435,9 +436,12 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 </div></section>
 
 <section class="light lt"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Photo</div><h2 style="margin-top:8px">Download</h2></div></div>
-<p class="muted rev">Free to use with stories about Lawrence and his work. Please credit: Courtesy of Lawrence Totimeh Jr.</p>
+<div class="sec-head rev"><div><div class="eyebrow">Photo</div><h2 style="margin-top:8px">Photos</h2></div></div>
+<p class="muted rev">Free to use with stories about Lawrence and his work. Credit the official photo: Courtesy of Lawrence Totimeh Jr.</p>
 <div class="cta rev" style="margin-top:18px"><a class="btn red" href="img/hero/image.jpg" download="Lawrence-Totimeh-Jr.jpg">Download photo (JPG, 1206 x 1809)</a></div>
+<div class="rev" style="margin-top:34px;max-width:760px"><img src="img/march/nolan-dc-2026.jpg" alt="Marchers in Washington, D.C. carrying Justice for Nolan Wells signs" width="1078" height="802" loading="lazy" style="width:100%;height:auto;display:block;border:1px solid var(--ltline)">
+<p class="muted" style="margin-top:10px;font-size:14px">March for Nolan Xavier Wells ("One March. Fifty States."), Freedom Plaza, Washington, D.C., Nov. 1, 2026. Lead organizer: Tyler. Photo credit (required): @therealchancemeeting. Web size; for a full-size file, email hello@lawrencetotimeh.com.</p>
+<div class="cta" style="margin-top:12px"><a class="btn ghost" href="img/march/nolan-dc-2026.jpg" download="Justice-for-Nolan-Wells-DC-march.jpg" style="color:var(--ink);border-color:var(--ink)">Download march photo (JPG, 1078 x 802)</a></div></div>
 </div></section>
 
 <section class="light"><div class="wrap">
