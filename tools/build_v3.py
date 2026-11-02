@@ -121,6 +121,12 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="cta rev" style="margin-top:26px"><a class="btn red" href="playbook/">Open the Teen Playbook</a></div>
 </div></section>
 
+<section class="light" id="websites"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">New · website services</div><h2 style="margin-top:8px">Need a website for your business?</h2></div></div>
+<p class="lede muted rev">I build clean one-page sites for new and small businesses. Answer 10 questions, and I'll send you a free mockup of your site. You only pay if you want to move forward.</p>
+<div class="cta rev" style="margin-top:26px"><a class="btn red" href="websites.html#start">Get a free mockup</a><a class="btn ghost" href="websites.html" style="color:var(--ink);border-color:var(--ink)">How it works</a></div>
+</div></section>
+
 <section class="dark action" id="action"><div class="wrap">
 <div class="cols rev">
 <div><div class="eyebrow">Agent Kodak in action</div>
@@ -478,6 +484,135 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 <script>document.querySelectorAll('.copybio').forEach(function(b){var l=b.textContent;b.addEventListener('click',function(){var t=document.getElementById(b.getAttribute('data-t')).innerText.trim();var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent=l},1800)};if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){prompt('Copy',t)})}else{prompt('Copy',t)}})});</script>
 ''' + JOIN + FOOT
 
+# ---------------- Websites (services + 10-question form) ----------------
+WEB3FORMS_KEY = ""  # paste the free Web3Forms access key here; until then the form falls back to email
+WQ = [
+ ("q1", "Who are you?", "Your name or business name, what you do, and where you do it.",
+  ["Braids by Destiny. Knotless braids and locs. Southeast D.C.", "Green Edge Lawn Care. Mowing and yard cleanup in Prince George's County.", "Bright Path Tutoring. Math and reading help for grades 3 to 8, online and in Richmond."],
+  "Fill in the blank: “I help (who) with (what) in (where).”"),
+ ("q2", "What should people know first?", "If someone reads only one sentence about you, what should it say? Then add 2 or 3 sentences on who you help and how their life is better after.",
+  ["Braids that last, done neat and on time. Most clients leave in under 5 hours and their style lasts 6 to 8 weeks.", "A clean yard without the weekend work. We show up on the same day every week, so you never have to think about it.", "Your child can catch up and feel confident again. I work one on one, and parents get a short update after every session."],
+  "Think about what customers say when they thank you. That's usually your best first sentence."),
+ ("q3", "What should visitors do next?", "How should people reach you or buy from you? Call, text, email, book online, or something else? If you book online, paste the link.",
+  ["Book on my Square page: square.site/book/...", "Call or text for a free quote.", "Email me to set up a free 15-minute call."],
+  "Pick the one way you most want people to contact you. One clear choice works better than five."),
+ ("q4", "Photo and colors", "What photo do you want at the top: you, your logo, your work or your space? Tell me colors you like or don't. You'll send the photo when I reply by email.",
+  ["A clear photo of me smiling, in good light.", "My logo, plus a before-and-after of my best work.", "I like black and gold. No pink, please."],
+  "Stand facing a window during the day and have a friend take a photo with your phone. Not sure about colors? I'll show you 5 options."),
+ ("q5", "Anything to announce right now?", "A sale, grand opening, event, new service or “now booking” note to show near the top. Include the date and a link. If not, just say “no.”",
+  ["Holiday special: 15% off all braids booked by Dec. 15.", "Now booking spring cleanups. Spots fill by March 1.", "Free reading check for new students in January."],
+  "Say “no.” This box is optional, and you can add one later."),
+ ("q6", "What do you offer?", "Your main services or products, 2 to 6 of them, with one sentence each. Add prices if you want them shown. “Starting at” prices work well.",
+  ["Knotless braids: small, medium or large, any length. Starting at $180.", "Weekly mowing: mow, edge and blow. Starting at $45 a visit.", "One-on-one tutoring: 1 hour, online or in person. $50 a session, or 4 for $180."],
+  "Write down what people ask you for most. Those are your services. If prices change a lot, leave them off and say “Call for a quote.”"),
+ ("q7", "What's your story?", "How did you get started, and why do you do this? A few sentences is plenty. Personal is good. People buy from people.",
+  ["I started braiding my little sisters' hair at 12. By high school, half my block was in my chair. I opened my own space in 2023.", "I worked for a big landscaping company for 6 years. I started Green Edge to give customers the care I always wanted to give them.", "I taught 4th grade for 8 years. I saw how fast kids grow with one-on-one time, so I started tutoring full time."],
+  "Answer these: When did you start? What made you start? What do you love about it?"),
+ ("q8", "Why should people trust you?", "2 or 3 quick facts. Numbers work best.",
+  ["5 years braiding. 1,000+ clients. Licensed in D.C.", "Licensed and insured. 200+ yards a week. Family owned.", "8 years as a certified teacher. 90% of my students raised their grades."],
+  "Count anything: years doing this, customers served, 5-star reviews, licenses, awards. New business? Count your years of experience, not the business's age."),
+ ("q9", "What do customers say?", "2 or 3 short quotes from real customers, with their first name and last initial. Only quotes they said you can share.",
+  ["“My braids lasted 8 weeks and still looked fresh.” Tasha M.", "“They never miss a week. My yard has never looked better.” Robert J.", "“My son went from a D to a B in math in one semester.” Angela W."],
+  "Copy nice texts, Google reviews or Instagram comments. Or text 3 happy customers: “Can I put a short quote from you on my new website?” No quotes yet? Leave it blank."),
+ ("q10", "How do people reach you?", "Everything you want on the site: phone (only if you want it public), hours, city or area you serve, and social links. Do you already own a web address?",
+  ["Text 202-555-0100 · Tue to Sat, 9am to 6pm · Southeast D.C. · Instagram @braidsbydestiny · No web address yet."],
+  "No business email or web address yet? That's normal. I'll help you get both. A web address costs about $15 a year and should be in your name."),
+]
+def _wq(i, q):
+    k, title, ask, ex, tip = q
+    exs = "".join(f"<li>{x}</li>" for x in ex)
+    req = " required" if k in ("q1", "q2", "q6") else ""
+    return f'''<div class="wq rev"><label for="{k}"><span class="wn">{i:02d}</span>{title}</label>
+<p class="wask">{ask}</p>
+<details class="wex"><summary>See examples</summary><ul>{exs}</ul><p><b>Stuck?</b> {tip}</p></details>
+<textarea id="{k}" name="{k}" data-q="{i}. {title}"{req}></textarea></div>'''
+
+websites = head("Websites for small businesses · Lawrence Totimeh Jr.", "A clean one-page website for your business. Answer 10 questions, get a free mockup, and pay only if you want to move forward. $500, built by Lawrence Totimeh Jr.", "websites.html") + nav("") + '''
+<section class="dark pagehero"><div class="wrap">
+<div class="eyebrow">Website services · for new and small businesses</div>
+<h1>Get a website<br>that works.</h1>
+<p class="lede">One clean page that looks good on phones, shows what you do, and makes it easy for customers to reach you. Answer 10 questions below. I send you a free mockup. You only pay if you want to move forward.</p>
+<div class="cta" style="margin-top:30px"><a class="btn red" href="#start">Start the 10 questions</a><a class="btn ghost" href="#how">How it works</a></div>
+</div></section>
+
+<section class="light" id="how"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">How it works</div><h2 style="margin-top:8px">Three steps. No tech skills needed.</h2></div></div>
+<div class="wsteps rev">
+<div class="card"><div class="v">1</div><div class="l"><b>Answer 10 questions.</b> Short answers are fine. Every question has examples if you get stuck.</div></div>
+<div class="card"><div class="v">2</div><div class="l"><b>Get a free mockup.</b> Within about 2 days, I email you a PDF of your site on a computer and on a phone.</div></div>
+<div class="card"><div class="v">3</div><div class="l"><b>Go live.</b> Tell me what to change. When you love it, the site launches in about 7 to 10 days.</div></div>
+</div>
+<div class="wprice rev">
+<div><div class="eyebrow">The Launch package</div><div class="wbig">$500</div><p class="muted">50% to start, 50% at launch.</p></div>
+<ul class="list">
+<li>One page that works on phones and computers</li>
+<li>Your services, story, reviews and contact info</li>
+<li>Hooked up to your own web address</li>
+<li>A link preview, so your link looks good when you text it</li>
+<li>2 rounds of changes before launch</li>
+<li>45 days of small fixes after launch</li>
+</ul>
+</div>
+<p class="muted rev" style="margin-top:22px">Need more pages, a contact form or something custom? Say so in the form and I'll quote it. Sites I've built include <a href="https://lawrencetotimeh.com/">lawrencetotimeh.com</a>, <a href="https://drbrandonfrye.com/" target="_blank" rel="noopener">drbrandonfrye.com</a> and <a href="https://lifereigndc.org/" target="_blank" rel="noopener">lifereigndc.org</a>.</p>
+</div></section>
+
+<section class="light lt" id="start"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Your free mockup</div><h2 style="margin-top:8px">The 10 questions</h2></div></div>
+<p class="lede muted rev" style="max-width:62ch"><b>Don't worry about sounding perfect.</b> Write like you're texting a friend. My job is to turn your words into a clean website. Tap “See examples” under any question for help. Your answers save on this device as you type, so you can come back later.</p>
+<form class="form wform" id="webForm">
+<div class="pair rev"><div><label for="w_name">Your name</label><input id="w_name" name="name" autocomplete="name" required></div><div><label for="w_biz">Business name</label><input id="w_biz" name="business"></div></div>
+<div class="pair rev"><div><label for="w_email">Email</label><input id="w_email" name="email" type="email" autocomplete="email" required></div><div><label for="w_phone">Phone (optional)</label><input id="w_phone" name="phone" type="tel" autocomplete="tel"></div></div>
+''' + "\n".join(_wq(i, q) for i, q in enumerate(WQ, 1)) + '''
+<div class="rev"><label for="w_extra">Anything else? (optional)</label><textarea id="w_extra" name="extra" data-q="Anything else"></textarea></div>
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+<div class="rev"><button class="btn red" type="submit" id="w_send">Send my answers</button>
+<p class="muted" style="font-size:13px;margin-top:12px">I use your answers only to build your mockup. No spam, and no payment until you say yes.</p></div>
+<div id="w_done" class="wdone" hidden></div>
+</form>
+</div></section>
+<style>
+.wsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.wsteps .v{font-family:Oswald,sans-serif;font-size:40px;color:var(--red)}
+.wprice{display:grid;grid-template-columns:240px 1fr;gap:30px;align-items:start;margin-top:34px;padding:28px;border:1px solid var(--ltline)}
+.wbig{font-family:Oswald,sans-serif;font-size:64px;line-height:1;margin:8px 0 6px}
+.wform{max-width:760px;margin-top:26px}
+.wq{padding-top:22px;border-top:1px solid var(--ltline)}
+.wq label{font-family:Oswald,sans-serif;font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:6px}
+.wn{color:var(--red);margin-right:10px}
+.wask{margin:0 0 10px;color:#4a4740}
+.wex{margin:0 0 12px;font-size:15px}
+.wex summary{cursor:pointer;color:var(--red);font-weight:600;font-size:14px}
+.wex ul{margin:10px 0 8px;padding-left:20px;color:#4a4740}.wex li{margin:4px 0}
+.wex p{margin:0;color:#4a4740}
+.wform textarea{height:130px;background:#fff}
+.wform input{background:#fff}
+.hp{position:absolute;left:-9999px}
+.wdone{padding:22px;background:#fff;border-left:4px solid var(--red)}
+@media(max-width:760px){.wsteps,.wprice{grid-template-columns:1fr}}
+</style>
+<script>(function(){
+var KEY="''' + WEB3FORMS_KEY + '''";
+var f=document.getElementById('webForm');if(!f)return;
+var fields=f.querySelectorAll('input:not(.hp),textarea'),SK='webq-draft';
+try{var d=JSON.parse(localStorage.getItem(SK)||'{}');fields.forEach(function(el){if(d[el.id])el.value=d[el.id]})}catch(e){}
+f.addEventListener('input',function(){try{var d={};fields.forEach(function(el){if(el.value)d[el.id]=el.value});localStorage.setItem(SK,JSON.stringify(d))}catch(e){}});
+function v(id){var el=document.getElementById(id);return el?el.value.trim():''}
+f.addEventListener('submit',function(ev){ev.preventDefault();
+var who=v('w_name')+(v('w_biz')?' ('+v('w_biz')+')':'');
+var body='Name: '+v('w_name')+'\\nBusiness: '+v('w_biz')+'\\nEmail: '+v('w_email')+'\\nPhone: '+v('w_phone')+'\\n';
+f.querySelectorAll('textarea').forEach(function(t){body+='\\n'+t.getAttribute('data-q')+'\\n'+(t.value.trim()||'(skipped)')+'\\n'});
+var done=document.getElementById('w_done'),btn=document.getElementById('w_send');
+function ok(){try{localStorage.removeItem(SK)}catch(e){}done.hidden=false;done.innerHTML='<b>Got it. Thank you!</b><br>I\\'ll email you within about 2 days with your free mockup and a request for your photo.';btn.disabled=true;done.scrollIntoView({behavior:'smooth',block:'center'})}
+function mail(){window.location.href='mailto:hello@lawrencetotimeh.com?subject='+encodeURIComponent('Website questions: '+who)+'&body='+encodeURIComponent(body);done.hidden=false;done.innerHTML='Your email app should open with your answers filled in. Press <b>Send</b> there to finish. Nothing opened? Email your answers to hello@lawrencetotimeh.com.'}
+if(!KEY){mail();return}
+btn.disabled=true;btn.textContent='Sending...';
+fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:KEY,subject:'Website questions: '+who,from_name:'lawrencetotimeh.com',replyto:v('w_email'),email:v('w_email'),botcheck:f.querySelector('.hp').checked,message:body})})
+.then(function(r){return r.json()}).then(function(j){if(j.success){ok()}else{throw 0}})
+.catch(function(){btn.disabled=false;btn.textContent='Send my answers';mail()});
+});
+})();</script>
+''' + JOIN + FOOT
+
 def redirect(to, canon=None):
     canon = canon or to
     return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
@@ -492,7 +627,7 @@ notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land
 </div></section>
 """ + JOIN + FOOT
 
-pages = {"404.html": notfound, "index.html": home, "press.html": press, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
+pages = {"404.html": notfound, "index.html": home, "press.html": press, "websites.html": websites, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
          "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
 for name, html in pages.items():
     os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
