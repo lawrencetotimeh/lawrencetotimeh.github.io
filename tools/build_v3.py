@@ -70,7 +70,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
 <div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S., Virginia State</span><span class="chip">10+ yrs educator</span><span class="chip">TEDx speaker</span></div>
 </div>
-<div class="photo"><img src="img/hero/image.jpg" alt="Lawrence Totimeh Jr. in a gray suit with a Liberian flag lapel pin" width="1200" height="1465"><div class="tag">Lawrence Totimeh Jr.</div></div>
+<div class="photo"><img src="img/march/nolan-dc-2026-megaphone.jpg" alt="Lawrence Totimeh Jr. leading chants on a megaphone at the Justice for Nolan Wells march in Washington, D.C." width="1058" height="801" style="object-position:32% 50%;filter:none" fetchpriority="high"><div class="tag">Photo: @billleephotography</div></div>
 </div></section>
 
 <section class="light"><div class="wrap">
@@ -139,9 +139,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="frame"><img src="img/action2/image.jpg" alt="Lawrence marching with a raised fist, as posted by The New York Times" style="object-position:50% 38%" loading="lazy"><div class="cap">The New York Times · 2020</div></div>
 <div class="frame"><img src="img/action3/image.jpg" alt="Lawrence at a police line, as aired on ESPN's First Take" style="object-position:50% 40%" loading="lazy"><div class="cap">ESPN First Take · 2020</div></div>
 </div>
-<style>.march2{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}}@media(max-width:760px){{.march2{{grid-template-columns:1fr}}}}</style>
-<div class="march2 rev"><div class="frame"><img src="img/march/nolan-dc-2026.jpg" alt="Marchers at Freedom Plaza in Washington, D.C. carrying Justice for Nolan Wells signs, led by a man with a megaphone" style="object-position:50% 45%" loading="lazy" width="1078" height="802"><div class="cap">March for Nolan · D.C. · Nov. 1, 2026 · Organizer: Tyler · Photo: @therealchancemeeting</div></div>
-<div class="frame"><img src="img/march/nolan-dc-2026-megaphone.jpg" alt="Lawrence leading chants on a megaphone at the Justice for Nolan Wells march in Washington, D.C." style="object-position:45% 50%" loading="lazy" width="1058" height="801"><div class="cap">On the mic · D.C. · Nov. 1, 2026 · Photo: @billleephotography</div></div></div>
+<div class="frame rev" style="margin-top:18px"><img src="img/march/nolan-dc-2026.jpg" alt="Marchers at Freedom Plaza in Washington, D.C. carrying Justice for Nolan Wells signs, led by a man with a megaphone" style="object-position:50% 45%" loading="lazy" width="1078" height="802"><div class="cap">March for Nolan · D.C. · Nov. 1, 2026 · Organizer: Tyler · Photo: @therealchancemeeting</div></div>
 </div></section>
 
 <section class="light lt" id="speaking"><div class="wrap">
