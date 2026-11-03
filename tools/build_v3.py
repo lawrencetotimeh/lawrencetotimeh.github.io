@@ -64,7 +64,7 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <section class="hero dark"><div class="wrap">
 <div>
 <div class="eyebrow">Agent Kodak · Social justice advocate · Speaker · Civic educator · Combat veteran</div>
-<h1 style="margin-top:14px"><span class="l">Understand power.</span> <span class="l">Examine the evidence.</span> <span class="l">Act <span class="red">together.</span></span></h1>
+<h1 style="margin-top:14px;text-wrap:balance"><span class="l" style="white-space:normal;text-wrap:balance">The power of the people</span> <span class="l" style="white-space:normal;text-wrap:balance">is greater than</span> <span class="l" style="white-space:normal;text-wrap:balance"><span class="red">the people in power.</span></span></h1>
 <p class="sub">Community-centered civic education that helps people understand power, examine evidence, and act together.</p>
 <p class="lede">I turn the law into visual lessons so everyday people know their rights and can hold public officials accountable. I'm not a lawyer. I'm a social justice advocate and civic educator.</p>
 <div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
