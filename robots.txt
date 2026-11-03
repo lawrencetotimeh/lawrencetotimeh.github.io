@@ -1,0 +1,5 @@
+# lawrencetotimeh.com: everything public may be crawled, including by AI search tools.
+User-agent: *
+Allow: /
+
+Sitemap: https://lawrencetotimeh.com/sitemap.xml
