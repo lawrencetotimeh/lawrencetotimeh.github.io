@@ -55,12 +55,16 @@ JOIN = '''<section class="dark join"><div class="wrap rev">
 </div></section>
 <script>document.querySelectorAll('.zelle').forEach(function(b){var l=b.textContent;b.addEventListener('click',function(){var e=b.getAttribute('data-email');var done=function(){b.textContent='Copied: '+e;setTimeout(function(){b.textContent=l},2500)};if(navigator.clipboard){navigator.clipboard.writeText(e).then(done,function(){prompt('Zelle email',e)})}else{prompt('Zelle email',e)}})});</script>'''
 
+HOME_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://lawrencetotimeh.com/#person", "name": "Lawrence Totimeh Jr.", "alternateName": ["Lawrence Kwame Totimeh Jr.", "Lawrence Totimeh", "Agent Kodak", "AgentKodak"], "url": "https://lawrencetotimeh.com/", "image": "https://lawrencetotimeh.com/img/hero/image.jpg", "description": "Lawrence Totimeh Jr. (Agent Kodak) is a social justice advocate, civic educator and U.S. Army combat veteran who served in Iraq. Through his School of Law series, he teaches how the justice system works in plain language, from the public record, so everyday people know their rights and can hold public officials accountable. He is a TEDx speaker. He is an educator, not an attorney.", "jobTitle": ["Social justice advocate", "Civic educator", "Public speaker"], "birthPlace": {"@type": "Place", "name": "Newark, New Jersey"}, "homeLocation": {"@type": "Place", "name": "Washington, D.C. area"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Virginia State University"}, "memberOf": {"@type": "Organization", "name": "Life Reign", "url": "https://lifereigndc.org/"}, "founder": {"@type": "Organization", "name": "Liberia Forward", "url": "https://www.liberiaforward.org/"}, "knowsAbout": ["Civic education", "Know your rights", "Public records", "Police accountability", "Social justice", "Government accountability"], "sameAs": ["https://www.youtube.com/@AgentKodak", "https://www.instagram.com/AgentKodak", "https://www.tiktok.com/@AgentKodak", "https://www.facebook.com/AgentKodak", "https://www.linkedin.com/in/sgttotimeh/", "https://www.liberiaforward.org/lawrence-totimeh", "https://www.youtube.com/watch?v=qIvFzfNngaw"]}, {"@type": "WebSite", "@id": "https://lawrencetotimeh.com/#website", "url": "https://lawrencetotimeh.com/", "name": "Lawrence Totimeh Jr. · Agent Kodak", "alternateName": "agentkodak.com", "publisher": {"@id": "https://lawrencetotimeh.com/#person"}, "inLanguage": "en"}]}</script>'
+PRESS_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "url": "https://lawrencetotimeh.com/press.html", "mainEntity": {"@id": "https://lawrencetotimeh.com/#person"}}</script>'
+WEB_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "One-page websites for small businesses", "provider": {"@id": "https://lawrencetotimeh.com/#person", "@type": "Person", "name": "Lawrence Totimeh Jr."}, "areaServed": "United States", "url": "https://lawrencetotimeh.com/websites.html", "offers": {"@type": "Offer", "price": "500", "priceCurrency": "USD", "description": "The Launch package: a one-page website"}}</script>'
+
 def yt(id_, title):
     return f'<iframe src="https://www.youtube-nocookie.com/embed/{id_}" title="{title}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
 
 # ---------------- HOME ----------------
 home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and civic educator",
-            "Lawrence Totimeh Jr. is a social justice advocate and civic educator, not a lawyer. Plain-language civics lessons taught from the public record, the Classroom map, talks and workshops, and Follow the Money LIB.", "") + nav("home") + f'''
+            "Lawrence Totimeh Jr. is a social justice advocate and civic educator, not a lawyer. Plain-language civics lessons taught from the public record, the Classroom map, talks and workshops, and Follow the Money LIB.", "").replace("</head>", HOME_LD + "</head>") + nav("home") + f'''
 <section class="hero dark"><div class="wrap">
 <div>
 <div class="eyebrow">Agent Kodak · Social justice advocate · Speaker · Civic educator · Combat veteran</div>
@@ -422,7 +426,7 @@ document.getElementById('dlLtr').addEventListener('click',function(){{var b=new 
 </script>
 ''' + JOIN + FOOT
 
-press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr. (Agent Kodak): short and long bios, a downloadable photo, quick facts and media contact.", "press.html") + nav("") + '''
+press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr. (Agent Kodak): short and long bios, a downloadable photo, quick facts and media contact.", "press.html").replace("</head>", PRESS_LD + "</head>") + nav("") + '''
 <section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">Press · Media kit</div>
 <h1>Press kit</h1>
@@ -530,7 +534,7 @@ def _wq(i, q):
 <details class="wex"><summary>See examples</summary><ul>{exs}</ul><p><b>Stuck?</b> {tip}</p></details>
 <textarea id="{k}" name="{k}" data-q="{i}. {title}"{req}></textarea></div>'''
 
-websites = head("Websites for small businesses · Lawrence Totimeh Jr.", "A clean one-page website for your business. Answer 10 questions, get a free mockup, and pay only if you want to move forward. $500, built by Lawrence Totimeh Jr.", "websites.html") + nav("") + '''
+websites = head("Websites for small businesses · Lawrence Totimeh Jr.", "A clean one-page website for your business. Answer 10 questions, get a free mockup, and pay only if you want to move forward. $500, built by Lawrence Totimeh Jr.", "websites.html").replace("</head>", WEB_LD + "</head>") + nav("") + '''
 <section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">Website services · for new and small businesses</div>
 <h1>Get a website<br>that works.</h1>
@@ -618,7 +622,7 @@ fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':
 
 def redirect(to, canon=None):
     canon = canon or to
-    return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
+    return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
 
 # ---------------- 404 ----------------
 notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land. Try the Classroom, the Act page, or the homepage.", "404.html").replace('<link rel="canonical" href="https://lawrencetotimeh.com/404.html">\n', '<base href="https://lawrencetotimeh.com/"><meta name="robots" content="noindex">\n') + nav("") + """
