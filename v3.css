@@ -121,3 +121,6 @@ footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 .pagehero .chips{margin-top:26px}
 @media(max-width:760px){.act-grid{grid-template-columns:1fr}.form textarea.tall{height:360px}}
 .form button.ghost{border:1.5px solid var(--paper);background:transparent;color:var(--paper)}.light .form button.ghost{border-color:var(--ink);color:var(--ink)}
+
+/* Phone menu: show every link, no hidden slide-over (Nov 3, 2026) */
+@media(max-width:820px){nav ul{flex-wrap:wrap;overflow:visible;gap:12px 18px;padding:10px 0 14px}}
