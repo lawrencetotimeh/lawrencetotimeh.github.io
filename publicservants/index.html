@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Know Your Public Servants</title>
+<meta name="description" content="Type your address. Find your U.S. representative, both senators and, in Maryland, your state and county officials. Save them to your phone in one tap.">
 <meta property="og:image" content="https://lawrencetotimeh.com/img/hero/image.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lawrencetotimeh.com/publicservants/">
-<meta name="description" content="Type your address. Find your U.S. representative and both senators. Save all three to your phone in one tap.">
 <meta property="og:title" content="Know Your Public Servants">
-<meta property="og:description" content="Find your representative and both senators. Save all three to your phone. Search 'public servant' any time.">
+<meta property="og:description" content="Find the people you elected. Save them to your phone. Search 'public servant' any time.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
@@ -93,14 +93,14 @@ details summary{cursor:pointer;font-weight:700}
   <div class="topbar"><div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div></div>
   <span class="eyebrow" data-t="eyebrow">Agents of Change Field Guide · Civic education</span>
   <h1 data-t="h1" data-html>Know Your <span class="g">Public Servants</span></h1>
-  <p class="lead" data-t="lead">Three people in Congress work for you. Save them in your phone like you mean it.</p>
-  <p class="small" style="margin-top:14px" data-t="intro">If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. One tap saves them to your contacts.</p>
+  <p class="lead" data-t="lead">The people you elected work for you. Save them in your phone like you mean it.</p>
+  <p class="small" style="margin-top:14px" data-t="intro">If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. In Maryland we also find your governor, and in Prince George's County your state and county officials. One tap saves them to your contacts.</p>
   <p class="stamp" id="stamp"></p>
 </header>
 
 <section id="find">
   <span class="eyebrow" data-t="step1">Step 1</span>
-  <h2 data-t="find">Find your three</h2>
+  <h2 data-t="find">Find your public servants</h2>
   <form id="ps-form" novalidate>
     <div class="grid2">
       <div class="full"><label for="ps-street" data-t="street">Street address</label><input id="ps-street" autocomplete="address-line1" placeholder="123 Main St"></div>
@@ -129,6 +129,7 @@ details summary{cursor:pointer;font-weight:700}
   </div>
   <p class="small" style="margin:24px 0 0" data-t="yourthree" data-html><b>Your three public servants:</b></p>
   <div class="cards" id="ps-cards"></div>
+  <p class="small muted" style="margin-top:12px" data-t="stlocal" data-html></p>
   <div class="tips">
     <p class="small" style="margin:0" data-t="updating" data-html><b>Updating after an election?</b> Your phone can't remove old contacts for you. First open Contacts, search <b>public servant</b>, and delete anyone who isn't listed above. Then tap Save.</p>
     <p class="small" style="margin:10px 0 0" data-t="howto" data-html><b>iPhone:</b> tap a box, scroll to the bottom, tap <b>Create New Contact</b>, then tap the <b>✓</b>. Repeat for each box. <b>Android:</b> tap a box (or Save all), choose <b>Contacts</b>, then tap <b>Save</b>.</p>
@@ -172,6 +173,7 @@ details summary{cursor:pointer;font-weight:700}
 <div class="wrap">
 <footer>
   <b>Know Your Public Servants</b> · Agent Kodak · Agents of Change Field Guide.
+  <p style="margin:8px 0 0" data-t="srcloc"></p>
   <p style="margin:8px 0 0" data-t="foot">District lookup: U.S. Census Bureau Geocoder. Members of Congress, offices and phone numbers: the public-domain congress-legislators dataset. Senators and representatives listed for the 50 states. DC and the territories have one delegate in the House and no senators.</p>
 </footer>
 </div>
@@ -179,7 +181,7 @@ details summary{cursor:pointer;font-weight:700}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
-  var PAGE_CHECKED = {en:"October 26, 2026", es:"26 de octubre de 2026"};
+  var PAGE_CHECKED = {en:"November 4, 2026", es:"4 de noviembre de 2026"};
   var SHORT = "agentkodak.com/publicservants";
   var LEG_URL = "https://unitedstates.github.io/congress-legislators/legislators-current.json";
   var OFF_URL = "https://unitedstates.github.io/congress-legislators/legislators-district-offices.json";
@@ -192,10 +194,10 @@ details summary{cursor:pointer;font-weight:700}
     en:{
       eyebrow:"Agents of Change Field Guide · Civic education",
       h1:'Know Your <span class="g">Public Servants</span>',
-      lead:"Three people in Congress work for you. Save them in your phone like you mean it.",
-      intro:"If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. One tap saves them to your contacts.",
+      lead:"The people you elected work for you. Save them in your phone like you mean it.",
+      intro:"If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. In Maryland we also find your governor, and in Prince George's County your state and county officials. One tap saves them to your contacts.",
       stamp:"Page last checked {d}. Members of Congress update automatically from public records.",
-      step1:"Step 1", find:"Find your three", street:"Street address", city:"City", state:"State", zip:"ZIP", go:"Find my public servants",
+      step1:"Step 1", find:"Find your public servants", street:"Street address", city:"City", state:"State", zip:"ZIP", go:"Find my public servants",
       nomatch:"<b>We couldn't match that exact address.</b> Pick your House district:", useone:"Use this one",
       priv:"<b>Your address stays yours.</b> We don't save anything you type. Your address goes only to the U.S. Census Bureau's public lookup to find your district. The list of members of Congress comes from a free public record of Congress.",
       step2:"Step 2", saveh:"Save them to your phone", onetap:"One tap",
@@ -221,15 +223,26 @@ details summary{cursor:pointer;font-weight:700}
       jobrep:"Your voice in the U.S. House.\n\nCall when it's federal: Social Security, VA, Medicare, IRS, passports, immigration, or a federal agency that won't answer you.\n\nTheir caseworkers can push the agency for you.\n\nAlso call about bills in Congress.",
       jobsen:"One of your two voices in the U.S. Senate.\n\nCall about federal bills, the federal judges and cabinet members the Senate confirms, or a federal agency problem like VA, Social Security, IRS or passports.\n\nTheir caseworkers can help you too.",
       writeThem:"Write them:", saved:"Saved {d} from {s}.\nOfficials change after elections. Go to {s} to update.",
-      pv:{name:"Name",org:"Company",title:"Job title",phone:"Phone",web:"Website",note:"Note"}
+      pv:{name:"Name",org:"Company",title:"Job title",phone:"Phone",web:"Website",note:"Note"},
+      yourN:"<b>Your {n} public servants:</b>", email:"Email", office:"Office",
+      mgov:"Governor", mstatesen:"State Sen.", mdel:"Delegate", mcexec:"County Exec.", mcouncil:"Council", matl:"At-large",
+      gov:"Governor of {s}", statesen:"State Senator, {s} Legislative District {d}", del:"State Delegate, {s} Legislative District {d}", cexec:"County Executive, {c}", council:"County Council, {c} District {d}", atl:"County Council At-Large, {c}",
+      jobgov:"Runs your state government.\n\nCall about state agencies (unemployment, Medicaid, MVA, state police), state budget priorities, and bills the governor signs or vetoes.",
+      jobstatesen:"Your voice in the state Senate.\n\nCall about state laws, state budget money for your area, and state agencies that won't answer you.",
+      jobdel:"One of your voices in the state House of Delegates.\n\nCall about state laws, schools and roads funding, and state agency problems. Delegates are often the easiest state official to reach.",
+      jobcexec:"Runs county government day to day.\n\nCall about county services: police, trash, roads, permits, county budget and county agencies.",
+      jobcouncil:"Your district's voice on the County Council.\n\nCall about zoning and what gets built near you, the county budget, the police budget, and problems on your block.",
+      jobatl:"Represents the whole county on the County Council.\n\nCall about countywide issues: the budget, schools funding, policing and development.",
+      stlocal:"<b>State and county:</b> In Maryland we also add your governor. In Prince George's County we add your county executive, county council members, state senator and delegates, straight from county records. More states and counties are coming. Drop your city in the comments on @agentkodak.",
+      srcloc:"County officials and state legislators for Prince George's County: Prince George's County GIS election data, kept by the county. Governor: USA.gov."
     },
     es:{
       eyebrow:"Guía de Agentes del Cambio · Educación cívica",
       h1:'Conoce a tus <span class="g">Servidores Públicos</span>',
-      lead:"Tres personas en el Congreso trabajan para ti. Guárdalas en tu teléfono en serio.",
-      intro:"Si vives en uno de los 50 estados, tienes un representante y dos senadores en el Congreso de EE. UU. Escribe tu dirección una vez. Encontramos a los tres. Con un toque los guardas en tus contactos.",
+      lead:"Las personas que elegiste trabajan para ti. Guárdalas en tu teléfono en serio.",
+      intro:"Si vives en uno de los 50 estados, tienes un representante y dos senadores en el Congreso de EE. UU. Escribe tu dirección una vez. Encontramos a los tres. En Maryland también encontramos a tu gobernador, y en el Condado de Prince George's a tus funcionarios estatales y del condado. Con un toque los guardas en tus contactos.",
       stamp:"Página revisada el {d}. Los miembros del Congreso se actualizan automáticamente con registros públicos.",
-      step1:"Paso 1", find:"Encuentra a tus tres", street:"Dirección", city:"Ciudad", state:"Estado", zip:"Código postal", go:"Buscar mis servidores públicos",
+      step1:"Paso 1", find:"Encuentra a tus servidores públicos", street:"Dirección", city:"Ciudad", state:"Estado", zip:"Código postal", go:"Buscar mis servidores públicos",
       nomatch:"<b>No pudimos ubicar esa dirección exacta.</b> Elige tu distrito de la Cámara:", useone:"Usar este",
       priv:"<b>Tu dirección es tuya.</b> No guardamos nada de lo que escribes. Tu dirección solo va a la búsqueda pública de la Oficina del Censo de EE. UU. para encontrar tu distrito. La lista de miembros del Congreso viene de un registro público y gratuito.",
       step2:"Paso 2", saveh:"Guárdalos en tu teléfono", onetap:"Un toque",
@@ -255,7 +268,18 @@ details summary{cursor:pointer;font-weight:700}
       jobrep:"Tu voz en la Cámara de Representantes.\n\nLlama cuando sea un asunto federal: Seguro Social, VA, Medicare, IRS, pasaportes, inmigración, o una agencia federal que no te responde.\n\nSu personal puede presionar a la agencia por ti.\n\nTambién llama sobre proyectos de ley en el Congreso.",
       jobsen:"Una de tus dos voces en el Senado.\n\nLlama sobre proyectos de ley federales, los jueces federales y miembros del gabinete que el Senado confirma, o un problema con una agencia federal como el VA, Seguro Social, IRS o pasaportes.\n\nSu personal también puede ayudarte.",
       writeThem:"Escríbeles:", saved:"Guardado el {d} desde {s}.\nLos funcionarios cambian después de las elecciones. Ve a {s} para actualizar.",
-      pv:{name:"Nombre",org:"Empresa",title:"Cargo",phone:"Teléfono",web:"Sitio web",note:"Nota"}
+      pv:{name:"Nombre",org:"Empresa",title:"Cargo",phone:"Teléfono",web:"Sitio web",note:"Nota"},
+      yourN:"<b>Tus {n} servidores públicos:</b>", email:"Correo", office:"Oficina",
+      mgov:"Gobernador", mstatesen:"Senador est.", mdel:"Delegado", mcexec:"Ejec. condado", mcouncil:"Concejo", matl:"General",
+      gov:"Gobernador(a) de {s}", statesen:"Senador(a) estatal, {s} Distrito Legislativo {d}", del:"Delegado(a) estatal, {s} Distrito Legislativo {d}", cexec:"Ejecutivo(a) del Condado, {c}", council:"Concejo del Condado, {c} Distrito {d}", atl:"Concejo del Condado, puesto general, {c}",
+      jobgov:"Dirige el gobierno de tu estado.\n\nLlama sobre agencias estatales (desempleo, Medicaid, MVA, policía estatal), prioridades del presupuesto estatal y leyes que firma o veta.",
+      jobstatesen:"Tu voz en el Senado estatal.\n\nLlama sobre leyes estatales, fondos del presupuesto estatal para tu área y agencias estatales que no te responden.",
+      jobdel:"Una de tus voces en la Cámara de Delegados del estado.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
+      jobcexec:"Dirige el gobierno del condado día a día.\n\nLlama sobre servicios del condado: policía, basura, calles, permisos, presupuesto y agencias del condado.",
+      jobcouncil:"La voz de tu distrito en el Concejo del Condado.\n\nLlama sobre zonificación y lo que se construye cerca de ti, el presupuesto del condado, el presupuesto de la policía y problemas en tu cuadra.",
+      jobatl:"Representa a todo el condado en el Concejo.\n\nLlama sobre temas de todo el condado: presupuesto, escuelas, policía y desarrollo.",
+      stlocal:"<b>Estado y condado:</b> En Maryland también agregamos a tu gobernador. En el Condado de Prince George's agregamos al ejecutivo del condado, miembros del concejo, senador y delegados estatales, directamente de los registros del condado. Pronto más estados y condados.",
+      srcloc:"Funcionarios del condado y legisladores estatales del Condado de Prince George's: datos electorales del SIG del condado. Gobernador: USA.gov."
     }
   };
   var lang="en";
@@ -293,16 +317,38 @@ details summary{cursor:pointer;font-weight:700}
     var f=list[0]; return {phone:f.phone,city:f.city||"",st:f.state||"",zip:f.zip||"",address:[f.address,f.suite,f.building].filter(Boolean).join(", ")};
   }
 
+  /* ---------- state + local (Phase 2/3 pilot) ---------- */
+  var GIS = "https://gis.princegeorgescountymd.gov/arcgis/rest/services/Elections/ELECTIONS/MapServer/";
+  var GOV = { MD:{name:"Wes Moore", phone:"410-974-3901", url:"https://md.accessgov.com/governor/Forms/Page/cs/contact-the-governor/1"} };
+  var PREFIX = {gov:"Gov.", statesen:"Sen.", del:"Del.", cexec:"County Exec.", council:"Council Member", atl:"Council Member"};
+  function cleanName(n){ return String(n||"").replace(/\s+-\s+.*$/,"").replace(/\s+/g," ").trim(); }
+  function splitName(n){ var p=n.split(" "), suf=""; if(p.length>2 && /^(Jr\.?|Sr\.?|II|III|IV),?$/i.test(p[p.length-1])){ suf=p.pop().replace(/,$/,""); } var last=p.pop().replace(/,$/,""); return {first:p.join(" "), last:last, suffix:suf}; }
+  function mk(kind,name,phone,email,url,vars){ name=cleanName(name); if(!name) return null; var sp=splitName(name); return {kind:kind,name:name,first:sp.first,last:sp.last,suffix:sp.suffix,phone:phone||"",email:(email||"").trim(),url:(url||"").trim(),vars:vars||{}}; }
+  function gisQ(layer,pt){ var q="geometry="+encodeURIComponent(JSON.stringify({x:pt.lon,y:pt.lat}))+"&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json"; return fetch(GIS+layer+"/query?"+q).then(function(r){return r.json()}).then(function(j){ return (j&&j.features&&j.features[0])?j.features[0].attributes:null; }).catch(function(){return null}); }
+  function loadLocal(state,pt){
+    var out=[];
+    if(GOV[state]){ var g=GOV[state]; out.push(mk("gov",g.name,g.phone,"",g.url,{s:STATES[state]})); }
+    if(state!=="MD"||!pt) return Promise.resolve(out);
+    return Promise.all([gisQ(8,pt),gisQ(6,pt),gisQ(7,pt)]).then(function(r){
+      var L=r[0], E=r[1], C=r[2], cty="Prince George's County";
+      if(L){ var d=String(L.DISTRICTID||"").trim(); out.push(mk("statesen",L.REPNAME1,L.PHONE1,L.EMAIL1,"",{s:"Maryland",d:d})); [2,3,4].forEach(function(i){ var x=mk("del",L["REPNAME"+i],L["PHONE"+i],L["EMAIL"+i],"",{s:"Maryland",d:d}); if(x) out.push(x); }); }
+      if(E){ out.push(mk("cexec",E.EXECUTIVE,E.TELPHONE,E.EMAIL,E.WEB_PAGE,{c:cty})); }
+      if(C){ out.push(mk("council",C.REPNAME1,C.PHONE1,C.EMAIL1,C.DISTRICTURL1,{c:cty,d:String(C.DISTRICTID||"").trim()})); [1,2].forEach(function(i){ var x=mk("atl",C["ATLARGENAME"+i],C["ATLARGEPHONE"+i],C["ATLARGEEMAIL"+i],"",{c:cty}); if(x) out.push(x); }); }
+      return out.filter(Boolean);
+    }).catch(function(){ return out; });
+  }
+  function isLoc(o){ return o.kind && o.kind!=="fed"; }
+
   /* ---------- vCard ---------- */
-  function roleOf(o){ var st=STATES[o.state]||o.state; return o.type==="sen" ? t("sen")+", "+st : t("rep")+", "+st+(o.district?" "+t("district")+" "+o.district:" "+t("atlarge")); }
+  function roleOf(o){ if(isLoc(o)) return fmt(t(o.kind),o.vars); var st=STATES[o.state]||o.state; return o.type==="sen" ? t("sen")+", "+st : t("rep")+", "+st+(o.district?" "+t("district")+" "+o.district:" "+t("atlarge")); }
   function vEsc(s){ return String(s||"").replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;"); }
   function fold(line){ var out="", s=line; while(s.length>73){ var k=73; while(k>60&&s.charAt(k-1)==="\\") k--; out+=s.slice(0,k)+"\r\n "; s=s.slice(k); } return out+s; }
   function tel(p){ var n=String(p||"").replace(/[^0-9]/g,""); return n.length===10?"+1-"+n.slice(0,3)+"-"+n.slice(3,6)+"-"+n.slice(6):n; }
-  function job(o){ return o.type==="sen"?t("jobsen"):t("jobrep"); }
+  function job(o){ if(isLoc(o)) return t("job"+o.kind); return o.type==="sen"?t("jobsen"):t("jobrep"); }
   function today(){ return new Date().toLocaleDateString(lang==="es"?"es-US":"en-US",{year:"numeric",month:"long",day:"numeric"}); }
   function vcard(o){
-    var prefix=o.type==="sen"?"Sen.":"Rep.";
-    var note=job(o)+(o.url?"\n\n"+t("writeThem")+" "+o.url:"")+"\n\n"+fmt(t("saved"),{d:today(),s:SHORT});
+    var prefix=isLoc(o)?PREFIX[o.kind]:(o.type==="sen"?"Sen.":"Rep.");
+    var note=job(o)+(o.url?"\n\n"+t("writeThem")+" "+o.url:(o.email?"\n\n"+t("writeThem")+" "+o.email:""))+"\n\n"+fmt(t("saved"),{d:today(),s:SHORT});
     var L=["BEGIN:VCARD","VERSION:3.0",
       "N:"+vEsc(o.last)+";"+vEsc(o.first)+";;"+prefix+";"+vEsc(o.suffix),
       "FN:"+vEsc(o.name),
@@ -310,7 +356,8 @@ details summary{cursor:pointer;font-weight:700}
       "TITLE:"+vEsc(roleOf(o)),
       "CATEGORIES:Public Servant"];
     if(o.local){ L.push("item1.TEL;TYPE=WORK,VOICE:"+tel(o.local.phone)); L.push("item1.X-ABLabel:"+vEsc(t("local")+(o.local.city?" ("+o.local.city+")":""))); }
-    if(o.phone){ L.push("item2.TEL;TYPE=WORK,VOICE:"+tel(o.phone)); L.push("item2.X-ABLabel:"+vEsc(t("dc"))); }
+    if(o.phone){ L.push("item2.TEL;TYPE=WORK,VOICE:"+tel(o.phone)); L.push("item2.X-ABLabel:"+vEsc(isLoc(o)?t("office"):t("dc"))); }
+    if(o.email) L.push("EMAIL;TYPE=WORK:"+o.email);
     if(o.url) L.push("URL;TYPE=WORK:"+o.url);
     if(o.local&&o.local.address) L.push("ADR;TYPE=WORK:;;"+vEsc(o.local.address)+";"+vEsc(o.local.city)+";"+vEsc(o.local.st)+";"+vEsc(o.local.zip)+";USA");
     else if(o.address) L.push("ADR;TYPE=WORK:;;"+vEsc(o.address)+";;;;");
@@ -332,7 +379,7 @@ details summary{cursor:pointer;font-weight:700}
   }
   function renderTip(){ var a=/Android/.test(navigator.userAgent); $("ps-devtip").innerHTML = isIOS()? t("tipios") : a? t("tipandroid") : t("tipios")+t("tipandroid"); }
   function renderMini(){ renderTip();
-    $("ps-mini").innerHTML=current.map(function(o,i){ var lab=o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
+    $("ps-mini").innerHTML=current.map(function(o,i){ var lab=isLoc(o)?(t("m"+o.kind)+(o.vars.d?" · "+o.vars.d:"")):(o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state)); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
     $("ps-mini").querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ saveOne(+b.dataset.i); }); });
   }
   function saveAll(list){
@@ -347,15 +394,15 @@ details summary{cursor:pointer;font-weight:700}
   /* ---------- results ---------- */
   var current=[];
   function show(list){
-    current=list; var box=$("ps-cards"); box.innerHTML="";
+    current=list; var box=$("ps-cards"); box.innerHTML=""; var yh=document.querySelector('[data-t="yourthree"]'); if(yh) yh.innerHTML=fmt(t("yourN"),{n:list.length});
     list.forEach(function(o){
       var d=document.createElement("div"); d.className="card";
       var callNum=(o.local&&o.local.phone)||o.phone;
       d.innerHTML='<span class="r">'+esc(roleOf(o))+'</span><span class="nm">'+esc(o.name)+'</span>'+
         (o.local?'<span class="small">'+esc(t("local"))+(o.local.city?' ('+esc(o.local.city)+')':'')+': <span class="mono">'+esc(o.local.phone)+'</span></span>':'')+
-        (o.phone?'<span class="small">'+esc(t("dc"))+': <span class="mono">'+esc(o.phone)+'</span></span>':'')+
+        (o.phone?'<span class="small">'+esc(isLoc(o)?t("office"):t("dc"))+': <span class="mono">'+esc(o.phone)+'</span></span>':'')+
         '<span class="job">'+esc(job(o))+'</span>'+
-        '<div class="row" style="margin-top:4px">'+(callNum?'<a class="btn ghost" href="tel:'+esc(String(callNum).replace(/[^0-9+]/g,""))+'">'+esc(t("call"))+'</a>':'')+(o.url?'<a class="btn ghost" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("write"))+'</a>':'')+'</div>';
+        '<div class="row" style="margin-top:4px">'+(callNum?'<a class="btn ghost" href="tel:'+esc(String(callNum).replace(/[^0-9+]/g,""))+'">'+esc(t("call"))+'</a>':'')+(o.url?'<a class="btn ghost" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("write"))+'</a>':(o.email?'<a class="btn ghost" href="mailto:'+esc(o.email)+'">'+esc(t("email"))+'</a>':''))+'</div>';
       box.appendChild(d);
     });
     renderMini();
@@ -380,7 +427,7 @@ details summary{cursor:pointer;font-weight:700}
       if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
       var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      function done(list){ savedIdx={}; show(list); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }
+      function done(list){ list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); loadLocal(v.state,pt).then(function(extra){ savedIdx={}; show(list.concat(extra)); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
       if(rep){ done([withLocal(rep)].concat(sens)); return; }
       var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
       $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
