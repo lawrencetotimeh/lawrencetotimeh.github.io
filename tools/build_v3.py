@@ -24,11 +24,11 @@ def nav(active=""):
         on = ' class="on"' if key == active else ""
         return f'<li><a{on} href="{href}">{label}</a></li>'
     return f'''<nav><div class="wrap"><a class="brand" href="index.html">LAWRENCE TOTIMEH <b>JR.</b></a>
-<ul>{a("class/","Classroom","class")}{a("act.html","Act","act")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
+<ul>{a("class/","Classroom","class")}{a("publicservants/","Public Servants","ps")}{a("act.html","Act","act")}{a("speaking.html","Speaking","speaking")}{a("about.html","About","about")}{a("events.html","Events","events")}{a("follow-the-money.html","Follow the Money","ftm")}</ul>
 <a class="btn red" href="contact.html">Book Lawrence</a></div></nav>
 <a class="givebar" href="#support-links"><span class="wrap"><span class="gb-t">Keep the lessons free</span><span class="gb-b">Support the work &rarr;</span><span class="gb-s">Cash App · PayPal · Zelle</span></span></a>'''
 
-FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a> · <a href="press.html">Press</a> · <a href="playbook/">Teen Playbook</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
+FOOT = '''<footer><div class="wrap"><div><div class="mono"><a href="https://www.youtube.com/@AgentKodak" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/AgentKodak" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@AgentKodak" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/AgentKodak" target="_blank" rel="noopener">Facebook</a> · @AgentKodak</div><div style="margin-top:8px">I'm an educator, not an attorney. Nothing here is legal advice. · <a href="mailto:hello@lawrencetotimeh.com">hello@lawrencetotimeh.com</a> · <a href="contact.html#support">Support the work</a> · <a href="press.html">Press</a> · <a href="playbook/">Teen Playbook</a> · <a href="publicservants/">Public Servants</a></div></div><div class="mono">© <span id="yr">2026</span> Lawrence Totimeh Jr.</div></div></footer>
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
@@ -55,7 +55,7 @@ JOIN = '''<section class="dark join"><div class="wrap rev">
 </div></section>
 <script>document.querySelectorAll('.zelle').forEach(function(b){var l=b.textContent;b.addEventListener('click',function(){var e=b.getAttribute('data-email');var done=function(){b.textContent='Copied: '+e;setTimeout(function(){b.textContent=l},2500)};if(navigator.clipboard){navigator.clipboard.writeText(e).then(done,function(){prompt('Zelle email',e)})}else{prompt('Zelle email',e)}})});</script>'''
 
-HOME_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://lawrencetotimeh.com/#person", "name": "Lawrence Totimeh Jr.", "alternateName": ["Lawrence Kwame Totimeh Jr.", "Lawrence Totimeh", "Agent Kodak", "AgentKodak"], "url": "https://lawrencetotimeh.com/", "image": "https://lawrencetotimeh.com/img/hero/image.jpg", "description": "Lawrence Totimeh Jr. (Agent Kodak) is a social justice advocate, civic educator and U.S. Army combat veteran who served in Iraq. Through his School of Law series, he teaches how the justice system works in plain language, from the public record, so everyday people know their rights and can hold public officials accountable. He is a TEDx speaker. He is an educator, not an attorney.", "jobTitle": ["Social justice advocate", "Civic educator", "Public speaker"], "birthPlace": {"@type": "Place", "name": "Newark, New Jersey"}, "homeLocation": {"@type": "Place", "name": "Washington, D.C. area"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Virginia State University"}, "memberOf": {"@type": "Organization", "name": "Life Reign", "url": "https://lifereigndc.org/"}, "founder": {"@type": "Organization", "name": "Liberia Forward", "url": "https://www.liberiaforward.org/"}, "knowsAbout": ["Civic education", "Know your rights", "Public records", "Police accountability", "Social justice", "Government accountability"], "sameAs": ["https://www.youtube.com/@AgentKodak", "https://www.instagram.com/AgentKodak", "https://www.tiktok.com/@AgentKodak", "https://www.facebook.com/AgentKodak", "https://www.linkedin.com/in/sgttotimeh/", "https://www.liberiaforward.org/lawrence-totimeh", "https://www.youtube.com/watch?v=qIvFzfNngaw"]}, {"@type": "WebSite", "@id": "https://lawrencetotimeh.com/#website", "url": "https://lawrencetotimeh.com/", "name": "Lawrence Totimeh Jr. · Agent Kodak", "alternateName": "agentkodak.com", "publisher": {"@id": "https://lawrencetotimeh.com/#person"}, "inLanguage": "en"}]}</script>'
+HOME_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://lawrencetotimeh.com/#person", "name": "Lawrence Totimeh Jr.", "alternateName": ["Lawrence Kwame Totimeh Jr.", "Lawrence Totimeh", "Agent Kodak", "AgentKodak"], "url": "https://lawrencetotimeh.com/", "image": "https://lawrencetotimeh.com/img/hero/image.jpg", "description": "Lawrence Totimeh Jr., known as Agent Kodak, is a U.S. Army combat veteran, program coordinator and civic educator. He teaches everyday people how power works, how to get answers in writing, and how to hold the people they elect accountable. He holds an M.S. from Virginia State University and is a TEDx speaker.", "jobTitle": ["Civic educator", "Program coordinator", "Social justice advocate", "Public speaker"], "birthPlace": {"@type": "Place", "name": "Newark, New Jersey"}, "homeLocation": {"@type": "Place", "name": "Washington, D.C. area"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Virginia State University"}, "memberOf": {"@type": "Organization", "name": "Life Reign", "url": "https://lifereigndc.org/"}, "founder": {"@type": "Organization", "name": "Liberia Forward", "url": "https://www.liberiaforward.org/"}, "knowsAbout": ["Civic education", "Know your rights", "Public records", "Police accountability", "Social justice", "Government accountability"], "sameAs": ["https://www.youtube.com/@AgentKodak", "https://www.instagram.com/AgentKodak", "https://www.tiktok.com/@AgentKodak", "https://www.facebook.com/AgentKodak", "https://www.linkedin.com/in/sgttotimeh/", "https://www.liberiaforward.org/lawrence-totimeh", "https://www.youtube.com/watch?v=qIvFzfNngaw"]}, {"@type": "WebSite", "@id": "https://lawrencetotimeh.com/#website", "url": "https://lawrencetotimeh.com/", "name": "Lawrence Totimeh Jr. · Agent Kodak", "alternateName": "agentkodak.com", "publisher": {"@id": "https://lawrencetotimeh.com/#person"}, "inLanguage": "en"}]}</script>'
 PRESS_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "url": "https://lawrencetotimeh.com/press.html", "mainEntity": {"@id": "https://lawrencetotimeh.com/#person"}}</script>'
 WEB_LD = '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "One-page websites for small businesses", "provider": {"@id": "https://lawrencetotimeh.com/#person", "@type": "Person", "name": "Lawrence Totimeh Jr."}, "areaServed": "United States", "url": "https://lawrencetotimeh.com/websites.html", "offers": {"@type": "Offer", "price": "500", "priceCurrency": "USD", "description": "The Launch package: a one-page website"}}</script>'
 
@@ -63,38 +63,52 @@ def yt(id_, title):
     return f'<iframe src="https://www.youtube-nocookie.com/embed/{id_}" title="{title}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
 
 # ---------------- HOME ----------------
-home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and civic educator",
-            "Lawrence Totimeh Jr. is a social justice advocate and civic educator, not a lawyer. Plain-language civics lessons taught from the public record, the Classroom map, talks and workshops, and Follow the Money LIB.", "").replace("</head>", HOME_LD + "</head>") + nav("home") + f'''
+home = head("Lawrence Totimeh Jr. (Agent Kodak) · Civic Educator",
+            "Combat veteran, program coordinator and civic educator. Learn how power works, find your public servants, get answers in writing, and hold the people you elect accountable.", "").replace('<meta property="og:title" content="Lawrence Totimeh Jr. (Agent Kodak) · Civic Educator"><meta property="og:description" content="Combat veteran, program coordinator and civic educator. Learn how power works, find your public servants, get answers in writing, and hold the people you elect accountable.">', '<meta property="og:title" content="The power of the people is greater than the people in power."><meta property="og:description" content="Find your public servants, save them in your phone, and track what they promised. Civic education from Lawrence Totimeh Jr. (Agent Kodak).">').replace("</head>", HOME_LD + "</head>") + nav("home") + f'''
 <section class="hero dark"><div class="wrap">
 <div>
 <div class="eyebrow">Agent Kodak · Social justice advocate · Speaker · Civic educator · Combat veteran</div>
 <h1 style="margin-top:14px;text-wrap:balance"><span class="l" style="white-space:normal;text-wrap:balance">The power of the people</span> <span class="l" style="white-space:normal;text-wrap:balance">is greater than</span> <span class="l" style="white-space:normal;text-wrap:balance"><span class="red">the people in power.</span></span></h1>
-<p class="sub">Community-centered civic education that helps people understand power, examine evidence, and act together.</p>
+<p class="mission" style="margin:20px 0 0;font-size:22px;font-weight:700;color:#fff;line-height:1.3">We voted. Now we hold them accountable.</p>
+<p class="sub" style="margin-top:12px">Find your public servants. Save them in your phone. Track what they promised, and check in until they deliver.</p>
 <p class="lede">I'm a combat veteran, program coordinator, and civic educator. I teach everyday people how power works, how to get answers in writing, and how to hold the people they elect accountable.</p>
-<div class="cta"><a class="btn red" href="class/">Enter the Classroom</a><a class="btn ghost" href="contact.html">Book a Talk</a></div>
-<div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S., Virginia State</span><span class="chip">10+ yrs educator</span><span class="chip">TEDx speaker</span></div>
+<div class="cta"><a class="btn red" href="publicservants/">Find Your Public Servants</a><a class="btn ghost" href="class/">Enter the Classroom</a></div>
+<p style="margin:14px 0 0;font-size:15px"><a href="contact.html" style="color:var(--paper)">Book a talk &rarr;</a></p>
+<div class="chips"><span class="chip">U.S. Army · Iraq</span><span class="chip">M.S., Virginia State</span><span class="chip">10+ yrs educator</span><a class="chip" href="https://www.youtube.com/watch?v=qIvFzfNngaw" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">TEDx speaker &#8599;</a></div>
 </div>
 <div class="photo"><img src="img/march/nolan-dc-2026-claire-megaphone.jpg" alt="Lawrence Totimeh Jr. with a megaphone raised, leading chants at the Justice for Nolan Wells march in Washington, D.C." width="801" height="1205" style="object-position:50% 30%;filter:none" fetchpriority="high"><div class="tag">Photo: @c.l.a.i.r.e.s.a.v.a.r.y</div></div>
 </div></section>
 
 <section class="light"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Theory to practice</div><h2 style="margin-top:8px">How this works</h2></div></div>
-<div class="steps rev">
-<div class="step"><div class="n">01</div><h3>Learn the law</h3><p class="muted">Plain-language civics lessons on how the justice system works, taught from the public record by an educator, not an attorney. Probable cause, grand juries, civil suits, discovery.</p></div>
-<div class="step"><div class="n">02</div><h3>Document</h3><p class="muted">Records, receipts, and a paper trail. Transparency creates accountability.</p></div>
-<div class="step"><div class="n">03</div><h3>Act</h3><p class="muted">Vote. Follow up. Teach somebody else. Our enemy is injustice, not people.</p></div>
-</div></div></section>
+<div class="sec-head rev"><div><div class="eyebrow">The accountability cycle</div><h2 style="margin-top:8px">Democracy is a project. You're the boss.</h2></div></div>
+<div class="steps rev" style="grid-template-columns:repeat(4,1fr)">
+<div class="step"><div class="n">01</div><h3>Know them</h3><p class="muted">Type your address. Save every public servant to your phone.</p><p style="margin-top:12px"><a class="btn red" href="publicservants/">Find yours</a></p></div>
+<div class="step"><div class="n">02</div><h3>Write down the promise</h3><p class="muted">Screenshot what they said they'd do. That's your baseline.</p></div>
+<div class="step"><div class="n">03</div><h3>Check in</h3><p class="muted">Find their town hall. Every month or every three months, ask: "You said this. Where are we?"</p></div>
+<div class="step"><div class="n">04</div><h3>Decide</h3><p class="muted">If they deliver, rehire them. If they don't, replace them.</p></div>
+</div>
+<p class="muted rev" style="margin-top:22px;font-size:15px"><i>Plan. Vote. Monitor. Evaluate. Repeat.</i></p>
+</div></section>
 
-<section class="dark" id="lessons"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">The School of Law · a civic education series on YouTube at @AgentKodak</div><h2 style="margin-top:8px">Real cases. Plain language.</h2></div><a class="btn ghost" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">The playlist</a></div>
-<p class="lede muted rev">A real Mississippi case, taught one lesson at a time: civil lawsuits, discovery, probable cause, new evidence, and the federal path. Lawrence is an educator, not an attorney. These lessons are not legal advice.</p>
+<section class="dark" id="series"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Watch the series</div><h2 style="margin-top:8px">Learn it. Then use it.</h2></div></div>
+<div class="cards3 rev">
+<div class="pkg"><div class="eyebrow">Coming soon</div><h3 style="margin:10px 0 12px">We Paid For That</h3><p class="muted">Our tax dollars built it. So why are we paying twice? Receipts on drug prices, stadiums, data centers and more.</p></div>
+<div class="pkg"><div class="eyebrow">Series</div><h3 style="margin:10px 0 12px">Nolan Wells School of Law</h3><p class="muted">How a death investigation works, what the records show, and how to ask for answers in writing.</p><div class="cta" style="margin-top:20px"><a class="btn ghost" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">Start the lessons</a></div></div>
+<div class="pkg"><div class="eyebrow">Campaign</div><h3 style="margin:10px 0 12px">On the Record for Nolan</h3><p class="muted">One letter to your representative and both senators. Yes, no or silent.</p><div class="cta" style="margin-top:20px"><a class="btn red" href="class/ontherecord/">Send the letter</a></div></div>
+</div>
+</div></section>
+
+<section class="dark" id="lessons" style="border-top:1px solid var(--line)"><div class="wrap">
+<div class="sec-head rev"><div><div class="eyebrow">Case study</div><h2 style="margin-top:8px">Nolan Wells School of Law</h2></div></div>
+<p class="lede muted rev">One young man's death. One family still waiting for answers. Lesson by lesson, we use the public record to show how a death investigation works, where it breaks down, and how to ask for answers in writing.</p>
 <div class="lessons rev" style="margin-top:36px">
 <div class="lesson"><div class="shell">{yt("r8bkd_yQsOQ","Lesson 7, Part 1: Who's connected to who in Mississippi?")}</div><div class="t">Lesson 7 · Part 1<b>Who's connected to who in Mississippi?</b></div></div>
 <div class="lesson"><div class="shell">{yt("PRJ1wK_wpeA","Lesson 6, Part 3: A no with no reason isn't allowed")}</div><div class="t">Lesson 6 · Part 3<b>A "no" with no reason isn't allowed</b></div></div>
 <div class="lesson"><div class="shell">{yt("KnF-P05Y96k","Lesson 6, Part 2: Where the feds at? Who knocked")}</div><div class="t">Lesson 6 · Part 2<b>Where the feds at? Who knocked</b></div></div>
 </div>
-<div class="cta rev" style="margin-top:22px"><a class="btn red" href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">Watch every lesson: the full playlist</a><a class="btn ghost" href="class/">The Classroom map</a></div>
-<p class="muted rev" style="margin-top:14px;font-size:14px">The three newest lessons are above. All 16 videos, in order, are in the playlist on YouTube.</p>
+<div class="cta rev" style="margin-top:22px"><a class="btn red" href="class/">Start the lessons</a><a class="btn ghost" href="class/ontherecord/">Send the letter</a></div>
+<p class="muted rev" style="margin-top:14px;font-size:14px">The three newest lessons are above. Every video, in order, is in the <a href="https://www.youtube.com/playlist?list=PLS3fOn-lOHhs" target="_blank" rel="noopener">playlist on YouTube</a>. Lawrence is an educator, not an attorney. These lessons are not legal advice.</p>
 </div></section>
 
 <section class="dark classroom panelbg" id="class" style="border-top:1px solid var(--line)"><div class="wrap">
@@ -111,12 +125,12 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 <div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 750,000 views in the past year</h2></div></div>
 <div class="proof rev" style="grid-template-columns:1.4fr 1fr 1fr 1fr">
 <div class="card"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div>
-<div class="card"><div class="v">12K+</div><div class="l">followers on Instagram at @AgentKodak</div></div>
+<div class="card"><div class="v">15K+</div><div class="l">followers on Instagram at @AgentKodak</div></div>
 <div class="card"><div class="v">10K+</div><div class="l">followers on Facebook</div></div>
 <div class="card"><div class="v">1,200+</div><div class="l">subscribers on YouTube, and growing</div></div>
 </div>
 <p class="muted" style="font-size:14px;margin-top:14px">Every lesson and every document is free, with no email gate.</p>
-<p class="muted" style="font-size:12px;margin-top:6px">Views: combined platform insights, 12 months to Oct. 7, 2026. Followers and subscribers as of Nov. 2, 2026.</p>
+<p class="muted" style="font-size:12px;margin-top:6px">Views: combined platform insights, 12 months to Oct. 7, 2026. Instagram as of Nov. 4, 2026. Facebook and YouTube as of Nov. 2, 2026.</p>
 </div></section>
 
 <section class="light lt" id="playbook"><div class="wrap">
@@ -147,14 +161,14 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 </div></section>
 
 <section class="light lt" id="speaking"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Speaking &amp; workshops</div><h2 style="margin-top:8px">Four talks. Every one ends with a documentation exercise.</h2></div><a class="btn red" href="contact.html">Book Lawrence</a></div>
+<div class="sec-head rev"><div><div class="eyebrow">Speaking &amp; workshops</div><h2 style="margin-top:8px">Four talks. Built for people who were never taught civics.</h2></div><a class="btn red" href="contact.html">Book Lawrence</a></div>
 <div class="talks rev">
-<div class="talk"><h3>Transparency Creates Accountability</h3><p>Public records, documentation and holding officials accountable.</p><p class="leave"><b>You leave with:</b> a template to start a paper trail in your community.</p></div>
-<div class="talk"><h3>Learn the Law</h3><p>The basic rights every student is supposed to know, and how to use them: at a traffic stop, at school, online, and in a courtroom.</p><p class="leave"><b>You leave with:</b> a one-page "your rights and how to use them" card.</p></div>
-<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, using the interactive map. <a href="class/">See the map</a>.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county.</p></div>
-<div class="talk"><h3>From the Front Line</h3><p>Civic power from Fannie Lou Hamer to today. Nonpartisan voter education option.</p><p class="leave"><b>You leave with:</b> the civic power timeline and a voter-ready checklist.</p></div>
+<div class="talk"><h3>Democracy Is a Project: You&#39;re the Boss</h3><p>The accountability cycle in plain language. Know your public servants, write down what they promised, check in, and decide whether they keep the job. Audiences leave with every official saved in their phone.</p><p class="leave"><b>Best for:</b> High schools, colleges, churches, community groups.</p></div>
+<div class="talk"><h3>Documentation Beats Conversation</h3><p>How to get answers in writing: public records requests, written complaints and letters to officials. Real examples of agencies answering paper when they ignored phone calls.</p><p class="leave"><b>Best for:</b> Community organizations, advocacy groups, students.</p></div>
+<div class="talk"><h3>We Paid For That</h3><p>Our tax dollars built it, so why are we paying twice? Drug prices, stadiums, data centers and corporate deals, with the receipts, and what to ask the people who approved them.</p><p class="leave"><b>Best for:</b> Colleges, civic and labor groups, conferences.</p></div>
+<div class="talk"><h3>A Case Study: Nolan Xavier Wells</h3><p>How a death investigation works, step by step, and where it can break down. Built from public records. Questions, not accusations.</p><p class="leave"><b>Best for:</b> Law and criminal justice classes, HBCUs, community forums.</p></div>
 </div>
-<p class="muted rev" style="margin-top:22px;font-size:14px">For HBCUs, high schools, middle schools, churches, veteran groups and community organizations. Keynote, workshop, or classroom series. <a href="speaking.html">Full details and the speaker sheet</a>.</p>
+<p class="muted rev" style="margin-top:22px;font-size:14px">For HBCUs, high schools, middle schools, churches, veteran groups and community organizations. Interactive, and adaptable for teens or adults. <a href="speaking.html">Full details and the speaker sheet</a>.</p>
 </div></section>
 
 <section class="light two-sec"><div class="wrap two">
@@ -192,22 +206,23 @@ home = head("Lawrence Totimeh Jr. · Agent Kodak · Social justice advocate and 
 ''' + FOOT
 
 # ---------------- SPEAKING ----------------
-speaking = head("Speaking & Workshops · Lawrence Totimeh Jr.", "Civic education for schools, colleges, churches, veterans and community groups. Four talks, each ending with a documentation exercise.", "speaking.html") + nav("speaking") + f'''
+speaking = head("Speaking & Workshops · Lawrence Totimeh Jr.", "Civic education for schools, colleges, churches, veterans and community groups. Four interactive talks on power, accountability and getting answers in writing.", "speaking.html") + nav("speaking") + f'''
 <section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">Speaking &amp; workshops</div>
 <h1>Civic education for the rooms that need it</h1>
-<p class="lede">Schools, colleges, churches, veterans and community groups. Lawrence is a social justice advocate and civic educator, not an attorney. He teaches how the justice system is built, in plain language, from the public record, so audiences leave knowing the rules and the next move.</p>
+<p class="lede">Schools, colleges, churches, veterans and community groups. Lawrence is a combat veteran, program coordinator and civic educator. He teaches how power works, how to get answers in writing, and how to hold the people we elect accountable. He is an educator, not an attorney.</p>
 <div class="cta" style="margin-top:30px"><a class="btn red" href="contact.html">Book Lawrence</a><a class="btn ghost" href="speaker-sheet.pdf">Speaker sheet (PDF)</a></div>
 </div></section>
 
 <section class="light lt"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Four talks</div><h2 style="margin-top:8px">Every one ends with a documentation exercise, not a Q&amp;A</h2></div></div>
+<div class="sec-head rev"><div><div class="eyebrow">Four talks</div><h2 style="margin-top:8px">Interactive, and built for people who were never taught civics</h2></div></div>
 <div class="talks rev">
-<div class="talk"><h3>Transparency Creates Accountability</h3><p>Public records, documentation and holding officials accountable. How a paper trail wins.</p><p class="leave"><b>You leave with:</b> a template to start building a paper trail in your community.</p></div>
-<div class="talk"><h3>Learn the Law</h3><p>The basic rights every student is supposed to know, and how to use them. What to say at a traffic stop, what a school can and cannot search, what you sign online, and what happens from probable cause to a courtroom. Taught in plain language, with practice.</p><p class="leave"><b>You leave with:</b> a one-page "your rights and how to use them" card, and a script for the moments that matter.</p></div>
-<div class="talk"><h3>Who Holds the Levers</h3><p>How the justice system is structured, taught with the interactive map from the Classroom. <a href="class/">See the map: lawrencetotimeh.com/class</a>.</p><p class="leave"><b>You leave with:</b> a filled-in chart of who decides what in your county, and where pressure actually lands.</p></div>
-<div class="talk"><h3>From the Front Line</h3><p>Civic power from Fannie Lou Hamer to today. Available with a nonpartisan voter education workshop built on official state resources.</p><p class="leave"><b>You leave with:</b> the civic power timeline and a voter-ready checklist.</p></div>
+<div class="talk"><h3>Democracy Is a Project: You&#39;re the Boss</h3><p>The accountability cycle in plain language. Know your public servants, write down what they promised, check in, and decide whether they keep the job. Audiences leave with every official saved in their phone.</p><p class="leave"><b>Best for:</b> High schools, colleges, churches, community groups.</p></div>
+<div class="talk"><h3>Documentation Beats Conversation</h3><p>How to get answers in writing: public records requests, written complaints and letters to officials. Real examples of agencies answering paper when they ignored phone calls.</p><p class="leave"><b>Best for:</b> Community organizations, advocacy groups, students.</p></div>
+<div class="talk"><h3>We Paid For That</h3><p>Our tax dollars built it, so why are we paying twice? Drug prices, stadiums, data centers and corporate deals, with the receipts, and what to ask the people who approved them.</p><p class="leave"><b>Best for:</b> Colleges, civic and labor groups, conferences.</p></div>
+<div class="talk"><h3>A Case Study: Nolan Xavier Wells</h3><p>How a death investigation works, step by step, and where it can break down. Built from public records. Questions, not accusations.</p><p class="leave"><b>Best for:</b> Law and criminal justice classes, HBCUs, community forums.</p></div>
 </div>
+<p class="muted rev" style="margin-top:22px;font-size:15px">All talks: interactive, built for people who were never taught civics, and adaptable for teens or adults.</p>
 </div></section>
 
 <section class="dark"><div class="wrap">
@@ -436,10 +451,10 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 <section class="light"><div class="wrap two">
 <div class="rev">
 <div class="eyebrow">Short bio · about 60 words</div>
-<p class="lede" id="bio-short" style="margin-top:12px">Lawrence Totimeh Jr. is a social justice advocate, civic educator and U.S. Army combat veteran who served in Iraq. Through his School of Law series at @AgentKodak, he teaches how the justice system works in plain language, from the public record, so everyday people know their rights and can hold public officials accountable. He is a TEDx speaker.</p>
+<p class="lede" id="bio-short" style="margin-top:12px">Lawrence Totimeh Jr., known as Agent Kodak, is a U.S. Army combat veteran, program coordinator and civic educator. He teaches everyday people how power works, how to get answers in writing, and how to hold the people they elect accountable. He holds an M.S. from Virginia State University and is a TEDx speaker.</p>
 <div class="cta" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-short" style="color:var(--ink);border-color:var(--ink)">Copy short bio</button></div>
 <div class="eyebrow" style="margin-top:40px">Courte biographie · en français (traduction)</div>
-<p id="bio-fr" lang="fr" style="margin-top:12px">Lawrence Totimeh Jr. est militant pour la justice sociale, éducateur civique et ancien combattant de l'armée américaine, qui a servi en Irak. Avec sa série School of Law (@AgentKodak), il explique en langage simple, à partir de documents publics, comment fonctionne le système judiciaire, afin que chacun connaisse ses droits et puisse demander des comptes aux responsables publics. Il est intervenant TEDx.</p>
+<p id="bio-fr" lang="fr" style="margin-top:12px">Lawrence Totimeh Jr., connu sous le nom d'Agent Kodak, est un vétéran de combat de l'armée américaine, coordinateur de programmes et éducateur civique. Il apprend aux citoyens ordinaires comment fonctionne le pouvoir, comment obtenir des réponses par écrit et comment demander des comptes à leurs élus. Il est titulaire d'un master de Virginia State University et intervenant TEDx.</p>
 <div class="cta" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-fr" style="color:var(--ink);border-color:var(--ink)">Copier la biographie</button></div>
 </div>
 <div class="photo rev"><img src="img/hero/image.jpg" alt="Lawrence Totimeh Jr. in a gray suit with a Liberian flag lapel pin" width="1206" height="1809" loading="lazy"><div class="tag">Official photo</div></div>
@@ -462,10 +477,11 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 </div></section>
 
 <section class="light"><div class="wrap">
-<div class="eyebrow rev">Long bio · about 170 words</div>
+<div class="eyebrow rev">Long bio · about 150 words</div>
 <div id="bio-long" class="rev" style="max-width:70ch;margin-top:12px">
-<p>Lawrence Totimeh Jr. is a social justice advocate and civic educator based in the Washington, D.C. area. He turns the law into plain-language visual lessons so everyday people know their rights and can hold public officials accountable. His School of Law series, on YouTube, Instagram, TikTok and Facebook at @AgentKodak, teaches the justice system one real case at a time. He is an educator, not an attorney.</p>
-<p style="margin-top:14px">Born in Newark, New Jersey, to Liberian parents, Lawrence served in Baghdad, Iraq, in 2011 as a U.S. Army door gunner. He has spent more than ten years in classrooms from D.C. to Los Angeles, where he coached the Locke High School Lady Saints to a 2019 CIF Los Angeles City Section title. In 2020, his photo led a Los Angeles Times investigation into police tactics during the George Floyd protests. He founded Liberia Forward, spoke at TEDxSinkor in Monrovia, and launched Follow the Money LIB. He studied at Virginia State University, earning a bachelor's degree, a graduate certificate and a master's degree.</p>
+<p>Lawrence Totimeh Jr., known online as Agent Kodak, is a Liberian American civic educator, social justice advocate and U.S. Army combat veteran who served in Iraq. After more than ten years as an educator, he now teaches civics to the people school skipped: how government actually works, who holds power, and how ordinary people can hold it accountable.</p>
+<p style="margin-top:14px">His lessons turn public records into plain, visual explainers. His campaign On the Record for Nolan asks every member of Congress one question in writing about the death of Nolan Xavier Wells: yes, no or silent. His free Know Your Public Servants tool lets anyone type in their address and save their elected officials to their phone.</p>
+<p style="margin-top:14px">Lawrence holds an M.S. from Virginia State University and has spoken at TEDxSinkor. He is based in the Washington, D.C. area. His message is simple: the power of the people is greater than the people in power.</p>
 </div>
 <div class="cta rev" style="margin-top:16px"><button class="btn ghost copybio" type="button" data-t="bio-long" style="color:var(--ink);border-color:var(--ink)">Copy long bio</button></div>
 </div></section>
@@ -475,10 +491,10 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 <ul class="list" style="margin-top:16px">
 <li><b>Name:</b> Lawrence Totimeh Jr. (Agent Kodak on social media)</li>
 <li><b>Based:</b> Washington, D.C. area</li>
-<li><b>Work:</b> Social justice advocate, civic educator, speaker</li>
+<li><b>Work:</b> Civic educator, program coordinator, social justice advocate, speaker</li>
 <li><b>Service:</b> U.S. Army, Baghdad, Iraq, 2011 (Operation New Dawn)</li>
 <li><b>Education:</b> Virginia State University: B.S., graduate certificate, M.S.</li>
-<li><b>Reach:</b> 750K+ views across platforms in the 12 months to Oct. 7, 2026. 12K+ Instagram followers, 10K+ Facebook followers and 1,200+ YouTube subscribers as of Nov. 2, 2026.</li>
+<li><b>Reach:</b> 750K+ views across platforms in the 12 months to Oct. 7, 2026. 15K+ Instagram followers as of Nov. 4, 2026. 10K+ Facebook followers and 1,200+ YouTube subscribers as of Nov. 2, 2026.</li>
 <li><b>Social:</b> @AgentKodak on YouTube, Instagram, TikTok and Facebook</li>
 <li><b>Note:</b> He is an educator, not an attorney.</li>
 </ul></div>
