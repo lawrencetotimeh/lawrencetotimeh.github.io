@@ -17,6 +17,7 @@ def head(title, desc, canon, og="img/hero/image.jpg"):
 {ICONS}
 {FONTS}
 <link rel="stylesheet" href="v3.css">
+<script data-goatcounter="https://agentkodak.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head><body>'''
 
 def nav(active=""):
