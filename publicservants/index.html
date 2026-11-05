@@ -125,6 +125,11 @@ details summary{cursor:pointer;font-weight:700}
   <div class="mini" id="ps-mini"></div>
   <div class="devtip" id="ps-devtip"></div>
   <p class="ok" id="ps-saved" hidden style="margin:10px 0 0"></p>
+  <div id="ps-fb" hidden style="margin-top:14px;padding:12px 14px;border:2px solid var(--ink);border-radius:10px">
+    <p style="margin:0 0 10px;font-weight:600" data-t="fbq">Quick question: before today, did you know who your state representative was?</p>
+    <div class="row" id="ps-fb-btns"><button class="btn ghost" type="button" data-fb="yes" data-t="fbyes">Yes</button><button class="btn ghost" type="button" data-fb="no" data-t="fbno">No</button></div>
+    <p class="small muted" id="ps-fb-thanks" hidden style="margin:8px 0 0" data-t="fbthanks">Thank you. Your answer is counted anonymously, with no name or address.</p>
+  </div>
   <div class="save" id="ps-allwrap" style="margin-top:12px">
     <button class="btn big" type="button" id="ps-save">Or save all 3 at once</button>
   </div>
@@ -231,6 +236,7 @@ details summary{cursor:pointer;font-weight:700}
       jobgov:"Runs your state government.\n\nCall about state agencies (unemployment, Medicaid, MVA, state police), state budget priorities, and bills the governor signs or vetoes.",
       jobstatesen:"Your voice in the state Senate.\n\nCall about state laws, state budget money for your area, and state agencies that won't answer you.",
       jobdel:"One of your voices in the state House of Delegates.\n\nCall about state laws, schools and roads funding, and state agency problems. Delegates are often the easiest state official to reach.",
+      fbq:"Quick question: before today, did you know who your state representative was?", fbyes:"Yes", fbno:"No", fbthanks:"Thank you. Your answer is counted anonymously, with no name or address.",
       jobsrep:"One of your voices in the state House.\n\nCall about state laws, schools and roads funding, and state agency problems. Your state rep is often the easiest state official to reach.",
       jobasm:"Your voice in the State Assembly.\n\nCall about state laws, schools and roads funding, and state agency problems. Assembly members are often the easiest state official to reach.",
       jobcexec:"Runs county government day to day.\n\nCall about county services: police, trash, roads, permits, county budget and county agencies.",
@@ -278,6 +284,7 @@ details summary{cursor:pointer;font-weight:700}
       jobgov:"Dirige el gobierno de tu estado.\n\nLlama sobre agencias estatales (desempleo, Medicaid, MVA, policía estatal), prioridades del presupuesto estatal y leyes que firma o veta.",
       jobstatesen:"Tu voz en el Senado estatal.\n\nLlama sobre leyes estatales, fondos del presupuesto estatal para tu área y agencias estatales que no te responden.",
       jobdel:"Una de tus voces en la Cámara de Delegados del estado.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
+      fbq:"Pregunta rápida: antes de hoy, ¿sabías quién era tu representante estatal?", fbyes:"Sí", fbno:"No", fbthanks:"Gracias. Tu respuesta se cuenta de forma anónima, sin nombre ni dirección.",
       jobsrep:"Una de tus voces en la Cámara estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
       jobasm:"Tu voz en la Asamblea estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
       jobcexec:"Dirige el gobierno del condado día a día.\n\nLlama sobre servicios del condado: policía, basura, calles, permisos, presupuesto y agencias del condado.",
@@ -389,7 +396,9 @@ details summary{cursor:pointer;font-weight:700}
   function download(blob,name){ var u=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
   var savedIdx={};
   function fileName(o){ return (o.last||"contact").replace(/[^A-Za-z0-9]+/g,"-")+"-public-servant.vcf"; }
-  function saveOne(i){ gc("save-one-"+LAST_ST);
+  function showFb(){ var f=$("ps-fb"); if(f && !FB_DONE) f.hidden=false; }
+  var FB_DONE=false;
+  function saveOne(i){ gc("save-one-"+LAST_ST); showFb();
     var o=current[i]; if(!o) return; var name=fileName(o), blob=new Blob([vcard(o)+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
     savedIdx[i]=true; renderMini();
     try{ var file=new File([blob],name,{type:"text/vcard"});
@@ -403,7 +412,7 @@ details summary{cursor:pointer;font-weight:700}
     $("ps-mini").innerHTML=current.map(function(o,i){ var lab=isLoc(o)?(t("m"+o.kind)+(o.vars.d?" · "+o.vars.d:"")):(o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state)); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
     $("ps-mini").querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ saveOne(+b.dataset.i); }); });
   }
-  function saveAll(list){ gc("save-all-"+LAST_ST);
+  function saveAll(list){ gc("save-all-"+LAST_ST); showFb();
     var name="public-servants.vcf", blob=new Blob([list.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
     try{ var file=new File([blob],name,{type:"text/vcard"});
       if(!isIOS() && /Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:t("org")}).then(function(){flash(msg,t("share"))}).catch(function(){download(blob,name)}); return; }
@@ -455,6 +464,8 @@ details summary{cursor:pointer;font-weight:700}
     }).catch(function(){ st.textContent=t("netfail"); });
   });
 
+  document.querySelectorAll("#ps-fb-btns button").forEach(function(b){ b.addEventListener("click",function(){ if(FB_DONE) return; FB_DONE=true; gc("knew-staterep-"+b.getAttribute("data-fb")+"-"+LAST_ST); $("ps-fb-btns").hidden=true; $("ps-fb-thanks").hidden=false; }); });
+  document.addEventListener("click",function(e){ var a=e.target.closest&&e.target.closest("#ps-cards a"); if(!a) return; var h=a.getAttribute("href")||""; gc((/^tel:/.test(h)?"tap-call-":/^mailto:/.test(h)?"tap-email-":"tap-write-")+LAST_ST); },true);
   applyLang();
 })();
 </script>
