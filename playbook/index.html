@@ -164,4 +164,5 @@ fetch('states.json').then(function(r){return r.json()}).then(function(list){
 }).catch(function(){document.getElementById('pb-msg').textContent='Could not load state rules. Refresh the page to try again.';route()});
 })();
 </script>
+<script>(function(){function gc(p){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:p,title:p,event:true})}catch(e){}}document.addEventListener("click",function(e){var c=e.target.closest?e.target:null;if(!c)return;MAP.some(function(m){if(c.closest(m[0])){gc(m[1]);return true}})},true);var MAP=[["#pb-all", "playbook-pdf-all"], ["#pb-dl", "playbook-pdf-one"], ["#pb-print", "playbook-print"], ["#pb-share", "playbook-copy-link"]];})();</script>
 </body></html>
