@@ -338,7 +338,9 @@ details summary{cursor:pointer;font-weight:700}
     var sn=STATES[state];
     (data.upper[lkey(sld.upper)]||[]).forEach(function(x){ var o=mk("statesen",x.n,x.p,x.e,"",{s:sn,d:x.d}); if(o) out.push(o); });
     var lk=LOWER_DEL[state]?"del":LOWER_ASM[state]?"asm":"srep";
-    (data.lower[lkey(sld.lower)]||[]).forEach(function(x){ var o=mk(lk,x.n,x.p,x.e,"",{s:sn,d:x.d}); if(o) out.push(o); });
+    var lk2=lkey(sld.lower), lows=data.lower[lk2];
+    if(!lows){ lows=[]; Object.keys(data.lower).sort().forEach(function(x){ if(x.length===lk2.length+1 && x.indexOf(lk2)===0 && /[a-z]$/.test(x)) lows=lows.concat(data.lower[x]); }); }
+    lows.forEach(function(x){ var o=mk(lk,x.n,x.p,x.e,"",{s:sn,d:x.d}); if(o) out.push(o); });
   }
   function loadLocal(state,pt,sld){
     var out=[];
