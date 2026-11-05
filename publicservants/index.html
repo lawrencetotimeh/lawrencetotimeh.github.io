@@ -86,7 +86,8 @@ input,select{width:100%;font:inherit;font-size:17px;padding:11px 12px;border:1px
 .stamp{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-top:14px}
 footer{border-top:1px solid var(--line);padding-block:24px 44px;font-size:14px;color:var(--muted)}
 details summary{cursor:pointer;font-weight:700}
-</style></head><body>
+</style><script data-goatcounter="https://agentkodak.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head><body>
 <div class="wrap">
 
 <header class="hero">
@@ -236,7 +237,7 @@ details summary{cursor:pointer;font-weight:700}
       jobcouncil:"Your district's voice on the County Council.\n\nCall about zoning and what gets built near you, the county budget, the police budget, and problems on your block.",
       jobatl:"Represents the whole county on the County Council.\n\nCall about countywide issues: the budget, schools funding, policing and development.",
       stlocal:"<b>State and local:</b> In every state we now add your governor, state senator and state representative. In Prince George's County, MD, we also add your county executive and county council. More cities and counties are coming. Drop your city in the comments on @agentkodak.",
-      srcloc:"Governors: USA.gov. State legislators: Open States (openstates.org), updated every week. Prince George's County officials and Maryland legislators there: Prince George's County GIS election data, kept by the county."
+      srcloc:"Governors: USA.gov. State legislators: Open States (openstates.org), updated every week. We count visits and lookups anonymously; your address is never stored or sent to us. Prince George's County officials and Maryland legislators there: Prince George's County GIS election data, kept by the county."
     },
     es:{
       eyebrow:"Guía de Agentes del Cambio · Educación cívica",
@@ -283,7 +284,7 @@ details summary{cursor:pointer;font-weight:700}
       jobcouncil:"La voz de tu distrito en el Concejo del Condado.\n\nLlama sobre zonificación y lo que se construye cerca de ti, el presupuesto del condado, el presupuesto de la policía y problemas en tu cuadra.",
       jobatl:"Representa a todo el condado en el Concejo.\n\nLlama sobre temas de todo el condado: presupuesto, escuelas, policía y desarrollo.",
       stlocal:"<b>Estado y local:</b> En todos los estados ahora agregamos a tu gobernador, tu senador estatal y tu representante estatal. En el Condado de Prince George's, MD, también agregamos al ejecutivo y al concejo del condado. Pronto más ciudades y condados.",
-      srcloc:"Gobernadores: USA.gov. Legisladores estatales: Open States (openstates.org), actualizado cada semana. Funcionarios del Condado de Prince George's: datos electorales del SIG del condado."
+      srcloc:"Gobernadores: USA.gov. Legisladores estatales: Open States (openstates.org), actualizado cada semana. Contamos visitas y búsquedas de forma anónima; tu dirección nunca se guarda ni se nos envía. Funcionarios del Condado de Prince George's: datos electorales del SIG del condado."
     }
   };
   var lang="en";
@@ -355,6 +356,8 @@ details summary{cursor:pointer;font-weight:700}
       return out.filter(Boolean);
     }).catch(function(){ return out; });
   }
+  var LAST_ST="";
+  function gc(p){ try{ if(window.goatcounter&&window.goatcounter.count) window.goatcounter.count({path:p,title:p,event:true}); }catch(e){} }
   function isLoc(o){ return o.kind && o.kind!=="fed"; }
 
   /* ---------- vCard ---------- */
@@ -386,7 +389,7 @@ details summary{cursor:pointer;font-weight:700}
   function download(blob,name){ var u=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},60000); }
   var savedIdx={};
   function fileName(o){ return (o.last||"contact").replace(/[^A-Za-z0-9]+/g,"-")+"-public-servant.vcf"; }
-  function saveOne(i){
+  function saveOne(i){ gc("save-one-"+LAST_ST);
     var o=current[i]; if(!o) return; var name=fileName(o), blob=new Blob([vcard(o)+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
     savedIdx[i]=true; renderMini();
     try{ var file=new File([blob],name,{type:"text/vcard"});
@@ -400,7 +403,7 @@ details summary{cursor:pointer;font-weight:700}
     $("ps-mini").innerHTML=current.map(function(o,i){ var lab=isLoc(o)?(t("m"+o.kind)+(o.vars.d?" · "+o.vars.d:"")):(o.type==="sen"?t("minisen"):t("minirep")+(o.district?" · "+o.state+"-"+o.district:" · "+o.state)); var d=!!savedIdx[i]; return '<button type="button" data-i="'+i+'" class="'+(d?"done":"")+'"><span class="mr">'+esc(lab)+'</span><span class="mn">'+esc(o.name)+'</span><span class="ma">'+esc(d?"\u2713 "+t("savedok"):t("tapsave"))+'</span></button>'; }).join("");
     $("ps-mini").querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click",function(){ saveOne(+b.dataset.i); }); });
   }
-  function saveAll(list){
+  function saveAll(list){ gc("save-all-"+LAST_ST);
     var name="public-servants.vcf", blob=new Blob([list.map(vcard).join("\r\n")+"\r\n"],{type:"text/vcard;charset=utf-8"}), msg=$("ps-saved");
     try{ var file=new File([blob],name,{type:"text/vcard"});
       if(!isIOS() && /Android/.test(navigator.userAgent) && navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:t("org")}).then(function(){flash(msg,t("share"))}).catch(function(){download(blob,name)}); return; }
@@ -445,7 +448,7 @@ details summary{cursor:pointer;font-weight:700}
       if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
       var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      function done(list){ list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); loadLocal(v.state,pt,sld).then(function(extra){ savedIdx={}; show(list.concat(extra)); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
+      function done(list){ LAST_ST=v.state; gc("lookup-"+v.state); list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); loadLocal(v.state,pt,sld).then(function(extra){ savedIdx={}; show(list.concat(extra)); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
       if(rep){ done([withLocal(rep)].concat(sens)); return; }
       var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
       $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
