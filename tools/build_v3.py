@@ -645,7 +645,7 @@ def redirect(to, canon=None):
     return f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Redirecting</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="https://lawrencetotimeh.com/{canon}"><script>location.replace("{to}")</script></head><body><p>Moved. <a href="{to}">Continue</a></p></body></html>'
 
 # ---------------- 404 ----------------
-notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land. Try the Classroom, the Act page, or the homepage.", "404.html").replace('<link rel="canonical" href="https://lawrencetotimeh.com/404.html">\n', '<base href="https://lawrencetotimeh.com/"><meta name="robots" content="noindex">\n') + nav("") + """
+notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land. Try the Classroom, the Act page, or the homepage.", "404.html").replace('<link rel="canonical" href="https://lawrencetotimeh.com/404.html">\n', '<base href="https://lawrencetotimeh.com/"><meta name="robots" content="noindex">\n<script>(function(){var p=location.pathname,l=p.toLowerCase();if(p!==l){location.replace(l+location.search+location.hash)}})();</script>\n') + nav("") + """
 <section class="dark pagehero"><div class="wrap">
 <div class="eyebrow">404 · Page not found</div>
 <h1>That link<br>didn't land.</h1>
@@ -655,7 +655,7 @@ notfound = head("Page not found · Lawrence Totimeh Jr.", "That link didn't land
 """ + JOIN + FOOT
 
 pages = {"404.html": notfound, "index.html": home, "press.html": press, "websites.html": websites, "speaking.html": speaking, "events.html": events, "follow-the-money.html": ftm, "contact.html": contact, "act.html": act, "act/index.html": redirect("../act.html","act.html"), "stop/index.html": redirect("/class/stop/","class/stop/"), "records/index.html": redirect("/class/records/","class/records/"),
-         "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html")}
+         "community.html": redirect("index.html"), "support.html": redirect("contact.html#support"), "systems.html": redirect("index.html"), "booking.html": redirect("events.html"), "PublicServants/index.html": redirect("/publicservants/","publicservants/"), "Publicservants/index.html": redirect("/publicservants/","publicservants/")}
 for name, html in pages.items():
     os.makedirs(os.path.dirname(os.path.join(ROOT, name)) or ROOT, exist_ok=True)
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
