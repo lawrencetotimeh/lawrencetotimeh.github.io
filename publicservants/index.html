@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Know Your Public Servants</title>
-<meta name="description" content="Type your address. Find your U.S. representative, both senators and, in Maryland, your state and county officials. Save them to your phone in one tap.">
+<meta name="description" content="Type your address. Find your U.S. representative, both senators, your governor and your state legislators. Save them to your phone in one tap.">
 <meta property="og:image" content="https://lawrencetotimeh.com/img/hero/image.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -94,7 +94,7 @@ details summary{cursor:pointer;font-weight:700}
   <span class="eyebrow" data-t="eyebrow">Agents of Change Field Guide · Civic education</span>
   <h1 data-t="h1" data-html>Know Your <span class="g">Public Servants</span></h1>
   <p class="lead" data-t="lead">The people you elected work for you. Save them in your phone like you mean it.</p>
-  <p class="small" style="margin-top:14px" data-t="intro">If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. In Maryland we also find your governor, and in Prince George's County your state and county officials. One tap saves them to your contacts.</p>
+  <p class="small" style="margin-top:14px" data-t="intro">If you live in one of the 50 states, type your address once. We find your U.S. representative, both U.S. senators, your governor, your state senator and your state representative. In Prince George's County, MD, we add your county officials too. One tap saves them to your contacts.</p>
   <p class="stamp" id="stamp"></p>
 </header>
 
@@ -181,7 +181,7 @@ details summary{cursor:pointer;font-weight:700}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
-  var PAGE_CHECKED = {en:"November 4, 2026", es:"4 de noviembre de 2026"};
+  var PAGE_CHECKED = {en:"November 5, 2026", es:"5 de noviembre de 2026"};
   var SHORT = "agentkodak.com/publicservants";
   var LEG_URL = "https://unitedstates.github.io/congress-legislators/legislators-current.json";
   var OFF_URL = "https://unitedstates.github.io/congress-legislators/legislators-district-offices.json";
@@ -195,7 +195,7 @@ details summary{cursor:pointer;font-weight:700}
       eyebrow:"Agents of Change Field Guide · Civic education",
       h1:'Know Your <span class="g">Public Servants</span>',
       lead:"The people you elected work for you. Save them in your phone like you mean it.",
-      intro:"If you live in one of the 50 states, you have one U.S. representative and two U.S. senators. Type your address once. We find all three. In Maryland we also find your governor, and in Prince George's County your state and county officials. One tap saves them to your contacts.",
+      intro:"If you live in one of the 50 states, type your address once. We find your U.S. representative, both U.S. senators, your governor, your state senator and your state representative. In Prince George\'s County, MD, we add your county officials too. One tap saves them to your contacts.",
       stamp:"Page last checked {d}. Members of Congress update automatically from public records.",
       step1:"Step 1", find:"Find your public servants", street:"Street address", city:"City", state:"State", zip:"ZIP", go:"Find my public servants",
       nomatch:"<b>We couldn't match that exact address.</b> Pick your House district:", useone:"Use this one",
@@ -225,22 +225,24 @@ details summary{cursor:pointer;font-weight:700}
       writeThem:"Write them:", saved:"Saved {d} from {s}.\nOfficials change after elections. Go to {s} to update.",
       pv:{name:"Name",org:"Company",title:"Job title",phone:"Phone",web:"Website",note:"Note"},
       yourN:"<b>Your {n} public servants:</b>", email:"Email", office:"Office",
-      mgov:"Governor", mstatesen:"State Sen.", mdel:"Delegate", mcexec:"County Exec.", mcouncil:"Council", matl:"At-large",
-      gov:"Governor of {s}", statesen:"State Senator, {s} Legislative District {d}", del:"State Delegate, {s} Legislative District {d}", cexec:"County Executive, {c}", council:"County Council, {c} District {d}", atl:"County Council At-Large, {c}",
+      mgov:"Governor", mstatesen:"State Sen.", mdel:"Delegate", msrep:"State Rep.", masm:"Assembly", mcexec:"County Exec.", mcouncil:"Council", matl:"At-large",
+      gov:"Governor of {s}", statesen:"State Senator, {s} District {d}", del:"State Delegate, {s} District {d}", srep:"State Representative, {s} District {d}", asm:"State Assembly Member, {s} District {d}", cexec:"County Executive, {c}", council:"County Council, {c} District {d}", atl:"County Council At-Large, {c}",
       jobgov:"Runs your state government.\n\nCall about state agencies (unemployment, Medicaid, MVA, state police), state budget priorities, and bills the governor signs or vetoes.",
       jobstatesen:"Your voice in the state Senate.\n\nCall about state laws, state budget money for your area, and state agencies that won't answer you.",
       jobdel:"One of your voices in the state House of Delegates.\n\nCall about state laws, schools and roads funding, and state agency problems. Delegates are often the easiest state official to reach.",
+      jobsrep:"One of your voices in the state House.\n\nCall about state laws, schools and roads funding, and state agency problems. Your state rep is often the easiest state official to reach.",
+      jobasm:"Your voice in the State Assembly.\n\nCall about state laws, schools and roads funding, and state agency problems. Assembly members are often the easiest state official to reach.",
       jobcexec:"Runs county government day to day.\n\nCall about county services: police, trash, roads, permits, county budget and county agencies.",
       jobcouncil:"Your district's voice on the County Council.\n\nCall about zoning and what gets built near you, the county budget, the police budget, and problems on your block.",
       jobatl:"Represents the whole county on the County Council.\n\nCall about countywide issues: the budget, schools funding, policing and development.",
-      stlocal:"<b>State and county:</b> In Maryland we also add your governor. In Prince George's County we add your county executive, county council members, state senator and delegates, straight from county records. More states and counties are coming. Drop your city in the comments on @agentkodak.",
-      srcloc:"County officials and state legislators for Prince George's County: Prince George's County GIS election data, kept by the county. Governor: USA.gov."
+      stlocal:"<b>State and local:</b> In every state we now add your governor, state senator and state representative. In Prince George's County, MD, we also add your county executive and county council. More cities and counties are coming. Drop your city in the comments on @agentkodak.",
+      srcloc:"Governors: USA.gov. State legislators: Open States (openstates.org), updated every week. Prince George's County officials and Maryland legislators there: Prince George's County GIS election data, kept by the county."
     },
     es:{
       eyebrow:"Guía de Agentes del Cambio · Educación cívica",
       h1:'Conoce a tus <span class="g">Servidores Públicos</span>',
       lead:"Las personas que elegiste trabajan para ti. Guárdalas en tu teléfono en serio.",
-      intro:"Si vives en uno de los 50 estados, tienes un representante y dos senadores en el Congreso de EE. UU. Escribe tu dirección una vez. Encontramos a los tres. En Maryland también encontramos a tu gobernador, y en el Condado de Prince George's a tus funcionarios estatales y del condado. Con un toque los guardas en tus contactos.",
+      intro:"Si vives en uno de los 50 estados, escribe tu dirección una vez. Encontramos a tu representante, tus dos senadores federales, tu gobernador, tu senador estatal y tu representante estatal. En el Condado de Prince George\'s, MD, también a los funcionarios del condado. Con un toque los guardas en tus contactos.",
       stamp:"Página revisada el {d}. Los miembros del Congreso se actualizan automáticamente con registros públicos.",
       step1:"Paso 1", find:"Encuentra a tus servidores públicos", street:"Dirección", city:"Ciudad", state:"Estado", zip:"Código postal", go:"Buscar mis servidores públicos",
       nomatch:"<b>No pudimos ubicar esa dirección exacta.</b> Elige tu distrito de la Cámara:", useone:"Usar este",
@@ -270,16 +272,18 @@ details summary{cursor:pointer;font-weight:700}
       writeThem:"Escríbeles:", saved:"Guardado el {d} desde {s}.\nLos funcionarios cambian después de las elecciones. Ve a {s} para actualizar.",
       pv:{name:"Nombre",org:"Empresa",title:"Cargo",phone:"Teléfono",web:"Sitio web",note:"Nota"},
       yourN:"<b>Tus {n} servidores públicos:</b>", email:"Correo", office:"Oficina",
-      mgov:"Gobernador", mstatesen:"Senador est.", mdel:"Delegado", mcexec:"Ejec. condado", mcouncil:"Concejo", matl:"General",
-      gov:"Gobernador(a) de {s}", statesen:"Senador(a) estatal, {s} Distrito Legislativo {d}", del:"Delegado(a) estatal, {s} Distrito Legislativo {d}", cexec:"Ejecutivo(a) del Condado, {c}", council:"Concejo del Condado, {c} Distrito {d}", atl:"Concejo del Condado, puesto general, {c}",
+      mgov:"Gobernador", mstatesen:"Senador est.", mdel:"Delegado", msrep:"Rep. estatal", masm:"Asamblea", mcexec:"Ejec. condado", mcouncil:"Concejo", matl:"General",
+      gov:"Gobernador(a) de {s}", statesen:"Senador(a) estatal, {s} Distrito {d}", del:"Delegado(a) estatal, {s} Distrito {d}", srep:"Representante estatal, {s} Distrito {d}", asm:"Asambleísta estatal, {s} Distrito {d}", cexec:"Ejecutivo(a) del Condado, {c}", council:"Concejo del Condado, {c} Distrito {d}", atl:"Concejo del Condado, puesto general, {c}",
       jobgov:"Dirige el gobierno de tu estado.\n\nLlama sobre agencias estatales (desempleo, Medicaid, MVA, policía estatal), prioridades del presupuesto estatal y leyes que firma o veta.",
       jobstatesen:"Tu voz en el Senado estatal.\n\nLlama sobre leyes estatales, fondos del presupuesto estatal para tu área y agencias estatales que no te responden.",
       jobdel:"Una de tus voces en la Cámara de Delegados del estado.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
+      jobsrep:"Una de tus voces en la Cámara estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
+      jobasm:"Tu voz en la Asamblea estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
       jobcexec:"Dirige el gobierno del condado día a día.\n\nLlama sobre servicios del condado: policía, basura, calles, permisos, presupuesto y agencias del condado.",
       jobcouncil:"La voz de tu distrito en el Concejo del Condado.\n\nLlama sobre zonificación y lo que se construye cerca de ti, el presupuesto del condado, el presupuesto de la policía y problemas en tu cuadra.",
       jobatl:"Representa a todo el condado en el Concejo.\n\nLlama sobre temas de todo el condado: presupuesto, escuelas, policía y desarrollo.",
-      stlocal:"<b>Estado y condado:</b> En Maryland también agregamos a tu gobernador. En el Condado de Prince George's agregamos al ejecutivo del condado, miembros del concejo, senador y delegados estatales, directamente de los registros del condado. Pronto más estados y condados.",
-      srcloc:"Funcionarios del condado y legisladores estatales del Condado de Prince George's: datos electorales del SIG del condado. Gobernador: USA.gov."
+      stlocal:"<b>Estado y local:</b> En todos los estados ahora agregamos a tu gobernador, tu senador estatal y tu representante estatal. En el Condado de Prince George's, MD, también agregamos al ejecutivo y al concejo del condado. Pronto más ciudades y condados.",
+      srcloc:"Gobernadores: USA.gov. Legisladores estatales: Open States (openstates.org), actualizado cada semana. Funcionarios del Condado de Prince George's: datos electorales del SIG del condado."
     }
   };
   var lang="en";
@@ -319,18 +323,30 @@ details summary{cursor:pointer;font-weight:700}
 
   /* ---------- state + local (Phase 2/3 pilot) ---------- */
   var GIS = "https://gis.princegeorgescountymd.gov/arcgis/rest/services/Elections/ELECTIONS/MapServer/";
-  var GOV = { MD:{name:"Wes Moore", phone:"410-974-3901", url:"https://md.accessgov.com/governor/Forms/Page/cs/contact-the-governor/1"} };
-  var PREFIX = {gov:"Gov.", statesen:"Sen.", del:"Del.", cexec:"County Exec.", council:"Council Member", atl:"Council Member"};
+  /* Governors: USA.gov state pages, checked Nov 5, 2026 */
+  var GOV = {"AL":{"name":"Kay Ivey","phone":"334-242-7100","url":"https://governor.alabama.gov/contact/"},"AK":{"name":"Mike Dunleavy","phone":"907-465-3500","url":"https://gov.alaska.gov/contact/"},"AZ":{"name":"Katie Hobbs","phone":"602-542-4331","url":"https://azgovernor.gov/office-arizona-governor/form/contact-governor-hobbs"},"AR":{"name":"Sarah Huckabee Sanders","phone":"501-682-2345","url":"https://governor.arkansas.gov/online-services/contact-the-governor/"},"CA":{"name":"Gavin Newsom","phone":"916-445-2841","url":"https://www.gov.ca.gov/contact/"},"CO":{"name":"Jared Polis","phone":"303-866-2885","url":"https://www.colorado.gov/governor/contact-us"},"CT":{"name":"Ned Lamont","phone":"860-566-4840","url":"https://portal.ct.gov/Office-of-the-Governor/Contact/Email-Governor-Lamont"},"DE":{"name":"Matt Meyer","phone":"302-744-4101","url":"https://governor.delaware.gov/contact/"},"FL":{"name":"Ron DeSantis","phone":"850-717-9337","url":"https://flgov.com/eog/leadership/people/ron-desantis/contact"},"GA":{"name":"Brian P. Kemp","phone":"404-656-1776","url":"https://gov.georgia.gov/contact-us"},"HI":{"name":"Josh Green","phone":"808-586-0034","url":"https://governor.hawaii.gov/contact-us/contact-the-governor/"},"ID":{"name":"Brad Little","phone":"208-334-2100","url":"https://gov.idaho.gov/contact/contact-us/"},"IL":{"name":"JB Pritzker","phone":"217-782-6830","url":"https://gov.illinois.gov/contact-us/contact-the-governor.html"},"IN":{"name":"Mike Braun","phone":"317-232-4567","url":"https://www.in.gov/gov/ask-mike/"},"IA":{"name":"Kim Reynolds","phone":"515-281-5211","url":"https://governor.iowa.gov/contact-office-governor"},"KS":{"name":"Laura Kelly","phone":"785-296-3232","url":"https://www.governor.ks.gov/contact/contact"},"KY":{"name":"Andy Beshear","phone":"502-564-2611","url":"https://governor.ky.gov/contact/contact-us"},"LA":{"name":"Jeff Landry","phone":"225-342-0991","url":"https://gov.louisiana.gov/page/contact"},"ME":{"name":"Janet T. Mills","phone":"207-287-3531","url":"https://www.maine.gov/governor/mills/contact"},"MD":{"name":"Wes Moore","phone":"410-974-3901","url":"https://md.accessgov.com/governor/Forms/Page/cs/contact-the-governor/1"},"MA":{"name":"Maura Healey","phone":"617-725-4005","url":"https://www.mass.gov/forms/email-the-governors-office"},"MI":{"name":"Gretchen Whitmer","phone":"517-335-7858","url":"https://www.michigan.gov/whitmer/contact"},"MN":{"name":"Tim Walz","phone":"651-201-3400","url":"https://mn.gov/governor/connect/contact-us/contact-form.jsp"},"MS":{"name":"Tate Reeves","phone":"601-359-3150","url":""},"MO":{"name":"Mike Kehoe","phone":"573-751-3222","url":"https://governor.mo.gov/contact-us"},"MT":{"name":"Greg Gianforte","phone":"406-444-3111","url":"https://governor.mt.gov/Contact/"},"NE":{"name":"Jim Pillen","phone":"402-471-2244","url":"https://governor.nebraska.gov/contact-governor"},"NV":{"name":"Joe Lombardo","phone":"775-684-5670","url":"https://gov.nv.gov/Contact/Contact/"},"NH":{"name":"Kelly Ayotte","phone":"603-271-2121","url":"https://www.governor.nh.gov/contact-governor-ayotte"},"NJ":{"name":"Mikie Sherrill","phone":"609-292-6000","url":""},"NM":{"name":"Michelle Lujan Grisham","phone":"505-476-2200","url":"https://www.governor.state.nm.us/contact-the-governor/"},"NY":{"name":"Kathy Hochul","phone":"518-474-8390","url":"https://www.governor.ny.gov/content/governor-contact-form"},"NC":{"name":"Josh Stein","phone":"919-814-2000","url":"https://governor.nc.gov/contact/contact-governor-stein"},"ND":{"name":"Kelly Armstrong","phone":"701-328-2200","url":"https://www.governor.nd.gov/contact"},"OH":{"name":"Mike DeWine","phone":"614-644-4357","url":"https://governor.ohio.gov/contact"},"OK":{"name":"J. Kevin Stitt","phone":"405-521-2342","url":"https://oklahoma.gov/governor/contact.html"},"OR":{"name":"Tina Kotek","phone":"503-378-4582","url":"https://www.oregon.gov/gov/pages/contact-us.aspx"},"PA":{"name":"Josh Shapiro","phone":"717-787-2500","url":"https://www.governor.pa.gov/contact/"},"RI":{"name":"Dan McKee","phone":"401-222-2080","url":"https://governor.ri.gov/contact"},"SC":{"name":"Henry McMaster","phone":"803-734-2100","url":"https://governor.sc.gov/contact-governors-office"},"SD":{"name":"Larry Rhoden","phone":"605-773-3212","url":"https://governor.sd.gov/office/contact.aspx"},"TN":{"name":"Bill Lee","phone":"615-741-2001","url":"https://www.tn.gov/governor/contact-us.html"},"TX":{"name":"Greg Abbott","phone":"512-463-2000","url":"https://gov.texas.gov/contact"},"UT":{"name":"Spencer J. Cox","phone":"801-538-1000","url":"https://governor.utah.gov/contact/"},"VT":{"name":"Phil Scott","phone":"802-828-3333","url":"https://governor.vermont.gov/contact"},"VA":{"name":"Abigail Spanberger","phone":"804-786-2211","url":"https://www.governor.virginia.gov/contact/"},"WA":{"name":"Bob Ferguson","phone":"360-902-4111","url":"https://governor.wa.gov/contacting-governor/contacting-governors-office"},"WV":{"name":"Patrick Morrisey","phone":"304-558-2000","url":"https://wv.accessgov.com/governor/Forms/Page/submitcomment-governor/contact-governor/0"},"WI":{"name":"Tony Evers","phone":"608-266-1212","url":"https://evers.wi.gov/Pages/connect.aspx"},"WY":{"name":"Mark Gordon","phone":"307-777-7434","url":"https://governor.wyo.gov/contact/governor"}};
+  var LOWER_ASM = {CA:1,NY:1,NV:1,WI:1,NJ:1}, LOWER_DEL = {MD:1,VA:1,WV:1};
+  function lkey(d){ return String(d||"").toLowerCase().replace(/district/g," ").replace(/[^a-z0-9]+/g," ").trim().split(" ").map(function(w){return /^\d+$/.test(w)?String(parseInt(w,10)):w}).join(" "); }
+  function loadState(state){ return fetch("/publicservants/data/leg-"+state+".json").then(function(r){return r.ok?r.json():null}).catch(function(){return null}); }
+  var PREFIX = {gov:"Gov.", statesen:"Sen.", del:"Del.", srep:"Rep.", asm:"Asm.", cexec:"County Exec.", council:"Council Member", atl:"Council Member"};
   function cleanName(n){ return String(n||"").replace(/\s+-\s+.*$/,"").replace(/\s+/g," ").trim(); }
   function splitName(n){ var p=n.split(" "), suf=""; if(p.length>2 && /^(Jr\.?|Sr\.?|II|III|IV),?$/i.test(p[p.length-1])){ suf=p.pop().replace(/,$/,""); } var last=p.pop().replace(/,$/,""); return {first:p.join(" "), last:last, suffix:suf}; }
   function mk(kind,name,phone,email,url,vars){ name=cleanName(name); if(!name) return null; var sp=splitName(name); return {kind:kind,name:name,first:sp.first,last:sp.last,suffix:sp.suffix,phone:phone||"",email:(email||"").trim(),url:(url||"").trim(),vars:vars||{}}; }
   function gisQ(layer,pt){ var q="geometry="+encodeURIComponent(JSON.stringify({x:pt.lon,y:pt.lat}))+"&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json"; return fetch(GIS+layer+"/query?"+q).then(function(r){return r.json()}).then(function(j){ return (j&&j.features&&j.features[0])?j.features[0].attributes:null; }).catch(function(){return null}); }
-  function loadLocal(state,pt){
+  function addState(out,state,sld,data){
+    if(!data||!sld) return;
+    var sn=STATES[state];
+    (data.upper[lkey(sld.upper)]||[]).forEach(function(x){ var o=mk("statesen",x.n,x.p,x.e,"",{s:sn,d:x.d}); if(o) out.push(o); });
+    var lk=LOWER_DEL[state]?"del":LOWER_ASM[state]?"asm":"srep";
+    (data.lower[lkey(sld.lower)]||[]).forEach(function(x){ var o=mk(lk,x.n,x.p,x.e,"",{s:sn,d:x.d}); if(o) out.push(o); });
+  }
+  function loadLocal(state,pt,sld){
     var out=[];
     if(GOV[state]){ var g=GOV[state]; out.push(mk("gov",g.name,g.phone,"",g.url,{s:STATES[state]})); }
-    if(state!=="MD"||!pt) return Promise.resolve(out);
-    return Promise.all([gisQ(8,pt),gisQ(6,pt),gisQ(7,pt)]).then(function(r){
+    if(state!=="MD"||!pt) return loadState(state).then(function(d){ addState(out,state,sld,d); return out.filter(Boolean); });
+    return Promise.all([gisQ(8,pt),gisQ(6,pt),gisQ(7,pt),loadState(state)]).then(function(r){
       var L=r[0], E=r[1], C=r[2], cty="Prince George's County";
+      if(!L) addState(out,state,sld,r[3]);
       if(L){ var d=String(L.DISTRICTID||"").trim(); out.push(mk("statesen",L.REPNAME1,L.PHONE1,L.EMAIL1,"",{s:"Maryland",d:d})); [2,3,4].forEach(function(i){ var x=mk("del",L["REPNAME"+i],L["PHONE"+i],L["EMAIL"+i],"",{s:"Maryland",d:d}); if(x) out.push(x); }); }
       if(E){ out.push(mk("cexec",E.EXECUTIVE,E.TELPHONE,E.EMAIL,E.WEB_PAGE,{c:cty})); }
       if(C){ out.push(mk("council",C.REPNAME1,C.PHONE1,C.EMAIL1,C.DISTRICTURL1,{c:cty,d:String(C.DISTRICTID||"").trim()})); [1,2].forEach(function(i){ var x=mk("atl",C["ATLARGENAME"+i],C["ATLARGEPHONE"+i],C["ATLARGEEMAIL"+i],"",{c:cty}); if(x) out.push(x); }); }
@@ -420,14 +436,14 @@ details summary{cursor:pointer;font-weight:700}
     if(!v.street||!v.city||!/^[A-Z]{2}$/.test(v.state)||!/^\d{5}$/.test(v.zip)){ st.textContent=t("fill"); return; }
     st.textContent=t("finding"); $("ps-pick").hidden=true; $("results").hidden=true;
     Promise.all([loadLeg(),geocode(v).catch(function(){return null}),loadOff()]).then(function(r){
-      var leg=r[0], g=r[1], offs=r[2], dnum=null, pt=null;
-      try{ var m=g.result.addressMatches[0]; if(m.coordinates) pt={lat:+m.coordinates.y,lon:+m.coordinates.x}; var G=m.geographies; Object.keys(G).forEach(function(k){ if(/Congressional Districts/.test(k)){ var n=parseInt(G[k][0].BASENAME,10); dnum=isNaN(n)?0:n; } }) }catch(err){}
+      var leg=r[0], g=r[1], offs=r[2], dnum=null, pt=null, sld={};
+      try{ var m=g.result.addressMatches[0]; if(m.coordinates) pt={lat:+m.coordinates.y,lon:+m.coordinates.x}; var G=m.geographies; Object.keys(G).forEach(function(k){ if(/Congressional Districts/.test(k)){ var n=parseInt(G[k][0].BASENAME,10); dnum=isNaN(n)?0:n; } if(/State Legislative Districts - Upper/.test(k)) sld.upper=G[k][0].BASENAME; if(/State Legislative Districts - Lower/.test(k)) sld.lower=G[k][0].BASENAME; }) }catch(err){}
       function withLocal(o){ var c={}; for(var k in o) c[k]=o[k]; c.local=nearestOffice(o,offs,pt); return c; }
       var sens=leg.filter(function(o){return o.type==="sen"&&o.state===v.state}).map(withLocal), reps=leg.filter(function(o){return o.type==="rep"&&o.state===v.state});
       if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
       var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      function done(list){ list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); loadLocal(v.state,pt).then(function(extra){ savedIdx={}; show(list.concat(extra)); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
+      function done(list){ list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); loadLocal(v.state,pt,sld).then(function(extra){ savedIdx={}; show(list.concat(extra)); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
       if(rep){ done([withLocal(rep)].concat(sens)); return; }
       var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
       $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
