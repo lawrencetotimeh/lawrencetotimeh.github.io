@@ -99,6 +99,16 @@ details summary{cursor:pointer;font-weight:700}
   <p class="stamp" id="stamp"></p>
 </header>
 
+<div id="iab" hidden style="margin:0 0 18px;padding:14px 16px;border:3px solid var(--red);border-radius:10px;background:#FFF">
+  <p style="margin:0 0 6px;font-weight:700;font-size:18px" data-t="iabh">Open this page in your phone's browser first</p>
+  <p style="margin:0 0 12px" data-t="iabp">You're inside the <span id="iab-app">social media</span> app, and it can't save contacts. Tap the button below. Then type your address there.</p>
+  <div class="row" style="gap:10px;flex-wrap:wrap">
+    <a class="btn" id="iab-ios" hidden href="x-safari-https://lawrencetotimeh.com/publicservants/" data-t="iabios">Open in Safari</a>
+    <a class="btn" id="iab-and" hidden href="intent://lawrencetotimeh.com/publicservants/#Intent;scheme=https;package=com.android.chrome;end" data-t="iaband">Open in Chrome</a>
+    <button class="btn ghost" type="button" id="iab-copy" data-t="iabcopy">Copy the link</button>
+  </div>
+  <p class="small muted" style="margin:10px 0 0" data-t="iabhelp">Button didn't work? Tap the three dots (•••) at the top right, then "Open in external browser."</p>
+</div>
 <section id="find">
   <span class="eyebrow" data-t="step1">Step 1</span>
   <h2 data-t="find">Find your public servants</h2>
@@ -236,6 +246,7 @@ details summary{cursor:pointer;font-weight:700}
       jobgov:"Runs your state government.\n\nCall about state agencies (unemployment, Medicaid, MVA, state police), state budget priorities, and bills the governor signs or vetoes.",
       jobstatesen:"Your voice in the state Senate.\n\nCall about state laws, state budget money for your area, and state agencies that won't answer you.",
       jobdel:"One of your voices in the state House of Delegates.\n\nCall about state laws, schools and roads funding, and state agency problems. Delegates are often the easiest state official to reach.",
+      iabh:"Open this page in your phone's browser first", iabp:"You're inside a social media app, and it can't save contacts. Tap the button below. Then type your address there.", iabios:"Open in Safari", iaband:"Open in Chrome", iabcopy:"Copy the link", iabcopied:"Copied. Paste it in Safari or Chrome.", iabhelp:"Button didn't work? Tap the three dots (•••) at the top right, then \"Open in external browser.\"",
       fbq:"Quick question: before today, did you know who your state representative was?", fbyes:"Yes", fbno:"No", fbthanks:"Thank you. Your answer is counted anonymously, with no name or address.",
       jobsrep:"One of your voices in the state House.\n\nCall about state laws, schools and roads funding, and state agency problems. Your state rep is often the easiest state official to reach.",
       jobasm:"Your voice in the State Assembly.\n\nCall about state laws, schools and roads funding, and state agency problems. Assembly members are often the easiest state official to reach.",
@@ -284,6 +295,7 @@ details summary{cursor:pointer;font-weight:700}
       jobgov:"Dirige el gobierno de tu estado.\n\nLlama sobre agencias estatales (desempleo, Medicaid, MVA, policía estatal), prioridades del presupuesto estatal y leyes que firma o veta.",
       jobstatesen:"Tu voz en el Senado estatal.\n\nLlama sobre leyes estatales, fondos del presupuesto estatal para tu área y agencias estatales que no te responden.",
       jobdel:"Una de tus voces en la Cámara de Delegados del estado.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
+      iabh:"Primero abre esta página en el navegador de tu teléfono", iabp:"Estás dentro de una app de redes sociales y no puede guardar contactos. Toca el botón de abajo. Luego escribe tu dirección allí.", iabios:"Abrir en Safari", iaband:"Abrir en Chrome", iabcopy:"Copiar el enlace", iabcopied:"Copiado. Pégalo en Safari o Chrome.", iabhelp:"¿No funcionó? Toca los tres puntos (•••) arriba a la derecha y luego \"Abrir en navegador externo.\"",
       fbq:"Pregunta rápida: antes de hoy, ¿sabías quién era tu representante estatal?", fbyes:"Sí", fbno:"No", fbthanks:"Gracias. Tu respuesta se cuenta de forma anónima, sin nombre ni dirección.",
       jobsrep:"Una de tus voces en la Cámara estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
       jobasm:"Tu voz en la Asamblea estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
@@ -464,6 +476,14 @@ details summary{cursor:pointer;font-weight:700}
     }).catch(function(){ st.textContent=t("netfail"); });
   });
 
+  (function(){ var ua=navigator.userAgent||"", app=/Instagram/i.test(ua)?"instagram":/FBAN|FBAV|FB_IAB|FBIOS/i.test(ua)?"facebook":/musical_ly|TikTok|BytedanceWebview|trill/i.test(ua)?"tiktok":/Snapchat/i.test(ua)?"snapchat":/Twitter/i.test(ua)?"x":/LinkedInApp/i.test(ua)?"linkedin":"";
+    if(!app) return; var box=$("iab"); if(!box) return; box.hidden=false; var ios=/iPhone|iPad|iPod/i.test(ua);
+    var lk=location.search?location.search:""; var u="lawrencetotimeh.com/publicservants/"+lk;
+    var a1=$("iab-ios"), a2=$("iab-and"); if(ios){ a1.hidden=false; a1.href="x-safari-https://"+u; } else { a2.hidden=false; a2.href="intent://"+u+"#Intent;scheme=https;package=com.android.chrome;end"; }
+    gc("inapp-"+app+(ios?"-ios":"-android"));
+    [a1,a2].forEach(function(a){ a.addEventListener("click",function(){ gc("inapp-open-"+app); }); });
+    var cb=$("iab-copy"); cb.addEventListener("click",function(){ var full="https://"+u; var done=function(){ cb.textContent=t("iabcopied"); }; try{ navigator.clipboard.writeText(full).then(done,function(){ prompt("",full); }); }catch(e){ prompt("",full); } gc("inapp-copy-"+app); });
+  })();
   document.querySelectorAll("#ps-fb-btns button").forEach(function(b){ b.addEventListener("click",function(){ if(FB_DONE) return; FB_DONE=true; gc("knew-staterep-"+b.getAttribute("data-fb")+"-"+LAST_ST); $("ps-fb-btns").hidden=true; $("ps-fb-thanks").hidden=false; }); });
   document.addEventListener("click",function(e){ var a=e.target.closest&&e.target.closest("#ps-cards a"); if(!a) return; var h=a.getAttribute("href")||""; gc((/^tel:/.test(h)?"tap-call-":/^mailto:/.test(h)?"tap-email-":"tap-write-")+LAST_ST); },true);
   applyLang();
