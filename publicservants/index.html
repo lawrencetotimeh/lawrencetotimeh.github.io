@@ -253,6 +253,7 @@ details summary{cursor:pointer;font-weight:700}
       joblcounty:"Your voice on the county's governing board.\n\nCall about the county budget, roads, public health, jails and county services.",
       jobanc:"Your neighborhood's elected voice in D.C.\n\nCall about liquor licenses, zoning, traffic and what's happening on your block. Unpaid, and usually easy to reach.",
       incgov:"Elected Nov. 3: Governor-elect {n} takes office {d}. Save the new contact then.", incsen:"Elected Nov. 3: Senator-elect {n} takes this seat {d}. Save the new contact then.", incsenabout:"Elected Nov. 3: Senator-elect {n} takes this seat around {d}. Save the new contact then.", incsengov:"Elected governor Nov. 3. A replacement senator will be appointed. Check back in January.", increp:"Elected Nov. 3: Representative-elect {n} takes this seat {d}. Save the new contact then.", incredist:"Your state has new district lines starting Jan. 3, 2027, so your representative may change. Check back then.", incmayor:"Mayor-elect {n} takes office {d}. Save the new contact then.", incmayorabout:"Mayor-elect {n} takes office around {d}. Save the new contact then.",
+      remind:"Remind me on {d}", remdone:"Reminder opened. Tap Add or Save.", remtitle:"Save your new public servant ({r})", remdesc:"Go to {u}, type your address, and save the updated contact. Then delete the old one from your phone.",
       gaptag:"Help map your area", gaph:"Not mapped yet. Be the first.", gapp:"We don't have {need} for {where} yet. Know the official page that lists them? Send it, and we'll add it for everyone in your area. A source link is required.", gapmayor:"your mayor", gapcouncil:"your city council member", gapcounty:"your county officials", gapfind:"Find the official page", gapsend:"Send us the source", gappriv:"The email only includes your city and county. Never your address.",
       fbq:"Quick question: before today, did you know who your state representative was?", fbyes:"Yes", fbno:"No", fbthanks:"Thank you. Your answer is counted anonymously, with no name or address.",
       jobsrep:"One of your voices in the state House.\n\nCall about state laws, schools and roads funding, and state agency problems. Your state rep is often the easiest state official to reach.",
@@ -309,6 +310,7 @@ details summary{cursor:pointer;font-weight:700}
       joblcounty:"Tu voz en la junta de gobierno del condado.\n\nLlama sobre el presupuesto del condado, carreteras, salud pública, cárceles y servicios del condado.",
       jobanc:"La voz elegida de tu vecindario en D.C.\n\nLlama sobre licencias de licor, zonificación, tráfico y lo que pasa en tu cuadra.",
       incgov:"Elegido el 3 de nov.: {n} asume como gobernador(a) el {d}. Guarda el nuevo contacto entonces.", incsen:"Elegido el 3 de nov.: {n} ocupa este escaño el {d}. Guarda el nuevo contacto entonces.", incsenabout:"Elegido el 3 de nov.: {n} ocupa este escaño alrededor del {d}. Guarda el nuevo contacto entonces.", incsengov:"Elegido(a) gobernador(a) el 3 de nov. Se nombrará un reemplazo en el Senado. Vuelve en enero.", increp:"Elegido el 3 de nov.: {n} ocupa este escaño el {d}. Guarda el nuevo contacto entonces.", incredist:"Tu estado tiene nuevos distritos desde el 3 de enero de 2027, así que tu representante puede cambiar. Vuelve entonces.", incmayor:"{n} asume como alcalde el {d}. Guarda el nuevo contacto entonces.", incmayorabout:"{n} asume como alcalde alrededor del {d}. Guarda el nuevo contacto entonces.",
+      remind:"Recuérdame el {d}", remdone:"Recordatorio abierto. Toca Agregar o Guardar.", remtitle:"Guarda a tu nuevo servidor público ({r})", remdesc:"Ve a {u}, escribe tu dirección y guarda el contacto actualizado. Luego borra el anterior de tu teléfono.",
       gaptag:"Ayuda a mapear tu área", gaph:"Aún no está en el mapa. Sé el primero.", gapp:"Todavía no tenemos a {need} para {where}. ¿Conoces la página oficial donde aparecen? Envíala y la agregamos para todos en tu área. Se requiere un enlace de fuente.", gapmayor:"tu alcalde", gapcouncil:"tu concejal", gapcounty:"los funcionarios de tu condado", gapfind:"Buscar la página oficial", gapsend:"Envíanos la fuente", gappriv:"El correo solo incluye tu ciudad y condado. Nunca tu dirección.",
       fbq:"Pregunta rápida: antes de hoy, ¿sabías quién era tu representante estatal?", fbyes:"Sí", fbno:"No", fbthanks:"Gracias. Tu respuesta se cuenta de forma anónima, sin nombre ni dirección.",
       jobsrep:"Una de tus voces en la Cámara estatal.\n\nLlama sobre leyes estatales, fondos para escuelas y carreteras, y problemas con agencias estatales.",
@@ -409,6 +411,24 @@ details summary{cursor:pointer;font-weight:700}
     var h=HOUE[o.state+"-"+(o.district||0)]; if(h) return fmt(t("increp"),{n:h,d:dfmt("2027-01-03")}).replace("Representative-elect",o.state==="DC"?"Delegate-elect":"Representative-elect");
     if(REDIST.indexOf(o.state)>=0) return t("incredist");
     return "";
+  }
+  function remindOn(o,state){
+    var d="";
+    if(o.kind==="gov"){ d=GOVE[state]?GOVE[state][1]:""; }
+    else if(o.kind==="mayor"){ d=o.vars.electDate||""; }
+    else if(o.kind==="fed"){ var s=SENE[o.state]; d=(o.type==="sen"&&s&&s[2]&&o.name.indexOf(s[0])>=0)?s[2]:"2027-01-03"; }
+    if(!d) return ""; var p=d.split("-"), x=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+1)); return x.toISOString().slice(0,10);
+  }
+  function calAdd(o){
+    var d=o.remind.replace(/-/g,""), p=o.remind.split("-"), e=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+1)).toISOString().slice(0,10).replace(/-/g,"");
+    var title=fmt(t("remtitle"),{r:roleOf(o)}), link="https://agentkodak.com/publicservants?ref=cal", desc=o.incoming+"\n\n"+fmt(t("remdesc"),{u:link});
+    gc("remind-"+LAST_ST);
+    if(isIOS()){
+      var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Agent Kodak//Public Servants//EN","BEGIN:VEVENT","UID:ps-"+d+"-"+Math.random().toString(36).slice(2)+"@agentkodak.com","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z","DTSTART;VALUE=DATE:"+d,"DTEND;VALUE=DATE:"+e,fold("SUMMARY:"+vEsc(title)),fold("DESCRIPTION:"+vEsc(desc)),"URL:"+link,"BEGIN:VALARM","ACTION:DISPLAY",fold("DESCRIPTION:"+vEsc(title)),"TRIGGER:PT9H","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n")+"\r\n";
+      var u=URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"})); var w=window.open(u,"_blank"); if(!w) window.location.href=u; setTimeout(function(){URL.revokeObjectURL(u)},120000);
+    } else {
+      window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)+"&dates="+d+"/"+e+"&details="+encodeURIComponent(desc),"_blank","noopener");
+    }
   }
   function arcQ(url,pt){ var q="geometry="+encodeURIComponent(JSON.stringify({x:pt.lon,y:pt.lat}))+"&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json"; return withTimeout(fetch(url+"/query?"+q).then(function(r){return r.json()}).then(function(j){ return (j&&j.features)?j.features.map(function(x){return x.attributes}):[]; }),9000).catch(function(){return []}); }
   function withTimeout(p,ms){ return new Promise(function(ok,no){ var d=false; setTimeout(function(){ if(!d){d=true;no(new Error("timeout"))} },ms); p.then(function(v){ if(!d){d=true;ok(v)} },function(e){ if(!d){d=true;no(e)} }); }); }
@@ -522,10 +542,11 @@ details summary{cursor:pointer;font-weight:700}
       d.innerHTML='<span class="r">'+esc(roleOf(o))+'</span><span class="nm">'+esc(o.name)+'</span>'+
         (o.local?'<span class="small">'+esc(t("local"))+(o.local.city?' ('+esc(o.local.city)+')':'')+': <span class="mono">'+esc(o.local.phone)+'</span></span>':'')+
         (o.phone?'<span class="small">'+esc(isLoc(o)?t("office"):t("dc"))+': <span class="mono">'+esc(o.phone)+'</span></span>':'')+
-        '<span class="job">'+esc(job(o))+'</span>'+(o.incoming?'<span class="small" style="border-left:4px solid var(--red);padding-left:8px;font-weight:600">'+esc(o.incoming)+'</span>':'')+
+        '<span class="job">'+esc(job(o))+'</span>'+(o.incoming?'<span class="small" style="border-left:4px solid var(--red);padding-left:8px;font-weight:600">'+esc(o.incoming)+'</span>'+(o.remind?'<button type="button" class="btn ghost" data-rem="'+list.indexOf(o)+'" style="font-size:14px;padding:8px 12px;justify-self:start">'+esc(fmt(t("remind"),{d:dfmt(o.remind)}))+'</button>':''):'')+
         '<div class="row" style="margin-top:4px">'+(callNum?'<a class="btn ghost" href="tel:'+esc(String(callNum).replace(/[^0-9+]/g,""))+'">'+esc(t("call"))+'</a>':'')+(o.url?'<a class="btn ghost" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("write"))+'</a>':(o.email?'<a class="btn ghost" href="mailto:'+esc(o.email)+'">'+esc(t("email"))+'</a>':''))+'</div>';
       box.appendChild(d);
     });
+    box.querySelectorAll("button[data-rem]").forEach(function(b){ b.addEventListener("click",function(){ calAdd(list[+b.getAttribute("data-rem")]); b.textContent=t("remdone"); }); });
     var gp=gapCard(list,LAST_ST); if(gp) box.appendChild(gp);
     renderMini();
     var o=list[0], pv=t("pv");
@@ -549,7 +570,7 @@ details summary{cursor:pointer;font-weight:700}
       if(!sens.length&&!reps.length){ st.textContent=t("badstate"); return; }
       var rep=dnum!==null?(reps.filter(function(o){return o.district===dnum})[0]||(reps.length===1?reps[0]:null)):(reps.length===1?reps[0]:null);
       st.textContent="";
-      function done(list){ LAST_ST=v.state; gc("lookup-"+v.state); list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); Promise.all([loadLocal(v.state,pt,sld),loadCity(v.state,pt)]).then(function(rr){ var extra=rr[0], my=mayorOf(v.state); if(my) extra.push(my); extra=extra.concat(rr[1]); var all=list.concat(extra); all.forEach(function(o){ o.incoming=incoming(o,v.state); }); savedIdx={}; show(all); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
+      function done(list){ LAST_ST=v.state; gc("lookup-"+v.state); list.forEach(function(o){ if(!o.kind) o.kind="fed"; }); Promise.all([loadLocal(v.state,pt,sld),loadCity(v.state,pt)]).then(function(rr){ var extra=rr[0], my=mayorOf(v.state); if(my) extra.push(my); extra=extra.concat(rr[1]); var all=list.concat(extra); all.forEach(function(o){ o.incoming=incoming(o,v.state); o.remind=o.incoming?remindOn(o,v.state):""; }); savedIdx={}; show(all); $("results").scrollIntoView({behavior:"smooth",block:"start"}); }); }
       if(rep){ done([withLocal(rep)].concat(sens)); return; }
       var sel=$("ps-pick-sel"); sel.innerHTML=""; reps.sort(function(a,b){return a.district-b.district}).forEach(function(o,i){var op=document.createElement("option");op.value=i;op.textContent=t("district")+" "+o.district+": "+o.name;sel.appendChild(op)});
       $("ps-pick").hidden=false; $("ps-pick-go").onclick=function(){ done([withLocal(reps[+sel.value])].concat(sens)); $("ps-pick").hidden=true; };
