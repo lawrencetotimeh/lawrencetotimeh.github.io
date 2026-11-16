@@ -236,7 +236,7 @@ speaking = head("Speaking & Workshops · Lawrence Totimeh Jr.", "Civic education
 </div></section>
 
 <section class="light"><div class="wrap two">
-<div class="photo rev"><img src="img/action1/image.png" alt="Lawrence face to face with a police line at the 2020 protests in Los Angeles" loading="lazy"></div>
+<div class="rev" style="max-width:440px;width:100%;justify-self:center"><div class="photo" style="height:auto;aspect-ratio:2/3"><img src="img/march/nolan-dc-2026-claire-portrait.jpg" alt="Lawrence Totimeh Jr. holding a megaphone at the Justice for Nolan Wells march in Washington, D.C." width="900" height="1353" loading="lazy" style="object-position:50% 0"></div><p class="muted" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px">Photo: Claire Savary · @c.l.a.i.r.e.s.a.v.a.r.y</p></div>
 <div class="rev"><div class="eyebrow">Why him</div><h2 style="margin:10px 0 18px">He's been on the front line</h2>
 <p class="muted">Combat veteran. More than ten years in classrooms from DC to Los Angeles. A decade of civil and human rights work, from Trayvon Martin to today. His 2020 photo led the Los Angeles Times investigation into police tactics at the George Floyd protests. He teaches what he has lived, and he teaches it from the record.</p>
 <div class="cta" style="margin-top:30px"><a class="btn ghost" href="about.html">About Lawrence</a></div></div>
@@ -465,6 +465,9 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 <div class="sec-head rev"><div><div class="eyebrow">Photo</div><h2 style="margin-top:8px">Photos</h2></div></div>
 <p class="muted rev">Free to use with stories about Lawrence and his work. Credit the official photo: Courtesy of Lawrence Totimeh Jr.</p>
 <div class="cta rev" style="margin-top:18px"><a class="btn red" href="img/hero/image.jpg" download="Lawrence-Totimeh-Jr.jpg">Download photo (JPG, 1206 x 1809)</a></div>
+<div class="rev" style="margin-top:34px;max-width:420px"><img src="img/march/nolan-dc-2026-claire-portrait.jpg" alt="Portrait of Lawrence Totimeh Jr. holding a megaphone at the Justice for Nolan Wells march in Washington, D.C." width="900" height="1353" loading="lazy" style="width:100%;height:auto;display:block"></div>
+<p class="muted" style="margin-top:10px;font-size:14px">Portrait at the Justice for Nolan Wells march, Washington, D.C., Nov. 1, 2026. Photo credit (required): Claire Savary, @c.l.a.i.r.e.s.a.v.a.r.y, clairesavary.com.</p>
+<div class="cta" style="margin-top:12px"><a class="btn ghost" href="img/march/nolan-dc-2026-claire-portrait.jpg" download="Lawrence-Totimeh-Jr-portrait-Claire-Savary.jpg" style="color:var(--ink);border-color:var(--ink)">Download portrait (JPG, 900 x 1353)</a></div>
 <div class="rev" style="margin-top:34px;max-width:760px"><img src="img/march/nolan-dc-2026.jpg" alt="Marchers in Washington, D.C. carrying Justice for Nolan Wells signs" width="1078" height="802" loading="lazy" style="width:100%;height:auto;display:block;border:1px solid var(--ltline)">
 <p class="muted" style="margin-top:10px;font-size:14px">March for Nolan Xavier Wells ("One March. Fifty States."), Freedom Plaza, Washington, D.C., Nov. 1, 2026. Lead organizer: Tyler. Photo credit (required): @therealchancemeeting. Web size; for a full-size file, email hello@lawrencetotimeh.com.</p>
 <div class="cta" style="margin-top:12px"><a class="btn ghost" href="img/march/nolan-dc-2026.jpg" download="Justice-for-Nolan-Wells-DC-march.jpg" style="color:var(--ink);border-color:var(--ink)">Download march photo (JPG, 1078 x 802)</a></div></div>
