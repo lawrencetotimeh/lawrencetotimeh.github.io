@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Agent Kodak Teleprompter</title>
+<style>
+  :root { --bg:#ffffff; --ink:#111; --dim:#b8b8b8; --red:#c8102e; --panel:#f4f4f2; }
+  body.dark { --bg:#000; --ink:#fff; --dim:#555; --panel:#151515; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; }
+  button, select, input { font:inherit; }
+  .hidden { display:none !important; }
+
+  /* Editor */
+  #editor { max-width:900px; margin:0 auto; padding:20px 18px 40px; }
+  #editor h1 { font-size:28px; margin:6px 0 2px; }
+  #editor p.sub { margin:0 0 14px; color:#666; }
+  .flag { height:8px; background:repeating-linear-gradient(90deg,#000 0 20px,#ffc72c 20px 40px,#c8102e 40px 60px,#fff 60px 80px); margin:-20px -18px 18px; }
+  textarea { width:100%; min-height:52vh; font-size:18px; line-height:1.5; padding:14px; border:2px solid #111; border-radius:10px; background:#fff; color:#111; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:12px 0; }
+  .btn { border:0; border-radius:10px; padding:14px 18px; font-weight:700; cursor:pointer; background:#111; color:#fff; }
+  .btn.red { background:var(--red); }
+  .btn.ghost { background:transparent; color:var(--ink); border:2px solid var(--ink); }
+  label.opt { display:flex; align-items:center; gap:8px; background:var(--panel); padding:10px 12px; border-radius:10px; }
+  .hint { font-size:14px; color:#666; line-height:1.4; }
+  .stat { font-weight:700; }
+
+  /* Prompter */
+  #prompter { position:fixed; inset:0; background:var(--bg); }
+  #scroller { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:auto; }
+  #text { padding:45vh 7vw 80vh; line-height:1.35; font-weight:700; word-wrap:break-word; }
+  #text.mirror { transform:scaleX(-1); }
+  #text .w { transition:color .25s; }
+  #text .w.read { color:var(--dim); }
+  #text .w.now { color:var(--red); }
+  #text .cue { color:var(--red); font-style:italic; font-weight:600; }
+  #text p { margin:0 0 .9em; }
+  #guide { position:absolute; left:0; right:0; top:33%; height:0; border-top:3px solid var(--red); opacity:.55; pointer-events:none; }
+  #guide::before { content:"▶"; position:absolute; left:6px; top:-17px; color:var(--red); font-size:22px; }
+  #hud { position:absolute; left:0; right:0; bottom:0; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; padding:10px 10px calc(10px + env(safe-area-inset-bottom)); background:linear-gradient(transparent, var(--bg) 35%); transition:opacity .4s; }
+  #hud.fade { opacity:.12; }
+  #hud .btn { padding:12px 14px; }
+  #status { position:absolute; top:calc(8px + env(safe-area-inset-top)); right:12px; font-size:14px; font-weight:700; padding:6px 10px; border-radius:20px; background:var(--panel); }
+  #timer { position:absolute; top:calc(8px + env(safe-area-inset-top)); left:12px; font-size:18px; font-weight:800; padding:6px 10px; border-radius:20px; background:var(--panel); }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#999; margin-right:6px; vertical-align:middle; }
+  .dot.on { background:#1db954; animation:pulse 1.2s infinite; }
+  @keyframes pulse { 50% { opacity:.35; } }
+</style>
+</head>
+<body>
+
+<section id="editor">
+  <div class="flag"></div>
+  <h1>Agent Kodak Teleprompter</h1>
+  <p class="sub">Free. Voice follow: it scrolls as you speak. Your script stays on this device.</p>
+
+  <textarea id="script" placeholder="Paste your speech here. Put crowd cues in parentheses, like (Crowd: YES!) and they'll show in red and get skipped."></textarea>
+
+  <div class="row">
+    <span class="stat" id="stats">0 words · about 0:00 at 130 wpm</span>
+  </div>
+
+  <div class="row">
+    <label class="opt">Text size <input id="size" type="range" min="28" max="110" value="56"></label>
+    <label class="opt">Auto speed <input id="speed" type="range" min="40" max="220" value="130"> <span id="speedv">130</span> wpm</label>
+  </div>
+  <div class="row">
+    <label class="opt"><input id="voice" type="checkbox" checked> Voice follow</label>
+    <label class="opt"><input id="dark" type="checkbox"> Dark mode</label>
+    <label class="opt"><input id="mirror" type="checkbox"> Mirror (for glass prompters)</label>
+  </div>
+
+  <div class="row">
+    <button class="btn red" id="go">▶ Start prompter</button>
+    <button class="btn ghost" id="clear">Clear</button>
+  </div>
+
+  <p class="hint">
+    <b>Voice follow</b> works in Safari on iPhone/iPad and in Chrome. Allow the microphone when asked.
+    If it ever loses your place, tap the screen to pause, drag to where you are, and tap ▶ again.
+    No internet at the venue or no mic permission? Turn off Voice follow and it scrolls at the Auto speed instead.<br>
+    <b>Controls in the prompter:</b> tap the screen to pause or resume · drag to scroll · a Bluetooth remote or keyboard works too (Space = pause, ↑/↓ = nudge).
+  </p>
+</section>
+
+<section id="prompter" class="hidden">
+  <div id="scroller"><div id="text"></div></div>
+  <div id="guide"></div>
+  <div id="timer">0:00</div>
+  <div id="status"><span class="dot" id="dot"></span><span id="mode">Paused</span></div>
+  <div id="hud">
+    <button class="btn" id="play">▶</button>
+    <button class="btn ghost" id="back">⟲ Top</button>
+    <button class="btn ghost" id="minus">A−</button>
+    <button class="btn ghost" id="plus">A+</button>
+    <button class="btn ghost" id="exit">✕ Edit</button>
+  </div>
+</section>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('akp_' + k); return v === null ? d : v; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem('akp_' + k, v); } catch (e) {} }
+  };
+
+  const ta = $('script');
+  ta.value = store.get('script', '');
+  $('size').value = store.get('size', 56);
+  $('speed').value = store.get('speed', 130);
+  $('voice').checked = store.get('voice', '1') === '1';
+  $('dark').checked = store.get('dark', '0') === '1';
+  $('mirror').checked = store.get('mirror', '0') === '1';
+  $('speedv').textContent = $('speed').value;
+  document.body.classList.toggle('dark', $('dark').checked);
+
+  function countWords(s) { return (s.replace(/\([^)]*\)/g, ' ').match(/[A-Za-z0-9'’]+/g) || []).length; }
+  function stats() {
+    const n = countWords(ta.value), wpm = +$('speed').value || 130, sec = Math.round(n / wpm * 60);
+    $('stats').textContent = `${n} words · about ${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} at ${wpm} wpm`;
+  }
+  ta.addEventListener('input', () => { store.set('script', ta.value); stats(); });
+  $('speed').addEventListener('input', e => { $('speedv').textContent = e.target.value; store.set('speed', e.target.value); stats(); });
+  $('size').addEventListener('input', e => store.set('size', e.target.value));
+  $('voice').addEventListener('change', e => store.set('voice', e.target.checked ? '1' : '0'));
+  $('dark').addEventListener('change', e => { store.set('dark', e.target.checked ? '1' : '0'); document.body.classList.toggle('dark', e.target.checked); });
+  $('mirror').addEventListener('change', e => store.set('mirror', e.target.checked ? '1' : '0'));
+  $('clear').addEventListener('click', () => { if (confirm('Clear the script?')) { ta.value = ''; store.set('script', ''); stats(); } });
+  stats();
+
+  // ---------- build prompter text ----------
+  const norm = w => w.toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9']/g, '');
+  let words = [];      // {el, n}
+  let ptr = 0;         // index of next word to speak
+  function build() {
+    const text = $('text');
+    text.innerHTML = '';
+    text.style.fontSize = $('size').value + 'px';
+    text.classList.toggle('mirror', $('mirror').checked);
+    words = [];
+    const paras = ta.value.replace(/\r/g, '').split(/\n\s*\n|\n/).filter(p => p.trim());
+    for (const para of paras) {
+      const p = document.createElement('p');
+      const parts = para.split(/(\([^)]*\))/);
+      for (const part of parts) {
+        if (!part) continue;
+        if (/^\(.*\)$/.test(part)) {
+          const c = document.createElement('span'); c.className = 'cue'; c.textContent = part + ' '; p.appendChild(c);
+          continue;
+        }
+        for (const tok of part.split(/\s+/)) {
+          if (!tok) continue;
+          const s = document.createElement('span'); s.className = 'w'; s.textContent = tok + ' ';
+          p.appendChild(s);
+          const n = norm(tok);
+          if (n) words.push({ el: s, n });
+          else p.appendChild(document.createTextNode(''));
+        }
+      }
+      text.appendChild(p);
+    }
+    ptr = 0; paint();
+  }
+
+  // ---------- scrolling ----------
+  const sc = $('scroller');
+  let target = null, raf = null;
+  function scrollToWord(i) {
+    const w = words[Math.min(i, words.length - 1)];
+    if (!w) return;
+    const r = w.el.getBoundingClientRect(), sr = sc.getBoundingClientRect();
+    target = sc.scrollTop + (r.top - sr.top) - sr.height * 0.33 + r.height * 0.2;
+    if (!raf) raf = requestAnimationFrame(glide);
+  }
+  function glide() {
+    raf = null;
+    if (target === null) return;
+    const d = target - sc.scrollTop;
+    if (Math.abs(d) < 1) { sc.scrollTop = target; target = null; return; }
+    sc.scrollTop += d * 0.12;
+    raf = requestAnimationFrame(glide);
+  }
+  let lastPainted = -1;
+  function paint() {
+    if (lastPainted >= 0 && words[lastPainted]) words[lastPainted].el.classList.remove('now');
+    for (let i = 0; i < words.length; i++) words[i].el.classList.toggle('read', i < ptr);
+    if (words[ptr]) { words[ptr].el.classList.add('now'); lastPainted = ptr; }
+  }
+
+  // ---------- voice follow ----------
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, listening = false, wantListen = false;
+
+  function feed(tokens) {
+    // advance ptr through script words that match what was heard
+    let moved = false;
+    for (let k = 0; k < tokens.length; k++) {
+      const t = tokens[k];
+      if (!t) continue;
+      // near window: allow skipping a few words (stumbles, ad-libs)
+      let hit = -1;
+      for (let j = ptr; j < Math.min(words.length, ptr + 8); j++) { if (match(words[j].n, t)) { hit = j; break; } }
+      // far window: only jump if the next heard word confirms it
+      if (hit < 0 && k + 1 < tokens.length) {
+        const t2 = tokens[k + 1];
+        for (let j = ptr + 8; j < Math.min(words.length - 1, ptr + 40); j++) {
+          if (match(words[j].n, t) && match(words[j + 1].n, t2)) { hit = j; break; }
+        }
+      }
+      if (hit >= 0) { ptr = hit + 1; moved = true; }
+    }
+    if (moved) { paint(); scrollToWord(ptr); }
+  }
+  function match(a, b) {
+    if (a === b) return true;
+    if (a.length > 3 && b.length > 3 && (a.startsWith(b) || b.startsWith(a))) return true;
+    // digits vs words, e.g. "1935" heard as "1935": fine; strip trailing s
+    return a.replace(/s$/, '') === b.replace(/s$/, '');
+  }
+
+  let heardFinal = 0; // count of final tokens already fed
+  function startRec() {
+    if (!SR) { setMode('Voice not supported here: auto-scroll', false); startAuto(); return; }
+    rec = new SR();
+    rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
+    let fedInterim = '';
+    rec.onresult = e => {
+      let finals = [], interim = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const txt = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finals.push(txt); else interim += ' ' + txt;
+      }
+      if (finals.length) { feed(finals.join(' ').split(/\s+/).map(norm)); fedInterim = ''; }
+      if (interim.trim()) {
+        // feed only the tail we haven't seen, keyed by the interim string
+        const toks = interim.trim().split(/\s+/).map(norm);
+        const prev = fedInterim ? fedInterim.split(' ') : [];
+        let same = 0; while (same < prev.length && same < toks.length && prev[same] === toks[same]) same++;
+        feed(toks.slice(Math.max(0, same - 1)));
+        fedInterim = toks.join(' ');
+      }
+      kick();
+    };
+    rec.onstart = () => { listening = true; setMode('Listening', true); };
+    rec.onerror = ev => {
+      if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
+        wantListen = false; setMode('Mic blocked: using auto-scroll', false); startAuto();
+      }
+    };
+    rec.onend = () => { listening = false; if (wantListen) { try { rec.start(); } catch (e) { setTimeout(() => { try { rec.start(); } catch (e2) {} }, 300); } } else setMode('Paused', false); };
+    try { rec.start(); } catch (e) {}
+  }
+  function stopRec() { wantListen = false; if (rec) { try { rec.stop(); } catch (e) {} } }
+
+  // ---------- auto scroll fallback ----------
+  let autoTimer = null, autoOn = false;
+  function startAuto() {
+    autoOn = true; setMode('Auto-scroll', true);
+    let last = performance.now();
+    const step = now => {
+      if (!autoOn) return;
+      const dt = (now - last) / 1000; last = now;
+      const wpm = +$('speed').value || 130;
+      // estimate pixels per word from average word height/width
+      const pxPerWord = (+$('size').value) * 1.35 / 6;
+      sc.scrollTop += wpm / 60 * pxPerWord * dt;
+      autoTimer = requestAnimationFrame(step);
+    };
+    autoTimer = requestAnimationFrame(step);
+  }
+  function stopAuto() { autoOn = false; if (autoTimer) cancelAnimationFrame(autoTimer); }
+
+  // ---------- run state ----------
+  let running = false, t0 = 0, elapsed = 0, tick = null, wakeLock = null;
+  function setMode(txt, on) { $('mode').textContent = txt; $('dot').classList.toggle('on', !!on); }
+  async function keepAwake() { try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {} }
+  function play() {
+    running = true; $('play').textContent = '❚❚';
+    t0 = performance.now() - elapsed * 1000;
+    tick = setInterval(() => { elapsed = (performance.now() - t0) / 1000; const s = Math.floor(elapsed); $('timer').textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }, 250);
+    keepAwake();
+    if ($('voice').checked && SR) { wantListen = true; startRec(); } else startAuto();
+    kick();
+  }
+  function pause() {
+    running = false; $('play').textContent = '▶';
+    clearInterval(tick); stopRec(); stopAuto(); setMode('Paused', false);
+    // when paused, re-sync pointer to whatever word sits on the guide line
+    resyncFromScroll();
+    $('hud').classList.remove('fade');
+  }
+  function resyncFromScroll() {
+    const sr = sc.getBoundingClientRect(), y = sr.top + sr.height * 0.33;
+    let best = ptr, bd = 1e9;
+    for (let i = 0; i < words.length; i++) {
+      const r = words[i].el.getBoundingClientRect(); const d = Math.abs(r.top - y);
+      if (d < bd) { bd = d; best = i; }
+      if (r.top > y + 200) break;
+    }
+    ptr = best; paint();
+  }
+
+  // fade HUD while running
+  let fadeT = null;
+  function kick() { $('hud').classList.remove('fade'); clearTimeout(fadeT); if (running) fadeT = setTimeout(() => $('hud').classList.add('fade'), 2500); }
+
+  $('go').addEventListener('click', () => {
+    if (!ta.value.trim()) { alert('Paste your script first.'); return; }
+    $('editor').classList.add('hidden'); $('prompter').classList.remove('hidden');
+    build(); sc.scrollTop = 0; elapsed = 0; $('timer').textContent = '0:00';
+    try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); } catch (e) {}
+    setMode('Tap ▶ to start', false);
+  });
+  $('play').addEventListener('click', e => { e.stopPropagation(); running ? pause() : play(); });
+  $('back').addEventListener('click', e => { e.stopPropagation(); pause(); ptr = 0; paint(); sc.scrollTop = 0; elapsed = 0; $('timer').textContent = '0:00'; });
+  $('plus').addEventListener('click', e => { e.stopPropagation(); const s = Math.min(130, +$('size').value + 6); $('size').value = s; store.set('size', s); $('text').style.fontSize = s + 'px'; scrollToWord(ptr); });
+  $('minus').addEventListener('click', e => { e.stopPropagation(); const s = Math.max(24, +$('size').value - 6); $('size').value = s; store.set('size', s); $('text').style.fontSize = s + 'px'; scrollToWord(ptr); });
+  $('exit').addEventListener('click', e => { e.stopPropagation(); pause(); $('prompter').classList.add('hidden'); $('editor').classList.remove('hidden'); try { document.exitFullscreen && document.exitFullscreen(); } catch (e2) {} });
+
+  // tap anywhere on the text to pause/resume (but not when dragging)
+  let downY = 0, moved = false;
+  sc.addEventListener('pointerdown', e => { downY = e.clientY; moved = false; });
+  sc.addEventListener('pointermove', e => { if (Math.abs(e.clientY - downY) > 10) moved = true; });
+  sc.addEventListener('pointerup', () => { if (!moved) { running ? pause() : play(); } else if (!running) resyncFromScroll(); });
+  sc.addEventListener('scroll', () => { if (!running) kick(); });
+
+  document.addEventListener('keydown', e => {
+    if ($('prompter').classList.contains('hidden')) return;
+    if (e.code === 'Space' || e.key === 'Enter' || e.key === 'PageDown' && false) { e.preventDefault(); running ? pause() : play(); }
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); ptr = Math.min(words.length - 1, ptr + 5); paint(); scrollToWord(ptr); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); ptr = Math.max(0, ptr - 5); paint(); scrollToWord(ptr); }
+  });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && running) keepAwake(); });
+})();
+</script>
+</body>
+</html>

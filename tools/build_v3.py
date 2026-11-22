@@ -123,15 +123,14 @@ home = head("Lawrence Totimeh Jr. (Agent Kodak) · Civic Educator",
 </div></section>
 
 <section class="light"><div class="wrap">
-<div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 750,000 views in the past year</h2></div></div>
+<div class="sec-head rev"><div><div class="eyebrow">Proof · verified numbers only</div><h2 style="margin-top:8px">Over 2.2 million views in 2026</h2></div></div>
 <div class="proof rev" style="grid-template-columns:1.4fr 1fr 1fr 1fr">
-<div class="card"><div class="v">750K+</div><div class="l">views across Facebook, Instagram, TikTok and YouTube in the past year</div></div>
-<div class="card"><div class="v">15K+</div><div class="l">followers on Instagram at @AgentKodak</div></div>
-<div class="card"><div class="v">10K+</div><div class="l">followers on Facebook</div></div>
-<div class="card"><div class="v">1,200+</div><div class="l">subscribers on YouTube, and growing</div></div>
+<div class="card"><div class="v">1M+</div><div class="l">views on Facebook</div></div>
+<div class="card"><div class="v">960K+</div><div class="l">views on Instagram</div></div>
+<div class="card"><div class="v">219K+</div><div class="l">views on TikTok</div></div>
+<div class="card"><div class="v">35,000+</div><div class="l">followers across Facebook, Instagram, TikTok and YouTube</div></div>
 </div>
 <p class="muted" style="font-size:14px;margin-top:14px">Every lesson and every document is free, with no email gate.</p>
-<p class="muted" style="font-size:12px;margin-top:6px">Views: combined platform insights, 12 months to Oct. 7, 2026. Instagram as of Nov. 4, 2026. Facebook and YouTube as of Nov. 2, 2026.</p>
 </div></section>
 
 <section class="light lt" id="playbook"><div class="wrap">
@@ -509,7 +508,7 @@ press = head("Press · Lawrence Totimeh Jr.", "Press kit for Lawrence Totimeh Jr
 <li><b>Work:</b> Civic educator, program coordinator, social justice advocate, speaker</li>
 <li><b>Service:</b> U.S. Army, Baghdad, Iraq, 2011 (Operation New Dawn)</li>
 <li><b>Education:</b> Virginia State University: B.S., graduate certificate, M.S.</li>
-<li><b>Reach:</b> 750K+ views across platforms in the 12 months to Oct. 7, 2026. 15K+ Instagram followers as of Nov. 4, 2026. 10K+ Facebook followers and 1,200+ YouTube subscribers as of Nov. 2, 2026.</li>
+<li><b>Reach:</b> Over 2.2 million views in 2026: 1M+ on Facebook, 960K+ on Instagram, 219K+ on TikTok. 35,000+ followers across Facebook, Instagram, TikTok and YouTube.</li>
 <li><b>Social:</b> @AgentKodak on YouTube, Instagram, TikTok and Facebook</li>
 <li><b>Note:</b> He is an educator, not an attorney.</li>
 </ul></div>
