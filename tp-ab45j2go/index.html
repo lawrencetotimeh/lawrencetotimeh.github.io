@@ -30,7 +30,7 @@
 
   /* Prompter */
   #prompter { position:fixed; inset:0; background:var(--bg); }
-  #scroller { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:auto; }
+  #scroller { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:auto; overscroll-behavior:contain; touch-action:pan-y; }
   #text { padding:45vh 7vw 80vh; line-height:1.35; font-weight:700; word-wrap:break-word; }
   #text.mirror { transform:scaleX(-1); }
   #text .w { transition:color .25s; }
@@ -163,55 +163,94 @@
       }
       text.appendChild(p);
     }
-    ptr = 0; paint();
+    ptr = 0; painted = 0; nowEl = null; paint();
   }
 
   // ---------- scrolling ----------
   const sc = $('scroller');
   let target = null, raf = null;
+  // Your finger always wins. While you touch or flick the text, nothing else moves it.
+  let fingerDown = false, dragged = false, holdUntil = 0, settleT = null;
+  const held = () => fingerDown || performance.now() < holdUntil;
   function scrollToWord(i) {
+    if (held()) return;
     const w = words[Math.min(i, words.length - 1)];
     if (!w) return;
     const r = w.el.getBoundingClientRect(), sr = sc.getBoundingClientRect();
-    target = sc.scrollTop + (r.top - sr.top) - sr.height * 0.33 + r.height * 0.2;
+    target = Math.max(0, sc.scrollTop + (r.top - sr.top) - sr.height * 0.33 + r.height * 0.2);
     if (!raf) raf = requestAnimationFrame(glide);
   }
   function glide() {
     raf = null;
-    if (target === null) return;
-    const d = target - sc.scrollTop;
-    if (Math.abs(d) < 1) { sc.scrollTop = target; target = null; return; }
-    sc.scrollTop += d * 0.12;
+    if (target === null || held()) { target = null; return; }
+    const max = sc.scrollHeight - sc.clientHeight;
+    const goal = Math.min(target, max), d = goal - sc.scrollTop;
+    if (Math.abs(d) < 1.5) { sc.scrollTop = goal; target = null; return; }
+    let step = d * 0.12; if (Math.abs(step) < 1) step = d > 0 ? 1 : -1;
+    const before = sc.scrollTop;
+    sc.scrollTop = before + step;
+    if (sc.scrollTop === before) { target = null; return; }   // can't move any further: stop pulling
     raf = requestAnimationFrame(glide);
   }
-  let lastPainted = -1;
+  function settle() {
+    clearTimeout(settleT);
+    settleT = setTimeout(() => {
+      if (held()) { settle(); return; }
+      if (dragged) { dragged = false; resyncFromScroll(); missStreak = 0; }
+    }, 180);
+  }
+  sc.addEventListener('touchstart', () => { fingerDown = true; target = null; }, { passive: true });
+  sc.addEventListener('touchmove', () => { dragged = true; }, { passive: true });
+  const lift = () => { fingerDown = false; if (dragged) { holdUntil = performance.now() + 900; settle(); } };
+  sc.addEventListener('touchend', lift, { passive: true });
+  sc.addEventListener('touchcancel', lift, { passive: true });
+  sc.addEventListener('wheel', () => { dragged = true; target = null; holdUntil = performance.now() + 500; settle(); }, { passive: true });
+  // a flick keeps rolling after the finger lifts: keep hands off until it stops
+  sc.addEventListener('scroll', () => { if (dragged && !fingerDown) { holdUntil = Math.max(holdUntil, performance.now() + 250); settle(); } }, { passive: true });
+
+  let painted = 0, nowEl = null;
   function paint() {
-    if (lastPainted >= 0 && words[lastPainted]) words[lastPainted].el.classList.remove('now');
-    for (let i = 0; i < words.length; i++) words[i].el.classList.toggle('read', i < ptr);
-    if (words[ptr]) { words[ptr].el.classList.add('now'); lastPainted = ptr; }
+    if (ptr > painted) { for (let i = painted; i < ptr && i < words.length; i++) words[i].el.classList.add('read'); }
+    else { for (let i = ptr; i < painted && i < words.length; i++) words[i].el.classList.remove('read'); }
+    painted = ptr;
+    if (nowEl) nowEl.classList.remove('now');
+    nowEl = words[ptr] ? words[ptr].el : null;
+    if (nowEl) nowEl.classList.add('now');
   }
 
   // ---------- voice follow ----------
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   let rec = null, listening = false, wantListen = false;
 
+  let missStreak = 0;   // heard words in a row that were not in the script (ad-libs)
+  const at = j => (j >= 0 && j < words.length) ? words[j].n : '';
   function feed(tokens) {
-    // advance ptr through script words that match what was heard
     let moved = false;
     for (let k = 0; k < tokens.length; k++) {
       const t = tokens[k];
       if (!t) continue;
-      // near window: allow skipping a few words (stumbles, ad-libs)
+      const t2 = tokens[k + 1] || '', t3 = tokens[k + 2] || '';
       let hit = -1;
-      for (let j = ptr; j < Math.min(words.length, ptr + 8); j++) { if (match(words[j].n, t)) { hit = j; break; } }
-      // far window: only jump if the next heard word confirms it
-      if (hit < 0 && k + 1 < tokens.length) {
-        const t2 = tokens[k + 1];
-        for (let j = ptr + 8; j < Math.min(words.length - 1, ptr + 40); j++) {
-          if (match(words[j].n, t) && match(words[j + 1].n, t2)) { hit = j; break; }
+      // 1. the next word, or one of the two after it (a dropped or mumbled word)
+      for (let j = ptr; j < Math.min(words.length, ptr + 3); j++) {
+        const two = t2 && match(at(j + 1), t2);
+        if (match(words[j].n, t) && (two || (missStreak < 3 && (j === ptr || t.length >= 4)))) { hit = j; break; }
+      }
+      // 2. a little further down: needs a second word to agree, or a long word
+      if (hit < 0) for (let j = ptr + 3; j < Math.min(words.length, ptr + 14); j++) {
+        const two = t2 && match(at(j + 1), t2), three = two && t3 && match(at(j + 2), t3);
+        if (match(words[j].n, t) && (missStreak >= 3 ? three : (t2 ? two : t.length >= 6))) { hit = j; break; }
+      }
+      // 3. off script, then back on: three words in a row, anywhere ahead (or a little behind)
+      if (hit < 0 && t2 && t3 && missStreak >= 2) {
+        for (let j = ptr + 14; j < words.length - 2; j++) {
+          if (match(words[j].n, t) && match(words[j + 1].n, t2) && match(words[j + 2].n, t3)) { hit = j; break; }
+        }
+        if (hit < 0 && missStreak >= 4) for (let j = ptr - 3; j >= Math.max(0, ptr - 150); j--) {
+          if (match(words[j].n, t) && match(at(j + 1), t2) && match(at(j + 2), t3)) { hit = j; break; }
         }
       }
-      if (hit >= 0) { ptr = hit + 1; moved = true; }
+      if (hit >= 0) { ptr = hit + 1; moved = true; missStreak = 0; } else missStreak++;
     }
     if (moved) { paint(); scrollToWord(ptr); }
   }
@@ -227,25 +266,19 @@
     if (!SR) { setMode('Voice not supported here: auto-scroll', false); startAuto(); return; }
     rec = new SR();
     rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
-    let fedInterim = '';
+    let prevToks = {};
     rec.onresult = e => {
-      let finals = [], interim = '';
       for (let i = e.resultIndex; i < e.results.length; i++) {
-        const txt = e.results[i][0].transcript;
-        if (e.results[i].isFinal) finals.push(txt); else interim += ' ' + txt;
-      }
-      if (finals.length) { feed(finals.join(' ').split(/\s+/).map(norm)); fedInterim = ''; }
-      if (interim.trim()) {
-        // feed only the tail we haven't seen, keyed by the interim string
-        const toks = interim.trim().split(/\s+/).map(norm);
-        const prev = fedInterim ? fedInterim.split(' ') : [];
+        const toks = e.results[i][0].transcript.trim().split(/\s+/).map(norm).filter(Boolean);
+        const prev = prevToks[i] || [];
         let same = 0; while (same < prev.length && same < toks.length && prev[same] === toks[same]) same++;
-        feed(toks.slice(Math.max(0, same - 1)));
-        fedInterim = toks.join(' ');
+        // feed only what is new, plus one word of overlap for context
+        if (same < toks.length) feed(toks.slice(Math.max(0, same - 1)));
+        prevToks[i] = toks;
       }
       kick();
     };
-    rec.onstart = () => { listening = true; setMode('Listening', true); };
+    rec.onstart = () => { listening = true; prevToks = {}; setMode('Listening', true); };
     rec.onerror = ev => {
       if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
         wantListen = false; setMode('Mic blocked: using auto-scroll', false); startAuto();
@@ -267,7 +300,7 @@
       const wpm = +$('speed').value || 130;
       // estimate pixels per word from average word height/width
       const pxPerWord = (+$('size').value) * 1.35 / 6;
-      sc.scrollTop += wpm / 60 * pxPerWord * dt;
+      if (!held()) sc.scrollTop += wpm / 60 * pxPerWord * dt;
       autoTimer = requestAnimationFrame(step);
     };
     autoTimer = requestAnimationFrame(step);
@@ -325,7 +358,7 @@
   let downY = 0, moved = false;
   sc.addEventListener('pointerdown', e => { downY = e.clientY; moved = false; });
   sc.addEventListener('pointermove', e => { if (Math.abs(e.clientY - downY) > 10) moved = true; });
-  sc.addEventListener('pointerup', () => { if (!moved) { running ? pause() : play(); } else if (!running) resyncFromScroll(); });
+  sc.addEventListener('pointerup', () => { if (!moved && !dragged) { running ? pause() : play(); } });
   sc.addEventListener('scroll', () => { if (!running) kick(); });
 
   document.addEventListener('keydown', e => {
