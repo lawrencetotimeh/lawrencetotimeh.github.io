@@ -30,7 +30,7 @@
 
   /* Prompter */
   #prompter { position:fixed; inset:0; background:var(--bg); }
-  #scroller { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:auto; }
+  #scroller { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:auto; overscroll-behavior:contain; touch-action:pan-y; }
   #text { padding:45vh 7vw 80vh; line-height:1.35; font-weight:700; word-wrap:break-word; }
   #text.mirror { transform:scaleX(-1); }
   #text .w { transition:color .25s; }
@@ -179,21 +179,47 @@
   // ---------- scrolling ----------
   const sc = $('scroller');
   let target = null, raf = null;
+  // Your finger always wins. While you touch or flick the text, nothing else moves it.
+  let fingerDown = false, dragged = false, holdUntil = 0, settleT = null;
+  const held = () => fingerDown || performance.now() < holdUntil;
   function scrollToWord(i) {
+    if (held()) return;
     const w = words[Math.min(i, words.length - 1)];
     if (!w) return;
     const r = w.el.getBoundingClientRect(), sr = sc.getBoundingClientRect();
-    target = sc.scrollTop + (r.top - sr.top) - sr.height * 0.33 + r.height * 0.2;
+    target = Math.max(0, sc.scrollTop + (r.top - sr.top) - sr.height * 0.33 + r.height * 0.2);
     if (!raf) raf = requestAnimationFrame(glide);
   }
   function glide() {
     raf = null;
-    if (target === null) return;
-    const d = target - sc.scrollTop;
-    if (Math.abs(d) < 1) { sc.scrollTop = target; target = null; return; }
-    sc.scrollTop += d * 0.12;
+    if (target === null || held()) { target = null; return; }
+    const goal = Math.min(target, sc.scrollHeight - sc.clientHeight), d = goal - sc.scrollTop;
+    if (Math.abs(d) < 1.5) { sc.scrollTop = goal; target = null; return; }
+    let step = d * 0.12; if (Math.abs(step) < 1) step = d > 0 ? 1 : -1;
+    const before = sc.scrollTop;
+    sc.scrollTop = before + step;
+    if (sc.scrollTop === before) { target = null; return; }   // can't move further: stop pulling
     raf = requestAnimationFrame(glide);
   }
+  // After a drag or flick stops, pick up from the word sitting on the red line.
+  function settle() {
+    clearTimeout(settleT);
+    settleT = setTimeout(() => {
+      if (held()) { settle(); return; }
+      if (!dragged) return;
+      dragged = false; resyncFromScroll();
+      // drop whatever was half-heard before the drag, so it can't pull the page back
+      if (running && wantListen && rec) { try { rec.abort(); } catch (e) {} }
+    }, 180);
+  }
+  sc.addEventListener('touchstart', () => { fingerDown = true; target = null; }, { passive: true });
+  sc.addEventListener('touchmove', () => { dragged = true; }, { passive: true });
+  const lift = () => { fingerDown = false; if (dragged) { holdUntil = performance.now() + 900; settle(); } };
+  sc.addEventListener('touchend', lift, { passive: true });
+  sc.addEventListener('touchcancel', lift, { passive: true });
+  sc.addEventListener('wheel', () => { dragged = true; target = null; holdUntil = performance.now() + 500; settle(); }, { passive: true });
+  // a flick keeps rolling after the finger lifts: hands off until it stops
+  sc.addEventListener('scroll', () => { if (dragged && !fingerDown) { holdUntil = Math.max(holdUntil, performance.now() + 250); settle(); } }, { passive: true });
   let painted = 0, lastNow = -1;
   function setRead(i, on) { const w = words[i]; if (!w) return; w.el.classList.toggle('read', on); for (const x of w.extra) x.classList.toggle('read', on); }
   function paint(full) {
@@ -380,7 +406,7 @@
       const wpm = +$('speed').value || 130;
       // estimate pixels per word from average word height/width
       const pxPerWord = (+$('size').value) * 1.35 / 6;
-      sc.scrollTop += wpm / 60 * pxPerWord * dt;
+      if (!held()) sc.scrollTop += wpm / 60 * pxPerWord * dt;
       autoTimer = requestAnimationFrame(step);
     };
     autoTimer = requestAnimationFrame(step);
@@ -438,7 +464,7 @@
   let downY = 0, moved = false;
   sc.addEventListener('pointerdown', e => { downY = e.clientY; moved = false; });
   sc.addEventListener('pointermove', e => { if (Math.abs(e.clientY - downY) > 10) moved = true; });
-  sc.addEventListener('pointerup', () => { if (!moved) { running ? pause() : play(); } else setTimeout(resyncFromScroll, 350); });
+  sc.addEventListener('pointerup', e => { if (!moved && !dragged) { running ? pause() : play(); } else if (e.pointerType === 'mouse') { dragged = true; holdUntil = performance.now() + 300; settle(); } });
   sc.addEventListener('scroll', () => { if (!running) kick(); });
 
   document.addEventListener('keydown', e => {
